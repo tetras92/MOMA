@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Alternative.py" beforeDir="false" afterPath="$PROJECT_DIR$/Alternative.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AppreciationObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/AppreciationObject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DA.py" beforeDir="false" afterPath="$PROJECT_DIR$/DA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DM.py" beforeDir="false" afterPath="$PROJECT_DIR$/DM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dialog.py" beforeDir="false" afterPath="$PROJECT_DIR$/Dialog.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InformationStore.py" beforeDir="false" afterPath="$PROJECT_DIR$/InformationStore.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/gurobi.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +104,7 @@
       <workItem from="1578153344872" duration="1386000" />
       <workItem from="1578155261419" duration="3027000" />
       <workItem from="1578171147332" duration="8573000" />
-      <workItem from="1578230216643" duration="6296000" />
+      <workItem from="1578230216643" duration="6573000" />
     </task>
     <task id="LOCAL-00001" summary="first commut">
       <created>1578153549362</created>
@@ -134,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578154038876</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="commit">
+      <created>1578241975250</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1578241975250</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,17 +179,18 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commut" />
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
   <component name="WindowStateProjectService">
     <state x="233" y="0" key="#Notifications" timestamp="1578241940759">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="0" key="#Notifications/0.0.1280.680@0.0.1280.680" timestamp="1578241940759" />
-    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1578154146470">
+    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1578241994100">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1578154146470" />
+    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1578241994100" />
     <state x="121" y="57" key="DiffContextDialog" timestamp="1578153727117">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -198,22 +199,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1578153131991" />
-    <state width="1237" height="258" key="GridCell.Tab.0.bottom" timestamp="1578238924255">
+    <state width="618" height="258" key="GridCell.Tab.0.bottom" timestamp="1578242078080">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="258" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1578238924255" />
-    <state width="1237" height="258" key="GridCell.Tab.0.center" timestamp="1578238924252">
+    <state width="618" height="258" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1578242078080" />
+    <state width="618" height="258" key="GridCell.Tab.0.center" timestamp="1578242078080">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="258" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1578238924252" />
-    <state width="1237" height="258" key="GridCell.Tab.0.left" timestamp="1578238924252">
+    <state width="618" height="258" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1578242078080" />
+    <state width="618" height="258" key="GridCell.Tab.0.left" timestamp="1578242078080">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="258" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1578238924252" />
-    <state width="1237" height="258" key="GridCell.Tab.0.right" timestamp="1578238924255">
+    <state width="618" height="258" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1578242078080" />
+    <state width="618" height="258" key="GridCell.Tab.0.right" timestamp="1578242078080">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="258" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1578238924255" />
+    <state width="618" height="258" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1578242078080" />
     <state width="1237" height="179" key="GridCell.Tab.1.bottom" timestamp="1578238166693">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
