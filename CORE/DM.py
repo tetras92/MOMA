@@ -2,8 +2,8 @@ import csv
 
 import numpy as np
 
-from MCDA.ComparisonTerm import *
-from MCDA.decorators import singleton
+from CORE.ComparisonTerm import *
+from CORE.decorators import singleton
 
 
 class DM:

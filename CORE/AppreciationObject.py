@@ -1,6 +1,6 @@
-from MCDA.Commitment import *
-from MCDA.ComparisonTerm import ComparisonTerm
-from MCDA.InformationStore import NonPI, PI
+from CORE.Commitment import *
+from CORE.ComparisonTerm import ComparisonTerm
+from CORE.InformationStore import NonPI, PI
 
 
 class AppreciationObject:

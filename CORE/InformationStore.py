@@ -1,7 +1,7 @@
 from gurobipy import *
 
-from MCDA.ComparisonTerm import *
-from MCDA.decorators import singleton
+from CORE.ComparisonTerm import *
+from CORE.decorators import singleton
 
 
 class InformationStore:
