@@ -137,6 +137,7 @@ class DA:
 
             if not N_initial_empty_state :
                 continue
+            print("NonPI")
             pco = NonPI().pick()
             Dialog(pco).madeWith(WS_DM())
 

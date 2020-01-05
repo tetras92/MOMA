@@ -27,7 +27,6 @@ class PI(InformationStore):
 @singleton
 class NonPI(InformationStore):
     def __init__(self, aoPicker):
-        #InformationStore.__init__()
         self._store = list()
         self._aoPicker = aoPicker
 
@@ -41,12 +40,13 @@ class NonPI(InformationStore):
     def add(self, information):
         self._store.append(information)
 
-    def removeAll(self, Nstore):
-        for pco in Nstore:
+    def update(self):
+        for pco in N():
             if pco in self._store:
-                self._store.pop(self._store.index(pco))
+                self._store.remove(pco)
 
     def __iter__(self):
+        self.update()
         return self._store.__iter__()
 
     def __repr__(self):
@@ -66,16 +66,14 @@ class N(InformationStore):
         gurobi_model.setObjective(pco_linexpr, GRB.MINIMIZE)
         gurobi_model.update()
         gurobi_model.optimize()
-        val = gurobi_model.objVal
-        #print("\tS1 : {}".format(val))
+
         if gurobi_model.objVal >= 0:
             pco.termN = ComparisonTerm.IS_PREFERRED_TO
             return True
         gurobi_model.setObjective(- pco_linexpr, GRB.MINIMIZE)
         gurobi_model.update()
         gurobi_model.optimize()
-        val = gurobi_model.objVal
-        #print("\tS2 : {}".format(val))
+
         if gurobi_model.objVal >= 0:
             pco.termN = ComparisonTerm.IS_LESS_PREFERRED_THAN
             return True
@@ -84,11 +82,21 @@ class N(InformationStore):
 
     def update(self, VarDict, gurobi_model):
         for pco in NonPI():
-            #print("N : {}".format(pco))
-            if self._check(pco, VarDict, gurobi_model):
-                self.add(pco)
+            pco_linexpr, term = pco.linear_expr_and_term(VarDict)
+            gurobi_model.setObjective(pco_linexpr, GRB.MINIMIZE)
+            gurobi_model.update()
+            gurobi_model.optimize()
 
-        NonPI().removeAll(self._store)
+            if gurobi_model.objVal >= 0:
+                pco.termN = ComparisonTerm.IS_PREFERRED_TO
+            else:
+                gurobi_model.setObjective(- pco_linexpr, GRB.MINIMIZE)
+                gurobi_model.update()
+                gurobi_model.optimize()
+                if gurobi_model.objVal >= 0:
+                    pco.termN = ComparisonTerm.IS_LESS_PREFERRED_THAN
+
+        NonPI().update()
 
     def add(self, information):
         self._store.append(information)
@@ -99,6 +107,9 @@ class N(InformationStore):
     def pick(self):
         indexToPick = self._aoPicker.pickIndex(len(self))
         return self._store.pop(indexToPick)
+
+    def __iter__(self):
+        return self._store.__iter__()
 
     def __len__(self):
         return len(self._store)

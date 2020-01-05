@@ -1,6 +1,6 @@
 from CORE.Commitment import *
 from CORE.ComparisonTerm import ComparisonTerm
-from CORE.InformationStore import NonPI, PI
+from CORE.InformationStore import NonPI, PI, N
 
 
 class AppreciationObject:
@@ -28,13 +28,16 @@ class PairwiseComparisonObject(AppreciationObject):
     def setTermP(self, v):
         self._termP = v
         PI().add(self)
-        CommitmentStore().add(Commitment(self, v))
-        print(" \tDM answers {}".format(v))
+        CommitmentStore().add(AnswerCommitment(self, v))
+        print("\tDM answers {}".format(v))
 
     def getTermN(self):
         return self._termN
     def setTermN(self, v):
         self._termN = v
+        N().add(self)
+        CommitmentStore().add(ValidationCommitment(self, v))
+
     termP = property(getTermP, setTermP)
     termN = property(getTermN, setTermN)
 
