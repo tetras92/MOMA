@@ -1,4 +1,4 @@
-from Dialog import Dialog
+from MCDA.Dialog import Dialog
 class Commitment:
     def __init__(self, ao, term):
         self._ao = ao
@@ -13,7 +13,7 @@ class Commitment:
     id = property(getId)
 
 
-from decorators import singleton
+from MCDA.decorators import singleton
 @singleton
 class CommitmentStore():
     def __init__(self):

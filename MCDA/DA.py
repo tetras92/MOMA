@@ -1,10 +1,10 @@
 import csv
 import itertools as it
 
-from Alternative import *
-from AppreciationObject import PairwiseComparisonObject
-from InformationStore import *
-from Tools import attribute_creator
+from MCDA.Alternative import *
+from MCDA.AppreciationObject import PairwiseComparisonObject
+from MCDA.InformationStore import *
+from MCDA.Tools import attribute_creator
 
 
 @singleton
@@ -141,9 +141,9 @@ class DA:
             Dialog(pco).madeWith(WS_DM())
 
 
-from StopCriterion import *
-from AOPicker import *
-from DM import WS_DM
+from MCDA.StopCriterion import *
+from MCDA.AOPicker import *
+from MCDA.DM import WS_DM
 if __name__ == "__main__" :
     WS_DM("CSVFILES/DM_Utility_Function.csv")
     DA(criteriaFileName="CSVFILES/criteria.csv", performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv", NonPI_AOPicker=RandomPicker(0),
