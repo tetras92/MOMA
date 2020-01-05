@@ -5,4 +5,5 @@ class Dialog:
         self.ao = ao
 
     def madeWith(self, dm):
+        print("Dialog {} : \n\t{}".format(Dialog.NB, self.ao))
         dm.evaluate(self.ao)

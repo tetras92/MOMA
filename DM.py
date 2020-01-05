@@ -29,7 +29,7 @@ class WS_DM(DM):
         else:
             pco.termP = ComparisonTerm.IS_INDIFERRENT_TO
 
-        #print("NonPI : {}\nPi : {}".format(len(NonPI()), len(PI())))
+
 
 
 

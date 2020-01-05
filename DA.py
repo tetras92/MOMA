@@ -1,5 +1,6 @@
 import csv
 import itertools as it
+
 from Alternative import *
 from AppreciationObject import PairwiseComparisonObject
 from InformationStore import *
@@ -8,7 +9,8 @@ from Tools import attribute_creator
 
 @singleton
 class DA:
-    def __init__(self, criteriaFileName="", performanceTableFileName="", NonPI_AOPicker=None, stopCriterion=None):
+    EPSILON = 0.0000001
+    def __init__(self, criteriaFileName="", performanceTableFileName="", NonPI_AOPicker=None, N_AOPicker=None,stopCriterion=None):
 
         self._criteriaFileName = criteriaFileName
         self._performanceTableFileName = performanceTableFileName
@@ -17,12 +19,14 @@ class DA:
         # Initialization of the InformationStore Objects
         NonPI(NonPI_AOPicker)
         PI()
-        N()
+        N(N_AOPicker)
         # End
         self._generate_PCO()
         self._stopCriterion = stopCriterion
 
         self._generate_list_of_list_of_ordered_criterion_attributes()
+        self._generate_gurobi_model_and_its_varDict()
+
     def _set_up(self):
         self._set_up_criteria()
         self._set_up_alternatives()
@@ -89,9 +93,50 @@ class DA:
         for NSL in L:
             NSL.sort(key=lambda x : D[x])
         self._list_of_list_of_ordered_criterion_attributes = L
-        print(self._list_of_list_of_ordered_criterion_attributes)
+
+
+    def _generate_gurobi_model_and_its_varDict(self):
+        for criterion, i in list(zip(self._criteriaOrderedList, range(len(self._list_of_list_of_ordered_criterion_attributes)))):
+            self._list_of_list_of_ordered_criterion_attributes[i].append(attribute_creator(criterion, "BETA"))
+            self._list_of_list_of_ordered_criterion_attributes[i] = [attribute_creator(criterion, "ALPHA")] + self._list_of_list_of_ordered_criterion_attributes[i]
+
+        gurobi_model = Model("MOMA_MCDA")
+        gurobi_model.setParam('OutputFlag', False)
+        VarDict = {varname : gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0, name=varname)
+                    for L in self._list_of_list_of_ordered_criterion_attributes for varname in L}
+
+        cst = LinExpr()
+        for LOCA in self._list_of_list_of_ordered_criterion_attributes:
+            for i in range(1, len(LOCA)):
+                gurobi_model.addConstr(VarDict[LOCA[i]] >= VarDict[LOCA[i-1]])
+            gurobi_model.addConstr(VarDict[LOCA[0]] == 0)
+            cst += VarDict[LOCA[-1]]
+        gurobi_model.addConstr(cst == 1)
+
+        for linexpr, term in PI().get_linear_expr_and_term_of_preference_information_stored(VarDict):
+            if term == ComparisonTerm.IS_LESS_PREFERRED_THAN:
+                gurobi_model.addConstr(linexpr <= - DA().EPSILON)
+            elif term == ComparisonTerm.IS_PREFERRED_TO:
+                gurobi_model.addConstr(linexpr >= DA().EPSILON)
+            elif term == ComparisonTerm.IS_INDIFERRENT_TO:
+                gurobi_model.addConstr(linexpr == 0)
+            else :
+                raise Exception("Error in PI")
+
+        #print(self._list_of_list_of_ordered_criterion_attributes)
+        return gurobi_model, VarDict
+
     def process(self):
         while not self._stopCriterion.stop():
+            model, varDict = self._generate_gurobi_model_and_its_varDict()
+            N().update(varDict, model)
+            N_initial_empty_state = N().is_empty()
+            while not N().is_empty():
+                pco = N().pick()
+                Dialog(pco).madeWith(WS_DM())
+
+            if not N_initial_empty_state :
+                continue
             pco = NonPI().pick()
             Dialog(pco).madeWith(WS_DM())
 
@@ -102,6 +147,6 @@ from DM import WS_DM
 if __name__ == "__main__" :
     WS_DM("CSVFILES/DM_Utility_Function.csv")
     DA(criteriaFileName="CSVFILES/criteria.csv", performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv", NonPI_AOPicker=RandomPicker(0),
-       stopCriterion=DialogDurationStopCriterion(6))
+       stopCriterion=DialogDurationStopCriterion(6), N_AOPicker=RandomPicker(0))
 
     DA().process()

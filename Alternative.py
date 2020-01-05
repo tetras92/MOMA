@@ -1,5 +1,5 @@
 import numpy as np
-
+from gurobipy import quicksum
 class Alternative:
     def __init__(self, idAlt, attributesList, attributeLevelsList):
         self._idAlt = idAlt
@@ -38,3 +38,6 @@ class Alternative:
         return "[{:>2}] : {}".format(str(self._idAlt), self._attributesList)
     def __repr__(self):
         return "[{:>2}] : {}".format(str(self._idAlt), self._attributesList)
+
+    def linear_expr(self, VarDict):
+        return quicksum([VarDict[attr] for attr in self._attributesList])

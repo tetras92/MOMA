@@ -29,8 +29,15 @@ class PairwiseComparisonObject(AppreciationObject):
         self._termP = v
         PI().add(self)
         CommitmentStore().add(Commitment(self, v))
+        print(" \tDM answers {}".format(v))
 
+    def getTermN(self):
+        return self._termN
+    def setTermN(self, v):
+        self._termN = v
     termP = property(getTermP, setTermP)
+    termN = property(getTermN, setTermN)
+
     def __str__(self):
         term = self._termP
         if self._termN != ComparisonTerm.NO_TERM:
@@ -42,3 +49,6 @@ class PairwiseComparisonObject(AppreciationObject):
 
     def __eq__(self, other):
         return self.alternative1 == other.alternative1 and self.alternative2 == other.alternative2
+
+    def linear_expr_and_term(self, VarDict):
+        return (self.alternative1.linear_expr(VarDict) - self.alternative2.linear_expr(VarDict), self._termP)
