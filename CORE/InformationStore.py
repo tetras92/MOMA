@@ -61,25 +61,6 @@ class N(InformationStore):
         self._store = list()
         self._aoPicker = aoPicker
 
-    def _check(self, pco, VarDict, gurobi_model):
-        pco_linexpr, term = pco.linear_expr_and_term(VarDict)
-        gurobi_model.setObjective(pco_linexpr, GRB.MINIMIZE)
-        gurobi_model.update()
-        gurobi_model.optimize()
-
-        if gurobi_model.objVal >= 0:
-            pco.termN = ComparisonTerm.IS_PREFERRED_TO
-            return True
-        gurobi_model.setObjective(- pco_linexpr, GRB.MINIMIZE)
-        gurobi_model.update()
-        gurobi_model.optimize()
-
-        if gurobi_model.objVal >= 0:
-            pco.termN = ComparisonTerm.IS_LESS_PREFERRED_THAN
-            return True
-
-        return False
-
     def update(self, VarDict, gurobi_model):
         for pco in NonPI():
             pco_linexpr, term = pco.linear_expr_and_term(VarDict)
