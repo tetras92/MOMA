@@ -7,13 +7,13 @@ from CORE.decorators import singleton
 class InformationStore:
     def __init__(self):
         self._store = list()
-    pass
+
+
 
 @singleton
 class PI(InformationStore):
     def __init__(self):
         self._store = list()
-        pass #InformationStore.__init__()
 
     def add(self, information):
         self._store.append(information)
@@ -21,8 +21,11 @@ class PI(InformationStore):
     def __len__(self):
         return len(self._store)
 
-    def get_linear_expr_and_term_of_preference_information_stored(self, VarDict):
-        return [pis.linear_expr_and_term(VarDict) for pis in self._store]
+    def get_linear_constraint(self, VarDict):
+        return [pinf.linear_constraint(VarDict) for pinf in self._store]
+
+    def __iter__(self):
+        return self._store.__iter__()
 
 @singleton
 class NonPI(InformationStore):
@@ -35,21 +38,19 @@ class NonPI(InformationStore):
 
     def pick(self):
         indexToPick = self._aoPicker.pickIndex(len(self))
-        return self._store.pop(indexToPick)
+        return self._store[indexToPick]
 
     def add(self, information):
         self._store.append(information)
 
-    def update(self):
-        for pco in N():
-            if pco in self._store:
-                self._store.remove(pco)
+    def remove(self, info):
+        self._store.remove(info)
+
 
     def __iter__(self):
-        self.update()
         return self._store.__iter__()
 
-    def __repr__(self):
+    def __str__(self):
         s = ""
         for elm in self._store:
             s += str(elm) + "\n"
@@ -57,13 +58,12 @@ class NonPI(InformationStore):
 @singleton
 class N(InformationStore):
     def __init__(self, aoPicker):
-        # InformationStore.__init__()
         self._store = list()
         self._aoPicker = aoPicker
 
     def update(self, VarDict, gurobi_model):
         for pco in NonPI():
-            pco_linexpr, term = pco.linear_expr_and_term(VarDict)
+            pco_linexpr = pco.linear_expr(VarDict)
             gurobi_model.setObjective(pco_linexpr, GRB.MINIMIZE)
             gurobi_model.update()
             gurobi_model.optimize()
@@ -77,7 +77,7 @@ class N(InformationStore):
                 if gurobi_model.objVal >= 0:
                     pco.termN = ComparisonTerm.IS_LESS_PREFERRED_THAN
 
-        NonPI().update()
+
 
     def add(self, information):
         self._store.append(information)
@@ -87,10 +87,13 @@ class N(InformationStore):
 
     def pick(self):
         indexToPick = self._aoPicker.pickIndex(len(self))
-        return self._store.pop(indexToPick)
+        return self._store[indexToPick]
 
     def __iter__(self):
         return self._store.__iter__()
 
     def __len__(self):
         return len(self._store)
+
+    def remove(self, info):
+        self._store.remove(info)
