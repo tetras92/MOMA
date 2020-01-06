@@ -131,7 +131,7 @@ class DA:
             model, varDict = self._generate_gurobi_model_and_its_varDict()
             N().update(varDict, model)
             N_initial_empty_state = N().is_empty()
-            while not N().is_empty():
+            if not N_initial_empty_state:
                 pco = N().pick()
                 Dialog(pco).madeWith(WS_DM())
 
