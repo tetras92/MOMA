@@ -126,30 +126,30 @@ class DA:
         #print(self._list_of_list_of_ordered_criterion_attributes)
         return gurobi_model, VarDict
 
-    def process(self):
+    def process(self, dm):
         while not self._stopCriterion.stop():
             model, varDict = self._generate_gurobi_model_and_its_varDict()
             N().update(varDict, model)
             N_initial_empty_state = N().is_empty()
             if not N_initial_empty_state:
                 pco = N().pick()
-                Dialog(pco).madeWith(WS_DM())
+                Dialog(pco).madeWith(dm)
 
-            if not N_initial_empty_state :
+            if not N_initial_empty_state:
                 continue
 
             pco = NonPI().pick()
-            Dialog(pco).madeWith(WS_DM())
+            Dialog(pco).madeWith(dm)
 
 
 from CORE.StopCriterion import *
 from CORE.AOPicker import *
-from CORE.DM import WS_DM
+from CORE.DM import WS_DM, NoisyWS_DM
 
 
 if __name__ == "__main__" :
-    WS_DM("CSVFILES/DM_Utility_Function.csv")
-    DA(criteriaFileName="CSVFILES/criteria.csv", performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv", NonPI_AOPicker=RandomPicker(),
+    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function.csv", 0)
+    DA(criteriaFileName="CSVFILES/criteria.csv", performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv", NonPI_AOPicker=RandomPicker(0),
        stopCriterion=DialogDurationStopCriterion(6), N_AOPicker=RandomPicker(0))
 
-    DA().process()
+    DA().process(dm)
