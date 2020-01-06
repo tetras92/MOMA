@@ -2,16 +2,14 @@ import csv
 import itertools as it
 
 from CORE.Alternative import *
-from CORE.AppreciationObject import PairwiseComparisonObject
+from CORE.Information import Information
 from CORE.InformationStore import *
 from CORE.Tools import attribute_creator
-
+from CORE.Tools import EPSILON
 
 @singleton
 class DA:
-    EPSILON = 0.0000001
     def __init__(self, criteriaFileName="", performanceTableFileName="", NonPI_AOPicker=None, N_AOPicker=None,stopCriterion=None):
-
         self._criteriaFileName = criteriaFileName
         self._performanceTableFileName = performanceTableFileName
         self._alternativesDict = dict()
@@ -79,7 +77,7 @@ class DA:
             C = list(coupleOfAltId)
             C.sort()
             C = [self._alternativesDict[elt] for elt in C]
-            PairwiseComparisonObject(*C)
+            Information(*C)
 
     def _generate_list_of_list_of_ordered_criterion_attributes(self):
         L = list()
@@ -113,11 +111,13 @@ class DA:
             cst += VarDict[LOCA[-1]]
         gurobi_model.addConstr(cst == 1)
 
-        for linexpr, term in PI().get_linear_expr_and_term_of_preference_information_stored(VarDict):
+        for information in PI():
+            linexpr = information.linear_expr(VarDict)
+            term = information.termP
             if term == ComparisonTerm.IS_LESS_PREFERRED_THAN:
-                gurobi_model.addConstr(linexpr <= - DA().EPSILON)
+                gurobi_model.addConstr(linexpr <= - EPSILON)
             elif term == ComparisonTerm.IS_PREFERRED_TO:
-                gurobi_model.addConstr(linexpr >= DA().EPSILON)
+                gurobi_model.addConstr(linexpr >= EPSILON)
             elif term == ComparisonTerm.IS_INDIFERRENT_TO:
                 gurobi_model.addConstr(linexpr == 0)
             else :
@@ -144,7 +144,7 @@ class DA:
 
 from CORE.StopCriterion import *
 from CORE.AOPicker import *
-from CORE.DM import WS_DM, NoisyWS_DM
+from CORE.DM import NoisyWS_DM
 
 
 if __name__ == "__main__" :

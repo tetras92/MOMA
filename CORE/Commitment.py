@@ -1,10 +1,10 @@
 from CORE.Dialog import Dialog
 class Commitment:
-    def __init__(self, ao, term):
-        self._ao = ao
+    def __init__(self, info, term):
+        self.info = info
         self._term = term
         self.date = Dialog.NB
-        self._id = ao.id
+        self._id = info.id
         CommitmentStore().add(self)
 
     def getId(self):
