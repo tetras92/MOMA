@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="">
+    <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="DA process : un élément de N à la foid">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/DA.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/DA.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
@@ -42,11 +50,36 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\MICS\PycharmProjects\MOMBA\MCDA" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\MICS\PycharmProjects\MOMBA" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.DA (1)">
+    <configuration name="DA (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MOMBA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/DA.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="DA" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -60,7 +93,29 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DA.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\MICS\PycharmProjects\MOMBA\MCDA\DA.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="InformationStore" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MOMBA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/InformationStore.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -71,6 +126,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.DA (1)" />
+        <item itemvalue="Python.InformationStore" />
         <item itemvalue="Python.DA" />
       </list>
     </recent_temporary>
@@ -104,7 +161,9 @@
       <workItem from="1578153344872" duration="1386000" />
       <workItem from="1578155261419" duration="3027000" />
       <workItem from="1578171147332" duration="8573000" />
-      <workItem from="1578230216643" duration="6573000" />
+      <workItem from="1578230216643" duration="14676000" />
+      <workItem from="1578296034897" duration="13877000" />
+      <workItem from="1578345278830" duration="5666000" />
     </task>
     <task id="LOCAL-00001" summary="first commut">
       <created>1578153549362</created>
@@ -134,7 +193,77 @@
       <option name="project" value="LOCAL" />
       <updated>1578241975250</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="commit">
+      <created>1578242242901</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1578242242901</updated>
+    </task>
+    <task id="LOCAL-00006" summary="commit CORE">
+      <created>1578242437846</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1578242437846</updated>
+    </task>
+    <task id="LOCAL-00007" summary="commit CORE">
+      <created>1578242533063</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1578242533064</updated>
+    </task>
+    <task id="LOCAL-00008" summary="commit CORE">
+      <created>1578255360518</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1578255360518</updated>
+    </task>
+    <task id="LOCAL-00009" summary="InformationStore (premières simplifications)">
+      <created>1578265012672</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1578265012672</updated>
+    </task>
+    <task id="LOCAL-00010" summary="some outputs (outputs.txt)">
+      <created>1578296427728</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1578296427728</updated>
+    </task>
+    <task id="LOCAL-00011" summary="DA process : un élément de N à la foid">
+      <created>1578309535185</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1578309535185</updated>
+    </task>
+    <task id="LOCAL-00012" summary="AVANT REFACTORING DE LA GESTION DE L'INFO">
+      <created>1578329271173</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1578329271173</updated>
+    </task>
+    <task id="LOCAL-00013" summary="REFACTORING INFORMATION DONE">
+      <created>1578337526420</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1578337526420</updated>
+    </task>
+    <task id="LOCAL-00014" summary="DA generate basic model ==&gt; static">
+      <created>1578407749644</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1578407749644</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,17 +309,24 @@
     <MESSAGE value="first commut" />
     <MESSAGE value="first commit" />
     <MESSAGE value="commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit" />
+    <MESSAGE value="commit CORE" />
+    <MESSAGE value="InformationStore (premières simplifications)" />
+    <MESSAGE value="some outputs (outputs.txt)" />
+    <MESSAGE value="DA process : un élément de N à la foid" />
+    <MESSAGE value="AVANT REFACTORING DE LA GESTION DE L'INFO" />
+    <MESSAGE value="REFACTORING INFORMATION DONE" />
+    <MESSAGE value="DA generate basic model ==&gt; static" />
+    <option name="LAST_COMMIT_MESSAGE" value="DA generate basic model ==&gt; static" />
   </component>
   <component name="WindowStateProjectService">
     <state x="233" y="0" key="#Notifications" timestamp="1578241940759">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="0" key="#Notifications/0.0.1280.680@0.0.1280.680" timestamp="1578241940759" />
-    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1578241994100">
+    <state x="184" y="0" key="CommitChangelistDialog2" timestamp="1578407788817">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1578241994100" />
+    <state x="184" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1578407788817" />
     <state x="121" y="57" key="DiffContextDialog" timestamp="1578153727117">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -199,54 +335,54 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1578153131991" />
-    <state width="618" height="258" key="GridCell.Tab.0.bottom" timestamp="1578242078080">
+    <state width="1237" height="268" key="GridCell.Tab.0.bottom" timestamp="1578407711565">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="618" height="258" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1578242078080" />
-    <state width="618" height="258" key="GridCell.Tab.0.center" timestamp="1578242078080">
+    <state width="1237" height="268" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1578407711565" />
+    <state width="1237" height="268" key="GridCell.Tab.0.center" timestamp="1578407711564">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="618" height="258" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1578242078080" />
-    <state width="618" height="258" key="GridCell.Tab.0.left" timestamp="1578242078080">
+    <state width="1237" height="268" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1578407711564" />
+    <state width="1237" height="268" key="GridCell.Tab.0.left" timestamp="1578407711564">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="618" height="258" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1578242078080" />
-    <state width="618" height="258" key="GridCell.Tab.0.right" timestamp="1578242078080">
+    <state width="1237" height="268" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1578407711564" />
+    <state width="1237" height="268" key="GridCell.Tab.0.right" timestamp="1578407711565">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="618" height="258" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1578242078080" />
-    <state width="1237" height="179" key="GridCell.Tab.1.bottom" timestamp="1578238166693">
+    <state width="1237" height="268" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1578407711565" />
+    <state width="1237" height="179" key="GridCell.Tab.1.bottom" timestamp="1578265648183">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="179" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1578238166693" />
-    <state width="1237" height="179" key="GridCell.Tab.1.center" timestamp="1578238166693">
+    <state width="1237" height="179" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1578265648183" />
+    <state width="1237" height="179" key="GridCell.Tab.1.center" timestamp="1578265648183">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="179" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1578238166693" />
-    <state width="1237" height="179" key="GridCell.Tab.1.left" timestamp="1578238166693">
+    <state width="1237" height="179" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1578265648183" />
+    <state width="1237" height="179" key="GridCell.Tab.1.left" timestamp="1578265648183">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="179" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1578238166693" />
-    <state width="1237" height="179" key="GridCell.Tab.1.right" timestamp="1578238166693">
+    <state width="1237" height="179" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1578265648183" />
+    <state width="1237" height="179" key="GridCell.Tab.1.right" timestamp="1578265648183">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="179" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1578238166693" />
+    <state width="1237" height="179" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1578265648183" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1578153199156">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1578153199156" />
-    <state x="233" y="75" key="Vcs.Push.Dialog.v2" timestamp="1578241926493">
+    <state x="233" y="75" key="Vcs.Push.Dialog.v2" timestamp="1578407752033">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="75" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1578241926493" />
+    <state x="233" y="75" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1578407752033" />
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1578144798085">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1280.680@0.0.1280.680" timestamp="1578144798085" />
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1578230216669">
+    <state x="337" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1578345280959">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1578230216669" />
+    <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1578345280959" />
     <state x="203" y="78" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1578237520081">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -257,6 +393,8 @@
     <state x="378" y="133" key="git4idea.merge.GitPullDialog/0.0.1280.680@0.0.1280.680" timestamp="1578155320168" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MOMBA$DA.coverage" NAME="DA Coverage Results" MODIFIED="1578238924230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MOMBA$DA__1_.coverage" NAME="DA (1) Coverage Results" MODIFIED="1578407711542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
+    <SUITE FILE_PATH="coverage/MOMBA$InformationStore.coverage" NAME="InformationStore Coverage Results" MODIFIED="1578296154321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
+    <SUITE FILE_PATH="coverage/MOMBA$DA.coverage" NAME="DA Coverage Results" MODIFIED="1578258143598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

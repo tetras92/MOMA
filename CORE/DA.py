@@ -94,6 +94,7 @@ class DA:
         self._list_of_list_of_ordered_criterion_attributes = L
 
     @staticmethod
+
     def generate_basic_gurobi_model_and_its_varDict(criteriaOrderedList, listOfListOfOrderedCriterionAttributes):
         listOfListOfOrderedCriterionAttributesCopy = [L.copy() for L in listOfListOfOrderedCriterionAttributes]
         for criterion, i in list(zip(criteriaOrderedList, range(len(listOfListOfOrderedCriterionAttributesCopy)))):
