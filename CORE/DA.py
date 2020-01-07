@@ -1,5 +1,6 @@
 import csv
 import itertools as it
+from builtins import list
 
 from CORE.Alternative import *
 from CORE.Information import Information
@@ -23,7 +24,7 @@ class DA:
         self._stopCriterion = stopCriterion
 
         self._generate_list_of_list_of_ordered_criterion_attributes()
-        self._generate_gurobi_model_and_its_varDict()
+        #self._generate_basic_gurobi_model_and_its_varDict()
 
     def _set_up(self):
         self._set_up_criteria()
@@ -92,43 +93,31 @@ class DA:
             NSL.sort(key=lambda x : D[x])
         self._list_of_list_of_ordered_criterion_attributes = L
 
-
-    def _generate_gurobi_model_and_its_varDict(self):
-        for criterion, i in list(zip(self._criteriaOrderedList, range(len(self._list_of_list_of_ordered_criterion_attributes)))):
-            self._list_of_list_of_ordered_criterion_attributes[i].append(attribute_creator(criterion, "BETA"))
-            self._list_of_list_of_ordered_criterion_attributes[i] = [attribute_creator(criterion, "ALPHA")] + self._list_of_list_of_ordered_criterion_attributes[i]
+    @staticmethod
+    def generate_basic_gurobi_model_and_its_varDict(criteriaOrderedList, listOfListOfOrderedCriterionAttributes):
+        listOfListOfOrderedCriterionAttributesCopy = [L.copy() for L in listOfListOfOrderedCriterionAttributes]
+        for criterion, i in list(zip(criteriaOrderedList, range(len(listOfListOfOrderedCriterionAttributesCopy)))):
+            listOfListOfOrderedCriterionAttributesCopy[i].append(attribute_creator(criterion, "BETA"))
+            listOfListOfOrderedCriterionAttributesCopy[i] = [attribute_creator(criterion, "ALPHA")] + listOfListOfOrderedCriterionAttributesCopy[i]
 
         gurobi_model = Model("MOMA_MCDA")
         gurobi_model.setParam('OutputFlag', False)
         VarDict = {varname : gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0, name=varname)
-                    for L in self._list_of_list_of_ordered_criterion_attributes for varname in L}
+                    for L in listOfListOfOrderedCriterionAttributesCopy for varname in L}
 
         cst = LinExpr()
-        for LOCA in self._list_of_list_of_ordered_criterion_attributes:
+        for LOCA in listOfListOfOrderedCriterionAttributesCopy:
             for i in range(1, len(LOCA)):
                 gurobi_model.addConstr(VarDict[LOCA[i]] >= VarDict[LOCA[i-1]])
             gurobi_model.addConstr(VarDict[LOCA[0]] == 0)
             cst += VarDict[LOCA[-1]]
         gurobi_model.addConstr(cst == 1)
 
-        for information in PI():
-            linexpr = information.linear_expr(VarDict)
-            term = information.termP
-            if term == ComparisonTerm.IS_LESS_PREFERRED_THAN:
-                gurobi_model.addConstr(linexpr <= - EPSILON)
-            elif term == ComparisonTerm.IS_PREFERRED_TO:
-                gurobi_model.addConstr(linexpr >= EPSILON)
-            elif term == ComparisonTerm.IS_INDIFERRENT_TO:
-                gurobi_model.addConstr(linexpr == 0)
-            else :
-                raise Exception("Error in PI")
-
-        #print(self._list_of_list_of_ordered_criterion_attributes)
         return gurobi_model, VarDict
 
     def process(self, dm):
         while not self._stopCriterion.stop():
-            model, varDict = self._generate_gurobi_model_and_its_varDict()
+            model, varDict = DA().generate_basic_gurobi_model_and_its_varDict(self._criteriaOrderedList, self._list_of_list_of_ordered_criterion_attributes)
             N().update(varDict, model)
             N_initial_empty_state = N().is_empty()
             if not N_initial_empty_state:
