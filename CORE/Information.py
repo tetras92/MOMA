@@ -15,26 +15,28 @@ class Information:
 
     id = property(getId)
     def _nUpgrade(self, v):
-        self.o = NInformation(self, self.alternative1, self.alternative2)
         NonPI().remove(self)
+        self.o = NInformation(self, self.alternative1, self.alternative2)
+        self.o.termN = v
 
     def _pUpgrade(self, v):
         if isinstance(self.o, NInformation):
+            if self.o.termN != v: #DM ne valide pas la valeur inférée
+                return
             N().remove(self)
         elif isinstance(self.o, PairwiseInformation):
             NonPI().remove(self)
         self.o = PInformation(self, self.alternative1, self.alternative2)
+        self.o.termP = v
 
     def _pdowngrade(self):
         pass
 
     def setTermN(self, v):
         self._nUpgrade(v)
-        self.o.termN = v
 
     def setTermP(self, v):
         self._pUpgrade(v)
-        self.o.termP = v
 
     def getTermP(self):
         return self.o.termP

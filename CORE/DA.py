@@ -24,7 +24,6 @@ class DA:
         self._stopCriterion = stopCriterion
 
         self._generate_list_of_list_of_ordered_criterion_attributes()
-        #self._generate_basic_gurobi_model_and_its_varDict()
 
     def _set_up(self):
         self._set_up_criteria()
@@ -66,7 +65,6 @@ class DA:
         for i, j in list(it.permutations(self._alternativesDict.keys(), 2)):
             if (j not in dominatedAlternativeIdSet) and (i not in dominatedAlternativeIdSet) and \
                     self._alternativesDict[i] < self._alternativesDict[j]:
-                #print("{} < {}".format(self._alternativesDict[i].attributeLevelsList, self._alternativesDict[j].attributeLevelsList))
                 dominatedAlternativeIdSet.add(i)
         print("{} alternatives removed".format(len(dominatedAlternativeIdSet)))
         for id in dominatedAlternativeIdSet:
@@ -94,7 +92,6 @@ class DA:
         self._list_of_list_of_ordered_criterion_attributes = L
 
     @staticmethod
-
     def generate_basic_gurobi_model_and_its_varDict(criteriaOrderedList, listOfListOfOrderedCriterionAttributes):
         listOfListOfOrderedCriterionAttributesCopy = [L.copy() for L in listOfListOfOrderedCriterionAttributes]
         for criterion, i in list(zip(criteriaOrderedList, range(len(listOfListOfOrderedCriterionAttributesCopy)))):
