@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="DA process : un élément de N à la foid">
+    <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/DA.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/DA.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +162,8 @@
       <workItem from="1578171147332" duration="8573000" />
       <workItem from="1578230216643" duration="14676000" />
       <workItem from="1578296034897" duration="13877000" />
-      <workItem from="1578345278830" duration="5666000" />
+      <workItem from="1578345278830" duration="7498000" />
+      <workItem from="1578466578301" duration="2027000" />
     </task>
     <task id="LOCAL-00001" summary="first commut">
       <created>1578153549362</created>
@@ -263,7 +263,28 @@
       <option name="project" value="LOCAL" />
       <updated>1578407749644</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="basic model ==&gt; static">
+      <created>1578408035623</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1578408035623</updated>
+    </task>
+    <task id="LOCAL-00016" summary="début mise à jour de la réponse binaire du DM aux éléments de N">
+      <created>1578467531430</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1578467531430</updated>
+    </task>
+    <task id="LOCAL-00017" summary="mise à jour reponse binaire du DM : DM can answer yes or No (+ InvalidationCommitment)">
+      <created>1578468557532</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1578468557532</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,17 +337,20 @@
     <MESSAGE value="AVANT REFACTORING DE LA GESTION DE L'INFO" />
     <MESSAGE value="REFACTORING INFORMATION DONE" />
     <MESSAGE value="DA generate basic model ==&gt; static" />
-    <option name="LAST_COMMIT_MESSAGE" value="DA generate basic model ==&gt; static" />
+    <MESSAGE value="basic model ==&gt; static" />
+    <MESSAGE value="début mise à jour de la réponse binaire du DM aux éléments de N" />
+    <MESSAGE value="mise à jour reponse binaire du DM : DM can answer yes or No (+ InvalidationCommitment)" />
+    <option name="LAST_COMMIT_MESSAGE" value="mise à jour reponse binaire du DM : DM can answer yes or No (+ InvalidationCommitment)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="233" y="0" key="#Notifications" timestamp="1578241940759">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="0" key="#Notifications/0.0.1280.680@0.0.1280.680" timestamp="1578241940759" />
-    <state x="184" y="0" key="CommitChangelistDialog2" timestamp="1578407788817">
+    <state x="184" y="0" key="CommitChangelistDialog2" timestamp="1578468556892">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="184" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1578407788817" />
+    <state x="184" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1578468556892" />
     <state x="121" y="57" key="DiffContextDialog" timestamp="1578153727117">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -335,22 +359,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1578153131991" />
-    <state width="1237" height="268" key="GridCell.Tab.0.bottom" timestamp="1578407711565">
+    <state width="1237" height="418" key="GridCell.Tab.0.bottom" timestamp="1578468486037">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="268" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1578407711565" />
-    <state width="1237" height="268" key="GridCell.Tab.0.center" timestamp="1578407711564">
+    <state width="1237" height="418" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1578468486037" />
+    <state width="1237" height="418" key="GridCell.Tab.0.center" timestamp="1578468486037">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="268" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1578407711564" />
-    <state width="1237" height="268" key="GridCell.Tab.0.left" timestamp="1578407711564">
+    <state width="1237" height="418" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1578468486037" />
+    <state width="1237" height="418" key="GridCell.Tab.0.left" timestamp="1578468486036">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="268" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1578407711564" />
-    <state width="1237" height="268" key="GridCell.Tab.0.right" timestamp="1578407711565">
+    <state width="1237" height="418" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1578468486036" />
+    <state width="1237" height="418" key="GridCell.Tab.0.right" timestamp="1578468486037">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="268" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1578407711565" />
+    <state width="1237" height="418" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1578468486037" />
     <state width="1237" height="179" key="GridCell.Tab.1.bottom" timestamp="1578265648183">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -371,18 +395,18 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1578153199156" />
-    <state x="233" y="75" key="Vcs.Push.Dialog.v2" timestamp="1578407752033">
+    <state x="233" y="75" key="Vcs.Push.Dialog.v2" timestamp="1578468567965">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="75" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1578407752033" />
+    <state x="233" y="75" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1578468567965" />
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1578144798085">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1280.680@0.0.1280.680" timestamp="1578144798085" />
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1578345280959">
+    <state x="337" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1578466578823">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1578345280959" />
+    <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1578466578823" />
     <state x="203" y="78" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1578237520081">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -393,7 +417,7 @@
     <state x="378" y="133" key="git4idea.merge.GitPullDialog/0.0.1280.680@0.0.1280.680" timestamp="1578155320168" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MOMBA$DA__1_.coverage" NAME="DA (1) Coverage Results" MODIFIED="1578407711542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
+    <SUITE FILE_PATH="coverage/MOMBA$DA__1_.coverage" NAME="DA (1) Coverage Results" MODIFIED="1578468486024" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
     <SUITE FILE_PATH="coverage/MOMBA$InformationStore.coverage" NAME="InformationStore Coverage Results" MODIFIED="1578296154321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
     <SUITE FILE_PATH="coverage/MOMBA$DA.coverage" NAME="DA Coverage Results" MODIFIED="1578258143598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
