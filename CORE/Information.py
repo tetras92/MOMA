@@ -1,6 +1,7 @@
 from CORE.AppreciationObject import PairwiseInformation, NInformation, PInformation
-from CORE.InformationStore import NonPI, N
 from CORE.Commitment import *
+from CORE.InformationStore import NonPI, N
+
 
 class Information:
     NB_OBJECT = 0
@@ -52,7 +53,6 @@ class Information:
 
     def __str__(self):
         return self.o.__str__()
-
 
     def linear_expr(self, VarDict):
         return (self.alternative1.linear_expr(VarDict) - self.alternative2.linear_expr(VarDict))

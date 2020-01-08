@@ -1,8 +1,9 @@
 from gurobipy import *
 
 from CORE.ComparisonTerm import *
-from CORE.decorators import singleton
 from CORE.Tools import EPSILON
+from CORE.decorators import singleton
+
 
 class InformationStore:
     def __init__(self):
@@ -22,6 +23,9 @@ class InformationStore:
             else:
                 raise Exception("Error in PI")
 
+
+
+
 @singleton
 class PI(InformationStore):
     def __init__(self):
@@ -39,17 +43,34 @@ class PI(InformationStore):
     def __iter__(self):
         return self._store.__iter__()
 
+    def getAsymmetricAndSymmetricParts(self):
+        AL = list()
+        SL = list()
+        for information in self:
+            if information.termP == ComparisonTerm.IS_PREFERRED_TO:
+                AL.append((information.alternative1, information.alternative2))
+            elif information.termP == ComparisonTerm.IS_LESS_PREFERRED_THAN:
+                AL.append((information.alternative2, information.alternative1))
+            elif information.termP == ComparisonTerm.IS_INDIFERRENT_TO:
+                SL.append((information.alternative1, information.alternative2))
+            else:
+                raise Exception("Error getAsymmetricAndSymmetricParts in PI()")
+
+        return AL, SL
+
 @singleton
 class NonPI(InformationStore):
-    def __init__(self, aoPicker):
+    def __init__(self):
         self._store = list()
-        self._aoPicker = aoPicker
+
+    def setInfoPicker(self, infoPicker):
+        self._infoPicker = infoPicker
 
     def __len__(self):
         return len(self._store)
 
     def pick(self):
-        indexToPick = self._aoPicker.pickIndex(len(self))
+        indexToPick = self._infoPicker.pickIndex(len(self))
         return self._store[indexToPick]
 
     def add(self, information):
@@ -69,28 +90,28 @@ class NonPI(InformationStore):
         return s
 @singleton
 class N(InformationStore):
-    def __init__(self, aoPicker):
+    def __init__(self):
         self._store = list()
-        self._aoPicker = aoPicker
+
+    def setInfoPicker(self, infoPicker):
+        self._infoPicker = infoPicker
 
     def update(self, VarDict, gurobi_model):
         InformationStore.addInformationToModel(PI(), gurobi_model, VarDict)
-        for pco in NonPI():
-            pco_linexpr = pco.linear_expr(VarDict)
+        for info in NonPI():
+            pco_linexpr = info.linear_expr(VarDict)
             gurobi_model.setObjective(pco_linexpr, GRB.MINIMIZE)
             gurobi_model.update()
             gurobi_model.optimize()
 
             if gurobi_model.objVal >= 0:
-                pco.termN = ComparisonTerm.IS_PREFERRED_TO
+                info.termN = ComparisonTerm.IS_PREFERRED_TO
             else:
                 gurobi_model.setObjective(- pco_linexpr, GRB.MINIMIZE)
                 gurobi_model.update()
                 gurobi_model.optimize()
                 if gurobi_model.objVal >= 0:
-                    pco.termN = ComparisonTerm.IS_LESS_PREFERRED_THAN
-
-
+                    info.termN = ComparisonTerm.IS_LESS_PREFERRED_THAN
 
     def add(self, information):
         self._store.append(information)
@@ -99,7 +120,7 @@ class N(InformationStore):
         return len(self._store) == 0
 
     def pick(self):
-        indexToPick = self._aoPicker.pickIndex(len(self))
+        indexToPick = self._infoPicker.pickIndex(len(self))
         return self._store[indexToPick]
 
     def __iter__(self):
