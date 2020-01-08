@@ -13,12 +13,19 @@ class Commitment:
     id = property(getId)
 
 class AnswerCommitment(Commitment):
-    def __init__(self, ao, term):
-        Commitment.__init__(self,ao, term)
+    def __init__(self, info, term):
+        Commitment.__init__(self, info, term)
+        print("\tDM answers {}".format(term))
 
 class ValidationCommitment(Commitment):
-    def __init__(self, ao, term):
-        Commitment.__init__(self, ao, term)
+    def __init__(self, info, term):
+        Commitment.__init__(self, info, term)
+        print("\tDM answers YES")
+
+class InvalidationCommitment(Commitment):
+    def __init__(self, info, term):
+        Commitment.__init__(self, info, term)
+        print("\tDM answers NO")
 
 from CORE.decorators import singleton
 @singleton

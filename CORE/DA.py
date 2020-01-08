@@ -135,7 +135,7 @@ from CORE.DM import NoisyWS_DM
 
 
 if __name__ == "__main__" :
-    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function.csv", 0)
+    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function.csv", 0.5)
     DA(criteriaFileName="CSVFILES/criteria.csv", performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv", NonPI_AOPicker=RandomPicker(0),
        stopCriterion=DialogDurationStopCriterion(6), N_AOPicker=RandomPicker(0))
 

@@ -1,6 +1,6 @@
 from CORE.AppreciationObject import PairwiseInformation, NInformation, PInformation
 from CORE.InformationStore import NonPI, N
-
+from CORE.Commitment import *
 
 class Information:
     NB_OBJECT = 0
@@ -22,10 +22,15 @@ class Information:
     def _pUpgrade(self, v):
         if isinstance(self.o, NInformation):
             if self.o.termN != v: #DM ne valide pas la valeur inférée
+                CommitmentStore().add(InvalidationCommitment(self, v))
                 return
+            CommitmentStore().add(ValidationCommitment(self, v))
             N().remove(self)
+
         elif isinstance(self.o, PairwiseInformation):
+            CommitmentStore().add(AnswerCommitment(self, v))
             NonPI().remove(self)
+
         self.o = PInformation(self, self.alternative1, self.alternative2)
         self.o.termP = v
 
