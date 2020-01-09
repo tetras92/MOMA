@@ -24,7 +24,7 @@ class ValidationCommitment(Commitment):
 
 class InvalidationCommitment(Commitment):
     def __init__(self, info, term):
-        Commitment.__init__(self, info, term)
+        Commitment.__init__(self, info, term)  # ici, term est la réponse à laquelle s'oppose le DM
         print("\tDM answers NO")
 
 from CORE.decorators import singleton

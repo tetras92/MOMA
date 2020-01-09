@@ -10,6 +10,7 @@ class Information:
         self.alternative1 = alternative1
         self.alternative2 = alternative2
         self._id = Information.NB_OBJECT
+        Information.NB_OBJECT += 1
 
     def getId(self):
         return self._id
@@ -23,7 +24,7 @@ class Information:
     def _pUpgrade(self, v):
         if isinstance(self.o, NInformation):
             if self.o.termN != v: #DM ne valide pas la valeur inférée
-                CommitmentStore().add(InvalidationCommitment(self, v))
+                CommitmentStore().add(InvalidationCommitment(self, self.o.termN))
                 return
             CommitmentStore().add(ValidationCommitment(self, v))
             N().remove(self)
