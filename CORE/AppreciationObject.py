@@ -8,20 +8,12 @@ class AppreciationObject:
         self.alternative1 = alternative1
         self.alternative2 = alternative2
 
-
-
 class PairwiseInformation(AppreciationObject):
-    #NB_OF_OBJECTS = 0
     def __init__(self, infoConteneur, alternative1, alternative2): #infoConteneur : changer nom dès que possible
         """alternative1.id < alternative2.id"""
         NonPI().add(infoConteneur)
         self.conteneur = infoConteneur
         AppreciationObject.__init__(self, alternative1, alternative2)
-
-
-    def getId(self):
-        return self._id
-
 
     def __str__(self):
         return "{} {} {}".format(self.alternative1, ComparisonTerm.NO_TERM, self.alternative2)
@@ -32,7 +24,7 @@ class PairwiseInformation(AppreciationObject):
 
 
 class NInformation(AppreciationObject):
-    def __init__(self,infoConteneur, alternative1, alternative2): #infoConteneur : changer nom dès que possible
+    def __init__(self, infoConteneur, alternative1, alternative2): #infoConteneur : changer nom dès que possible
         """alternative1.id < alternative2.id"""
         N().add(infoConteneur)
         AppreciationObject.__init__(self, alternative1, alternative2)

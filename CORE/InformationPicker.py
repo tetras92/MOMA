@@ -1,8 +1,8 @@
-class AOPicker:
+class InformationPicker:
     pass
 
 import random as rdm
-class RandomPicker(AOPicker):
+class RandomPicker(InformationPicker):
     def __init__(self, seedValue=None):
         self._generator = rdm.Random()
         if not seedValue is None:

@@ -2,13 +2,25 @@ from gurobipy import *
 
 from CORE.ComparisonTerm import *
 from CORE.decorators import singleton
-
+from CORE.Tools import EPSILON
 
 class InformationStore:
     def __init__(self):
         self._store = list()
 
-
+    @staticmethod
+    def addInformationToModel(store, model, varDict):
+        for information in store:
+            linexpr = information.linear_expr(varDict)
+            term = information.termP
+            if term == ComparisonTerm.IS_LESS_PREFERRED_THAN:
+                model.addConstr(linexpr <= - EPSILON)
+            elif term == ComparisonTerm.IS_PREFERRED_TO:
+                model.addConstr(linexpr >= EPSILON)
+            elif term == ComparisonTerm.IS_INDIFERRENT_TO:
+                model.addConstr(linexpr == 0)
+            else:
+                raise Exception("Error in PI")
 
 @singleton
 class PI(InformationStore):
@@ -62,6 +74,7 @@ class N(InformationStore):
         self._aoPicker = aoPicker
 
     def update(self, VarDict, gurobi_model):
+        InformationStore.addInformationToModel(PI(), gurobi_model, VarDict)
         for pco in NonPI():
             pco_linexpr = pco.linear_expr(VarDict)
             gurobi_model.setObjective(pco_linexpr, GRB.MINIMIZE)
