@@ -3,7 +3,7 @@ class ComparisonTerm:
     NO_TERM = "?"
     IS_PREFERRED_TO = ">"
     IS_LESS_PREFERRED_THAN = "<"
-    IS_INDIFERRENT_TO = "="
+    IS_INDIFERRENT_TO = "~"
 
     @classmethod
     def terms(cls):

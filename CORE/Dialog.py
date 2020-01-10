@@ -5,5 +5,5 @@ class Dialog:
         self.info = info
 
     def madeWith(self, dm):
-        print("Dialog {} : \n\t{}".format(Dialog.NB, self.info))
+        #print("Dialog {} : \n\t{}".format(Dialog.NB, self.info))
         dm.evaluate(self.info)

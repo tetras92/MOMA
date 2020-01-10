@@ -42,14 +42,16 @@ class DA:
 from CORE.StopCriterion import *
 from CORE.InformationPicker import *
 from CORE.DM import NoisyWS_DM
-
+from CORE.Commitment import CommitmentStore
 
 if __name__ == "__main__" :
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv", performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv")
-    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function.csv", 0)
+    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function.csv", 1)
 
     DA(problemDescription=mcda_problem_description, NonPI_InfoPicker=RandomPicker(0),
-       stopCriterion=DialogDurationStopCriterion(1), N_InfoPicker=RandomPicker(0),
-       recommandationMaker=KBestRecommendationWrapper(4))
+       stopCriterion=DialogDurationStopCriterion(16), N_InfoPicker=RandomPicker(0),
+       recommandationMaker=KBestRecommendationWrapper(1))
 
     DA().process(dm)
+
+    print(CommitmentStore())
