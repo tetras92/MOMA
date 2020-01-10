@@ -23,13 +23,21 @@ class InformationStore:
             else:
                 raise Exception("Error in PI")
 
+    def clear(self):
+        pass
+    def remove(self, info):
+        self._store.remove(info)
 
-
+    def __str__(self):
+        s = ""
+        for elm in self._store:
+            s += str(elm) + "\n"
+        return s
 
 @singleton
 class PI(InformationStore):
     def __init__(self):
-        self._store = list()
+        InformationStore.__init__(self)
 
     def add(self, information):
         self._store.append(information)
@@ -58,10 +66,21 @@ class PI(InformationStore):
 
         return AL, SL
 
+    def clear(self):
+        store_copy = [info for info in self._store] # important car retire des éléments de PI
+        for info in store_copy:                     # et si on fait for info in self, l'itérateur est "perturbé"
+            del info.termP
+
+    def remove(self, info):
+        InformationStore.remove(self, info)
+
+    def __str__(self):
+        return InformationStore.__str__(self)
+
 @singleton
 class NonPI(InformationStore):
     def __init__(self):
-        self._store = list()
+        InformationStore.__init__(self)
 
     def setInfoPicker(self, infoPicker):
         self._infoPicker = infoPicker
@@ -77,27 +96,29 @@ class NonPI(InformationStore):
         self._store.append(information)
 
     def remove(self, info):
-        self._store.remove(info)
+        InformationStore.remove(self, info)
 
 
     def __iter__(self):
         return self._store.__iter__()
 
     def __str__(self):
-        s = ""
-        for elm in self._store:
-            s += str(elm) + "\n"
-        return s
+        return InformationStore.__str__(self)
+
+    def clear(self):
+        InformationStore.clear(self)
+
 @singleton
 class N(InformationStore):
     def __init__(self):
-        self._store = list()
+        InformationStore.__init__(self)
 
     def setInfoPicker(self, infoPicker):
         self._infoPicker = infoPicker
 
     def update(self, VarDict, gurobi_model):
-        InformationStore.addInformationToModel(PI(), gurobi_model, VarDict)
+        N().clear() # vider pour recalculer
+        InformationStore.addInformationToModel(PI(), gurobi_model, VarDict)  # effet de bord sur gurobi_model
         for info in NonPI():
             pco_linexpr = info.linear_expr(VarDict)
             gurobi_model.setObjective(pco_linexpr, GRB.MINIMIZE)
@@ -130,4 +151,12 @@ class N(InformationStore):
         return len(self._store)
 
     def remove(self, info):
-        self._store.remove(info)
+        InformationStore.remove(self, info)
+
+    def __str__(self):
+        return InformationStore.__str__(self)
+
+    def clear(self):
+        store_copy = [info for info in self._store] # important tout comme dans le cas de PI
+        for info in store_copy:
+            del info.termN

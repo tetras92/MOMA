@@ -1,7 +1,7 @@
 from CORE.AppreciationObject import PairwiseInformation, NInformation, PInformation
 from CORE.Commitment import *
-from CORE.InformationStore import NonPI, N
-
+from CORE.InformationStore import NonPI, N, PI
+from CORE.Exceptions import DMdoesntValidateNElementException
 
 class Information:
     NB_OBJECT = 0
@@ -25,7 +25,8 @@ class Information:
         if isinstance(self.o, NInformation):
             if self.o.termN != v: #DM ne valide pas la valeur inférée
                 CommitmentStore().add(InvalidationCommitment(self, self.o.termN))
-                return
+                raise DMdoesntValidateNElementException(self)
+                #return
             CommitmentStore().add(ValidationCommitment(self, v))
             N().remove(self)
 
@@ -36,8 +37,12 @@ class Information:
         self.o = PInformation(self, self.alternative1, self.alternative2)
         self.o.termP = v
 
-    def _pdowngrade(self):
-        pass
+    def _downgrade(self):
+        if isinstance(self.o, PInformation):
+            PI().remove(self)
+        elif isinstance(self.o, NInformation):
+            N().remove(self)
+        self.o = PairwiseInformation(self, self.alternative1, self.alternative2)
 
     def setTermN(self, v):
         self._nUpgrade(v)
@@ -48,8 +53,11 @@ class Information:
     def getTermP(self):
         return self.o.termP
 
-    termN = property(None, setTermN)
-    termP = property(getTermP, setTermP)
+    def deleteTerm(self):
+        self._downgrade()
+
+    termN = property(fset=setTermN, fdel=deleteTerm)
+    termP = property(fget=getTermP, fset=setTermP, fdel=deleteTerm)
 
 
     def __str__(self):
@@ -57,3 +65,4 @@ class Information:
 
     def linear_expr(self, VarDict):
         return (self.alternative1.linear_expr(VarDict) - self.alternative2.linear_expr(VarDict))
+

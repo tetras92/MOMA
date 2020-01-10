@@ -15,7 +15,6 @@ class ProblemDescription:
         self._alternativesDict = dict()
         self._set_up()
 
-
     def _set_up(self):
         self._set_up_criteria()
         self._set_up_alternatives()
@@ -59,19 +58,20 @@ class ProblemDescription:
             if (j not in dominatedAlternativeIdSet) and (i not in dominatedAlternativeIdSet) and \
                     self._alternativesDict[i] < self._alternativesDict[j]:
                 dominatedAlternativeIdSet.add(i)
-        print("{} alternatives removed".format(len(dominatedAlternativeIdSet)))
+        #print("{} alternatives removed".format(len(dominatedAlternativeIdSet)))
         self._dominatedAlternativeList = list()
         for id in dominatedAlternativeIdSet:
             self._dominatedAlternativeList.append(self._alternativesDict[id])
             del self._alternativesDict[id]
-        print("{} alternatives remained".format(len(self._alternativesDict)))
+        #print("{} alternatives remained".format(len(self._alternativesDict)))
 
     def _generate_Information(self):
+        self._list_of_information = list()
         for coupleOfAltId in list(it.combinations(self._alternativesDict.keys(), 2)):
             C = list(coupleOfAltId)
             C.sort()
             C = [self._alternativesDict[elt] for elt in C]
-            Information(*C)
+            self._list_of_information.append(Information(*C))
 
     def _generate_list_of_list_of_ordered_criterion_attributes(self):
         L = list()
@@ -120,4 +120,8 @@ class ProblemDescription:
     def getNumberOfAlternatives(self):
         return len(self._alternativesDict)
 
+    def getNumberOfInformation(self):
+        return len(self._list_of_information)
+
     numberOfAlternatives = property(getNumberOfAlternatives)
+    numberOfInformation = property(getNumberOfInformation)
