@@ -1,8 +1,10 @@
+from CORE.Exceptions import DMdoesntValidateNElementException
+from CORE.InconsistencySolver import InconsistencySolverFactory
 from CORE.InformationStore import *
 from CORE.ProblemDescription import *
 from CORE.Recommendation import KBestRecommendationWrapper
-from CORE.InconsistencySolver import InconsistencySolverFactory
-from CORE.Exceptions import DMdoesntValidateNElementException
+
+
 @singleton
 class DA:
     def __init__(self, problemDescription=None, NonPI_InfoPicker=None, N_InfoPicker=None,
@@ -56,12 +58,12 @@ class DA:
 
 from CORE.StopCriterion import *
 from CORE.InformationPicker import *
-from CORE.DM import NoisyWS_DM
-
+from CORE.DM import WS_DM
+from CORE.Commitment import CommitmentStore
 
 if __name__ == "__main__" :
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv", performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv")
-    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function.csv", 1)
+    dm = WS_DM("CSVFILES/DM_Utility_Function.csv") #NoisyWS_DM("CSVFILES/DM_Utility_Function.csv", 1)
 
     DA(problemDescription=mcda_problem_description, NonPI_InfoPicker=RandomPicker(0),
        stopCriterion=DialogDurationStopCriterion(16), N_InfoPicker=RandomPicker(0),
@@ -70,4 +72,4 @@ if __name__ == "__main__" :
 
     DA().process(dm)
 
-    #print(CommitmentStore())
+    print(CommitmentStore())

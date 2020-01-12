@@ -1,7 +1,8 @@
 from CORE.AppreciationObject import PairwiseInformation, NInformation, PInformation
 from CORE.Commitment import *
-from CORE.InformationStore import NonPI, N, PI
 from CORE.Exceptions import DMdoesntValidateNElementException
+from CORE.InformationStore import NonPI, N, PI
+
 
 class Information:
     NB_OBJECT = 0

@@ -1,5 +1,7 @@
-from CORE.Dialog import Dialog
 from CORE.ComparisonTerm import *
+from CORE.Dialog import Dialog
+
+
 class Commitment:
     def __init__(self, info, term):
         self.info = info
@@ -50,7 +52,7 @@ class CommitmentStore():
         self._store_date_commitment = list()
 
     def add(self, commitment):
-        print(commitment)
+        #print(commitment)
         if commitment.id not in self._store_info_commitment:
             self._store_info_commitment[commitment.id] = set()
         self._store_info_commitment[commitment.id].add(commitment)

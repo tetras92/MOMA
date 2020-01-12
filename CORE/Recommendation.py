@@ -1,5 +1,8 @@
-from CORE.Tools import EPSILON
 from gurobipy import *
+
+from CORE.Tools import EPSILON
+
+
 class Recommendation:
     def __init__(self, problemDescription=None, dominanceAsymmetricPart=list(), dominanceSymmetricPart=list()):
         """dominanceAsymmetricPart and dominanceSymmetricPart : sont des List"""
