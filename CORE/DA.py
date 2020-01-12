@@ -39,8 +39,8 @@ class DA:
 
             assert len(N()) + len(PI()) + len(NonPI()) == self._problemDescription.numberOfInformation
 
-            # print("PI : \n\t{}".format(str(PI())))
-            # print("N : \n\t{}".format(str(N())))
+            print("PI : \n\t{}".format(str(PI())))
+            print("N : \n\t{}".format(str(N())))
 
             if not N_initial_empty_state:
                 info = N().pick()
@@ -71,7 +71,7 @@ if __name__ == "__main__" :
 
     DA(problemDescription=mcda_problem_description, NonPI_InfoPicker=RandomPicker(0),
        stopCriterion=DialogDurationStopCriterion(16), N_InfoPicker=RandomPicker(0),
-       recommandationMaker=KBestRecommendationWrapper(1),
+       recommandationMaker=KBestRecommendationWrapper(4),
        InconsistencySolverType=InconsistencySolverFactory().clearPIInconsistencySolver)
 
     DA().process(dm)

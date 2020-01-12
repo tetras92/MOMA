@@ -36,16 +36,15 @@ class KBestRecommendation(Recommendation):
         Recommendation.__init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart)
         self.K = k
 
-
-    def _generate_recommendation(self):
+    def _oneBest(self, ListOfPreviousBest):
         model, varDict = Recommendation.generate_recommendation_model_and_its_varDict(self)
-        ListOfKBest = list()
-
         for altB in self._ListOfRepresentedAlternatives:
+            if altB in ListOfPreviousBest:
+                continue
             isBest = True
             for alt in self._ListOfRepresentedAlternatives:
-                if alt in ListOfKBest:
-                    continue          # omet les first Bests
+                if alt in ListOfPreviousBest:
+                    continue          # omet les previous Bests
                 model.setObjective(altB.linear_expr(varDict) - alt.linear_expr(varDict), GRB.MINIMIZE)
                 model.update()
                 model.optimize()
@@ -53,11 +52,18 @@ class KBestRecommendation(Recommendation):
                     isBest = False
                     continue
             if isBest:
-                ListOfKBest.append(altB)
-            if len(ListOfKBest) == self.K:
-                break
+                ListOfPreviousBest.append(altB)           # effet de bord
+                return True
+        return False
 
-        return len(ListOfKBest) == self.K, ListOfKBest
+    def _generate_recommendation(self):
+        ListOfKBest = list()
+
+        for i in range(self.K):
+            if not self._oneBest(ListOfKBest):
+                return False, ListOfKBest
+        return True, ListOfKBest
+
 
     def isAbleToRecommend(self):
         answer, self.ListOfKBest = self._generate_recommendation() # passe en premier pour pouvoir instancier self.ListOfKBest
