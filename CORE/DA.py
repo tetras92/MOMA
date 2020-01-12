@@ -8,7 +8,7 @@ from CORE.Recommendation import KBestRecommendationWrapper
 @singleton
 class DA:
     def __init__(self, problemDescription=None, NonPI_InfoPicker=None, N_InfoPicker=None,
-                 stopCriterion=None, recommandationMaker=None,
+                 stopCriterion=None, recommandationMaker=KBestRecommendationWrapper(1),
                  InconsistencySolverType=InconsistencySolverFactory().emptyInconsistencySolver):
         self._problemDescription = problemDescription
         # Initialization of the InformationStore Objects
@@ -24,7 +24,11 @@ class DA:
         self._stopCriterion = stopCriterion
         self._recommendationMaker = recommandationMaker
         self.inconsistencySolver = InconsistencySolverType(PI())
-        print(self.inconsistencySolver.__class__)
+        self.recommendation = None
+
+    def show(self):
+        print("MY RECOMMENDATION IS : ", self.recommendation)
+
 
     def process(self, dm):
         self._recommendationMaker.update(self._problemDescription, *PI().getAsymmetricAndSymmetricParts())
@@ -52,18 +56,18 @@ class DA:
             Dialog(info).madeWith(dm)
             self._recommendationMaker.update(self._problemDescription, *PI().getAsymmetricAndSymmetricParts())
 
-        print("MY RECOMMENDATION IS : ", self._recommendationMaker.recommendation)
+        self.recommendation = self._recommendationMaker.recommendation
 
 
 
 from CORE.StopCriterion import *
 from CORE.InformationPicker import *
-from CORE.DM import WS_DM
+from CORE.DM import *
 from CORE.Commitment import CommitmentStore
 
 if __name__ == "__main__" :
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv", performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv")
-    dm = WS_DM("CSVFILES/DM_Utility_Function.csv") #NoisyWS_DM("CSVFILES/DM_Utility_Function.csv", 1)
+    dm =  VNoisyWS_DM("CSVFILES/DM_Utility_Function.csv", 1, 0.8) # WS_DM("CSVFILES/DM_Utility_Function.csv")
 
     DA(problemDescription=mcda_problem_description, NonPI_InfoPicker=RandomPicker(0),
        stopCriterion=DialogDurationStopCriterion(16), N_InfoPicker=RandomPicker(0),
@@ -71,5 +75,5 @@ if __name__ == "__main__" :
        InconsistencySolverType=InconsistencySolverFactory().clearPIInconsistencySolver)
 
     DA().process(dm)
-
+    DA().show()
     print(CommitmentStore())

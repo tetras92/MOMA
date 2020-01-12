@@ -42,3 +42,12 @@ class WS_DM(NoisyWS_DM):
     def evaluate(self, info):
         NoisyWS_DM.evaluate(self, info)
 
+
+class VNoisyWS_DM(NoisyWS_DM):
+    def __init__(self, utilityFunctionName, initialSigma, raisonLoiGeo):
+        NoisyWS_DM.__init__(self, utilityFunctionName, initialSigma)
+        self._raisonLoiGeo = raisonLoiGeo
+
+    def evaluate(self, info):
+        NoisyWS_DM.evaluate(self, info)
+        self._sigma *= self._raisonLoiGeo
