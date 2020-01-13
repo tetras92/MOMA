@@ -4,7 +4,7 @@ from CORE.DM import NoisyWS_DM
 from CORE.InconsistencySolver import InconsistencySolverFactory
 from CORE.InformationPicker import *
 from CORE.ProblemDescription import *
-from CORE.Recommendation import KBestRecommendationWrapper
+from CORE.Recommendation import RecommendationWrapper, KBestRecommendation
 from CORE.StopCriterion import *
 
 if __name__ == "__main__" :
@@ -13,7 +13,7 @@ if __name__ == "__main__" :
 
     DA(problemDescription=mcda_problem_description, NonPI_InfoPicker=RandomPicker(0),
        stopCriterion=DialogDurationStopCriterion(16), N_InfoPicker=RandomPicker(0),
-       recommandationMaker=KBestRecommendationWrapper(4),
+       recommandationMaker=RecommendationWrapper(KBestRecommendation, 2),
        InconsistencySolverType=InconsistencySolverFactory().clearPIInconsistencySolver)
 
     DA().interactWith(dm)

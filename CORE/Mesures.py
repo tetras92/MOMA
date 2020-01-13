@@ -1,5 +1,11 @@
-
-
+from CORE.DA import DA
+from CORE.InconsistencySolver import InconsistencySolverFactory
+from CORE.InformationPicker import *
+from CORE.ProblemDescription import *
+from CORE.StopCriterion import *
+from CORE.DM import *
+from CORE.Recommendation import RecommendationWrapper, KBestRecommendation, OrderedKBestRecommendation
+from CORE.InformationStore import PI
 if __name__ == "__main__" :
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
                                                   performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv")
@@ -7,7 +13,7 @@ if __name__ == "__main__" :
     limitDialogDuration = 16
     DA(problemDescription=mcda_problem_description, NonPI_InfoPicker=RandomPicker(0),
             stopCriterion=DialogDurationStopCriterion(limitDialogDuration), N_InfoPicker=RandomPicker(0),
-            recommandationMaker=KBestRecommendationWrapper(1),
+            recommandationMaker=RecommendationWrapper(KBestRecommendation, 1),
             InconsistencySolverType=InconsistencySolverFactory().clearPIInconsistencySolver
             )
     DA().interactWith(dm)

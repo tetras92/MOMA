@@ -1,13 +1,14 @@
+from CORE.Dialog import Dialog
 from CORE.Exceptions import DMdoesntValidateNElementException
 from CORE.InconsistencySolver import InconsistencySolverFactory
 from CORE.InformationStore import *
-from CORE.Recommendation import KBestRecommendationWrapper
-from CORE.Dialog import Dialog
+from CORE.Recommendation import RecommendationWrapper, KBestRecommendation
+
 
 @singleton
 class DA:
     def __init__(self, problemDescription=None, NonPI_InfoPicker=None, N_InfoPicker=None,
-                 stopCriterion=None, recommandationMaker=KBestRecommendationWrapper(1),
+                 stopCriterion=None, recommandationMaker=RecommendationWrapper(KBestRecommendation, 1),
                  InconsistencySolverType=InconsistencySolverFactory().emptyInconsistencySolver):
         self._problemDescription = problemDescription
         # Initialization of the InformationStore Objects

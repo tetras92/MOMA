@@ -64,3 +64,4 @@ class CommitmentStore():
         for commitment in self._store_date_commitment:
             s += str(commitment) + "\n"
         return s
+

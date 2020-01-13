@@ -31,7 +31,7 @@ class Recommendation:
         model.update()
         return model, VarDict
 
-class KBestRecommendation(Recommendation):
+class OrderedKBestRecommendation(Recommendation):
     def __init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart, k=1):
         Recommendation.__init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart)
         self.K = k
@@ -77,21 +77,53 @@ class KBestRecommendation(Recommendation):
     canRecommend = property(isAbleToRecommend)
     recommendation = property(getRecommendation)
 
-
-class KBestRecommendationWrapper():
-
-    def __init__(self, k=1):
+class KBestRecommendation(Recommendation):
+    def __init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart, k=1):
+        Recommendation.__init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart)
         self.K = k
 
-    def update(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart):
-        self.kbro = KBestRecommendation(problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart, self.K)
+    def _generate_recommendation(self):
+        model, varDict = Recommendation.generate_recommendation_model_and_its_varDict(self)
+        ListKBest = list()
+        for altB in self._ListOfRepresentedAlternatives:
+            nb_alt_domined_by_altB = 0
+            for alt in self._ListOfRepresentedAlternatives:
+                if alt == altB : continue
+                model.setObjective(altB.linear_expr(varDict) - alt.linear_expr(varDict), GRB.MINIMIZE)
+                model.update()
+                model.optimize()
+                if model.objVal >= 0:
+                    nb_alt_domined_by_altB += 1
+            if nb_alt_domined_by_altB >= self._problemDescription.numberOfAlternatives - self.K :
+                ListKBest.append(altB)
+        return len(ListKBest) >= self.K, ListKBest
 
 
     def isAbleToRecommend(self):
-        return self.kbro.canRecommend
+        answer, self.ListOfKBest = self._generate_recommendation()  # passe en premier pour pouvoir instancier self.ListOfKBest
+        if len(self._ListOfRepresentedAlternatives) != self._problemDescription.numberOfAlternatives:
+            return False
+        return answer
 
     def getRecommendation(self):
-        return self.kbro.recommendation
+        return self.ListOfKBest
+
+    canRecommend = property(isAbleToRecommend)
+    recommendation = property(getRecommendation)
+
+class RecommendationWrapper():
+    def __init__(self, recommendationType, *args):
+        self.args = args
+        self._recommendationType = recommendationType
+
+    def update(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart):
+        self.ro = self._recommendationType(problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart, *self.args)
+
+    def isAbleToRecommend(self):
+        return self.ro.canRecommend
+
+    def getRecommendation(self):
+        return self.ro.recommendation
 
     canRecommend = property(isAbleToRecommend)
     recommendation = property(getRecommendation)
@@ -99,12 +131,15 @@ class KBestRecommendationWrapper():
 
 from CORE.ProblemDescription import ProblemDescription
 if __name__ == "__main__" :
-    mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv", performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv")
+    mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
+                                                  performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv")
     print(mcda_problem_description)
     dominanceAsymmetricPart = list([(mcda_problem_description[7], mcda_problem_description[11]),
-                                    (mcda_problem_description[11], mcda_problem_description[13]),
+                                    (mcda_problem_description[7], mcda_problem_description[14]),
+                                    (mcda_problem_description[13], mcda_problem_description[11]),
                                     (mcda_problem_description[13], mcda_problem_description[14])])
     dominanceSymmetricPart = []
+    # recommendation = OrderedKBestRecommendation(mcda_problem_description, dominanceAsymmetricPart, dominanceSymmetricPart, 4)
     recommendation = KBestRecommendation(mcda_problem_description, dominanceAsymmetricPart, dominanceSymmetricPart, 4)
 
     if recommendation.canRecommend:
