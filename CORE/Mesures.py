@@ -4,7 +4,7 @@ from CORE.InformationPicker import *
 from CORE.ProblemDescription import *
 from CORE.StopCriterion import *
 from CORE.DM import *
-from CORE.Recommendation import RecommendationWrapper, KBestRecommendation, OrderedKBestRecommendation
+from CORE.Recommendation import RecommendationWrapper, KBestRecommendation, KRankingRecommendation
 from CORE.InformationStore import PI
 if __name__ == "__main__" :
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",

@@ -31,7 +31,7 @@ class Recommendation:
         model.update()
         return model, VarDict
 
-class OrderedKBestRecommendation(Recommendation):
+class KRankingRecommendation(Recommendation):
     def __init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart, k=1):
         Recommendation.__init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart)
         self.K = k
@@ -139,8 +139,8 @@ if __name__ == "__main__" :
                                     (mcda_problem_description[13], mcda_problem_description[11]),
                                     (mcda_problem_description[13], mcda_problem_description[14])])
     dominanceSymmetricPart = []
-    # recommendation = OrderedKBestRecommendation(mcda_problem_description, dominanceAsymmetricPart, dominanceSymmetricPart, 4)
-    recommendation = KBestRecommendation(mcda_problem_description, dominanceAsymmetricPart, dominanceSymmetricPart, 4)
+    recommendation = KRankingRecommendation(mcda_problem_description, dominanceAsymmetricPart, dominanceSymmetricPart, 4)
+    # recommendation = KBestRecommendation(mcda_problem_description, dominanceAsymmetricPart, dominanceSymmetricPart, 4)
 
     if recommendation.canRecommend:
         print(recommendation.recommendation)
