@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/Commitment.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Commitment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/DA.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/DA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/Recommendation.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Recommendation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/gurobi.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +189,8 @@
       <workItem from="1578345278830" duration="7498000" />
       <workItem from="1578466578301" duration="2027000" />
       <workItem from="1578581049613" duration="17856000" />
-      <workItem from="1578842594835" duration="21730000" />
+      <workItem from="1578842594835" duration="22457000" />
+      <workItem from="1578902944999" duration="41000" />
     </task>
     <task id="LOCAL-00001" summary="first commut">
       <created>1578153549362</created>
@@ -341,7 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578865187802</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="CORRECTION DU BUG KBESTRECOMMENDATION = K FOIS un OneBest sinon l'ordre d'évaluation joue.">
+      <created>1578867130110</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1578867130110</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,17 +406,18 @@
     <MESSAGE value="Exceptions.py : quand DM ne valide pas un element de N&#10;InconsistencySolver.py : Empty et clearPI&#10;N.update : réaliser un clear avant&#10;assertion : nbr constant d'information tout au long du processus" />
     <MESSAGE value="BONNE HIERARCHIE D'HERITAGE AU NIVEAU DU DM" />
     <MESSAGE value="DES MESURES + UN NOUVEAU MODELE DE DM" />
-    <option name="LAST_COMMIT_MESSAGE" value="DES MESURES + UN NOUVEAU MODELE DE DM" />
+    <MESSAGE value="CORRECTION DU BUG KBESTRECOMMENDATION = K FOIS un OneBest sinon l'ordre d'évaluation joue." />
+    <option name="LAST_COMMIT_MESSAGE" value="CORRECTION DU BUG KBESTRECOMMENDATION = K FOIS un OneBest sinon l'ordre d'évaluation joue." />
   </component>
   <component name="WindowStateProjectService">
     <state x="233" y="0" key="#Notifications" timestamp="1578241940759">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="0" key="#Notifications/0.0.1280.680@0.0.1280.680" timestamp="1578241940759" />
-    <state x="184" y="0" key="CommitChangelistDialog2" timestamp="1578865187229">
+    <state x="184" y="0" key="CommitChangelistDialog2" timestamp="1578867129575">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="184" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1578865187229" />
+    <state x="184" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1578867129575" />
     <state x="121" y="57" key="DiffContextDialog" timestamp="1578153727117">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -420,22 +426,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1578153131991" />
-    <state width="1237" height="300" key="GridCell.Tab.0.bottom" timestamp="1578867040888">
+    <state width="1237" height="209" key="GridCell.Tab.0.bottom" timestamp="1578903016339">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="300" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1578867040888" />
-    <state width="1237" height="300" key="GridCell.Tab.0.center" timestamp="1578867040887">
+    <state width="1237" height="209" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1578903016339" />
+    <state width="1237" height="209" key="GridCell.Tab.0.center" timestamp="1578903016339">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="300" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1578867040887" />
-    <state width="1237" height="300" key="GridCell.Tab.0.left" timestamp="1578867040887">
+    <state width="1237" height="209" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1578903016339" />
+    <state width="1237" height="209" key="GridCell.Tab.0.left" timestamp="1578903016338">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="300" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1578867040887" />
-    <state width="1237" height="300" key="GridCell.Tab.0.right" timestamp="1578867040888">
+    <state width="1237" height="209" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1578903016338" />
+    <state width="1237" height="209" key="GridCell.Tab.0.right" timestamp="1578903016339">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="300" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1578867040888" />
+    <state width="1237" height="209" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1578903016339" />
     <state width="1237" height="179" key="GridCell.Tab.1.bottom" timestamp="1578265648183">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -464,10 +470,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1280.680@0.0.1280.680" timestamp="1578144798085" />
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1578842635719">
+    <state x="337" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1578902960699">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1578842635719" />
+    <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1578902960699" />
     <state x="203" y="78" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1578237520081">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -478,7 +484,7 @@
     <state x="378" y="133" key="git4idea.merge.GitPullDialog/0.0.1280.680@0.0.1280.680" timestamp="1578155320168" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MOMBA$DA__1_.coverage" NAME="DA (1) Coverage Results" MODIFIED="1578867040870" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
+    <SUITE FILE_PATH="coverage/MOMBA$DA__1_.coverage" NAME="DA (1) Coverage Results" MODIFIED="1578903016324" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
     <SUITE FILE_PATH="coverage/MOMBA$InformationStore.coverage" NAME="InformationStore Coverage Results" MODIFIED="1578296154321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
     <SUITE FILE_PATH="coverage/MOMBA$DA.coverage" NAME="DA Coverage Results" MODIFIED="1578258143598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MOMBA$Mesures.coverage" NAME="Mesures Coverage Results" MODIFIED="1578864575816" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />

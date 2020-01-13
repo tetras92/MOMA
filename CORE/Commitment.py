@@ -52,7 +52,7 @@ class CommitmentStore():
         self._store_date_commitment = list()
 
     def add(self, commitment):
-        print(commitment)
+        # print(commitment)
         if commitment.id not in self._store_info_commitment:
             self._store_info_commitment[commitment.id] = set()
         self._store_info_commitment[commitment.id].add(commitment)

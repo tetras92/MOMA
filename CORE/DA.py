@@ -39,8 +39,8 @@ class DA:
 
             assert len(N()) + len(PI()) + len(NonPI()) == self._problemDescription.numberOfInformation
 
-            print("PI : \n\t{}".format(str(PI())))
-            print("N : \n\t{}".format(str(N())))
+            # print("PI : \n\t{}".format(str(PI())))
+            # print("N : \n\t{}".format(str(N())))
 
             if not N_initial_empty_state:
                 info = N().pick()
@@ -67,7 +67,7 @@ from CORE.Commitment import CommitmentStore
 
 if __name__ == "__main__" :
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv", performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv")
-    dm =  VNoisyWS_DM("CSVFILES/DM_Utility_Function.csv", 1, 0.8) # WS_DM("CSVFILES/DM_Utility_Function.csv")
+    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
 
     DA(problemDescription=mcda_problem_description, NonPI_InfoPicker=RandomPicker(0),
        stopCriterion=DialogDurationStopCriterion(16), N_InfoPicker=RandomPicker(0),
