@@ -1,9 +1,8 @@
 from CORE.Exceptions import DMdoesntValidateNElementException
 from CORE.InconsistencySolver import InconsistencySolverFactory
 from CORE.InformationStore import *
-from CORE.ProblemDescription import *
 from CORE.Recommendation import KBestRecommendationWrapper
-
+from CORE.Dialog import Dialog
 
 @singleton
 class DA:
@@ -30,7 +29,7 @@ class DA:
         print("MY RECOMMENDATION IS : ", self.recommendation)
 
 
-    def process(self, dm):
+    def interactWith(self, dm):
         self._recommendationMaker.update(self._problemDescription, *PI().getAsymmetricAndSymmetricParts())
         while not self._recommendationMaker.canRecommend and not self._stopCriterion.stop():
             model, varDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
@@ -60,20 +59,3 @@ class DA:
 
 
 
-from CORE.StopCriterion import *
-from CORE.InformationPicker import *
-from CORE.DM import *
-from CORE.Commitment import CommitmentStore
-
-if __name__ == "__main__" :
-    mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv", performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv")
-    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
-
-    DA(problemDescription=mcda_problem_description, NonPI_InfoPicker=RandomPicker(0),
-       stopCriterion=DialogDurationStopCriterion(16), N_InfoPicker=RandomPicker(0),
-       recommandationMaker=KBestRecommendationWrapper(4),
-       InconsistencySolverType=InconsistencySolverFactory().clearPIInconsistencySolver)
-
-    DA().process(dm)
-    DA().show()
-    print(CommitmentStore())

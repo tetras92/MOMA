@@ -1,14 +1,4 @@
-from CORE.Commitment import CommitmentStore
-from CORE.DM import WS_DM
-from CORE.InconsistencySolver import InconsistencySolverFactory
-from CORE.InformationPicker import *
-from CORE.ProblemDescription import *
-from CORE.Recommendation import KBestRecommendationWrapper
-from CORE.StopCriterion import *
-from CORE.DA import DA
-from CORE.DM import NoisyWS_DM, VNoisyWS_DM
-from CORE.InformationStore import *
-import numpy as np
+
 
 if __name__ == "__main__" :
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
@@ -20,7 +10,7 @@ if __name__ == "__main__" :
             recommandationMaker=KBestRecommendationWrapper(1),
             InconsistencySolverType=InconsistencySolverFactory().clearPIInconsistencySolver
             )
-    DA().process(dm)
+    DA().interactWith(dm)
     DA().show()
 
     ref_dialogDuration = Dialog.NB
@@ -40,7 +30,7 @@ if __name__ == "__main__" :
         for ite in range(nb_iterations):
             PI().clear()
             Dialog.NB = 0
-            DA().process(dmN)
+            DA().interactWith(dmN)
             #print("nombre de questions : {}".format(Dialog.NB))
             NBDIALOG.append(Dialog.NB)
            # DA().show()
