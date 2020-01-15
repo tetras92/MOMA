@@ -15,7 +15,6 @@ class ProblemDescription:
         self._alternativesDict = dict()
         self._set_up()
 
-
     def _set_up(self):
         self._set_up_criteria()
         self._set_up_alternatives()
@@ -33,20 +32,26 @@ class ProblemDescription:
                 altListOfAttributeLevels = [self._criterionLevelsDict[criterion][
                                                 self._criterionAtrributesDict[criterion].index(row[criterion.lower()])]
                                             for criterion in self._criteriaOrderedList]
-                self._register_alternative(Alternative(altId, altListOfAttributes, altListOfAttributeLevels))
+                altListOfSymbols = [self._criterionSymbolsDict[criterion][
+                                                self._criterionAtrributesDict[criterion].index(row[criterion.lower()])]
+                                            for criterion in self._criteriaOrderedList]
+                self._register_alternative(Alternative(altId, altListOfAttributes, altListOfAttributeLevels, altListOfSymbols))
                 #print(altListOfAttributes, altListOfAttributeLevels, sep="\n")
 
     def _set_up_criteria(self):
         self._criterionAtrributesDict = dict()
         self._criterionLevelsDict = dict()
         self._criteriaOrderedList = list()
+        self._criterionSymbolsDict = dict()
         with open(self._criteriaFileName) as critFile:
             reader = csv.DictReader(critFile)
             for row in reader:
                 self._criterionAtrributesDict[row[reader.fieldnames[1]].upper()] = \
-                    [row[reader.fieldnames[i]] for i in range(2, len(reader.fieldnames), 2)]
+                    [row[reader.fieldnames[i]] for i in range(2, len(reader.fieldnames), 3)]
                 self._criterionLevelsDict[row[reader.fieldnames[1]].upper()] = \
-                    [int(row[reader.fieldnames[i + 1]]) for i in range(2, len(reader.fieldnames), 2)]
+                    [int(row[reader.fieldnames[i + 1]]) for i in range(2, len(reader.fieldnames), 3)]
+                self._criterionSymbolsDict[row[reader.fieldnames[1]].upper()] = \
+                    [row[reader.fieldnames[i + 2]] for i in range(2, len(reader.fieldnames), 3)]
                 self._criteriaOrderedList.append(row[reader.fieldnames[1]].upper())
 
     def _register_alternative(self, alternative):
@@ -54,7 +59,6 @@ class ProblemDescription:
 
     def _remove_dominated_alternatives(self):
         dominatedAlternativeIdSet = set()
-
         for i, j in list(it.permutations(self._alternativesDict.keys(), 2)):
             if (j not in dominatedAlternativeIdSet) and (i not in dominatedAlternativeIdSet) and \
                     self._alternativesDict[i] < self._alternativesDict[j]:
@@ -67,11 +71,12 @@ class ProblemDescription:
         print("{} alternatives remained".format(len(self._alternativesDict)))
 
     def _generate_Information(self):
+        self._list_of_information = list()
         for coupleOfAltId in list(it.combinations(self._alternativesDict.keys(), 2)):
             C = list(coupleOfAltId)
             C.sort()
             C = [self._alternativesDict[elt] for elt in C]
-            Information(*C)
+            self._list_of_information.append(Information(*C))
 
     def _generate_list_of_list_of_ordered_criterion_attributes(self):
         L = list()
@@ -120,4 +125,8 @@ class ProblemDescription:
     def getNumberOfAlternatives(self):
         return len(self._alternativesDict)
 
+    def getNumberOfInformation(self):
+        return len(self._list_of_information)
+
     numberOfAlternatives = property(getNumberOfAlternatives)
+    numberOfInformation = property(getNumberOfInformation)

@@ -1,4 +1,3 @@
-from CORE.Commitment import *
 from CORE.ComparisonTerm import ComparisonTerm
 from CORE.InformationStore import NonPI, PI, N
 
@@ -12,7 +11,6 @@ class PairwiseInformation(AppreciationObject):
     def __init__(self, infoConteneur, alternative1, alternative2): #infoConteneur : changer nom dès que possible
         """alternative1.id < alternative2.id"""
         NonPI().add(infoConteneur)
-        self.conteneur = infoConteneur
         AppreciationObject.__init__(self, alternative1, alternative2)
 
     def __str__(self):
@@ -32,9 +30,9 @@ class NInformation(AppreciationObject):
 
     def getTermN(self):
         return self._termN
+
     def setTermN(self, v):
         self._termN = v
-        #CommitmentStore().add(ValidationCommitment(self, v))
 
     termN = property(getTermN, setTermN)
 
@@ -48,17 +46,15 @@ class PInformation(AppreciationObject):
     def __init__(self, infoConteneur, alternative1, alternative2): #infoConteneur : changer nom dès que possible
         """alternative1.id < alternative2.id"""
         PI().add(infoConteneur)
-        self._conteneur = infoConteneur
         AppreciationObject.__init__(self, alternative1, alternative2)
         self._termP = ComparisonTerm.NO_TERM
 
 
     def getTermP(self):
         return self._termP
+
     def setTermP(self, v):
         self._termP = v
-        CommitmentStore().add(AnswerCommitment(self._conteneur, v))
-        print("\tDM answers {}".format(v))
 
     termP = property(getTermP, setTermP)
 

@@ -1,79 +1,181 @@
-Dialog 1 :
+sigma = 0
+MY RECOMMENDATION IS :  [[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'], [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'], [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100'], [ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50']]
+[COMMITMENT STORE]
+<class 'CORE.Commitment.AnswerCommitment'> at 1 :
 	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers <
-Dialog 2 :
+	DM answers <.
+<class 'CORE.Commitment.AnswerCommitment'> at 2 :
 	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers =
-Dialog 3 :
+	DM answers ~.
+<class 'CORE.Commitment.ValidationCommitment'> at 3 :
 	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] > [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers >
-Dialog 4 :
+	DM answers YES.
+<class 'CORE.Commitment.AnswerCommitment'> at 4 :
 	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
-	DM answers <
-Dialog 5 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers <
-Dialog 6 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] < [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers <
+	DM answers <.
 
-======
+                        ---- DANS LA SUITE AUCUNE GESTION DE L'INCONSISTANCE ----
 
-Dialog 1 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers >
-Dialog 2 :
+===================
+sigma = 0.5
+MY RECOMMENDATION IS :  [[14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']]
+[COMMITMENT STORE]
+<class 'CORE.Commitment.AnswerCommitment'> at 1 :
+	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers >.
+<class 'CORE.Commitment.AnswerCommitment'> at 2 :
+	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers <.
+<class 'CORE.Commitment.InvalidationCommitment'> at 3 :
+	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers NO.
+<class 'CORE.Commitment.InvalidationCommitment'> at 4 :
+	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers NO.
+<class 'CORE.Commitment.ValidationCommitment'> at 5 :
+	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers YES.
+<class 'CORE.Commitment.AnswerCommitment'> at 6 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
+	DM answers <.
+
+===================
+sigma = 1
+MY RECOMMENDATION IS :  [[14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']]
+[COMMITMENT STORE]
+<class 'CORE.Commitment.AnswerCommitment'> at 1 :
+	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers >.
+<class 'CORE.Commitment.AnswerCommitment'> at 2 :
+	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers <.
+<class 'CORE.Commitment.InvalidationCommitment'> at 3 :
+	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers NO.
+<class 'CORE.Commitment.ValidationCommitment'> at 4 :
+	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers YES.
+<class 'CORE.Commitment.AnswerCommitment'> at 5 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
+	DM answers >.
+<class 'CORE.Commitment.InvalidationCommitment'> at 6 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] > [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers NO.
+<class 'CORE.Commitment.InvalidationCommitment'> at 7 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] > [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers NO.
+<class 'CORE.Commitment.InvalidationCommitment'> at 8 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] > [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers NO.
+<class 'CORE.Commitment.ValidationCommitment'> at 9 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] > [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers YES.
+<class 'CORE.Commitment.AnswerCommitment'> at 10 :
 	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers <
-Dialog 3 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] < [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers <
-Dialog 4 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers <
-Dialog 5 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
-	DM answers <
-Dialog 6 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers =
+	DM answers <.
 
-=====
-Dialog 1 :
+                               ---- DANS LA SUITE GESTION 'RADICALE' DE L'INCONSISTANCE ----
+==============
+sigma = 0.5
+MY RECOMMENDATION IS :  [[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50']]
+[COMMITMENT STORE]
+<class 'CORE.Commitment.AnswerCommitment'> at 1 :
+	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers <.
+<class 'CORE.Commitment.AnswerCommitment'> at 2 :
 	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers =
-Dialog 2 :
+	DM answers <.
+<class 'CORE.Commitment.AnswerCommitment'> at 3 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
+	DM answers >.
+<class 'CORE.Commitment.AnswerCommitment'> at 4 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers >.
+<class 'CORE.Commitment.AnswerCommitment'> at 5 :
 	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers >
-Dialog 3 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] < [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers <
-Dialog 4 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
-	DM answers <
-Dialog 5 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers <
-Dialog 6 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] < [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers <
+	DM answers <.
 
-=====
-Dialog 1 :
+==============
+sigma = 1
+MY RECOMMENDATION IS :  [[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']]
+[COMMITMENT STORE]
+<class 'CORE.Commitment.AnswerCommitment'> at 1 :
 	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers <
-Dialog 2 :
+	DM answers >.
+<class 'CORE.Commitment.AnswerCommitment'> at 2 :
 	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers =
-Dialog 3 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] > [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers >
-Dialog 4 :
+	DM answers <.
+<class 'CORE.Commitment.ValidationCommitment'> at 3 :
+	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers YES.
+<class 'CORE.Commitment.AnswerCommitment'> at 4 :
 	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
-	DM answers <
-Dialog 5 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers <
-Dialog 6 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] < [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers <
+	DM answers >.
+<class 'CORE.Commitment.InvalidationCommitment'> at 5 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] > [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers NO.
+<class 'CORE.Commitment.AnswerCommitment'> at 6 :
+	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers >.
+<class 'CORE.Commitment.AnswerCommitment'> at 7 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers <.
+<class 'CORE.Commitment.AnswerCommitment'> at 8 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
+	DM answers <.
+<class 'CORE.Commitment.AnswerCommitment'> at 9 :
+	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers <.
+
+
+                        ---- DM QUI APPRENNENT A REPONDRE r = 0.8 ----
+sigma_initial = 1 + Aucune gestion de l'inconsistance
+MY RECOMMENDATION IS :  [[14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']]
+[COMMITMENT STORE]
+<class 'CORE.Commitment.AnswerCommitment'> at 1 :
+	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers >.
+<class 'CORE.Commitment.AnswerCommitment'> at 2 :
+	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers <.
+<class 'CORE.Commitment.InvalidationCommitment'> at 3 :
+	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers NO.
+<class 'CORE.Commitment.ValidationCommitment'> at 4 :
+	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers YES.
+<class 'CORE.Commitment.AnswerCommitment'> at 5 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
+	DM answers >.
+<class 'CORE.Commitment.ValidationCommitment'> at 6 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] > [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers YES.
+<class 'CORE.Commitment.AnswerCommitment'> at 7 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers <.
+
+==============
+sigma_initial = 1 + gestion radicale de l'inconsistance
+MY RECOMMENDATION IS :  [[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']]
+[COMMITMENT STORE]
+<class 'CORE.Commitment.AnswerCommitment'> at 1 :
+	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers >.
+<class 'CORE.Commitment.AnswerCommitment'> at 2 :
+	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers <.
+<class 'CORE.Commitment.InvalidationCommitment'> at 3 :
+	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers NO.
+<class 'CORE.Commitment.AnswerCommitment'> at 4 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
+	DM answers >.
+<class 'CORE.Commitment.AnswerCommitment'> at 5 :
+	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	DM answers <.
+<class 'CORE.Commitment.AnswerCommitment'> at 6 :
+	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers >.
+<class 'CORE.Commitment.AnswerCommitment'> at 7 :
+	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	DM answers <.

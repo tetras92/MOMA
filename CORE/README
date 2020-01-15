@@ -1,0 +1,22 @@
+Brève description:
+    L'outil implémenté en Python se veut être un outil interactif d'aide à la décision
+    multicritère composé entre autres :
+        - d'un module de résolution d'inconsistance et
+        - d'un module d'explication
+
+Bibliothèques requises :
+    - le solveur GUROBI
+    - le module de calcul numérique NUMPY
+    - le module ITERTOOLS
+
+Utilisation :
+    Le point d'entrée de l'outil est le fichier main.py dans lequel, successivement,
+     - la prise en compte des paramètres du problème se fait via l'instanciation d'un
+     objet de type ProblemDescription et à partir de deux fichiers de configuration (format
+     csv) et dont 2 exemples sont CSVFILES/criteria.csv et CSVFILES/PerfTable4+.csv
+    - l'instanciation d'un DM automatique à partir d'un fichier de configuration.
+    - l'instanciation du DA (un singleton).
+    Dans ce fichier, l'interaction entre ces 2 acteurs se fait via la méthode interactWith
+    comme on peut s'en apercevoir.
+    La méthode show() de DA affiche la recommandation et l'affichage de la commitmentStore
+    fournit la trace de l'interaction.
