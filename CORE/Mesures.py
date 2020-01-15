@@ -7,7 +7,7 @@ from CORE.DM import *
 from CORE.Recommendation import RecommendationWrapper, KBestRecommendation, KRankingRecommendation
 from CORE.InformationStore import PI
 if __name__ == "__main__" :
-    mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
+    mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria4.csv",
                                                   performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv")
     dm = WS_DM("CSVFILES/DM_Utility_Function.csv") #
     limitDialogDuration = 16

@@ -63,12 +63,12 @@ class ProblemDescription:
             if (j not in dominatedAlternativeIdSet) and (i not in dominatedAlternativeIdSet) and \
                     self._alternativesDict[i] < self._alternativesDict[j]:
                 dominatedAlternativeIdSet.add(i)
-        #print("{} alternatives removed".format(len(dominatedAlternativeIdSet)))
+        print("{} alternatives removed".format(len(dominatedAlternativeIdSet)))
         self._dominatedAlternativeList = list()
         for id in dominatedAlternativeIdSet:
             self._dominatedAlternativeList.append(self._alternativesDict[id])
             del self._alternativesDict[id]
-        #print("{} alternatives remained".format(len(self._alternativesDict)))
+        print("{} alternatives remained".format(len(self._alternativesDict)))
 
     def _generate_Information(self):
         self._list_of_information = list()

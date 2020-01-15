@@ -131,7 +131,7 @@ class RecommendationWrapper():
 
 from CORE.ProblemDescription import ProblemDescription
 if __name__ == "__main__" :
-    mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
+    mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria4.csv",
                                                   performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv")
     print(mcda_problem_description)
     dominanceAsymmetricPart = list([(mcda_problem_description[7], mcda_problem_description[11]),
