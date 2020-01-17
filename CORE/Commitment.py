@@ -1,6 +1,6 @@
 from CORE.ComparisonTerm import *
 from CORE.Dialog import Dialog
-
+from CORE.Tools import colored_expression
 
 class Commitment:
     def __init__(self, info, term):
@@ -22,9 +22,10 @@ class AnswerCommitment(Commitment):
         #print("\tDM answers {}".format(term))
 
     def __str__(self):
+        symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
         return "{} at {} :\n\t{} {} {}\n\tDM answers {}.".format(self.__class__, self.date,
-                                                                 self.info.alternative1, ComparisonTerm.NO_TERM,
-                                                                 self.info.alternative2, self.term)
+                                                                 symb1, ComparisonTerm.NO_TERM,
+                                                                 symb2, self.term)
 
 class ValidationCommitment(Commitment):
     def __init__(self, info, term):
@@ -32,8 +33,9 @@ class ValidationCommitment(Commitment):
         #print("\tDM answers YES")
 
     def __str__(self):
+        symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
         return "{} at {} :\n\t{} {} {}\n\tDM answers YES.".format(self.__class__, self.date,
-                                                                  self.info.alternative1, self.term, self.info.alternative2)
+                                                                  symb1, self.term, symb2)
 
 class InvalidationCommitment(Commitment):
     def __init__(self, info, term):
@@ -41,8 +43,9 @@ class InvalidationCommitment(Commitment):
         #print("\tDM answers NO")
 
     def __str__(self):
+        symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
         return "{} at {} :\n\t{} {} {}\n\tDM answers NO.".format(self.__class__, self.date,
-                                                                  self.info.alternative1, self.term, self.info.alternative2)
+                                                                  symb1, self.term, symb2)
 
 from CORE.decorators import singleton
 @singleton
@@ -53,6 +56,7 @@ class CommitmentStore():
 
     def add(self, commitment):
         # print(commitment)
+
         if commitment.id not in self._store_info_commitment:
             self._store_info_commitment[commitment.id] = set()
         self._store_info_commitment[commitment.id].add(commitment)
