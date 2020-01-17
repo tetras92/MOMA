@@ -8,6 +8,7 @@ Bibliothèques requises :
     - le solveur GUROBI
     - le module de calcul numérique NUMPY
     - le module ITERTOOLS
+    - le module  termcolor (accessoirement)
 
 Utilisation :
     Le point d'entrée de l'outil est le fichier main.py dans lequel, successivement,
