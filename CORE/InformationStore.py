@@ -126,13 +126,19 @@ class N(InformationStore):
             gurobi_model.optimize()
 
             if gurobi_model.objVal >= 0:
-                info.termN = ComparisonTerm.IS_PREFERRED_TO
+                if gurobi_model.objVal == 0.0:
+                    info.termN = ComparisonTerm.IS_INDIFERRENT_TO
+                else:
+                    info.termN = ComparisonTerm.IS_PREFERRED_TO
             else:
                 gurobi_model.setObjective(- pco_linexpr, GRB.MINIMIZE)
                 gurobi_model.update()
                 gurobi_model.optimize()
                 if gurobi_model.objVal >= 0:
-                    info.termN = ComparisonTerm.IS_LESS_PREFERRED_THAN
+                    if gurobi_model.objVal == 0.0:
+                        info.termN = ComparisonTerm.IS_INDIFERRENT_TO
+                    else:
+                        info.termN = ComparisonTerm.IS_LESS_PREFERRED_THAN
 
     def add(self, information):
         self._store.append(information)
