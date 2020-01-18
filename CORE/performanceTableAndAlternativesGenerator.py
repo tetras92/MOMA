@@ -28,4 +28,4 @@ def generate(criteriaFileName, performanceTableName):
             writer.writerow(D)
 
 if __name__ == "__main__" :
-    generate("CSVFILES/criteria.csv", "CSVFILES/FullPerfTable6.csv")
+    generate("CSVFILES/criteria.csv", "CSVFILES/fullPerfTable6.csv")

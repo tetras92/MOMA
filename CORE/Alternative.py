@@ -13,11 +13,13 @@ class Alternative:
         return self._attributesList
     def getAttributeLevelsList(self):
         return self._attributeLevelsList
+    def getSymbolicName(self):
+        return self._symbolicName
 
     attributesList = property(getAttributesList)
     attributeLevelsList = property(getAttributeLevelsList)
     id = property(getId)
-
+    symbolicName = property(fget=getSymbolicName)
 
     def __eq__(self, other):
         return all(np.array(self._attributeLevelsList) == np.array(other.attributeLevelsList))
@@ -39,6 +41,7 @@ class Alternative:
         return "[{:>2}] : {}".format(str(self._idAlt), self._symbolicName)
     def __repr__(self):
         return "[{:>2}] : {}".format(str(self._idAlt), self._symbolicName)
+
 
     def linear_expr(self, VarDict):
         return quicksum([VarDict[attr] for attr in self._attributesList])
