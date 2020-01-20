@@ -100,8 +100,11 @@ class ProblemDescription:
 
         gurobi_model = Model(modelName)
         gurobi_model.setParam('OutputFlag', False)
-        VarDict = {varname: gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0, name=varname)
+        gurobi_model.Params.FeasibilityTol = 0.000000001
+        # print("FEASABILITY TOL", gurobi_model.Params.FeasibilityTol)
+        VarDict = {varname: gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0., ub=1., name=varname)
                    for L in listOfListOfOrderedCriterionAttributesCopy for varname in L}
+        gurobi_model.update()
 
         cst = LinExpr()
         for LOCA in listOfListOfOrderedCriterionAttributesCopy:

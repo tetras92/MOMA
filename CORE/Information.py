@@ -23,20 +23,22 @@ class Information:
         self.o.termN = v
 
     def _pUpgrade(self, v):
-        if isinstance(self.o, NInformation):
-            if self.o.termN != v: #DM ne valide pas la valeur inférée
-                CommitmentStore().add(InvalidationCommitment(self, self.o.termN))
-                raise DMdoesntValidateNElementException(self)
-                #return
-            CommitmentStore().add(ValidationCommitment(self, v))
-            N().remove(self)
+        oldO = self.o
+        self.o = PInformation(self, self.alternative1, self.alternative2)
+        self.o.termP = v
 
-        elif isinstance(self.o, PairwiseInformation):
+        if isinstance(oldO, NInformation):
+            N().remove(self)
+            if oldO.termN != v: # DM ne valide pas la valeur inférée
+                CommitmentStore().add(InvalidationCommitment(self, oldO.termN))
+                raise DMdoesntValidateNElementException(self)
+            CommitmentStore().add(ValidationCommitment(self, v))
+
+        elif isinstance(oldO, PairwiseInformation):
             CommitmentStore().add(AnswerCommitment(self, v))
             NonPI().remove(self)
 
-        self.o = PInformation(self, self.alternative1, self.alternative2)
-        self.o.termP = v
+
 
     def _downgrade(self):
         if isinstance(self.o, PInformation):
@@ -57,9 +59,12 @@ class Information:
     def deleteTerm(self):
         self._downgrade()
 
+    def lastCommitDate(self):
+        return CommitmentStore().getDateOf(self)
+
     termN = property(fset=setTermN, fdel=deleteTerm)
     termP = property(fget=getTermP, fset=setTermP, fdel=deleteTerm)
-
+    last_commit_date = property(fget=lastCommitDate)
 
     def __str__(self):
         return self.o.__str__()
