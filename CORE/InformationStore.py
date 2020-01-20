@@ -15,7 +15,7 @@ class InformationStore:
             linexpr = information.linear_expr(varDict)
             term = information.termP
             if term == ComparisonTerm.IS_LESS_PREFERRED_THAN:
-                model.addConstr(linexpr <= - EPSILON)
+                model.addConstr(- linexpr >=  EPSILON)
                 # model.addConstr(linexpr >= EPSILON)
             elif term == ComparisonTerm.IS_PREFERRED_TO:
                 model.addConstr(linexpr >= EPSILON)
@@ -152,18 +152,17 @@ class N(InformationStore):
     def update(self, VarDict, gurobi_model):
         N().clear() # vider pour recalculer
         InformationStore.addInformationToModel(PI(), gurobi_model, VarDict)  # effet de bord sur gurobi_model
-        for info in NonPI():
+        nonPI_copy = [info for info in NonPI()]          # indispensable car des effets de bords se produisent lorsque des éléments entrent ds N
+        for info in nonPI_copy:
             # print("N : INFO EVALUATED : {}".format(str(info)))
             pco_linexpr = info.linear_expr(VarDict)
             gurobi_model.setObjective(pco_linexpr, GRB.MINIMIZE)
             gurobi_model.update()
             gurobi_model.optimize()
-            # if gurobi_model.status == GRB.OPTIMAL:
-            #     print("OPTIMAL")
-            # elif gurobi_model.status == GRB.INFEASIBLE:
-            #     print("INFEASIBLE")
-            # for var in VarDict.values():
-            #     print(var, var.x)
+
+            # print("NonPI --")
+            # print(info, gurobi_model.objVal)
+
             if gurobi_model.objVal >= 0:
                 if gurobi_model.objVal == 0.0:
                     info.termN = ComparisonTerm.IS_INDIFERRENT_TO
@@ -173,10 +172,8 @@ class N(InformationStore):
                 gurobi_model.setObjective(- pco_linexpr, GRB.MINIMIZE)
                 gurobi_model.update()
                 gurobi_model.optimize()
-                # if gurobi_model.status == GRB.OPTIMAL:
-                #     print("OPTIMAL")
-                # elif gurobi_model.status == GRB.INFEASIBLE:
-                #     print("INFEASIBLE")
+
+                # print(info, gurobi_model.objVal)
                 if gurobi_model.objVal >= 0:
                     if gurobi_model.objVal == 0.0:
                         info.termN = ComparisonTerm.IS_INDIFERRENT_TO

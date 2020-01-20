@@ -1,6 +1,6 @@
 from CORE.ComparisonTerm import ComparisonTerm
 from CORE.InformationStore import NonPI, PI, N
-
+from CORE.Tools import colored_expression
 
 class AppreciationObject:
     def __init__(self, alternative1, alternative2):
@@ -13,8 +13,11 @@ class PairwiseInformation(AppreciationObject):
         NonPI().add(infoConteneur)
         AppreciationObject.__init__(self, alternative1, alternative2)
 
+
+
     def __str__(self):
-        return "{} {} {}".format(self.alternative1, ComparisonTerm.NO_TERM, self.alternative2)
+        symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
+        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, ComparisonTerm.NO_TERM, symb2, self.alternative2.id)
 
     def __repr__(self):
         return self.__str__()
@@ -37,7 +40,9 @@ class NInformation(AppreciationObject):
     termN = property(getTermN, setTermN)
 
     def __str__(self):
-        return "{} {} {}".format(self.alternative1, self._termN, self.alternative2)
+        symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
+        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self._termN, symb2,
+                                                     self.alternative2.id)
 
 
 
@@ -59,5 +64,7 @@ class PInformation(AppreciationObject):
     termP = property(getTermP, setTermP)
 
     def __str__(self):
-        return "{} {} {}".format(self.alternative1, self._termP, self.alternative2)
+        symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
+        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self._termP, symb2,
+                                                     self.alternative2.id)
 

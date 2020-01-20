@@ -20,7 +20,7 @@ if __name__ == "__main__" :
        NonPI_InfoPicker=RandomPicker(0),
        stopCriterion=DialogDurationStopCriterion(50),
        N_InfoPicker=RandomPicker(0),
-       recommandationMaker=RecommendationWrapper(KRankingRecommendation, 1),
+       recommandationMaker=RecommendationWrapper(KBestRecommendation, 1),
        InconsistencySolverType=InconsistencySolverWrapper(ITInconsistencySolver))
 
     DA().interactWith(dm)
