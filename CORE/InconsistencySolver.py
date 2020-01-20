@@ -3,21 +3,6 @@ from CORE.Tools import EPSILON
 from gurobipy import *
 
 class InconsistencySolver:
-    def __init__(self, infoStore):
-        self._store = infoStore
-
-    def solve(self):
-        pass
-
-class ClearPIInconsistencySolver(InconsistencySolver):
-    def __init__(self, infoStore):
-        InconsistencySolver.__init__(self, infoStore)
-
-    def solve(self):
-        self._store.clear()
-
-
-class ITInconsistencySolver():
     def __init__(self, mcda_problem_description, dominanceAsymmetricPart=[], datesAsymmetricPart=[],
                  dominanceSymmetricPart=[], datesSymmetricPart=[], matchingInfoCoupleAlt=dict()):
         self._mcda_problem_description = mcda_problem_description
@@ -35,6 +20,27 @@ class ITInconsistencySolver():
         # self._store ne contient pas l'élément rajouté dernièrement
         self._store = [self.datesDict[date] for date in self.datesDict if date != self.date_max]
         # print("combi", self._store)
+        # self._store = infoStore
+
+    def solve(self):
+        pass
+
+class ClearPIInconsistencySolver(InconsistencySolver):
+    def __init__(self, mcda_problem_description, dominanceAsymmetricPart=[], datesAsymmetricPart=[],
+                 dominanceSymmetricPart=[], datesSymmetricPart=[], matchingInfoCoupleAlt=dict()):
+        InconsistencySolver.__init__(self, mcda_problem_description, dominanceAsymmetricPart, datesAsymmetricPart,
+                                     dominanceSymmetricPart, datesSymmetricPart, matchingInfoCoupleAlt)
+
+
+    def solve(self):
+        return list(), list()
+
+
+class ITInconsistencySolver(InconsistencySolver):
+    def __init__(self, mcda_problem_description, dominanceAsymmetricPart=[], datesAsymmetricPart=[],
+                 dominanceSymmetricPart=[], datesSymmetricPart=[], matchingInfoCoupleAlt=dict()):
+        InconsistencySolver.__init__(self, mcda_problem_description, dominanceAsymmetricPart, datesAsymmetricPart,
+                 dominanceSymmetricPart, datesSymmetricPart, matchingInfoCoupleAlt)
 
     def generate_inconsistency_solver_model_and_its_varDict(self, potentialConsistentStore):
         model, VarDict = self._mcda_problem_description.generate_basic_gurobi_model_and_its_varDict(
@@ -80,16 +86,6 @@ class ITInconsistencySolver():
         raise Exception("Error in IT InconsistencySolver")
 
 
-
-
-
-@singleton
-class InconsistencySolverFactory():
-
-    clearPIInconsistencySolver = ClearPIInconsistencySolver
-    emptyInconsistencySolver = InconsistencySolver
-
-
 class InconsistencySolverWrapper():
     def __init__(self, SolverType):
         self._solverType = SolverType
@@ -98,10 +94,6 @@ class InconsistencySolverWrapper():
         self._store = store
 
     def update(self, problemDescription):
-        # dominanceAsymmetricPart = kwargs["dominanceAsymmetricPart"]
-        # dominanceSymmetricPart = kwargs["dominanceSymmetricPart"]
-        # datesAsymmetricPart = kwargs["datesAsymmetricPart"]
-        # datesSymmetricPart = kwargs["datesSymmetricPart"]
         kwargs = self._store.getAsymmetricAndSymmetricParts()
         self.iso = self._solverType(problemDescription, **kwargs)
         newDominanceAsymmetricPart, newDominanceSymmetricPart = self.iso.solve()
@@ -116,6 +108,9 @@ class InconsistencySolverWrapper():
         # print("{} elements to remove".format(str(len(self._infoToDeleteStore))))
 
     def solve(self):
+        print("Inconsistency Solver : Info removed from PI :")
+        for info in self._infoToDeleteStore:
+            print(info)
         self._store.removeAll(self._infoToDeleteStore)
 
 

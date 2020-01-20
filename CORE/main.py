@@ -1,7 +1,7 @@
 from CORE.Commitment import CommitmentStore
 from CORE.DA import DA
 from CORE.DM import NoisyWS_DM, WS_DM
-from CORE.InconsistencySolver import InconsistencySolverFactory, InconsistencySolverWrapper, ITInconsistencySolver
+from CORE.InconsistencySolver import ClearPIInconsistencySolver, InconsistencySolverWrapper, ITInconsistencySolver
 from CORE.InformationPicker import *
 from CORE.ProblemDescription import *
 from CORE.Recommendation import RecommendationWrapper, KBestRecommendation, KRankingRecommendation

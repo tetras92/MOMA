@@ -1,6 +1,5 @@
 from CORE.Dialog import Dialog
 from CORE.Exceptions import DMdoesntValidateNElementException
-from CORE.InconsistencySolver import InconsistencySolverFactory
 from CORE.InformationStore import *
 from CORE.Recommendation import RecommendationWrapper, KBestRecommendation
 
