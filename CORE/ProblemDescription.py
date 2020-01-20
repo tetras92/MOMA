@@ -100,8 +100,11 @@ class ProblemDescription:
 
         gurobi_model = Model(modelName)
         gurobi_model.setParam('OutputFlag', False)
-        VarDict = {varname: gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0, name=varname)
+        VarDict = {varname: gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0., name=varname)
                    for L in listOfListOfOrderedCriterionAttributesCopy for varname in L}
+        gurobi_model.update()
+        # for var in VarDict.values():
+        #     gurobi_model.addConstr(var >= 0.)
 
         cst = LinExpr()
         for LOCA in listOfListOfOrderedCriterionAttributesCopy:

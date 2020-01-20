@@ -32,7 +32,7 @@ class Recommendation:
         return model, VarDict
 
 class KRankingRecommendation(Recommendation):
-    def __init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart, k=1):
+    def __init__(self, k, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart):
         Recommendation.__init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart)
         self.K = k
 
@@ -78,7 +78,7 @@ class KRankingRecommendation(Recommendation):
     recommendation = property(getRecommendation)
 
 class KBestRecommendation(Recommendation):
-    def __init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart, k=1):
+    def __init__(self, k, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart):
         Recommendation.__init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart)
         self.K = k
 
@@ -116,8 +116,10 @@ class RecommendationWrapper():
         self.args = args
         self._recommendationType = recommendationType
 
-    def update(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart):
-        self.ro = self._recommendationType(problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart, *self.args)
+    def update(self, problemDescription, **kwargs):
+        dominanceAsymmetricPart = kwargs["dominanceAsymmetricPart"]
+        dominanceSymmetricPart = kwargs["dominanceSymmetricPart"]
+        self.ro = self._recommendationType(*self.args, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart)
 
     def isAbleToRecommend(self):
         return self.ro.canRecommend
@@ -139,7 +141,7 @@ if __name__ == "__main__" :
                                     (mcda_problem_description[13], mcda_problem_description[11]),
                                     (mcda_problem_description[13], mcda_problem_description[14])])
     dominanceSymmetricPart = []
-    recommendation = KRankingRecommendation(mcda_problem_description, dominanceAsymmetricPart, dominanceSymmetricPart, 4)
+    recommendation = KRankingRecommendation(4, mcda_problem_description, dominanceAsymmetricPart, dominanceSymmetricPart)
     # recommendation = KBestRecommendation(mcda_problem_description, dominanceAsymmetricPart, dominanceSymmetricPart, 4)
 
     if recommendation.canRecommend:

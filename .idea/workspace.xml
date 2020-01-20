@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/CORE/CSVFILES/DM_Utility_Function6.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/README" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/README" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/CSVFILES/DM_Utility_Function.csv" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/CSVFILES/DM_Utility_Function.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/Commitment.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Commitment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/DA.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/DA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/InconsistencySolver.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/InconsistencySolver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/Information.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Information.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/InformationStore.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/InformationStore.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/ProblemDescription.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/ProblemDescription.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/Recommendation.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Recommendation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/Tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Tools.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/gurobi.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,19 +58,19 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\MICS\PycharmProjects\MOMBA\MCDA" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\MICS\PycharmProjects\MOMBA\CORE\CSVFILES" />
       <recent name="C:\Users\MICS\PycharmProjects\MOMBA" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\MICS\PycharmProjects\MOMBA\MCDA" />
-    </key>
   </component>
   <component name="RunManager" selected="Python.main">
-    <configuration name="DA (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="InconsistencySolver" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -72,7 +83,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/DA.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/InconsistencySolver.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -172,10 +183,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.performanceTableAndAlternativesGenerator" />
         <item itemvalue="Python.Recommendation" />
+        <item itemvalue="Python.InconsistencySolver" />
+        <item itemvalue="Python.performanceTableAndAlternativesGenerator" />
         <item itemvalue="Python.Mesures" />
-        <item itemvalue="Python.DA (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -218,7 +229,9 @@
       <workItem from="1578950409857" duration="3905000" />
       <workItem from="1579010640498" duration="6937000" />
       <workItem from="1579093970547" duration="10489000" />
-      <workItem from="1579254760050" duration="9372000" />
+      <workItem from="1579254760050" duration="14109000" />
+      <workItem from="1579437422363" duration="18623000" />
+      <workItem from="1579465785043" duration="18682000" />
     </task>
     <task id="LOCAL-00001" summary="first commut">
       <created>1578153549362</created>
@@ -423,7 +436,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579268778611</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="AFFICHAGE COLORE DES PAIRES D'ALTERNATIVES">
+      <created>1579268845664</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1579268845664</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -502,10 +522,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="403" y="145" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680@0.0.1280.680" timestamp="1579097869293" />
-    <state x="-1651" y="9" width="749" height="800" key="CommitChangelistDialog2" timestamp="1579268777422">
+    <state x="-1651" y="9" width="749" height="800" key="CommitChangelistDialog2" timestamp="1579268845075">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="-1651" y="9" width="749" height="800" key="CommitChangelistDialog2/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579268777422" />
+    <state x="-1651" y="9" width="749" height="800" key="CommitChangelistDialog2/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579268845075" />
     <state x="179" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1579100039540" />
     <state x="121" y="57" key="DiffContextDialog" timestamp="1578153727117">
       <screen x="0" y="0" width="1280" height="680" />
@@ -515,51 +535,55 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1578153131991" />
-    <state width="1877" height="583" key="GridCell.Tab.0.bottom" timestamp="1579268678868">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1237" height="256" key="GridCell.Tab.0.bottom" timestamp="1579485350878">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1877" height="583" key="GridCell.Tab.0.bottom/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579268678868" />
-    <state width="1237" height="204" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1579110863779" />
-    <state width="1877" height="583" key="GridCell.Tab.0.center" timestamp="1579268678868">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="450" key="GridCell.Tab.0.bottom/0.0.1280.680/-1920.-272.1920.1040@-1920.-272.1920.1040" timestamp="1579283268968" />
+    <state width="1877" height="466" key="GridCell.Tab.0.bottom/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579269433198" />
+    <state width="1237" height="256" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1579485350878" />
+    <state width="1237" height="256" key="GridCell.Tab.0.center" timestamp="1579485350878">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1877" height="583" key="GridCell.Tab.0.center/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579268678868" />
-    <state width="1237" height="204" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1579110863779" />
-    <state width="1877" height="583" key="GridCell.Tab.0.left" timestamp="1579268678866">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="450" key="GridCell.Tab.0.center/0.0.1280.680/-1920.-272.1920.1040@-1920.-272.1920.1040" timestamp="1579283268968" />
+    <state width="1877" height="466" key="GridCell.Tab.0.center/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579269433197" />
+    <state width="1237" height="256" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1579485350878" />
+    <state width="1237" height="256" key="GridCell.Tab.0.left" timestamp="1579485350878">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1877" height="583" key="GridCell.Tab.0.left/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579268678866" />
-    <state width="1237" height="204" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1579110863779" />
-    <state width="1877" height="583" key="GridCell.Tab.0.right" timestamp="1579268678868">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="450" key="GridCell.Tab.0.left/0.0.1280.680/-1920.-272.1920.1040@-1920.-272.1920.1040" timestamp="1579283268968" />
+    <state width="1877" height="466" key="GridCell.Tab.0.left/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579269433197" />
+    <state width="1237" height="256" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1579485350878" />
+    <state width="1237" height="256" key="GridCell.Tab.0.right" timestamp="1579485350878">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1877" height="583" key="GridCell.Tab.0.right/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579268678868" />
-    <state width="1237" height="204" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1579110863779" />
-    <state width="1877" height="538" key="GridCell.Tab.1.bottom" timestamp="1579255903132">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1877" height="450" key="GridCell.Tab.0.right/0.0.1280.680/-1920.-272.1920.1040@-1920.-272.1920.1040" timestamp="1579283268968" />
+    <state width="1877" height="466" key="GridCell.Tab.0.right/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579269433197" />
+    <state width="1237" height="256" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1579485350878" />
+    <state width="1237" height="321" key="GridCell.Tab.1.bottom" timestamp="1579483267426">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="538" key="GridCell.Tab.1.bottom/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579255903132" />
-    <state width="1237" height="179" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1578265648183" />
-    <state width="1877" height="538" key="GridCell.Tab.1.center" timestamp="1579255903132">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1237" height="321" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1579483267426" />
+    <state width="1237" height="321" key="GridCell.Tab.1.center" timestamp="1579483267426">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="538" key="GridCell.Tab.1.center/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579255903132" />
-    <state width="1237" height="179" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1578265648183" />
-    <state width="1877" height="538" key="GridCell.Tab.1.left" timestamp="1579255903132">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1237" height="321" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1579483267426" />
+    <state width="1237" height="321" key="GridCell.Tab.1.left" timestamp="1579483267426">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="538" key="GridCell.Tab.1.left/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579255903132" />
-    <state width="1237" height="179" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1578265648183" />
-    <state width="1877" height="538" key="GridCell.Tab.1.right" timestamp="1579255903132">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1237" height="321" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1579483267426" />
+    <state width="1237" height="321" key="GridCell.Tab.1.right" timestamp="1579483267426">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="538" key="GridCell.Tab.1.right/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579255903132" />
-    <state width="1237" height="179" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1578265648183" />
-    <state x="-1707" y="0" key="SettingsEditor" timestamp="1579267044593">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="1237" height="321" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1579483267426" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1579438327934">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="-1707" y="0" key="SettingsEditor/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579267044593" />
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1579108942114" />
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1579438327934" />
     <state x="233" y="75" key="Vcs.Push.Dialog.v2" timestamp="1578905456719">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -568,11 +592,11 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1280.680@0.0.1280.680" timestamp="1578144798085" />
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1579254767923">
+    <state x="337" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1579465785683">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1579254767923" />
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1579093973598" />
+    <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1579465785683" />
     <state x="203" y="78" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1578237520081">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -581,14 +605,19 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="378" y="133" key="git4idea.merge.GitPullDialog/0.0.1280.680@0.0.1280.680" timestamp="1578155320168" />
+    <state x="104" y="95" key="vcs.ApplyPatchDifferentiatedDialog" timestamp="1579273463357">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="104" y="95" key="vcs.ApplyPatchDifferentiatedDialog/0.0.1280.680/-1920.0.1920.1040@0.0.1280.680" timestamp="1579273463357" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/MOMBA$Recommendation.coverage" NAME="Recommendation Coverage Results" MODIFIED="1578954244919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
+    <SUITE FILE_PATH="coverage/MOMBA$Recommendation.coverage" NAME="Recommendation Coverage Results" MODIFIED="1579475025781" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
     <SUITE FILE_PATH="coverage/MOMBA$DA__1_.coverage" NAME="DA (1) Coverage Results" MODIFIED="1578912283688" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
-    <SUITE FILE_PATH="coverage/MOMBA$main.coverage" NAME="main Coverage Results" MODIFIED="1579268678836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
+    <SUITE FILE_PATH="coverage/MOMBA$main.coverage" NAME="main Coverage Results" MODIFIED="1579485350867" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
     <SUITE FILE_PATH="coverage/MOMBA$InformationStore.coverage" NAME="InformationStore Coverage Results" MODIFIED="1578296154321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
     <SUITE FILE_PATH="coverage/MOMBA$DA.coverage" NAME="DA Coverage Results" MODIFIED="1578258143598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MOMBA$Mesures.coverage" NAME="Mesures Coverage Results" MODIFIED="1578953774462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
     <SUITE FILE_PATH="coverage/MOMBA$performanceTableAndAlternativesGenerator.coverage" NAME="performanceTableAndAlternativesGenerator Coverage Results" MODIFIED="1579094461251" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
+    <SUITE FILE_PATH="coverage/MOMBA$InconsistencySolver.coverage" NAME="InconsistencySolver Coverage Results" MODIFIED="1579468733995" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CORE" />
   </component>
 </project>

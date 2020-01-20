@@ -8,7 +8,6 @@ class Commitment:
         self.term = term
         self.date = Dialog.NB
         self._id = info.id
-        #CommitmentStore().add(self)
 
     def getId(self):
         return self._id
@@ -23,9 +22,9 @@ class AnswerCommitment(Commitment):
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
-        return "{} at {} :\n\t{} {} {}\n\tDM answers {}.".format(self.__class__, self.date,
-                                                                 symb1, ComparisonTerm.NO_TERM,
-                                                                 symb2, self.term)
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}]\n\tDM answers {}.".format(self.__class__, self.date,
+                                                                 self.info.alternative1.id, symb1, ComparisonTerm.NO_TERM,
+                                                                 symb2, self.info.alternative2.id, self.term)
 
 class ValidationCommitment(Commitment):
     def __init__(self, info, term):
@@ -34,8 +33,10 @@ class ValidationCommitment(Commitment):
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
-        return "{} at {} :\n\t{} {} {}\n\tDM answers YES.".format(self.__class__, self.date,
-                                                                  symb1, self.term, symb2)
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}]\n\tDM answers YES.".format(self.__class__, self.date,
+                                                                                     self.info.alternative1.id, symb1,
+                                                                                     self.term,
+                                                                                     symb2, self.info.alternative2.id)
 
 class InvalidationCommitment(Commitment):
     def __init__(self, info, term):
@@ -44,8 +45,10 @@ class InvalidationCommitment(Commitment):
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
-        return "{} at {} :\n\t{} {} {}\n\tDM answers NO.".format(self.__class__, self.date,
-                                                                  symb1, self.term, symb2)
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}]\n\tDM answers NO.".format(self.__class__, self.date,
+                                                                                      self.info.alternative1.id, symb1,
+                                                                                      self.term,
+                                                                                      symb2, self.info.alternative2.id)
 
 from CORE.decorators import singleton
 @singleton
@@ -55,13 +58,15 @@ class CommitmentStore():
         self._store_date_commitment = list()
 
     def add(self, commitment):
-        # print(commitment)
-
+        print(commitment)
         if commitment.id not in self._store_info_commitment:
-            self._store_info_commitment[commitment.id] = set()
-        self._store_info_commitment[commitment.id].add(commitment)
+            self._store_info_commitment[commitment.id] = list()
+        self._store_info_commitment[commitment.id].append(commitment)
 
         self._store_date_commitment.append(commitment)
+
+    def getDateOf(self, info):
+        return self._store_info_commitment[info.id][-1].date
 
     def __str__(self):
         s = "[COMMITMENT STORE]\n"
