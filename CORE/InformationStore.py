@@ -1,5 +1,6 @@
 from gurobipy import *
 
+from CORE.Commitment import CommitmentStore
 from CORE.ComparisonTerm import *
 from CORE.Tools import EPSILON
 from CORE.decorators import singleton
@@ -16,18 +17,17 @@ class InformationStore:
             term = information.termP
             if term == ComparisonTerm.IS_LESS_PREFERRED_THAN:
                 model.addConstr(- linexpr >=  EPSILON)
-                # model.addConstr(linexpr >= EPSILON)
             elif term == ComparisonTerm.IS_PREFERRED_TO:
                 model.addConstr(linexpr >= EPSILON)
-                # model.addConstr(linexpr <= - EPSILON)
             elif term == ComparisonTerm.IS_INDIFERRENT_TO:
                 model.addConstr(linexpr == 0)
-                # model.addConstr(linexpr == 2)
             else:
                 raise Exception("Error in PI")
             model.update()
+
     def clear(self):
         pass
+
     def remove(self, info):
         self._store.remove(info)
 
@@ -70,17 +70,17 @@ class PI(InformationStore):
                 element = (information.alternative1, information.alternative2)
                 AL.append((information.alternative1, information.alternative2))
                 relationElementInfoDict[information.id] = element
-                AD.append(self._store.index(information))
+                AD.append(CommitmentStore().getDateOf(information))
             elif information.termP == ComparisonTerm.IS_LESS_PREFERRED_THAN:
                 element = (information.alternative2, information.alternative1)
                 AL.append((information.alternative2, information.alternative1))
                 relationElementInfoDict[information.id] = element
-                AD.append(self._store.index(information))
+                AD.append(CommitmentStore().getDateOf(information))
             elif information.termP == ComparisonTerm.IS_INDIFERRENT_TO:
                 element = (information.alternative1, information.alternative2)
                 SL.append((information.alternative1, information.alternative2))
                 relationElementInfoDict[information.id] = element
-                SD.append(self._store.index(information))
+                SD.append(CommitmentStore().getDateOf(information))
             else:
                 raise Exception("Error getAsymmetricAndSymmetricParts in PI()")
         R["dominanceAsymmetricPart"] = AL

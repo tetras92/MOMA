@@ -3,14 +3,22 @@ from CORE.InformationStore import NonPI, PI, N
 from CORE.Tools import colored_expression
 
 class AppreciationObject:
+    """Classe de base modélisation une paire d'alternatives"""
     def __init__(self, alternative1, alternative2):
         self.alternative1 = alternative1
         self.alternative2 = alternative2
 
 class PairwiseInformation(AppreciationObject):
-    def __init__(self, infoConteneur, alternative1, alternative2): #infoConteneur : changer nom dès que possible
-        """alternative1.id < alternative2.id"""
-        NonPI().add(infoConteneur)
+    """Classe modélisant une paire d'alternatives sur
+    laquelle ne s'est pas encore (re)prononcé le DM :
+    l'information correspndante se trouve donc dans NonPI"""
+
+    def __init__(self, information, alternative1, alternative2):
+        """ Information * Alternative² --> NoneType
+        Hyp : alternative1.id < alternative2.id
+        le paramètre information est la 'capsule' enveloppant
+         la paire d'alternative."""
+        NonPI().add(information)
         AppreciationObject.__init__(self, alternative1, alternative2)
 
 
@@ -25,9 +33,15 @@ class PairwiseInformation(AppreciationObject):
 
 
 class NInformation(AppreciationObject):
-    def __init__(self, infoConteneur, alternative1, alternative2): #infoConteneur : changer nom dès que possible
-        """alternative1.id < alternative2.id"""
-        N().add(infoConteneur)
+    """Classe modélisant une paire d'alternatives induite par calcul
+        de la relation nécessaire : l'information correspondante se trouve
+        donc dans N"""
+    def __init__(self, information, alternative1, alternative2):
+        """ Information * Alternative² --> NoneType
+        Hyp : alternative1.id < alternative2.id
+        le paramètre information est la 'capsule' enveloppant
+         la paire d'alternative."""
+        N().add(information)
         AppreciationObject.__init__(self, alternative1, alternative2)
         self._termN = ComparisonTerm.NO_TERM
 
@@ -48,9 +62,15 @@ class NInformation(AppreciationObject):
 
 
 class PInformation(AppreciationObject):
-    def __init__(self, infoConteneur, alternative1, alternative2): #infoConteneur : changer nom dès que possible
-        """alternative1.id < alternative2.id"""
-        PI().add(infoConteneur)
+    """Classe modélisant une paire d'alternatives sur laquelle s'est
+        prononcé le décideur: l'information correspondante se trouve
+        donc dans PI"""
+    def __init__(self, information, alternative1, alternative2):
+        """ Information * Alternative² --> NoneType
+        Hyp : alternative1.id < alternative2.id
+        le paramètre information est la 'capsule' enveloppant
+         la paire d'alternative."""
+        PI().add(information)
         AppreciationObject.__init__(self, alternative1, alternative2)
         self._termP = ComparisonTerm.NO_TERM
 

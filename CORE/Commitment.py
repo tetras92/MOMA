@@ -3,6 +3,13 @@ from CORE.Dialog import Dialog
 from CORE.Tools import colored_expression
 
 class Commitment:
+    """Classe modélisant une déclaration du DM durant l'interaction.
+        Elle peut être de 3 types : Une réponse (AnswerCommitment),
+        une Validation d'une information induite (ValidationCommitment),
+        ou une contestation d'une information inférée (InvalidationCommitment).
+        Un Commitment encapsule une Information, l'avis du DM (sous la forme
+        d'un terme de comparaison), et la date de cet avis"""
+
     def __init__(self, info, term):
         self.info = info
         self.term = term
@@ -16,9 +23,11 @@ class Commitment:
 
 
 class AnswerCommitment(Commitment):
+    """Classe modélisant la déclaration que fait un DM en exprimant sa
+        préférence sur une paire d'alternatives à travers le terme de
+        comparaison term"""
     def __init__(self, info, term):
         Commitment.__init__(self, info, term)
-        #print("\tDM answers {}".format(term))
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
@@ -27,9 +36,11 @@ class AnswerCommitment(Commitment):
                                                                  symb2, self.info.alternative2.id, self.term)
 
 class ValidationCommitment(Commitment):
+    """Classe modélisant la déclaration que fait un DM en validant
+       un élément induit par calcul de la relation nécessaire, term
+       représente le terme de comparaison induit"""
     def __init__(self, info, term):
         Commitment.__init__(self, info, term)
-        #print("\tDM answers YES")
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
@@ -39,9 +50,11 @@ class ValidationCommitment(Commitment):
                                                                                      symb2, self.info.alternative2.id)
 
 class InvalidationCommitment(Commitment):
+    """Classe modélisant la déclaration que fait un DM en ne validant pas
+       un élément induit par calcul de la relation nécessaire, term
+       représente le terme de comparaison contesté"""
     def __init__(self, info, term):
         Commitment.__init__(self, info, term)  # ici, term est la réponse à laquelle s'oppose le DM
-        #print("\tDM answers NO")
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
@@ -53,6 +66,11 @@ class InvalidationCommitment(Commitment):
 from CORE.decorators import singleton
 @singleton
 class CommitmentStore():
+    """Classe conteneur de l'ensemble des Commitments du DM.
+        L'enregistrement se fait à la fois par information et par
+        date. Dans le premier cas, la 'base de données' est indexée sur
+        l'identifiant de l'information. Dans le second, elle est indexée
+        sur la 'date' de la déclaration."""
     def __init__(self):
         self._store_info_commitment = dict()
         self._store_date_commitment = list()
@@ -66,6 +84,9 @@ class CommitmentStore():
         self._store_date_commitment.append(commitment)
 
     def getDateOf(self, info):
+        """Information -> int
+        retourne le cas échéant la 'date' de la dernière déclaration
+        concernant info (quelle que soit la nature de cette déclaration)"""
         return self._store_info_commitment[info.id][-1].date
 
     def __str__(self):

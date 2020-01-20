@@ -5,7 +5,7 @@ from gurobipy import *
 
 from CORE.Alternative import Alternative
 from CORE.Information import Information
-from CORE.Tools import attribute_creator
+from CORE.Tools import attribute_creator, CONSTRAINTSFEASIBILITYTOL
 
 
 class ProblemDescription:
@@ -100,7 +100,7 @@ class ProblemDescription:
 
         gurobi_model = Model(modelName)
         gurobi_model.setParam('OutputFlag', False)
-        gurobi_model.Params.FeasibilityTol = 0.000000001
+        gurobi_model.Params.FeasibilityTol = CONSTRAINTSFEASIBILITYTOL
         # print("FEASABILITY TOL", gurobi_model.Params.FeasibilityTol)
         VarDict = {varname: gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0., ub=1., name=varname)
                    for L in listOfListOfOrderedCriterionAttributesCopy for varname in L}
