@@ -50,7 +50,6 @@ class DA:
     def show(self):
         """ --> NoneType
         affiche une recommandation partielle, complète ou Échec"""
-
         print("MY RECOMMENDATION IS : ", self.recommendation)
 
 

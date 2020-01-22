@@ -21,7 +21,6 @@ class Commitment:
 
     id = property(getId)
 
-
 class AnswerCommitment(Commitment):
     """Classe modélisant la déclaration que fait un DM en exprimant sa
         préférence sur une paire d'alternatives à travers le terme de
@@ -78,8 +77,8 @@ class CommitmentStore():
     def add(self, commitment):
         print(commitment)
         if commitment.id not in self._store_info_commitment:
-            self._store_info_commitment[commitment.id] = list()
-        self._store_info_commitment[commitment.id].append(commitment)
+            self._store_info_commitment[commitment.info] = list()
+        self._store_info_commitment[commitment.info].append(commitment)
 
         self._store_date_commitment.append(commitment)
 
@@ -87,7 +86,7 @@ class CommitmentStore():
         """Information -> int
         retourne le cas échéant la 'date' de la dernière déclaration
         concernant info (quelle que soit la nature de cette déclaration)"""
-        return self._store_info_commitment[info.id][-1].date
+        return self._store_info_commitment[info][-1].date
 
     def __str__(self):
         s = "[COMMITMENT STORE]\n"

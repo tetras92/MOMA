@@ -3,8 +3,21 @@ from CORE.Tools import EPSILON
 from gurobipy import *
 
 class InconsistencySolver:
+    """Classe (de base) modélisant un solveur d'inconsistance.
+        La méthode principale est la méthode solve. Elle retourne le
+        sous-ensemble d'éléments de la relation qui est consistante.
+        Ce sous-ensemble est retournée sous d'un couple : partie assymétrique
+        et partie symétrique."""
     def __init__(self, mcda_problem_description, dominanceAsymmetricPart=[], datesAsymmetricPart=[],
                  dominanceSymmetricPart=[], datesSymmetricPart=[], matchingInfoCoupleAlt=dict()):
+        """Type des paramètres :
+        mcda_problem_description : ProblemDescription
+        dominanceAsymmetricPart : List[Couple[Alternative, Alternative]]
+        dominanceSymmetricPart : List[Couple[Alternative, Alternative]]
+        datesAsymmetricPart : List[int]
+        datesSymmetricPart : List[int]
+        matchingInfoCoupleAlt : Dict[Information : Couple[Alternative, Alternative]]
+        """
         self._mcda_problem_description = mcda_problem_description
         self.dominanceAsymmetricPart = dominanceAsymmetricPart
         self.dominanceSymmetricPart = dominanceSymmetricPart
@@ -19,13 +32,13 @@ class InconsistencySolver:
         self.date_max = max(self.datesDict.keys())
         # self._store ne contient pas l'élément rajouté dernièrement
         self._store = [self.datesDict[date] for date in self.datesDict if date != self.date_max]
-        # print("combi", self._store)
-        # self._store = infoStore
 
     def solve(self):
         pass
 
-class ClearPIInconsistencySolver(InconsistencySolver):
+class RadicalInconsistencySolver(InconsistencySolver):
+    """Classe modélisant un solveur (radical) d'une inconsistance.
+        Le sous-ensemble  consistant retourné est vide."""
     def __init__(self, mcda_problem_description, dominanceAsymmetricPart=[], datesAsymmetricPart=[],
                  dominanceSymmetricPart=[], datesSymmetricPart=[], matchingInfoCoupleAlt=dict()):
         InconsistencySolver.__init__(self, mcda_problem_description, dominanceAsymmetricPart, datesAsymmetricPart,
@@ -37,12 +50,20 @@ class ClearPIInconsistencySolver(InconsistencySolver):
 
 
 class ITInconsistencySolver(InconsistencySolver):
+    """Classe modélisant un solveur d'une inconsistance dont le fonctionnement
+        est le suivant :
+        Sachant que l'union de dominanceAsymmetricPart et de dominanceSymmetricPart est un ensemble
+        inconsistant, le sous-ensemble (consistant) calculé est le plus grand inclus au sens strict dans
+        l'union de dominanceAsymmetricPart et de dominanceSymmetricPart dont l'information fournie
+        le plus récemment est la plus vieille."""
     def __init__(self, mcda_problem_description, dominanceAsymmetricPart=[], datesAsymmetricPart=[],
                  dominanceSymmetricPart=[], datesSymmetricPart=[], matchingInfoCoupleAlt=dict()):
         InconsistencySolver.__init__(self, mcda_problem_description, dominanceAsymmetricPart, datesAsymmetricPart,
                  dominanceSymmetricPart, datesSymmetricPart, matchingInfoCoupleAlt)
 
-    def generate_inconsistency_solver_model_and_its_varDict(self, potentialConsistentStore):
+    def _generate_inconsistency_solver_model_and_its_varDict(self, potentialConsistentStore):
+        """List[Couple[Alternative, Alternative]] -> GurobiModel, Couple[Couple[Alternative, Alternative], Couple[Alternative, Alternative]]
+            retourne """
         model, VarDict = self._mcda_problem_description.generate_basic_gurobi_model_and_its_varDict(
             "Test IT IncSolv")
         newDominanceAsymmetricPart = list()
@@ -75,7 +96,8 @@ class ITInconsistencySolver(InconsistencySolver):
                 kList_of_parts_of_store_copy.sort(key=lambda C: date_of_set_of_coupleAlt(C))
             for elmtK in kList_of_parts_of_store_copy:
                 potential_consistent_store = list(elmtK) + [self.datesDict[self.date_max]]
-                model, (newDominanceAsymmetricPart, newDominanceSymmetricPart) = self.generate_inconsistency_solver_model_and_its_varDict(potential_consistent_store)
+                model, (newDominanceAsymmetricPart, newDominanceSymmetricPart) = \
+                    self._generate_inconsistency_solver_model_and_its_varDict(potential_consistent_store)
                 model.update()
                 model.optimize()
                 # print(elmtK, "age", date_of_set_of_coupleAlt(elmtK))

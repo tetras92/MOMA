@@ -72,3 +72,5 @@ class Information:
     def linear_expr(self, VarDict):
         return (self.alternative1.linear_expr(VarDict) - self.alternative2.linear_expr(VarDict))
 
+    def __hash__(self):
+        return self._id

@@ -69,17 +69,17 @@ class PI(InformationStore):
             if information.termP == ComparisonTerm.IS_PREFERRED_TO:
                 element = (information.alternative1, information.alternative2)
                 AL.append((information.alternative1, information.alternative2))
-                relationElementInfoDict[information.id] = element
+                relationElementInfoDict[information] = element
                 AD.append(CommitmentStore().getDateOf(information))
             elif information.termP == ComparisonTerm.IS_LESS_PREFERRED_THAN:
                 element = (information.alternative2, information.alternative1)
                 AL.append((information.alternative2, information.alternative1))
-                relationElementInfoDict[information.id] = element
+                relationElementInfoDict[information] = element
                 AD.append(CommitmentStore().getDateOf(information))
             elif information.termP == ComparisonTerm.IS_INDIFERRENT_TO:
                 element = (information.alternative1, information.alternative2)
                 SL.append((information.alternative1, information.alternative2))
-                relationElementInfoDict[information.id] = element
+                relationElementInfoDict[information] = element
                 SD.append(CommitmentStore().getDateOf(information))
             else:
                 raise Exception("Error getAsymmetricAndSymmetricParts in PI()")
@@ -107,6 +107,7 @@ class PI(InformationStore):
     def removeAll(self, ListeInfo):
         for info in ListeInfo:
             del info.termP
+
 @singleton
 class NonPI(InformationStore):
     def __init__(self):
