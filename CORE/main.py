@@ -14,7 +14,7 @@ if __name__ == "__main__" :
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
                                                   performanceTableFileName="CSVFILES/PerfTable4+.csv")
     # print(mcda_problem_description)
-    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function6.csv", 0)# WS_DM("CSVFILES/DM_Utility_Function.csv")
+    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function6.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
 
     DA(problemDescription=mcda_problem_description,
        NonPI_InfoPicker=RandomPicker(0),

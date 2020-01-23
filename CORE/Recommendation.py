@@ -4,9 +4,13 @@ from CORE.Tools import EPSILON
 
 
 class Recommendation:
+    """ Classe (de base) modélisant une Recommandation."""
     def __init__(self, problemDescription=None, dominanceAsymmetricPart=list(), dominanceSymmetricPart=list()):
-        """dominanceAsymmetricPart and dominanceSymmetricPart : sont des List"""
-
+        """Type des paramètres :
+        mcda_problem_description : ProblemDescription
+        dominanceAsymmetricPart : List[Couple[Alternative, Alternative]]
+        dominanceSymmetricPart : List[Couple[Alternative, Alternative]]
+        """
         self._dominanceAsymmetricPart = dominanceAsymmetricPart
         self._dominanceSymmetricPart = dominanceSymmetricPart
         self._ListOfRepresentedAlternatives = list()
@@ -20,6 +24,8 @@ class Recommendation:
         self._problemDescription = problemDescription
 
     def generate_recommendation_model_and_its_varDict(self):
+        """Retourne le corps complet d'un programme linéaire dont la résolution
+        avec différents objectifs permettra de faire ou non la recommandation requise."""
         model, VarDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA Model For Recommendation")
 
         for alt1, alt2 in self._dominanceAsymmetricPart:
@@ -32,6 +38,10 @@ class Recommendation:
         return model, VarDict
 
 class KRankingRecommendation(Recommendation):
+    """Classe modélisant une recommandation du type k-Best ordonné.
+        La recommandation, lorsqu'elle peut être faite, est composée des k
+        meilleures alternatives qui, par ailleurs, sont ordonnées suivant
+        les préférences du DM"""
     def __init__(self, k, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart):
         Recommendation.__init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart)
         self.K = k
@@ -67,7 +77,7 @@ class KRankingRecommendation(Recommendation):
 
     def isAbleToRecommend(self):
         answer, self.ListOfKBest = self._generate_recommendation() # passe en premier pour pouvoir instancier self.ListOfKBest
-        if len(self._ListOfRepresentedAlternatives) != self._problemDescription.numberOfAlternatives :
+        if len(self._ListOfRepresentedAlternatives) != self._problemDescription.numberOfAlternatives:
             return False
         return answer
 
@@ -78,6 +88,9 @@ class KRankingRecommendation(Recommendation):
     recommendation = property(getRecommendation)
 
 class KBestRecommendation(Recommendation):
+    """Classe modélisant une recommandation du type k-Best.
+        La recommandation, lorsqu'elle peut être faite, est composée des k
+        meilleures alternatives"""
     def __init__(self, k, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart):
         Recommendation.__init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart)
         self.K = k
@@ -112,7 +125,11 @@ class KBestRecommendation(Recommendation):
     recommendation = property(getRecommendation)
 
 class RecommendationWrapper():
+    """ Classe enveloppant un objet de type Recommmandation et qui rend l'inclusion
+     de ce type d'objet possible dans le cadre que nous nous sommes ici fixé."""
     def __init__(self, recommendationType, *args):
+        """args, sont l'ensemble des paramètres obligatoires à l'initialisation de
+        recommendationType."""
         self.args = args
         self._recommendationType = recommendationType
 

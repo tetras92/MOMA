@@ -24,7 +24,7 @@ class InconsistencySolver:
         self.datesAsymmetricPart = datesAsymmetricPart
         self.datesSymmetricPart = datesSymmetricPart
         self.matchingInfoCoupleAlt = matchingInfoCoupleAlt
-        self.datesDict = dict()
+        self.datesDict = dict() # datesDict associe à une date (un entier) un couple de la relation
         for das, date in list(zip(dominanceAsymmetricPart, datesAsymmetricPart)):
             self.datesDict[date] = das
         for das, date in list(zip(dominanceSymmetricPart, datesSymmetricPart)):
@@ -63,7 +63,7 @@ class ITInconsistencySolver(InconsistencySolver):
 
     def _generate_inconsistency_solver_model_and_its_varDict(self, potentialConsistentStore):
         """List[Couple[Alternative, Alternative]] -> GurobiModel, Couple[Couple[Alternative, Alternative], Couple[Alternative, Alternative]]
-            retourne """
+            retourne d'une part le programme linéaire dont la faisabibilité déterminera la consistance de potentialConsistentStore"""
         model, VarDict = self._mcda_problem_description.generate_basic_gurobi_model_and_its_varDict(
             "Test IT IncSolv")
         newDominanceAsymmetricPart = list()
@@ -87,7 +87,7 @@ class ITInconsistencySolver(InconsistencySolver):
         def date_of(x):
             for date, coupleAlt in self.datesDict.items():
                 if x == coupleAlt: return date
-            raise Exception("InconsistencySolver : not found")
+            raise Exception("InconsistencySolver : information not found")
         date_of_set_of_coupleAlt = lambda C: max([date_of(elmt) for elmt in C])
 
         for k in range(len(self._store), -1, -1):
@@ -109,6 +109,8 @@ class ITInconsistencySolver(InconsistencySolver):
 
 
 class InconsistencySolverWrapper():
+    """Classe permettant l'intégration d'un solveur d'inconsistance dans le cadre que nous envisageons ici.
+        À l'initialisation,  on instancie le type de solveur à utiliser."""
     def __init__(self, SolverType):
         self._solverType = SolverType
 
@@ -116,6 +118,9 @@ class InconsistencySolverWrapper():
         self._store = store
 
     def update(self, problemDescription):
+        """Cette méthode 'charge' le solveur à utiliser avec les paramètres
+            attendus, lance une résolution du problème et récupère le sous-ensemble
+            consistant à retenir."""
         kwargs = self._store.getAsymmetricAndSymmetricParts()
         self.iso = self._solverType(problemDescription, **kwargs)
         newDominanceAsymmetricPart, newDominanceSymmetricPart = self.iso.solve()
@@ -124,7 +129,8 @@ class InconsistencySolverWrapper():
         for information in self._store:
             coupleMatchingWithInfo = self.iso.matchingInfoCoupleAlt[information.id]
             #print("couple", coupleMatchingWithInfo)
-            if not coupleMatchingWithInfo in newDominanceAsymmetricPart and not coupleMatchingWithInfo in newDominanceSymmetricPart:
+            if not coupleMatchingWithInfo in newDominanceAsymmetricPart\
+                    and not coupleMatchingWithInfo in newDominanceSymmetricPart:
                 self._infoToDeleteStore.append(information)
 
         # print("{} elements to remove".format(str(len(self._infoToDeleteStore))))
@@ -134,6 +140,17 @@ class InconsistencySolverWrapper():
         for info in self._infoToDeleteStore:
             print(info)
         self._store.removeAll(self._infoToDeleteStore)
+
+
+
+
+
+
+
+
+
+
+
 
 
 from CORE.ProblemDescription import ProblemDescription

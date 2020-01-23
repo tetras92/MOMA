@@ -9,6 +9,10 @@ from CORE.Tools import attribute_creator, CONSTRAINTSFEASIBILITYTOL
 
 
 class ProblemDescription:
+    """Classe modélisant la description du problème MCDA dans son ensemble.
+        Elle s'initialise à l'aide de 2 fichiers de configuration décrivant
+        d'une part les critères et l'ensemble de la table de performance."""
+
     def __init__(self, criteriaFileName="", performanceTableFileName=""):
         self._criteriaFileName = criteriaFileName
         self._performanceTableFileName = performanceTableFileName
@@ -16,6 +20,7 @@ class ProblemDescription:
         self._set_up()
 
     def _set_up(self):
+        """Méthode de set-up général"""
         self._set_up_criteria()
         self._set_up_alternatives()
         self._remove_dominated_alternatives()
@@ -23,6 +28,7 @@ class ProblemDescription:
         self._generate_list_of_list_of_ordered_criterion_attributes()
 
     def _set_up_alternatives(self):
+        """Instanciation des alternatives à partir de la table de performance."""
         with open(self._performanceTableFileName) as perfFile:
             reader = csv.DictReader(perfFile)
             for row in reader:
@@ -36,9 +42,9 @@ class ProblemDescription:
                                                 self._criterionAtrributesDict[criterion].index(row[criterion.lower()])]
                                             for criterion in self._criteriaOrderedList]
                 self._register_alternative(Alternative(altId, altListOfAttributes, altListOfAttributeLevels, altListOfSymbols))
-                #print(altListOfAttributes, altListOfAttributeLevels, sep="\n")
 
     def _set_up_criteria(self):
+        """Récupération de la description des critères"""
         self._criterionAtrributesDict = dict()
         self._criterionLevelsDict = dict()
         self._criteriaOrderedList = list()
@@ -58,6 +64,8 @@ class ProblemDescription:
         self._alternativesDict[alternative.id] = alternative
 
     def _remove_dominated_alternatives(self):
+        """Suppression des alternatives dominées;
+           Et leur stockage"""
         dominatedAlternativeIdSet = set()
         for i, j in list(it.permutations(self._alternativesDict.keys(), 2)):
             if (j not in dominatedAlternativeIdSet) and (i not in dominatedAlternativeIdSet) and \
@@ -71,6 +79,8 @@ class ProblemDescription:
         print("{} alternatives remained".format(len(self._alternativesDict)))
 
     def _generate_Information(self):
+        """Génération de tous les objets de type Information correspondant
+            aux alternatives du front de Pareto"""
         self._list_of_information = list()
         for coupleOfAltId in list(it.combinations(self._alternativesDict.keys(), 2)):
             C = list(coupleOfAltId)
@@ -79,11 +89,15 @@ class ProblemDescription:
             self._list_of_information.append(Information(*C))
 
     def _generate_list_of_list_of_ordered_criterion_attributes(self):
+        """Génération d'une liste ordonnée des attributs pour chacun des critères.
+        Sert notamment à la génération du corps d'un programme linéaire type prenant
+        en considération le sens de l'optimisation sur chacun des critères."""
         L = list()
         D = dict()
         for criterion in self._criteriaOrderedList:
             LA = list()
-            for attribute, level in list(zip(self._criterionAtrributesDict[criterion], self._criterionLevelsDict[criterion])):
+            for attribute, level in \
+                    list(zip(self._criterionAtrributesDict[criterion], self._criterionLevelsDict[criterion])):
                 D[attribute_creator(criterion, attribute)] = level
                 LA.append(attribute_creator(criterion, attribute))
             L.append(LA)
@@ -92,6 +106,10 @@ class ProblemDescription:
         self._list_of_list_of_ordered_criterion_attributes = L
 
     def generate_basic_gurobi_model_and_its_varDict(self, modelName):
+        """Retourne un programme linéaire de base prenant en considération le sens
+        d'optimisation sur chacun des critères. Celui-ci sera étoffé par les éléments de PI
+        pour le calcul de la relation nécessaire.
+        """
         listOfListOfOrderedCriterionAttributesCopy = [L.copy() for L in self._list_of_list_of_ordered_criterion_attributes]
         for criterion, i in list(zip(self._criteriaOrderedList, range(len(listOfListOfOrderedCriterionAttributesCopy)))):
             listOfListOfOrderedCriterionAttributesCopy[i].append(attribute_creator(criterion, "BETA"))

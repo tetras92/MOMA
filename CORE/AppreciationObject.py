@@ -8,6 +8,10 @@ class AppreciationObject:
         self.alternative1 = alternative1
         self.alternative2 = alternative2
 
+    def linear_expr(self, VarDict):
+        return (self.alternative1.linear_expr(VarDict) - self.alternative2.linear_expr(VarDict))
+
+
 class PairwiseInformation(AppreciationObject):
     """Classe modélisant une paire d'alternatives sur
     laquelle ne s'est pas encore (re)prononcé le DM :
@@ -22,6 +26,8 @@ class PairwiseInformation(AppreciationObject):
         AppreciationObject.__init__(self, alternative1, alternative2)
 
 
+    def linear_expr(self, VarDict):
+        return AppreciationObject.linear_expr(self, VarDict)
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
@@ -88,3 +94,5 @@ class PInformation(AppreciationObject):
         return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self._termP, symb2,
                                                      self.alternative2.id)
 
+    def linear_expr(self, VarDict):
+        return AppreciationObject.linear_expr(self, VarDict)

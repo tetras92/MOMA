@@ -70,17 +70,17 @@ class PI(InformationStore):
                 element = (information.alternative1, information.alternative2)
                 AL.append((information.alternative1, information.alternative2))
                 relationElementInfoDict[information] = element
-                AD.append(CommitmentStore().getDateOf(information))
+                AD.append(information.last_commit_date)
             elif information.termP == ComparisonTerm.IS_LESS_PREFERRED_THAN:
                 element = (information.alternative2, information.alternative1)
                 AL.append((information.alternative2, information.alternative1))
                 relationElementInfoDict[information] = element
-                AD.append(CommitmentStore().getDateOf(information))
+                AD.append(information.last_commit_date)
             elif information.termP == ComparisonTerm.IS_INDIFERRENT_TO:
                 element = (information.alternative1, information.alternative2)
                 SL.append((information.alternative1, information.alternative2))
                 relationElementInfoDict[information] = element
-                SD.append(CommitmentStore().getDateOf(information))
+                SD.append(information.last_commit_date)
             else:
                 raise Exception("Error getAsymmetricAndSymmetricParts in PI()")
         R["dominanceAsymmetricPart"] = AL
