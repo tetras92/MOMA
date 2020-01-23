@@ -127,7 +127,7 @@ class InconsistencySolverWrapper():
         # print("AS", newDominanceAsymmetricPart)
         self._infoToDeleteStore = list()
         for information in self._store:
-            coupleMatchingWithInfo = self.iso.matchingInfoCoupleAlt[information.id]
+            coupleMatchingWithInfo = self.iso.matchingInfoCoupleAlt[information]
             #print("couple", coupleMatchingWithInfo)
             if not coupleMatchingWithInfo in newDominanceAsymmetricPart\
                     and not coupleMatchingWithInfo in newDominanceSymmetricPart:
