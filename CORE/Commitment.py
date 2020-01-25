@@ -73,12 +73,21 @@ class CommitmentStore():
     def __init__(self):
         self._store_info_commitment = dict()
         self._store_date_commitment = list()
+        self._store_alt_commitment = dict()
 
     def add(self, commitment):
         print(commitment)
-        if commitment.id not in self._store_info_commitment:
+        if commitment.info not in self._store_info_commitment:
             self._store_info_commitment[commitment.info] = list()
         self._store_info_commitment[commitment.info].append(commitment)
+
+        if commitment.info.alternative1 not in self._store_alt_commitment:
+            self._store_alt_commitment[commitment.info.alternative1] = list()
+        self._store_alt_commitment[commitment.info.alternative1].append(commitment)
+
+        if commitment.info.alternative2 not in self._store_alt_commitment:
+            self._store_alt_commitment[commitment.info.alternative2] = list()
+        self._store_alt_commitment[commitment.info.alternative2].append(commitment)
 
         self._store_date_commitment.append(commitment)
 
@@ -90,7 +99,12 @@ class CommitmentStore():
 
     def __str__(self):
         s = "[COMMITMENT STORE]\n"
-        for commitment in self._store_date_commitment:
-            s += str(commitment) + "\n"
-        return s
+        for alt, Lcommitment in self._store_alt_commitment.items():
+            s += str(alt) + "\n"
+            for commitment in Lcommitment:
+                s += str(commitment) + "\n"
+            s += "===\n"
 
+        # for commitment in self._store_date_commitment:
+        #     s += str(commitment) + "\n"
+        return s

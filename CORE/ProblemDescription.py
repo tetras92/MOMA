@@ -1,12 +1,10 @@
 import csv
 import itertools as it
-
 from gurobipy import *
-
 from CORE.Alternative import Alternative
 from CORE.Information import Information
 from CORE.Tools import attribute_creator, CONSTRAINTSFEASIBILITYTOL
-
+import numpy as np
 
 class ProblemDescription:
     """Classe modélisant la description du problème MCDA dans son ensemble.
@@ -105,7 +103,7 @@ class ProblemDescription:
             NSL.sort(key=lambda x : D[x])
         self._list_of_list_of_ordered_criterion_attributes = L
 
-    def generate_basic_gurobi_model_and_its_varDict(self, modelName):
+    def generate_uta_gms_basic_gurobi_model_and_its_varDict(self, modelName):
         """Retourne un programme linéaire de base prenant en considération le sens
         d'optimisation sur chacun des critères. Celui-ci sera étoffé par les éléments de PI
         pour le calcul de la relation nécessaire.
@@ -133,6 +131,23 @@ class ProblemDescription:
         gurobi_model.addConstr(cst == 1)
 
         return gurobi_model, VarDict
+
+    def generate_kb_basic_gurobi_model_and_its_varList(self, modelName):
+        """Retourne le programme linéaire de base prenant en considération le sens
+        d'optimisation sur chacun des critères selon la version de la thèse de KB.
+        Celui-ci sera étoffé par les éléments de PI pour le calcul de la relation nécessaire.
+        """
+        gurobi_model = Model(modelName)
+        gurobi_model.setParam('OutputFlag', False)
+        gurobi_model.Params.FeasibilityTol = CONSTRAINTSFEASIBILITYTOL
+        gurobi_model.Params.DualReductions = 0   # indispensable pour discriminer entre PL InFeasible or unBounded
+        # Borne sup choisie arbitrairement égale à 1 (UTA GMS).
+        VarList = [gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0, name=criterion)
+                   for criterion in self._criteriaOrderedList]
+        gurobi_model.update()
+        # pas nécessaire de rajouter des contraintes du type (var >= 0) [ligne. 3 PL pg 52 de la thèse];
+        # lb = 0 le fait déjà
+        return gurobi_model, np.array(VarList)
 
     def __str__(self):
         s = ""

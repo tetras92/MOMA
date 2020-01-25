@@ -2,7 +2,7 @@ from CORE.AppreciationObject import PairwiseInformation, NInformation, PInformat
 from CORE.Commitment import *
 from CORE.Exceptions import DMdoesntValidateNElementException
 from CORE.InformationStore import NonPI, N, PI
-
+from CORE.Tools import covectorOfPairWiseInformationWith2Levels
 
 class Information:
     """ Classe représentant une information. Elle est conçue comme une 'capsule'
@@ -16,7 +16,8 @@ class Information:
         self.o = PairwiseInformation(self, alternative1, alternative2)
         self._id = Information.NB_OBJECT
         Information.NB_OBJECT += 1
-
+        # Calcul du covector : np.array[{1,-1,0}]
+        self.covector = covectorOfPairWiseInformationWith2Levels((alternative1, alternative2))
 
     def _nUpgrade(self, v):
         """Méthode traduisant le passage de l'information de NonPI à N.
@@ -36,7 +37,7 @@ class Information:
 
         if isinstance(oldO, NInformation):
             N().remove(self)
-            if oldO.termN != v: # DM ne valide pas la valeur inférée
+            if not oldO.termN is v: # DM ne valide pas la valeur inférée
                 CommitmentStore().add(InvalidationCommitment(self, oldO.termN))
                 raise DMdoesntValidateNElementException(self)
             CommitmentStore().add(ValidationCommitment(self, v))

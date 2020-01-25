@@ -3,7 +3,7 @@ import csv
 import numpy as np
 
 from CORE.ComparisonTerm import *
-
+from CORE.Tools import AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS
 
 class DM:
     """Classe (de base) modélisant un DM. Différents modèles héritent de cette
@@ -39,13 +39,10 @@ class NoisyWS_DM(DM):
         réalise (par effet de bord) l'évaluation de l'information."""
         U1 = self._evaluateAlternative(info.alternative1)
         U2 = self._evaluateAlternative(info.alternative2)
-        if U1 < U2:
-            info.termP = ComparisonTerm.IS_LESS_PREFERRED_THAN
-        elif U1 > U2:
-            info.termP = ComparisonTerm.IS_PREFERRED_TO
+        if U1 >= U2:
+            info.termP = AS_LEAST_AS_GOOD_AS()
         else:
-            info.termP = ComparisonTerm.IS_INDIFERRENT_TO
-
+            info.termP = NOT_AS_LEAST_AS_GOOD_AS()
 
 
 

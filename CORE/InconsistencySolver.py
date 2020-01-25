@@ -64,8 +64,9 @@ class ITInconsistencySolver(InconsistencySolver):
     def _generate_inconsistency_solver_model_and_its_varDict(self, potentialConsistentStore):
         """List[Couple[Alternative, Alternative]] -> GurobiModel, Couple[Couple[Alternative, Alternative], Couple[Alternative, Alternative]]
             retourne d'une part le programme linéaire dont la faisabibilité déterminera la consistance de potentialConsistentStore"""
-        model, VarDict = self._mcda_problem_description.generate_basic_gurobi_model_and_its_varDict(
+        model, VarDict = self._mcda_problem_description.generate_uta_gms_basic_gurobi_model_and_its_varDict(
             "Test IT IncSolv")
+
         newDominanceAsymmetricPart = list()
         newDominanceSymmetricPart = list()
 
