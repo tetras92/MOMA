@@ -1,6 +1,6 @@
 from CORE.ComparisonTerm import ComparisonTerm
 from CORE.InformationStore import NonPI, PI, N
-from CORE.Tools import colored_expression, NO_TERM
+from CORE.Tools import colored_expression
 
 class AppreciationObject:
     """Classe de base modélisation une paire d'alternatives"""
@@ -31,7 +31,7 @@ class PairwiseInformation(AppreciationObject):
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
-        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, NO_TERM(), symb2, self.alternative2.id)
+        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, ComparisonTerm.NO_TERM, symb2, self.alternative2.id)
 
     def __repr__(self):
         return self.__str__()

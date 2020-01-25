@@ -4,33 +4,25 @@ from CORE.Commitment import CommitmentStore
 from CORE.ComparisonTerm import *
 from CORE.Tools import EPSILON
 from CORE.decorators import singleton
-from CORE.Tools import AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS, CONSTRAINTSFEASIBILITYTOL
-from CORE.Dialog import Dialog
+
 
 class InformationStore:
     def __init__(self):
         self._store = list()
 
     @staticmethod
-    def addInformationToModel(store, model, varList):
+    def addInformationToModel(store, model, varDict):
         for information in store:
-            if information.termP is AS_LEAST_AS_GOOD_AS():
-                model.addConstr(quicksum(information.covector * varList) >= 0)
-            elif information.termP is NOT_AS_LEAST_AS_GOOD_AS():
-                model.addConstr(quicksum(information.covector * varList) <= 0)
+            linexpr = information.linear_expr(varDict)
+            term = information.termP
+            if term == ComparisonTerm.IS_LESS_PREFERRED_THAN:
+                model.addConstr(- linexpr >=  EPSILON)
+            elif term == ComparisonTerm.IS_PREFERRED_TO:
+                model.addConstr(linexpr >= EPSILON)
+            elif term == ComparisonTerm.IS_INDIFERRENT_TO:
+                model.addConstr(linexpr == 0)
             else:
-                raise Exception("Error in InformationStore.addInformationToModel")
-        # for information in store:
-        #     linexpr = information.linear_expr(varDict)
-        #     term = information.termP
-        #     if term == ComparisonTerm.IS_LESS_PREFERRED_THAN:
-        #         model.addConstr(- linexpr >=  EPSILON)
-        #     elif term == ComparisonTerm.IS_PREFERRED_TO:
-        #         model.addConstr(linexpr >= EPSILON)
-        #     elif term == ComparisonTerm.IS_INDIFERRENT_TO:
-        #         model.addConstr(linexpr == 0)
-        #     else:
-        #         raise Exception("Error in PI")
+                raise Exception("Error in PI")
             model.update()
 
     def clear(self):
@@ -98,21 +90,6 @@ class PI(InformationStore):
         R["matchingInfoCoupleAlt"] = relationElementInfoDict
         return R
 
-
-    def getRelation(self):
-        RelationDict = dict()
-        relationElementList = list()
-        for information in self:
-            if information.termP is AS_LEAST_AS_GOOD_AS():
-                relationElementList.append((information.alternative1, information.alternative2))
-            elif information.termP is NOT_AS_LEAST_AS_GOOD_AS():
-                relationElementList.append((information.alternative2, information.alternative1))
-            else :
-                raise Exception("Error getRelation in PI()")
-
-        RelationDict["dominanceRelation"] = relationElementList
-        return RelationDict
-
     def clear(self):
         store_copy = [info for info in self._store] # important car retire des éléments de PI
         for info in store_copy:                     # et si on fait for info in self, l'itérateur est "perturbé"
@@ -173,39 +150,36 @@ class N(InformationStore):
     def setInfoPicker(self, infoPicker):
         self._infoPicker = infoPicker
 
-    def update(self, VarList, gurobi_model):
+    def update(self, VarDict, gurobi_model):
         N().clear() # vider pour recalculer
-        # InformationStore.addInformationToModel(PI(), gurobi_model, VarDict)  # effet de bord sur gurobi_model
-
-        # effet de bord sur gurobi_mode
-        InformationStore.addInformationToModel(PI(), gurobi_model, VarList)
-        # indispensable car des effets de bords se produisent lorsque des éléments entrent ds N
-        nonPI_copy = [info for info in NonPI()]
+        InformationStore.addInformationToModel(PI(), gurobi_model, VarDict)  # effet de bord sur gurobi_model
+        nonPI_copy = [info for info in NonPI()]          # indispensable car des effets de bords se produisent lorsque des éléments entrent ds N
         for info in nonPI_copy:
-            # print(info)
-            pco_linexpr = quicksum(info.covector * VarList)
-            # print(pco_linexpr)
-            gurobi_model.addConstr(pco_linexpr <= -EPSILON)
-            # gurobi_model.setObjective(pco_linexpr, GRB.MINIMIZE)
+            # print("N : INFO EVALUATED : {}".format(str(info)))
+            pco_linexpr = info.linear_expr(VarDict)
+            gurobi_model.setObjective(pco_linexpr, GRB.MINIMIZE)
             gurobi_model.update()
             gurobi_model.optimize()
-            # if Dialog.NB == 94 :
-            #     if info.alternative1.id == 15 and info.alternative2.id == 53:
-            #         print("val", gurobi_model.objVal)
-            # print("status", gurobi_model.status)
-            if gurobi_model.status == GRB.INFEASIBLE :
-            # if gurobi_model.objVal >= 0:
-                info.termN = AS_LEAST_AS_GOOD_AS()
+
+            # print("NonPI --")
+            # print(info, gurobi_model.objVal)
+
+            if gurobi_model.objVal >= 0:
+                if gurobi_model.objVal == 0.0:
+                    info.termN = ComparisonTerm.IS_INDIFERRENT_TO
+                else:
+                    info.termN = ComparisonTerm.IS_PREFERRED_TO
             else:
-                gurobi_model.addConstr(pco_linexpr >= EPSILON)
-                # gurobi_model.setObjective(- pco_linexpr, GRB.MINIMIZE)
+                gurobi_model.setObjective(- pco_linexpr, GRB.MINIMIZE)
                 gurobi_model.update()
                 gurobi_model.optimize()
-                # if info.alternative1.id == 15 and info.alternative2.id == 53:
-                #     print("val-", gurobi_model.objVal)
-                if gurobi_model.status == GRB.INFEASIBLE:
-                # if gurobi_model.objVal >= 0:
-                    info.termN = NOT_AS_LEAST_AS_GOOD_AS()
+
+                # print(info, gurobi_model.objVal)
+                if gurobi_model.objVal >= 0:
+                    if gurobi_model.objVal == 0.0:
+                        info.termN = ComparisonTerm.IS_INDIFERRENT_TO
+                    else:
+                        info.termN = ComparisonTerm.IS_LESS_PREFERRED_THAN
 
     def add(self, information):
         self._store.append(information)
