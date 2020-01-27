@@ -1,10 +1,9 @@
-from CORE.Commitment import CommitmentStore
 from CORE.DA import DA
-from CORE.DM import NoisyWS_DM, WS_DM, RelativeNoisyDMWS_DM
-from CORE.InconsistencySolver import RadicalInconsistencySolver, InconsistencySolverWrapper, ITInconsistencySolver
-from CORE.InformationPicker import DifficultyLevelPicker, RandomPicker
+from CORE.DM import NoisyWS_DM
+from CORE.InconsistencySolver import InconsistencySolverWrapper, ITInconsistencySolver
+from CORE.InformationPicker import RandomPicker
 from CORE.ProblemDescription import *
-from CORE.Recommendation import RecommendationWrapper, KBestRecommendation, KRankingRecommendation
+from CORE.Recommendation import RecommendationWrapper, KRankingRecommendation
 from CORE.StopCriterion import *
 
 if __name__ == "__main__" :

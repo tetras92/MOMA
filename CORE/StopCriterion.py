@@ -1,5 +1,6 @@
-from CORE.Dialog import Dialog
 from CORE.Commitment import CommitmentStore
+from CORE.Dialog import Dialog
+
 
 class StopCriterion:
     """ Classe (de base) modélisant un critère d'arrêt explicite de l'interaction."""
@@ -25,6 +26,7 @@ class DMVolatilityStopCriterion(StopCriterion):
     def stop(self):
         for info, LOfCommitment in CommitmentStore().info_store.items():
             if len(LOfCommitment) == self._nbMaxOpinionOnTheSameInfo:
+                print("Stop because of {}".format(info))
                 return True
         return False
 

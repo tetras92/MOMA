@@ -1,5 +1,5 @@
-from termcolor import colored
 import numpy as np
+from termcolor import colored
 
 COLOR = "blue"
 attribute_creator = lambda criterion, attribute_value : '{}:{}'.format(criterion,attribute_value)

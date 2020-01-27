@@ -1,6 +1,8 @@
 from gurobipy import *
-from CORE.Tools import CONSTRAINTSFEASIBILITYTOL, covectorOfPairWiseInformationWith2Levels
+
 from CORE.ProblemDescription import ProblemDescription
+from CORE.Tools import CONSTRAINTSFEASIBILITYTOL, covectorOfPairWiseInformationWith2Levels
+
 gurobi_model = Model("Test")
 
 

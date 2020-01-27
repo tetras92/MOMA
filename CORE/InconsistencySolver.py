@@ -1,6 +1,7 @@
-from CORE.decorators import singleton
-from CORE.Tools import EPSILON
 from gurobipy import *
+
+from CORE.Tools import EPSILON
+
 
 class InconsistencySolver:
     """Classe (de base) modélisant un solveur d'inconsistance.
@@ -91,11 +92,11 @@ class ITInconsistencySolver(InconsistencySolver):
         date_of_set_of_coupleAlt = lambda C: max([date_of(elmt) for elmt in C])
 
         for k in range(len(self._store), -1, -1):
-            print("k", k)
+            # print("k", k)
             kList_of_parts_of_store_copy = list(ite.combinations(self._store, k))
-            print("--- {}".format(len(kList_of_parts_of_store_copy)))
+            # print("--- {}".format(len(kList_of_parts_of_store_copy)))
             if k != 0:
-                kList_of_parts_of_store_copy.sort(key=lambda C: date_of_set_of_coupleAlt(C))
+                kList_of_parts_of_store_copy.sort(key=lambda C: date_of_set_of_coupleAlt(C), reverse=False)
             for elmtK in kList_of_parts_of_store_copy:
                 potential_consistent_store = list(elmtK) + [self.datesDict[self.date_max]]
                 model, (newDominanceAsymmetricPart, newDominanceSymmetricPart) = \

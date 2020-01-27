@@ -1,11 +1,12 @@
 from CORE.DA import DA
+from CORE.DM import *
 from CORE.InconsistencySolver import InconsistencySolverFactory
 from CORE.InformationPicker import *
-from CORE.ProblemDescription import *
-from CORE.StopCriterion import *
-from CORE.DM import *
-from CORE.Recommendation import RecommendationWrapper, KBestRecommendation, KRankingRecommendation
 from CORE.InformationStore import PI
+from CORE.ProblemDescription import *
+from CORE.Recommendation import RecommendationWrapper, KBestRecommendation
+from CORE.StopCriterion import *
+
 if __name__ == "__main__" :
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria4.csv",
                                                   performanceTableFileName="CSVFILES/fullPerfTableTruncated.csv")

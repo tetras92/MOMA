@@ -1,6 +1,5 @@
 from gurobipy import *
 
-from CORE.Commitment import CommitmentStore
 from CORE.ComparisonTerm import *
 from CORE.Tools import EPSILON
 from CORE.decorators import singleton
