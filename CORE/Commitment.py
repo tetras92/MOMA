@@ -108,3 +108,10 @@ class CommitmentStore():
         # for commitment in self._store_date_commitment:
         #     s += str(commitment) + "\n"
         return s
+
+    def getInfoStore(self):
+        return self._store_info_commitment
+    info_store = property(fget=getInfoStore)
+
+    def getWayOfIntroduction(self, info):
+        return str(self._store_info_commitment[info][-1].__class__)

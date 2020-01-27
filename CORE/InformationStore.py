@@ -7,8 +7,9 @@ from CORE.decorators import singleton
 
 
 class InformationStore:
-    def __init__(self):
+    def __init__(self, strlen=105):
         self._store = list()
+        self._strlen = strlen
 
     @staticmethod
     def addInformationToModel(store, model, varDict):
@@ -32,7 +33,13 @@ class InformationStore:
         self._store.remove(info)
 
     def __str__(self):
-        s = ""
+        s = "{} element(s)\n".format(len(self._store))
+        if len(self._store) > self._strlen:
+            s += "...\n"
+            for elm in self._store[(len(self._store) - self._strlen): ]:
+                s += str(elm) + "\n"
+            return s
+
         for elm in self._store:
             s += str(elm) + "\n"
         return s
@@ -40,6 +47,9 @@ class InformationStore:
     def is_empty(self):
         return len(self._store) == 0
 
+
+    def __getitem__(self, item):
+        return self._store[item]
 
 @singleton
 class PI(InformationStore):
@@ -101,6 +111,17 @@ class PI(InformationStore):
     def __str__(self):
         return InformationStore.__str__(self)
 
+    # def __str__(self):
+    #     s = "{} element(s)\n".format(len(self._store))
+    #     if len(self._store) > self._strlen:
+    #         s += "...\n"
+    #         for elm in self._store[(len(self._store) - self._strlen): ]:
+    #             s += str(elm) + "added at {} by {}\n".format(elm.last_commit_date, elm.how_entering_pi)
+    #         return s
+    #
+    #     for elm in self._store:
+    #         s += str(elm) + " date : {} how :  {}\n".format(elm.last_commit_date, elm.how_entering_pi)
+    #     return s
     def is_empty(self):
         return InformationStore.is_empty(self)
 
@@ -120,8 +141,7 @@ class NonPI(InformationStore):
         return len(self._store)
 
     def pick(self):
-        indexToPick = self._infoPicker.pickIndex(len(self))
-        return self._store[indexToPick]
+        return self._infoPicker.pick(self)
 
     def add(self, information):
         self._store.append(information)
@@ -141,6 +161,9 @@ class NonPI(InformationStore):
 
     def is_empty(self):
         return InformationStore.is_empty(self)
+
+    def __getitem__(self, item):
+        return InformationStore.__getitem__(self, item)
 
 @singleton
 class N(InformationStore):
@@ -187,8 +210,7 @@ class N(InformationStore):
 
 
     def pick(self):
-        indexToPick = self._infoPicker.pickIndex(len(self))
-        return self._store[indexToPick]
+        return self._infoPicker.pick(self)
 
     def __iter__(self):
         return self._store.__iter__()
@@ -201,6 +223,9 @@ class N(InformationStore):
 
     def __str__(self):
         return InformationStore.__str__(self)
+
+    def __getitem__(self, item):
+        return InformationStore.__getitem__(self, item)
 
     def clear(self):
         store_copy = [info for info in self._store] # important tout comme dans le cas de PI

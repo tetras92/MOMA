@@ -1,181 +1,1880 @@
-sigma = 0
-MY RECOMMENDATION IS :  [[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'], [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'], [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100'], [ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50']]
-[COMMITMENT STORE]
+42 alternatives removed
+15 alternatives remained
+Academic license - for non-commercial use only
+PI :
+0 element(s)
+
+N :
+0 element(s)
+
 <class 'CORE.Commitment.AnswerCommitment'> at 1 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	[29] : -+++-+ ? ++++-- : [60]
 	DM answers <.
-<class 'CORE.Commitment.AnswerCommitment'> at 2 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers ~.
+PI :
+1 element(s)
+[29] : -+++-+ < ++++-- : [60]
+
+N :
+3 element(s)
+[15] : --++++ < +-+++- : [46]
+[23] : -+-+++ < ++-++- : [54]
+[27] : -++-++ < +++-+- : [58]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 2 :
+	[23] : -+-+++ < ++-++- : [54]
+	DM answers YES.
+PI :
+2 element(s)
+[29] : -+++-+ < ++++-- : [60]
+[23] : -+-+++ < ++-++- : [54]
+
+N :
+2 element(s)
+[15] : --++++ < +-+++- : [46]
+[27] : -++-++ < +++-+- : [58]
+
 <class 'CORE.Commitment.ValidationCommitment'> at 3 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] > [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	[27] : -++-++ < +++-+- : [58]
 	DM answers YES.
-<class 'CORE.Commitment.AnswerCommitment'> at 4 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
-	DM answers <.
+PI :
+3 element(s)
+[29] : -+++-+ < ++++-- : [60]
+[23] : -+-+++ < ++-++- : [54]
+[27] : -++-++ < +++-+- : [58]
 
-                        ---- DANS LA SUITE AUCUNE GESTION DE L'INCONSISTANCE ----
+N :
+1 element(s)
+[15] : --++++ < +-+++- : [46]
 
-===================
-sigma = 0.5
-MY RECOMMENDATION IS :  [[14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']]
-[COMMITMENT STORE]
-<class 'CORE.Commitment.AnswerCommitment'> at 1 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers >.
-<class 'CORE.Commitment.AnswerCommitment'> at 2 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers <.
-<class 'CORE.Commitment.InvalidationCommitment'> at 3 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers NO.
-<class 'CORE.Commitment.InvalidationCommitment'> at 4 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers NO.
-<class 'CORE.Commitment.ValidationCommitment'> at 5 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers YES.
-<class 'CORE.Commitment.AnswerCommitment'> at 6 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
-	DM answers <.
-
-===================
-sigma = 1
-MY RECOMMENDATION IS :  [[14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']]
-[COMMITMENT STORE]
-<class 'CORE.Commitment.AnswerCommitment'> at 1 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers >.
-<class 'CORE.Commitment.AnswerCommitment'> at 2 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers <.
-<class 'CORE.Commitment.InvalidationCommitment'> at 3 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers NO.
 <class 'CORE.Commitment.ValidationCommitment'> at 4 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	[15] : --++++ < +-+++- : [46]
 	DM answers YES.
+PI :
+4 element(s)
+[29] : -+++-+ < ++++-- : [60]
+[23] : -+-+++ < ++-++- : [54]
+[27] : -++-++ < +++-+- : [58]
+[15] : --++++ < +-+++- : [46]
+
+N :
+0 element(s)
+
 <class 'CORE.Commitment.AnswerCommitment'> at 5 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
-	DM answers >.
-<class 'CORE.Commitment.InvalidationCommitment'> at 6 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] > [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers NO.
-<class 'CORE.Commitment.InvalidationCommitment'> at 7 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] > [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers NO.
-<class 'CORE.Commitment.InvalidationCommitment'> at 8 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] > [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers NO.
-<class 'CORE.Commitment.ValidationCommitment'> at 9 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] > [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers YES.
-<class 'CORE.Commitment.AnswerCommitment'> at 10 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+	[54] : ++-++- ? ++++-- : [60]
 	DM answers <.
+PI :
+5 element(s)
+[29] : -+++-+ < ++++-- : [60]
+[23] : -+-+++ < ++-++- : [54]
+[27] : -++-++ < +++-+- : [58]
+[15] : --++++ < +-+++- : [46]
+[54] : ++-++- < ++++-- : [60]
 
-                               ---- DANS LA SUITE GESTION 'RADICALE' DE L'INCONSISTANCE ----
-==============
-sigma = 0.5
-MY RECOMMENDATION IS :  [[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50']]
-[COMMITMENT STORE]
-<class 'CORE.Commitment.AnswerCommitment'> at 1 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers <.
-<class 'CORE.Commitment.AnswerCommitment'> at 2 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers <.
-<class 'CORE.Commitment.AnswerCommitment'> at 3 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
-	DM answers >.
-<class 'CORE.Commitment.AnswerCommitment'> at 4 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers >.
-<class 'CORE.Commitment.AnswerCommitment'> at 5 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers <.
+N :
+4 element(s)
+[23] : -+-+++ < -+++-+ : [29]
+[23] : -+-+++ < ++++-- : [60]
+[39] : +--+++ < +-++-+ : [45]
+[51] : ++--++ < +++--+ : [57]
 
-==============
-sigma = 1
-MY RECOMMENDATION IS :  [[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']]
-[COMMITMENT STORE]
-<class 'CORE.Commitment.AnswerCommitment'> at 1 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers >.
-<class 'CORE.Commitment.AnswerCommitment'> at 2 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers <.
-<class 'CORE.Commitment.ValidationCommitment'> at 3 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers YES.
-<class 'CORE.Commitment.AnswerCommitment'> at 4 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
-	DM answers >.
-<class 'CORE.Commitment.InvalidationCommitment'> at 5 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] > [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers NO.
-<class 'CORE.Commitment.AnswerCommitment'> at 6 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers >.
-<class 'CORE.Commitment.AnswerCommitment'> at 7 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers <.
-<class 'CORE.Commitment.AnswerCommitment'> at 8 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
-	DM answers <.
-<class 'CORE.Commitment.AnswerCommitment'> at 9 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers <.
-
-
-                        ---- DM QUI APPRENNENT A REPONDRE r = 0.8 ----
-sigma_initial = 1 + Aucune gestion de l'inconsistance
-MY RECOMMENDATION IS :  [[14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']]
-[COMMITMENT STORE]
-<class 'CORE.Commitment.AnswerCommitment'> at 1 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers >.
-<class 'CORE.Commitment.AnswerCommitment'> at 2 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers <.
-<class 'CORE.Commitment.InvalidationCommitment'> at 3 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers NO.
-<class 'CORE.Commitment.ValidationCommitment'> at 4 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers YES.
-<class 'CORE.Commitment.AnswerCommitment'> at 5 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
-	DM answers >.
 <class 'CORE.Commitment.ValidationCommitment'> at 6 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] > [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
+	[39] : +--+++ < +-++-+ : [45]
 	DM answers YES.
-<class 'CORE.Commitment.AnswerCommitment'> at 7 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers <.
+PI :
+6 element(s)
+...
+[23] : -+-+++ < ++-++- : [54]
+[27] : -++-++ < +++-+- : [58]
+[15] : --++++ < +-+++- : [46]
+[54] : ++-++- < ++++-- : [60]
+[39] : +--+++ < +-++-+ : [45]
 
-==============
-sigma_initial = 1 + gestion radicale de l'inconsistance
-MY RECOMMENDATION IS :  [[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']]
-[COMMITMENT STORE]
-<class 'CORE.Commitment.AnswerCommitment'> at 1 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers >.
-<class 'CORE.Commitment.AnswerCommitment'> at 2 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+N :
+3 element(s)
+[23] : -+-+++ < -+++-+ : [29]
+[23] : -+-+++ < ++++-- : [60]
+[51] : ++--++ < +++--+ : [57]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 7 :
+	[51] : ++--++ < +++--+ : [57]
+	DM answers YES.
+PI :
+7 element(s)
+...
+[27] : -++-++ < +++-+- : [58]
+[15] : --++++ < +-+++- : [46]
+[54] : ++-++- < ++++-- : [60]
+[39] : +--+++ < +-++-+ : [45]
+[51] : ++--++ < +++--+ : [57]
+
+N :
+2 element(s)
+[23] : -+-+++ < -+++-+ : [29]
+[23] : -+-+++ < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 8 :
+	[23] : -+-+++ < ++++-- : [60]
+	DM answers YES.
+PI :
+8 element(s)
+...
+[15] : --++++ < +-+++- : [46]
+[54] : ++-++- < ++++-- : [60]
+[39] : +--+++ < +-++-+ : [45]
+[51] : ++--++ < +++--+ : [57]
+[23] : -+-+++ < ++++-- : [60]
+
+N :
+1 element(s)
+[23] : -+-+++ < -+++-+ : [29]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 9 :
+	[23] : -+-+++ < -+++-+ : [29]
+	DM answers YES.
+PI :
+9 element(s)
+...
+[54] : ++-++- < ++++-- : [60]
+[39] : +--+++ < +-++-+ : [45]
+[51] : ++--++ < +++--+ : [57]
+[23] : -+-+++ < ++++-- : [60]
+[23] : -+-+++ < -+++-+ : [29]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 10 :
+	[30] : -++++- ? ++++-- : [60]
 	DM answers <.
-<class 'CORE.Commitment.InvalidationCommitment'> at 3 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] < [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
-	DM answers NO.
-<class 'CORE.Commitment.AnswerCommitment'> at 4 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50']
+PI :
+10 element(s)
+...
+[39] : +--+++ < +-++-+ : [45]
+[51] : ++--++ < +++--+ : [57]
+[23] : -+-+++ < ++++-- : [60]
+[23] : -+-+++ < -+++-+ : [29]
+[30] : -++++- < ++++-- : [60]
+
+N :
+3 element(s)
+[15] : --++++ < +-++-+ : [45]
+[23] : -+-+++ < ++-+-+ : [53]
+[27] : -++-++ < +++--+ : [57]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 11 :
+	[23] : -+-+++ < ++-+-+ : [53]
+	DM answers YES.
+PI :
+11 element(s)
+...
+[51] : ++--++ < +++--+ : [57]
+[23] : -+-+++ < ++++-- : [60]
+[23] : -+-+++ < -+++-+ : [29]
+[30] : -++++- < ++++-- : [60]
+[23] : -+-+++ < ++-+-+ : [53]
+
+N :
+2 element(s)
+[15] : --++++ < +-++-+ : [45]
+[27] : -++-++ < +++--+ : [57]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 12 :
+	[27] : -++-++ < +++--+ : [57]
+	DM answers YES.
+PI :
+12 element(s)
+...
+[23] : -+-+++ < ++++-- : [60]
+[23] : -+-+++ < -+++-+ : [29]
+[30] : -++++- < ++++-- : [60]
+[23] : -+-+++ < ++-+-+ : [53]
+[27] : -++-++ < +++--+ : [57]
+
+N :
+1 element(s)
+[15] : --++++ < +-++-+ : [45]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 13 :
+	[15] : --++++ < +-++-+ : [45]
+	DM answers YES.
+PI :
+13 element(s)
+...
+[23] : -+-+++ < -+++-+ : [29]
+[30] : -++++- < ++++-- : [60]
+[23] : -+-+++ < ++-+-+ : [53]
+[27] : -++-++ < +++--+ : [57]
+[15] : --++++ < +-++-+ : [45]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 14 :
+	[15] : --++++ ? +-+-++ : [43]
 	DM answers >.
-<class 'CORE.Commitment.AnswerCommitment'> at 5 :
-	[11] : ['COMFORT:4*', 'RESTAURANT:NO', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50']
-	DM answers <.
-<class 'CORE.Commitment.AnswerCommitment'> at 6 :
-	[13] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:45-30', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+PI :
+14 element(s)
+...
+[30] : -++++- < ++++-- : [60]
+[23] : -+-+++ < ++-+-+ : [53]
+[27] : -++-++ < +++--+ : [57]
+[15] : --++++ < +-++-+ : [45]
+[15] : --++++ > +-+-++ : [43]
+
+N :
+14 element(s)
+...
+[51] : ++--++ < ++-+-+ : [53]
+[51] : ++--++ < ++-++- : [54]
+[51] : ++--++ < ++++-- : [60]
+[57] : +++--+ < ++++-- : [60]
+[58] : +++-+- < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 15 :
+	[51] : ++--++ < ++-+-+ : [53]
+	DM answers YES.
+PI :
+15 element(s)
+...
+[23] : -+-+++ < ++-+-+ : [53]
+[27] : -++-++ < +++--+ : [57]
+[15] : --++++ < +-++-+ : [45]
+[15] : --++++ > +-+-++ : [43]
+[51] : ++--++ < ++-+-+ : [53]
+
+N :
+13 element(s)
+...
+[43] : +-+-++ < +-+++- : [46]
+[51] : ++--++ < ++-++- : [54]
+[51] : ++--++ < ++++-- : [60]
+[57] : +++--+ < ++++-- : [60]
+[58] : +++-+- < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 16 :
+	[27] : -++-++ < ++++-- : [60]
+	DM answers YES.
+PI :
+16 element(s)
+...
+[27] : -++-++ < +++--+ : [57]
+[15] : --++++ < +-++-+ : [45]
+[15] : --++++ > +-+-++ : [43]
+[51] : ++--++ < ++-+-+ : [53]
+[27] : -++-++ < ++++-- : [60]
+
+N :
+12 element(s)
+...
+[43] : +-+-++ < +-+++- : [46]
+[51] : ++--++ < ++-++- : [54]
+[51] : ++--++ < ++++-- : [60]
+[57] : +++--+ < ++++-- : [60]
+[58] : +++-+- < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 17 :
+	[51] : ++--++ < ++-++- : [54]
+	DM answers YES.
+PI :
+17 element(s)
+...
+[15] : --++++ < +-++-+ : [45]
+[15] : --++++ > +-+-++ : [43]
+[51] : ++--++ < ++-+-+ : [53]
+[27] : -++-++ < ++++-- : [60]
+[51] : ++--++ < ++-++- : [54]
+
+N :
+11 element(s)
+...
+[43] : +-+-++ < +-++-+ : [45]
+[43] : +-+-++ < +-+++- : [46]
+[51] : ++--++ < ++++-- : [60]
+[57] : +++--+ < ++++-- : [60]
+[58] : +++-+- < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 18 :
+	[27] : -++-++ < -++++- : [30]
+	DM answers YES.
+PI :
+18 element(s)
+...
+[15] : --++++ > +-+-++ : [43]
+[51] : ++--++ < ++-+-+ : [53]
+[27] : -++-++ < ++++-- : [60]
+[51] : ++--++ < ++-++- : [54]
+[27] : -++-++ < -++++- : [30]
+
+N :
+10 element(s)
+...
+[43] : +-+-++ < +-++-+ : [45]
+[43] : +-+-++ < +-+++- : [46]
+[51] : ++--++ < ++++-- : [60]
+[57] : +++--+ < ++++-- : [60]
+[58] : +++-+- < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 19 :
+	[30] : -++++- > +++-+- : [58]
+	DM answers YES.
+PI :
+19 element(s)
+...
+[51] : ++--++ < ++-+-+ : [53]
+[27] : -++-++ < ++++-- : [60]
+[51] : ++--++ < ++-++- : [54]
+[27] : -++-++ < -++++- : [30]
+[30] : -++++- > +++-+- : [58]
+
+N :
+9 element(s)
+...
+[43] : +-+-++ < +-++-+ : [45]
+[43] : +-+-++ < +-+++- : [46]
+[51] : ++--++ < ++++-- : [60]
+[57] : +++--+ < ++++-- : [60]
+[58] : +++-+- < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 20 :
+	[29] : -+++-+ > ++--++ : [51]
+	DM answers YES.
+PI :
+20 element(s)
+...
+[27] : -++-++ < ++++-- : [60]
+[51] : ++--++ < ++-++- : [54]
+[27] : -++-++ < -++++- : [30]
+[30] : -++++- > +++-+- : [58]
+[29] : -+++-+ > ++--++ : [51]
+
+N :
+8 element(s)
+...
+[43] : +-+-++ < +-++-+ : [45]
+[43] : +-+-++ < +-+++- : [46]
+[51] : ++--++ < ++++-- : [60]
+[57] : +++--+ < ++++-- : [60]
+[58] : +++-+- < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 21 :
+	[27] : -++-++ < -+++-+ : [29]
+	DM answers YES.
+PI :
+21 element(s)
+...
+[51] : ++--++ < ++-++- : [54]
+[27] : -++-++ < -++++- : [30]
+[30] : -++++- > +++-+- : [58]
+[29] : -+++-+ > ++--++ : [51]
+[27] : -++-++ < -+++-+ : [29]
+
+N :
+7 element(s)
+...
+[43] : +-+-++ < +-++-+ : [45]
+[43] : +-+-++ < +-+++- : [46]
+[51] : ++--++ < ++++-- : [60]
+[57] : +++--+ < ++++-- : [60]
+[58] : +++-+- < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 22 :
+	[51] : ++--++ < ++++-- : [60]
+	DM answers YES.
+PI :
+22 element(s)
+...
+[27] : -++-++ < -++++- : [30]
+[30] : -++++- > +++-+- : [58]
+[29] : -+++-+ > ++--++ : [51]
+[27] : -++-++ < -+++-+ : [29]
+[51] : ++--++ < ++++-- : [60]
+
+N :
+6 element(s)
+...
+[29] : -+++-+ > +++--+ : [57]
+[43] : +-+-++ < +-++-+ : [45]
+[43] : +-+-++ < +-+++- : [46]
+[57] : +++--+ < ++++-- : [60]
+[58] : +++-+- < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 23 :
+	[43] : +-+-++ < +-++-+ : [45]
+	DM answers YES.
+PI :
+23 element(s)
+...
+[30] : -++++- > +++-+- : [58]
+[29] : -+++-+ > ++--++ : [51]
+[27] : -++-++ < -+++-+ : [29]
+[51] : ++--++ < ++++-- : [60]
+[43] : +-+-++ < +-++-+ : [45]
+
+N :
+5 element(s)
+[23] : -+-+++ > ++--++ : [51]
+[29] : -+++-+ > +++--+ : [57]
+[43] : +-+-++ < +-+++- : [46]
+[57] : +++--+ < ++++-- : [60]
+[58] : +++-+- < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 24 :
+	[58] : +++-+- < ++++-- : [60]
+	DM answers YES.
+PI :
+24 element(s)
+...
+[29] : -+++-+ > ++--++ : [51]
+[27] : -++-++ < -+++-+ : [29]
+[51] : ++--++ < ++++-- : [60]
+[43] : +-+-++ < +-++-+ : [45]
+[58] : +++-+- < ++++-- : [60]
+
+N :
+4 element(s)
+[23] : -+-+++ > ++--++ : [51]
+[29] : -+++-+ > +++--+ : [57]
+[43] : +-+-++ < +-+++- : [46]
+[57] : +++--+ < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 25 :
+	[29] : -+++-+ > +++--+ : [57]
+	DM answers YES.
+PI :
+25 element(s)
+...
+[27] : -++-++ < -+++-+ : [29]
+[51] : ++--++ < ++++-- : [60]
+[43] : +-+-++ < +-++-+ : [45]
+[58] : +++-+- < ++++-- : [60]
+[29] : -+++-+ > +++--+ : [57]
+
+N :
+3 element(s)
+[23] : -+-+++ > ++--++ : [51]
+[43] : +-+-++ < +-+++- : [46]
+[57] : +++--+ < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 26 :
+	[43] : +-+-++ < +-+++- : [46]
+	DM answers YES.
+PI :
+26 element(s)
+...
+[51] : ++--++ < ++++-- : [60]
+[43] : +-+-++ < +-++-+ : [45]
+[58] : +++-+- < ++++-- : [60]
+[29] : -+++-+ > +++--+ : [57]
+[43] : +-+-++ < +-+++- : [46]
+
+N :
+2 element(s)
+[23] : -+-+++ > ++--++ : [51]
+[57] : +++--+ < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 27 :
+	[23] : -+-+++ > ++--++ : [51]
+	DM answers YES.
+PI :
+27 element(s)
+...
+[43] : +-+-++ < +-++-+ : [45]
+[58] : +++-+- < ++++-- : [60]
+[29] : -+++-+ > +++--+ : [57]
+[43] : +-+-++ < +-+++- : [46]
+[23] : -+-+++ > ++--++ : [51]
+
+N :
+1 element(s)
+[57] : +++--+ < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 28 :
+	[57] : +++--+ < ++++-- : [60]
+	DM answers YES.
+PI :
+28 element(s)
+...
+[58] : +++-+- < ++++-- : [60]
+[29] : -+++-+ > +++--+ : [57]
+[43] : +-+-++ < +-+++- : [46]
+[23] : -+-+++ > ++--++ : [51]
+[57] : +++--+ < ++++-- : [60]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 29 :
+	[29] : -+++-+ ? +++-+- : [58]
 	DM answers >.
-<class 'CORE.Commitment.AnswerCommitment'> at 7 :
-	[ 7] : ['COMFORT:2*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:100-50'] ? [14] : ['COMFORT:4*', 'RESTAURANT:YES', 'COMMUTE_TIME:30-15', 'COST:180-100']
+PI :
+29 element(s)
+...
+[29] : -+++-+ > +++--+ : [57]
+[43] : +-+-++ < +-+++- : [46]
+[23] : -+-+++ > ++--++ : [51]
+[57] : +++--+ < ++++-- : [60]
+[29] : -+++-+ > +++-+- : [58]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 30 :
+	[46] : +-+++- ? +++--+ : [57]
+	DM answers >.
+PI :
+30 element(s)
+...
+[43] : +-+-++ < +-+++- : [46]
+[23] : -+-+++ > ++--++ : [51]
+[57] : +++--+ < ++++-- : [60]
+[29] : -+++-+ > +++-+- : [58]
+[46] : +-+++- > +++--+ : [57]
+
+N :
+2 element(s)
+[27] : -++-++ < +-+++- : [46]
+[46] : +-+++- > ++--++ : [51]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 31 :
+	[46] : +-+++- > ++--++ : [51]
+	DM answers YES.
+PI :
+31 element(s)
+...
+[23] : -+-+++ > ++--++ : [51]
+[57] : +++--+ < ++++-- : [60]
+[29] : -+++-+ > +++-+- : [58]
+[46] : +-+++- > +++--+ : [57]
+[46] : +-+++- > ++--++ : [51]
+
+N :
+1 element(s)
+[27] : -++-++ < +-+++- : [46]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 32 :
+	[27] : -++-++ < +-+++- : [46]
+	DM answers YES.
+PI :
+32 element(s)
+...
+[57] : +++--+ < ++++-- : [60]
+[29] : -+++-+ > +++-+- : [58]
+[46] : +-+++- > +++--+ : [57]
+[46] : +-+++- > ++--++ : [51]
+[27] : -++-++ < +-+++- : [46]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 33 :
+	[46] : +-+++- ? ++-++- : [54]
+	DM answers >.
+PI :
+33 element(s)
+...
+[29] : -+++-+ > +++-+- : [58]
+[46] : +-+++- > +++--+ : [57]
+[46] : +-+++- > ++--++ : [51]
+[27] : -++-++ < +-+++- : [46]
+[46] : +-+++- > ++-++- : [54]
+
+N :
+7 element(s)
+...
+[23] : -+-+++ < +-++-+ : [45]
+[23] : -+-+++ < +-+++- : [46]
+[43] : +-+-++ > ++--++ : [51]
+[45] : +-++-+ > ++--++ : [51]
+[45] : +-++-+ > ++-+-+ : [53]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 34 :
+	[43] : +-+-++ > ++--++ : [51]
+	DM answers YES.
+PI :
+34 element(s)
+...
+[46] : +-+++- > +++--+ : [57]
+[46] : +-+++- > ++--++ : [51]
+[27] : -++-++ < +-+++- : [46]
+[46] : +-+++- > ++-++- : [54]
+[43] : +-+-++ > ++--++ : [51]
+
+N :
+6 element(s)
+...
+[15] : --++++ > ++--++ : [51]
+[23] : -+-+++ < +-++-+ : [45]
+[23] : -+-+++ < +-+++- : [46]
+[45] : +-++-+ > ++--++ : [51]
+[45] : +-++-+ > ++-+-+ : [53]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 35 :
+	[15] : --++++ > -+-+++ : [23]
+	DM answers YES.
+PI :
+35 element(s)
+...
+[46] : +-+++- > ++--++ : [51]
+[27] : -++-++ < +-+++- : [46]
+[46] : +-+++- > ++-++- : [54]
+[43] : +-+-++ > ++--++ : [51]
+[15] : --++++ > -+-+++ : [23]
+
+N :
+5 element(s)
+[15] : --++++ > ++--++ : [51]
+[23] : -+-+++ < +-++-+ : [45]
+[23] : -+-+++ < +-+++- : [46]
+[45] : +-++-+ > ++--++ : [51]
+[45] : +-++-+ > ++-+-+ : [53]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 36 :
+	[23] : -+-+++ < +-+++- : [46]
+	DM answers YES.
+PI :
+36 element(s)
+...
+[27] : -++-++ < +-+++- : [46]
+[46] : +-+++- > ++-++- : [54]
+[43] : +-+-++ > ++--++ : [51]
+[15] : --++++ > -+-+++ : [23]
+[23] : -+-+++ < +-+++- : [46]
+
+N :
+4 element(s)
+[15] : --++++ > ++--++ : [51]
+[23] : -+-+++ < +-++-+ : [45]
+[45] : +-++-+ > ++--++ : [51]
+[45] : +-++-+ > ++-+-+ : [53]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 37 :
+	[45] : +-++-+ > ++-+-+ : [53]
+	DM answers YES.
+PI :
+37 element(s)
+...
+[46] : +-+++- > ++-++- : [54]
+[43] : +-+-++ > ++--++ : [51]
+[15] : --++++ > -+-+++ : [23]
+[23] : -+-+++ < +-+++- : [46]
+[45] : +-++-+ > ++-+-+ : [53]
+
+N :
+3 element(s)
+[15] : --++++ > ++--++ : [51]
+[23] : -+-+++ < +-++-+ : [45]
+[45] : +-++-+ > ++--++ : [51]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 38 :
+	[23] : -+-+++ < +-++-+ : [45]
+	DM answers YES.
+PI :
+38 element(s)
+...
+[43] : +-+-++ > ++--++ : [51]
+[15] : --++++ > -+-+++ : [23]
+[23] : -+-+++ < +-+++- : [46]
+[45] : +-++-+ > ++-+-+ : [53]
+[23] : -+-+++ < +-++-+ : [45]
+
+N :
+2 element(s)
+[15] : --++++ > ++--++ : [51]
+[45] : +-++-+ > ++--++ : [51]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 39 :
+	[15] : --++++ > ++--++ : [51]
+	DM answers YES.
+PI :
+39 element(s)
+...
+[15] : --++++ > -+-+++ : [23]
+[23] : -+-+++ < +-+++- : [46]
+[45] : +-++-+ > ++-+-+ : [53]
+[23] : -+-+++ < +-++-+ : [45]
+[15] : --++++ > ++--++ : [51]
+
+N :
+1 element(s)
+[45] : +-++-+ > ++--++ : [51]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 40 :
+	[45] : +-++-+ > ++--++ : [51]
+	DM answers YES.
+PI :
+40 element(s)
+...
+[23] : -+-+++ < +-+++- : [46]
+[45] : +-++-+ > ++-+-+ : [53]
+[23] : -+-+++ < +-++-+ : [45]
+[15] : --++++ > ++--++ : [51]
+[45] : +-++-+ > ++--++ : [51]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 41 :
+	[45] : +-++-+ ? +++--+ : [57]
+	DM answers >.
+PI :
+41 element(s)
+...
+[45] : +-++-+ > ++-+-+ : [53]
+[23] : -+-+++ < +-++-+ : [45]
+[15] : --++++ > ++--++ : [51]
+[45] : +-++-+ > ++--++ : [51]
+[45] : +-++-+ > +++--+ : [57]
+
+N :
+4 element(s)
+[15] : --++++ > -++-++ : [27]
+[27] : -++-++ < +-++-+ : [45]
+[39] : +--+++ > ++--++ : [51]
+[46] : +-+++- > +++-+- : [58]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 42 :
+	[46] : +-+++- > +++-+- : [58]
+	DM answers YES.
+PI :
+42 element(s)
+...
+[23] : -+-+++ < +-++-+ : [45]
+[15] : --++++ > ++--++ : [51]
+[45] : +-++-+ > ++--++ : [51]
+[45] : +-++-+ > +++--+ : [57]
+[46] : +-+++- > +++-+- : [58]
+
+N :
+3 element(s)
+[15] : --++++ > -++-++ : [27]
+[27] : -++-++ < +-++-+ : [45]
+[39] : +--+++ > ++--++ : [51]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 43 :
+	[39] : +--+++ > ++--++ : [51]
+	DM answers YES.
+PI :
+43 element(s)
+...
+[15] : --++++ > ++--++ : [51]
+[45] : +-++-+ > ++--++ : [51]
+[45] : +-++-+ > +++--+ : [57]
+[46] : +-+++- > +++-+- : [58]
+[39] : +--+++ > ++--++ : [51]
+
+N :
+2 element(s)
+[15] : --++++ > -++-++ : [27]
+[27] : -++-++ < +-++-+ : [45]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 44 :
+	[27] : -++-++ < +-++-+ : [45]
+	DM answers YES.
+PI :
+44 element(s)
+...
+[45] : +-++-+ > ++--++ : [51]
+[45] : +-++-+ > +++--+ : [57]
+[46] : +-+++- > +++-+- : [58]
+[39] : +--+++ > ++--++ : [51]
+[27] : -++-++ < +-++-+ : [45]
+
+N :
+1 element(s)
+[15] : --++++ > -++-++ : [27]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 45 :
+	[15] : --++++ > -++-++ : [27]
+	DM answers YES.
+PI :
+45 element(s)
+...
+[45] : +-++-+ > +++--+ : [57]
+[46] : +-+++- > +++-+- : [58]
+[39] : +--+++ > ++--++ : [51]
+[27] : -++-++ < +-++-+ : [45]
+[15] : --++++ > -++-++ : [27]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 46 :
+	[54] : ++-++- ? +++-+- : [58]
+	DM answers >.
+PI :
+46 element(s)
+...
+[46] : +-+++- > +++-+- : [58]
+[39] : +--+++ > ++--++ : [51]
+[27] : -++-++ < +-++-+ : [45]
+[15] : --++++ > -++-++ : [27]
+[54] : ++-++- > +++-+- : [58]
+
+N :
+5 element(s)
+[23] : -+-+++ > -++-++ : [27]
+[27] : -++-++ < ++-+-+ : [53]
+[27] : -++-++ < ++-++- : [54]
+[39] : +--+++ > +-+-++ : [43]
+[53] : ++-+-+ > +++--+ : [57]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 47 :
+	[53] : ++-+-+ > +++--+ : [57]
+	DM answers YES.
+PI :
+47 element(s)
+...
+[39] : +--+++ > ++--++ : [51]
+[27] : -++-++ < +-++-+ : [45]
+[15] : --++++ > -++-++ : [27]
+[54] : ++-++- > +++-+- : [58]
+[53] : ++-+-+ > +++--+ : [57]
+
+N :
+4 element(s)
+[23] : -+-+++ > -++-++ : [27]
+[27] : -++-++ < ++-+-+ : [53]
+[27] : -++-++ < ++-++- : [54]
+[39] : +--+++ > +-+-++ : [43]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 48 :
+	[23] : -+-+++ > -++-++ : [27]
+	DM answers YES.
+PI :
+48 element(s)
+...
+[27] : -++-++ < +-++-+ : [45]
+[15] : --++++ > -++-++ : [27]
+[54] : ++-++- > +++-+- : [58]
+[53] : ++-+-+ > +++--+ : [57]
+[23] : -+-+++ > -++-++ : [27]
+
+N :
+3 element(s)
+[27] : -++-++ < ++-+-+ : [53]
+[27] : -++-++ < ++-++- : [54]
+[39] : +--+++ > +-+-++ : [43]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 49 :
+	[27] : -++-++ < ++-+-+ : [53]
+	DM answers YES.
+PI :
+49 element(s)
+...
+[15] : --++++ > -++-++ : [27]
+[54] : ++-++- > +++-+- : [58]
+[53] : ++-+-+ > +++--+ : [57]
+[23] : -+-+++ > -++-++ : [27]
+[27] : -++-++ < ++-+-+ : [53]
+
+N :
+2 element(s)
+[27] : -++-++ < ++-++- : [54]
+[39] : +--+++ > +-+-++ : [43]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 50 :
+	[39] : +--+++ > +-+-++ : [43]
+	DM answers YES.
+PI :
+50 element(s)
+...
+[54] : ++-++- > +++-+- : [58]
+[53] : ++-+-+ > +++--+ : [57]
+[23] : -+-+++ > -++-++ : [27]
+[27] : -++-++ < ++-+-+ : [53]
+[39] : +--+++ > +-+-++ : [43]
+
+N :
+1 element(s)
+[27] : -++-++ < ++-++- : [54]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 51 :
+	[27] : -++-++ < ++-++- : [54]
+	DM answers YES.
+PI :
+51 element(s)
+...
+[53] : ++-+-+ > +++--+ : [57]
+[23] : -+-+++ > -++-++ : [27]
+[27] : -++-++ < ++-+-+ : [53]
+[39] : +--+++ > +-+-++ : [43]
+[27] : -++-++ < ++-++- : [54]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 52 :
+	[53] : ++-+-+ ? +++-+- : [58]
 	DM answers <.
+PI :
+52 element(s)
+...
+[23] : -+-+++ > -++-++ : [27]
+[27] : -++-++ < ++-+-+ : [53]
+[39] : +--+++ > +-+-++ : [43]
+[27] : -++-++ < ++-++- : [54]
+[53] : ++-+-+ < +++-+- : [58]
+
+N :
+18 element(s)
+...
+[51] : ++--++ < +++-+- : [58]
+[53] : ++-+-+ < ++-++- : [54]
+[53] : ++-+-+ < ++++-- : [60]
+[54] : ++-++- > +++--+ : [57]
+[57] : +++--+ < +++-+- : [58]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 53 :
+	[53] : ++-+-+ < ++++-- : [60]
+	DM answers YES.
+PI :
+53 element(s)
+...
+[27] : -++-++ < ++-+-+ : [53]
+[39] : +--+++ > +-+-++ : [43]
+[27] : -++-++ < ++-++- : [54]
+[53] : ++-+-+ < +++-+- : [58]
+[53] : ++-+-+ < ++++-- : [60]
+
+N :
+17 element(s)
+...
+[46] : +-+++- > ++-+-+ : [53]
+[51] : ++--++ < +++-+- : [58]
+[53] : ++-+-+ < ++-++- : [54]
+[54] : ++-++- > +++--+ : [57]
+[57] : +++--+ < +++-+- : [58]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 54 :
+	[39] : +--+++ < +-+++- : [46]
+	DM answers YES.
+PI :
+54 element(s)
+...
+[39] : +--+++ > +-+-++ : [43]
+[27] : -++-++ < ++-++- : [54]
+[53] : ++-+-+ < +++-+- : [58]
+[53] : ++-+-+ < ++++-- : [60]
+[39] : +--+++ < +-+++- : [46]
+
+N :
+16 element(s)
+...
+[46] : +-+++- > ++-+-+ : [53]
+[51] : ++--++ < +++-+- : [58]
+[53] : ++-+-+ < ++-++- : [54]
+[54] : ++-++- > +++--+ : [57]
+[57] : +++--+ < +++-+- : [58]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 55 :
+	[30] : -++++- > ++-+-+ : [53]
+	DM answers YES.
+PI :
+55 element(s)
+...
+[27] : -++-++ < ++-++- : [54]
+[53] : ++-+-+ < +++-+- : [58]
+[53] : ++-+-+ < ++++-- : [60]
+[39] : +--+++ < +-+++- : [46]
+[30] : -++++- > ++-+-+ : [53]
+
+N :
+15 element(s)
+...
+[46] : +-+++- > ++-+-+ : [53]
+[51] : ++--++ < +++-+- : [58]
+[53] : ++-+-+ < ++-++- : [54]
+[54] : ++-++- > +++--+ : [57]
+[57] : +++--+ < +++-+- : [58]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 56 :
+	[51] : ++--++ < +++-+- : [58]
+	DM answers YES.
+PI :
+56 element(s)
+...
+[53] : ++-+-+ < +++-+- : [58]
+[53] : ++-+-+ < ++++-- : [60]
+[39] : +--+++ < +-+++- : [46]
+[30] : -++++- > ++-+-+ : [53]
+[51] : ++--++ < +++-+- : [58]
+
+N :
+14 element(s)
+...
+[45] : +-++-+ < +-+++- : [46]
+[46] : +-+++- > ++-+-+ : [53]
+[53] : ++-+-+ < ++-++- : [54]
+[54] : ++-++- > +++--+ : [57]
+[57] : +++--+ < +++-+- : [58]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 57 :
+	[29] : -+++-+ > ++-+-+ : [53]
+	DM answers YES.
+PI :
+57 element(s)
+...
+[53] : ++-+-+ < ++++-- : [60]
+[39] : +--+++ < +-+++- : [46]
+[30] : -++++- > ++-+-+ : [53]
+[51] : ++--++ < +++-+- : [58]
+[29] : -+++-+ > ++-+-+ : [53]
+
+N :
+13 element(s)
+...
+[45] : +-++-+ < +-+++- : [46]
+[46] : +-+++- > ++-+-+ : [53]
+[53] : ++-+-+ < ++-++- : [54]
+[54] : ++-++- > +++--+ : [57]
+[57] : +++--+ < +++-+- : [58]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 58 :
+	[54] : ++-++- > +++--+ : [57]
+	DM answers YES.
+PI :
+58 element(s)
+...
+[39] : +--+++ < +-+++- : [46]
+[30] : -++++- > ++-+-+ : [53]
+[51] : ++--++ < +++-+- : [58]
+[29] : -+++-+ > ++-+-+ : [53]
+[54] : ++-++- > +++--+ : [57]
+
+N :
+12 element(s)
+...
+[30] : -++++- > +++--+ : [57]
+[45] : +-++-+ < +-+++- : [46]
+[46] : +-+++- > ++-+-+ : [53]
+[53] : ++-+-+ < ++-++- : [54]
+[57] : +++--+ < +++-+- : [58]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 59 :
+	[23] : -+-+++ < -++++- : [30]
+	DM answers YES.
+PI :
+59 element(s)
+...
+[30] : -++++- > ++-+-+ : [53]
+[51] : ++--++ < +++-+- : [58]
+[29] : -+++-+ > ++-+-+ : [53]
+[54] : ++-++- > +++--+ : [57]
+[23] : -+-+++ < -++++- : [30]
+
+N :
+11 element(s)
+...
+[30] : -++++- > +++--+ : [57]
+[45] : +-++-+ < +-+++- : [46]
+[46] : +-+++- > ++-+-+ : [53]
+[53] : ++-+-+ < ++-++- : [54]
+[57] : +++--+ < +++-+- : [58]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 60 :
+	[29] : -+++-+ < -++++- : [30]
+	DM answers YES.
+PI :
+60 element(s)
+...
+[51] : ++--++ < +++-+- : [58]
+[29] : -+++-+ > ++-+-+ : [53]
+[54] : ++-++- > +++--+ : [57]
+[23] : -+-+++ < -++++- : [30]
+[29] : -+++-+ < -++++- : [30]
+
+N :
+10 element(s)
+...
+[30] : -++++- > +++--+ : [57]
+[45] : +-++-+ < +-+++- : [46]
+[46] : +-+++- > ++-+-+ : [53]
+[53] : ++-+-+ < ++-++- : [54]
+[57] : +++--+ < +++-+- : [58]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 61 :
+	[57] : +++--+ < +++-+- : [58]
+	DM answers YES.
+PI :
+61 element(s)
+...
+[29] : -+++-+ > ++-+-+ : [53]
+[54] : ++-++- > +++--+ : [57]
+[23] : -+-+++ < -++++- : [30]
+[29] : -+++-+ < -++++- : [30]
+[57] : +++--+ < +++-+- : [58]
+
+N :
+9 element(s)
+...
+[30] : -++++- > ++-++- : [54]
+[30] : -++++- > +++--+ : [57]
+[45] : +-++-+ < +-+++- : [46]
+[46] : +-+++- > ++-+-+ : [53]
+[53] : ++-+-+ < ++-++- : [54]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 62 :
+	[30] : -++++- > ++--++ : [51]
+	DM answers YES.
+PI :
+62 element(s)
+...
+[54] : ++-++- > +++--+ : [57]
+[23] : -+-+++ < -++++- : [30]
+[29] : -+++-+ < -++++- : [30]
+[57] : +++--+ < +++-+- : [58]
+[30] : -++++- > ++--++ : [51]
+
+N :
+8 element(s)
+...
+[30] : -++++- > ++-++- : [54]
+[30] : -++++- > +++--+ : [57]
+[45] : +-++-+ < +-+++- : [46]
+[46] : +-+++- > ++-+-+ : [53]
+[53] : ++-+-+ < ++-++- : [54]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 63 :
+	[30] : -++++- > ++-++- : [54]
+	DM answers YES.
+PI :
+63 element(s)
+...
+[23] : -+-+++ < -++++- : [30]
+[29] : -+++-+ < -++++- : [30]
+[57] : +++--+ < +++-+- : [58]
+[30] : -++++- > ++--++ : [51]
+[30] : -++++- > ++-++- : [54]
+
+N :
+7 element(s)
+...
+[27] : -++-++ > ++--++ : [51]
+[30] : -++++- > +++--+ : [57]
+[45] : +-++-+ < +-+++- : [46]
+[46] : +-+++- > ++-+-+ : [53]
+[53] : ++-+-+ < ++-++- : [54]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 64 :
+	[53] : ++-+-+ < ++-++- : [54]
+	DM answers YES.
+PI :
+64 element(s)
+...
+[29] : -+++-+ < -++++- : [30]
+[57] : +++--+ < +++-+- : [58]
+[30] : -++++- > ++--++ : [51]
+[30] : -++++- > ++-++- : [54]
+[53] : ++-+-+ < ++-++- : [54]
+
+N :
+6 element(s)
+...
+[23] : -+-+++ < +++-+- : [58]
+[27] : -++-++ > ++--++ : [51]
+[30] : -++++- > +++--+ : [57]
+[45] : +-++-+ < +-+++- : [46]
+[46] : +-+++- > ++-+-+ : [53]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 65 :
+	[23] : -+-+++ < +++-+- : [58]
+	DM answers YES.
+PI :
+65 element(s)
+...
+[57] : +++--+ < +++-+- : [58]
+[30] : -++++- > ++--++ : [51]
+[30] : -++++- > ++-++- : [54]
+[53] : ++-+-+ < ++-++- : [54]
+[23] : -+-+++ < +++-+- : [58]
+
+N :
+5 element(s)
+[15] : --++++ > +--+++ : [39]
+[27] : -++-++ > ++--++ : [51]
+[30] : -++++- > +++--+ : [57]
+[45] : +-++-+ < +-+++- : [46]
+[46] : +-+++- > ++-+-+ : [53]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 66 :
+	[46] : +-+++- > ++-+-+ : [53]
+	DM answers YES.
+PI :
+66 element(s)
+...
+[30] : -++++- > ++--++ : [51]
+[30] : -++++- > ++-++- : [54]
+[53] : ++-+-+ < ++-++- : [54]
+[23] : -+-+++ < +++-+- : [58]
+[46] : +-+++- > ++-+-+ : [53]
+
+N :
+4 element(s)
+[15] : --++++ > +--+++ : [39]
+[27] : -++-++ > ++--++ : [51]
+[30] : -++++- > +++--+ : [57]
+[45] : +-++-+ < +-+++- : [46]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 67 :
+	[45] : +-++-+ < +-+++- : [46]
+	DM answers YES.
+PI :
+67 element(s)
+...
+[30] : -++++- > ++-++- : [54]
+[53] : ++-+-+ < ++-++- : [54]
+[23] : -+-+++ < +++-+- : [58]
+[46] : +-+++- > ++-+-+ : [53]
+[45] : +-++-+ < +-+++- : [46]
+
+N :
+3 element(s)
+[15] : --++++ > +--+++ : [39]
+[27] : -++-++ > ++--++ : [51]
+[30] : -++++- > +++--+ : [57]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 68 :
+	[15] : --++++ > +--+++ : [39]
+	DM answers YES.
+PI :
+68 element(s)
+...
+[53] : ++-+-+ < ++-++- : [54]
+[23] : -+-+++ < +++-+- : [58]
+[46] : +-+++- > ++-+-+ : [53]
+[45] : +-++-+ < +-+++- : [46]
+[15] : --++++ > +--+++ : [39]
+
+N :
+2 element(s)
+[27] : -++-++ > ++--++ : [51]
+[30] : -++++- > +++--+ : [57]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 69 :
+	[27] : -++-++ > ++--++ : [51]
+	DM answers YES.
+PI :
+69 element(s)
+...
+[23] : -+-+++ < +++-+- : [58]
+[46] : +-+++- > ++-+-+ : [53]
+[45] : +-++-+ < +-+++- : [46]
+[15] : --++++ > +--+++ : [39]
+[27] : -++-++ > ++--++ : [51]
+
+N :
+1 element(s)
+[30] : -++++- > +++--+ : [57]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 70 :
+	[30] : -++++- > +++--+ : [57]
+	DM answers YES.
+PI :
+70 element(s)
+...
+[46] : +-+++- > ++-+-+ : [53]
+[45] : +-++-+ < +-+++- : [46]
+[15] : --++++ > +--+++ : [39]
+[27] : -++-++ > ++--++ : [51]
+[30] : -++++- > +++--+ : [57]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 71 :
+	[30] : -++++- ? +-++-+ : [45]
+	DM answers <.
+PI :
+71 element(s)
+...
+[45] : +-++-+ < +-+++- : [46]
+[15] : --++++ > +--+++ : [39]
+[27] : -++-++ > ++--++ : [51]
+[30] : -++++- > +++--+ : [57]
+[30] : -++++- < +-++-+ : [45]
+
+N :
+9 element(s)
+...
+[29] : -+++-+ < +-++-+ : [45]
+[29] : -+++-+ < +-+++- : [46]
+[30] : -++++- < +-+++- : [46]
+[45] : +-++-+ > ++-++- : [54]
+[45] : +-++-+ > +++-+- : [58]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 72 :
+	[45] : +-++-+ > +++-+- : [58]
+	DM answers YES.
+PI :
+72 element(s)
+...
+[15] : --++++ > +--+++ : [39]
+[27] : -++-++ > ++--++ : [51]
+[30] : -++++- > +++--+ : [57]
+[30] : -++++- < +-++-+ : [45]
+[45] : +-++-+ > +++-+- : [58]
+
+N :
+8 element(s)
+...
+[27] : -++-++ < +-+-++ : [43]
+[29] : -+++-+ < +-++-+ : [45]
+[29] : -+++-+ < +-+++- : [46]
+[30] : -++++- < +-+++- : [46]
+[45] : +-++-+ > ++-++- : [54]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 73 :
+	[45] : +-++-+ > ++-++- : [54]
+	DM answers YES.
+PI :
+73 element(s)
+...
+[27] : -++-++ > ++--++ : [51]
+[30] : -++++- > +++--+ : [57]
+[30] : -++++- < +-++-+ : [45]
+[45] : +-++-+ > +++-+- : [58]
+[45] : +-++-+ > ++-++- : [54]
+
+N :
+7 element(s)
+...
+[27] : -++-++ < +--+++ : [39]
+[27] : -++-++ < +-+-++ : [43]
+[29] : -+++-+ < +-++-+ : [45]
+[29] : -+++-+ < +-+++- : [46]
+[30] : -++++- < +-+++- : [46]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 74 :
+	[23] : -+-+++ < +--+++ : [39]
+	DM answers YES.
+PI :
+74 element(s)
+...
+[30] : -++++- > +++--+ : [57]
+[30] : -++++- < +-++-+ : [45]
+[45] : +-++-+ > +++-+- : [58]
+[45] : +-++-+ > ++-++- : [54]
+[23] : -+-+++ < +--+++ : [39]
+
+N :
+6 element(s)
+...
+[27] : -++-++ < +--+++ : [39]
+[27] : -++-++ < +-+-++ : [43]
+[29] : -+++-+ < +-++-+ : [45]
+[29] : -+++-+ < +-+++- : [46]
+[30] : -++++- < +-+++- : [46]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 75 :
+	[27] : -++-++ < +-+-++ : [43]
+	DM answers YES.
+PI :
+75 element(s)
+...
+[30] : -++++- < +-++-+ : [45]
+[45] : +-++-+ > +++-+- : [58]
+[45] : +-++-+ > ++-++- : [54]
+[23] : -+-+++ < +--+++ : [39]
+[27] : -++-++ < +-+-++ : [43]
+
+N :
+5 element(s)
+[23] : -+-+++ < +-+-++ : [43]
+[27] : -++-++ < +--+++ : [39]
+[29] : -+++-+ < +-++-+ : [45]
+[29] : -+++-+ < +-+++- : [46]
+[30] : -++++- < +-+++- : [46]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 76 :
+	[30] : -++++- < +-+++- : [46]
+	DM answers YES.
+PI :
+76 element(s)
+...
+[45] : +-++-+ > +++-+- : [58]
+[45] : +-++-+ > ++-++- : [54]
+[23] : -+-+++ < +--+++ : [39]
+[27] : -++-++ < +-+-++ : [43]
+[30] : -++++- < +-+++- : [46]
+
+N :
+4 element(s)
+[23] : -+-+++ < +-+-++ : [43]
+[27] : -++-++ < +--+++ : [39]
+[29] : -+++-+ < +-++-+ : [45]
+[29] : -+++-+ < +-+++- : [46]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 77 :
+	[29] : -+++-+ < +-++-+ : [45]
+	DM answers YES.
+PI :
+77 element(s)
+...
+[45] : +-++-+ > ++-++- : [54]
+[23] : -+-+++ < +--+++ : [39]
+[27] : -++-++ < +-+-++ : [43]
+[30] : -++++- < +-+++- : [46]
+[29] : -+++-+ < +-++-+ : [45]
+
+N :
+3 element(s)
+[23] : -+-+++ < +-+-++ : [43]
+[27] : -++-++ < +--+++ : [39]
+[29] : -+++-+ < +-+++- : [46]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 78 :
+	[29] : -+++-+ < +-+++- : [46]
+	DM answers YES.
+PI :
+78 element(s)
+...
+[23] : -+-+++ < +--+++ : [39]
+[27] : -++-++ < +-+-++ : [43]
+[30] : -++++- < +-+++- : [46]
+[29] : -+++-+ < +-++-+ : [45]
+[29] : -+++-+ < +-+++- : [46]
+
+N :
+2 element(s)
+[23] : -+-+++ < +-+-++ : [43]
+[27] : -++-++ < +--+++ : [39]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 79 :
+	[23] : -+-+++ < +-+-++ : [43]
+	DM answers YES.
+PI :
+79 element(s)
+...
+[27] : -++-++ < +-+-++ : [43]
+[30] : -++++- < +-+++- : [46]
+[29] : -+++-+ < +-++-+ : [45]
+[29] : -+++-+ < +-+++- : [46]
+[23] : -+-+++ < +-+-++ : [43]
+
+N :
+1 element(s)
+[27] : -++-++ < +--+++ : [39]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 80 :
+	[27] : -++-++ < +--+++ : [39]
+	DM answers YES.
+PI :
+80 element(s)
+...
+[30] : -++++- < +-+++- : [46]
+[29] : -+++-+ < +-++-+ : [45]
+[29] : -+++-+ < +-+++- : [46]
+[23] : -+-+++ < +-+-++ : [43]
+[27] : -++-++ < +--+++ : [39]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 81 :
+	[39] : +--+++ ? +++--+ : [57]
+	DM answers >.
+PI :
+81 element(s)
+...
+[29] : -+++-+ < +-++-+ : [45]
+[29] : -+++-+ < +-+++- : [46]
+[23] : -+-+++ < +-+-++ : [43]
+[27] : -++-++ < +--+++ : [39]
+[39] : +--+++ > +++--+ : [57]
+
+N :
+1 element(s)
+[15] : --++++ > +++--+ : [57]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 82 :
+	[15] : --++++ > +++--+ : [57]
+	DM answers YES.
+PI :
+82 element(s)
+...
+[29] : -+++-+ < +-+++- : [46]
+[23] : -+-+++ < +-+-++ : [43]
+[27] : -++-++ < +--+++ : [39]
+[39] : +--+++ > +++--+ : [57]
+[15] : --++++ > +++--+ : [57]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 83 :
+	[30] : -++++- ? +-+-++ : [43]
+	DM answers >.
+PI :
+83 element(s)
+...
+[23] : -+-+++ < +-+-++ : [43]
+[27] : -++-++ < +--+++ : [39]
+[39] : +--+++ > +++--+ : [57]
+[15] : --++++ > +++--+ : [57]
+[30] : -++++- > +-+-++ : [43]
+
+N :
+1 element(s)
+[43] : +-+-++ < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 84 :
+	[43] : +-+-++ < ++++-- : [60]
+	DM answers YES.
+PI :
+84 element(s)
+...
+[27] : -++-++ < +--+++ : [39]
+[39] : +--+++ > +++--+ : [57]
+[15] : --++++ > +++--+ : [57]
+[30] : -++++- > +-+-++ : [43]
+[43] : +-+-++ < ++++-- : [60]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 85 :
+	[43] : +-+-++ ? +++-+- : [58]
+	DM answers <.
+PI :
+85 element(s)
+...
+[39] : +--+++ > +++--+ : [57]
+[15] : --++++ > +++--+ : [57]
+[30] : -++++- > +-+-++ : [43]
+[43] : +-+-++ < ++++-- : [60]
+[43] : +-+-++ < +++-+- : [58]
+
+N :
+8 element(s)
+...
+[30] : -++++- > +--+++ : [39]
+[39] : +--+++ < ++-++- : [54]
+[39] : +--+++ < ++++-- : [60]
+[43] : +-+-++ < ++-++- : [54]
+[45] : +-++-+ < ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 86 :
+	[45] : +-++-+ < ++++-- : [60]
+	DM answers YES.
+PI :
+86 element(s)
+...
+[15] : --++++ > +++--+ : [57]
+[30] : -++++- > +-+-++ : [43]
+[43] : +-+-++ < ++++-- : [60]
+[43] : +-+-++ < +++-+- : [58]
+[45] : +-++-+ < ++++-- : [60]
+
+N :
+7 element(s)
+...
+[29] : -+++-+ > +-+-++ : [43]
+[30] : -++++- > +--+++ : [39]
+[39] : +--+++ < ++-++- : [54]
+[39] : +--+++ < ++++-- : [60]
+[43] : +-+-++ < ++-++- : [54]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 87 :
+	[15] : --++++ < -++++- : [30]
+	DM answers YES.
+PI :
+87 element(s)
+...
+[30] : -++++- > +-+-++ : [43]
+[43] : +-+-++ < ++++-- : [60]
+[43] : +-+-++ < +++-+- : [58]
+[45] : +-++-+ < ++++-- : [60]
+[15] : --++++ < -++++- : [30]
+
+N :
+6 element(s)
+...
+[29] : -+++-+ > +-+-++ : [43]
+[30] : -++++- > +--+++ : [39]
+[39] : +--+++ < ++-++- : [54]
+[39] : +--+++ < ++++-- : [60]
+[43] : +-+-++ < ++-++- : [54]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 88 :
+	[39] : +--+++ < ++++-- : [60]
+	DM answers YES.
+PI :
+88 element(s)
+...
+[43] : +-+-++ < ++++-- : [60]
+[43] : +-+-++ < +++-+- : [58]
+[45] : +-++-+ < ++++-- : [60]
+[15] : --++++ < -++++- : [30]
+[39] : +--+++ < ++++-- : [60]
+
+N :
+5 element(s)
+[15] : --++++ < ++++-- : [60]
+[29] : -+++-+ > +-+-++ : [43]
+[30] : -++++- > +--+++ : [39]
+[39] : +--+++ < ++-++- : [54]
+[43] : +-+-++ < ++-++- : [54]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 89 :
+	[39] : +--+++ < ++-++- : [54]
+	DM answers YES.
+PI :
+89 element(s)
+...
+[43] : +-+-++ < +++-+- : [58]
+[45] : +-++-+ < ++++-- : [60]
+[15] : --++++ < -++++- : [30]
+[39] : +--+++ < ++++-- : [60]
+[39] : +--+++ < ++-++- : [54]
+
+N :
+4 element(s)
+[15] : --++++ < ++++-- : [60]
+[29] : -+++-+ > +-+-++ : [43]
+[30] : -++++- > +--+++ : [39]
+[43] : +-+-++ < ++-++- : [54]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 90 :
+	[30] : -++++- > +--+++ : [39]
+	DM answers YES.
+PI :
+90 element(s)
+...
+[45] : +-++-+ < ++++-- : [60]
+[15] : --++++ < -++++- : [30]
+[39] : +--+++ < ++++-- : [60]
+[39] : +--+++ < ++-++- : [54]
+[30] : -++++- > +--+++ : [39]
+
+N :
+3 element(s)
+[15] : --++++ < ++++-- : [60]
+[29] : -+++-+ > +-+-++ : [43]
+[43] : +-+-++ < ++-++- : [54]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 91 :
+	[43] : +-+-++ < ++-++- : [54]
+	DM answers YES.
+PI :
+91 element(s)
+...
+[15] : --++++ < -++++- : [30]
+[39] : +--+++ < ++++-- : [60]
+[39] : +--+++ < ++-++- : [54]
+[30] : -++++- > +--+++ : [39]
+[43] : +-+-++ < ++-++- : [54]
+
+N :
+2 element(s)
+[15] : --++++ < ++++-- : [60]
+[29] : -+++-+ > +-+-++ : [43]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 92 :
+	[15] : --++++ < ++++-- : [60]
+	DM answers YES.
+PI :
+92 element(s)
+...
+[39] : +--+++ < ++++-- : [60]
+[39] : +--+++ < ++-++- : [54]
+[30] : -++++- > +--+++ : [39]
+[43] : +-+-++ < ++-++- : [54]
+[15] : --++++ < ++++-- : [60]
+
+N :
+1 element(s)
+[29] : -+++-+ > +-+-++ : [43]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 93 :
+	[29] : -+++-+ > +-+-++ : [43]
+	DM answers YES.
+PI :
+93 element(s)
+...
+[39] : +--+++ < ++-++- : [54]
+[30] : -++++- > +--+++ : [39]
+[43] : +-+-++ < ++-++- : [54]
+[15] : --++++ < ++++-- : [60]
+[29] : -+++-+ > +-+-++ : [43]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 94 :
+	[15] : --++++ ? +++-+- : [58]
+	DM answers >.
+PI :
+94 element(s)
+...
+[30] : -++++- > +--+++ : [39]
+[43] : +-+-++ < ++-++- : [54]
+[15] : --++++ < ++++-- : [60]
+[29] : -+++-+ > +-+-++ : [43]
+[15] : --++++ > +++-+- : [58]
+
+N :
+1 element(s)
+[15] : --++++ > ++-+-+ : [53]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 95 :
+	[15] : --++++ > ++-+-+ : [53]
+	DM answers YES.
+PI :
+95 element(s)
+...
+[43] : +-+-++ < ++-++- : [54]
+[15] : --++++ < ++++-- : [60]
+[29] : -+++-+ > +-+-++ : [43]
+[15] : --++++ > +++-+- : [58]
+[15] : --++++ > ++-+-+ : [53]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 96 :
+	[43] : +-+-++ ? +++--+ : [57]
+	DM answers >.
+PI :
+96 element(s)
+...
+[15] : --++++ < ++++-- : [60]
+[29] : -+++-+ > +-+-++ : [43]
+[15] : --++++ > +++-+- : [58]
+[15] : --++++ > ++-+-+ : [53]
+[43] : +-+-++ > +++--+ : [57]
+
+N :
+3 element(s)
+[15] : --++++ > -+++-+ : [29]
+[39] : +--+++ > ++-+-+ : [53]
+[46] : +-+++- > ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 97 :
+	[15] : --++++ > -+++-+ : [29]
+	DM answers YES.
+PI :
+97 element(s)
+...
+[29] : -+++-+ > +-+-++ : [43]
+[15] : --++++ > +++-+- : [58]
+[15] : --++++ > ++-+-+ : [53]
+[43] : +-+-++ > +++--+ : [57]
+[15] : --++++ > -+++-+ : [29]
+
+N :
+2 element(s)
+[39] : +--+++ > ++-+-+ : [53]
+[46] : +-+++- > ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 98 :
+	[39] : +--+++ > ++-+-+ : [53]
+	DM answers YES.
+PI :
+98 element(s)
+...
+[15] : --++++ > +++-+- : [58]
+[15] : --++++ > ++-+-+ : [53]
+[43] : +-+-++ > +++--+ : [57]
+[15] : --++++ > -+++-+ : [29]
+[39] : +--+++ > ++-+-+ : [53]
+
+N :
+1 element(s)
+[46] : +-+++- > ++++-- : [60]
+
+<class 'CORE.Commitment.ValidationCommitment'> at 99 :
+	[46] : +-+++- > ++++-- : [60]
+	DM answers YES.
+PI :
+99 element(s)
+...
+[15] : --++++ > ++-+-+ : [53]
+[43] : +-+-++ > +++--+ : [57]
+[15] : --++++ > -+++-+ : [29]
+[39] : +--+++ > ++-+-+ : [53]
+[46] : +-+++- > ++++-- : [60]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 100 :
+	[23] : -+-+++ ? +++--+ : [57]
+	DM answers <.
+PI :
+100 element(s)
+...
+[43] : +-+-++ > +++--+ : [57]
+[15] : --++++ > -+++-+ : [29]
+[39] : +--+++ > ++-+-+ : [53]
+[46] : +-+++- > ++++-- : [60]
+[23] : -+-+++ < +++--+ : [57]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 101 :
+	[29] : -+++-+ ? ++-++- : [54]
+	DM answers <.
+PI :
+101 element(s)
+...
+[15] : --++++ > -+++-+ : [29]
+[39] : +--+++ > ++-+-+ : [53]
+[46] : +-+++- > ++++-- : [60]
+[23] : -+-+++ < +++--+ : [57]
+[29] : -+++-+ < ++-++- : [54]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 102 :
+	[29] : -+++-+ ? +--+++ : [39]
+	DM answers >.
+PI :
+102 element(s)
+...
+[39] : +--+++ > ++-+-+ : [53]
+[46] : +-+++- > ++++-- : [60]
+[23] : -+-+++ < +++--+ : [57]
+[29] : -+++-+ < ++-++- : [54]
+[29] : -+++-+ > +--+++ : [39]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 103 :
+	[15] : --++++ ? ++-++- : [54]
+	DM answers >.
+PI :
+103 element(s)
+...
+[46] : +-+++- > ++++-- : [60]
+[23] : -+-+++ < +++--+ : [57]
+[29] : -+++-+ < ++-++- : [54]
+[29] : -+++-+ > +--+++ : [39]
+[15] : --++++ > ++-++- : [54]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 104 :
+	[43] : +-+-++ ? ++-+-+ : [53]
+	DM answers <.
+PI :
+104 element(s)
+...
+[23] : -+-+++ < +++--+ : [57]
+[29] : -+++-+ < ++-++- : [54]
+[29] : -+++-+ > +--+++ : [39]
+[15] : --++++ > ++-++- : [54]
+[43] : +-+-++ < ++-+-+ : [53]
+
+N :
+0 element(s)
+
+<class 'CORE.Commitment.AnswerCommitment'> at 105 :
+	[39] : +--+++ ? +++-+- : [58]
+	DM answers >.
+MY RECOMMENDATION IS :  [[46] : +-+++-, [60] : ++++--, [45] : +-++-+, [30] : -++++-, [15] : --++++, [54] : ++-++-, [29] : -+++-+, [39] : +--+++, [58] : +++-+-, [53] : ++-+-+, [43] : +-+-++, [57] : +++--+, [23] : -+-+++, [27] : -++-++, [51] : ++--++]
+
+Process finished with exit code 0

@@ -1,4 +1,6 @@
 from CORE.Dialog import Dialog
+from CORE.Commitment import CommitmentStore
+
 class StopCriterion:
     """ Classe (de base) modélisant un critère d'arrêt explicite de l'interaction."""
 
@@ -13,3 +15,17 @@ class DialogDurationStopCriterion(StopCriterion):
 
     def stop(self):
         return self._nbDialogsMax == Dialog.NB
+
+
+class DMVolatilityStopCriterion(StopCriterion):
+    """Critère d'arrêt lié au traque de la versalité du DM"""
+    def __init__(self, nbMaxOpinionOnTheSameInfo):
+        self._nbMaxOpinionOnTheSameInfo = nbMaxOpinionOnTheSameInfo
+
+    def stop(self):
+        for info, LOfCommitment in CommitmentStore().info_store.items():
+            if len(LOfCommitment) == self._nbMaxOpinionOnTheSameInfo:
+                return True
+        return False
+
+

@@ -78,3 +78,17 @@ class VNoisyWS_DM(NoisyWS_DM):
     def evaluate(self, info):
         NoisyWS_DM.evaluate(self, info)
         self._sigma *= self._raisonLoiGeo
+
+class RelativeNoisyDMWS_DM(NoisyWS_DM):
+    def __init__(self, utilityFunctionFileName, sigma):
+        NoisyWS_DM.__init__(self, utilityFunctionFileName, sigma)
+
+    def evaluate(self, info):
+        if info.difficultyLevel == 4:
+            NoisyWS_DM.evaluate(self, info)
+        else :
+            sigma = self._sigma
+            self._sigma = 0.
+            NoisyWS_DM.evaluate(self, info)
+            self._sigma = sigma
+

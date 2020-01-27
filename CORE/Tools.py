@@ -1,4 +1,6 @@
 from termcolor import colored
+import numpy as np
+
 COLOR = "blue"
 attribute_creator = lambda criterion, attribute_value : '{}:{}'.format(criterion,attribute_value)
 colored_character = lambda c, o, color : colored(c, color) if c == o else c
@@ -19,6 +21,13 @@ def covectorOfPairWiseInformationWith2Levels(coupleAlt):
             cov.append(0)
     return np.array(cov)
 
+def difficultyLevel(coupleAlt):
+    alt1, alt2 = coupleAlt
+    d_level = 0
+    for level1i, level2i in list(zip(alt1.attributeLevelsList, alt2.attributeLevelsList)):
+        if level1i != level2i:
+            d_level += 1
+    return d_level
 
 from CORE.decorators import singleton
 @singleton

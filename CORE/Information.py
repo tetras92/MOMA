@@ -2,7 +2,7 @@ from CORE.AppreciationObject import PairwiseInformation, NInformation, PInformat
 from CORE.Commitment import *
 from CORE.Exceptions import DMdoesntValidateNElementException
 from CORE.InformationStore import NonPI, N, PI
-
+from CORE.Tools import difficultyLevel
 
 class Information:
     """ Classe représentant une information. Elle est conçue comme une 'capsule'
@@ -16,7 +16,7 @@ class Information:
         self.o = PairwiseInformation(self, alternative1, alternative2)
         self._id = Information.NB_OBJECT
         Information.NB_OBJECT += 1
-
+        self.difficultyLevel = difficultyLevel((alternative1, alternative2))
 
     def _nUpgrade(self, v):
         """Méthode traduisant le passage de l'information de NonPI à N.
@@ -84,11 +84,14 @@ class Information:
         """Dict[str:GurobiVar] -> GurobiLinExpr"""
         return self.o.linear_expr(VarDict)
 
+    def howEnteringPI(self):
+        return CommitmentStore().getWayOfIntroduction(self)
 
     id = property(getId)
     termN = property(fset=setTermN, fdel=deleteTerm)
     termP = property(fget=getTermP, fset=setTermP, fdel=deleteTerm)
     last_commit_date = property(fget=lastCommitDate)
+    how_entering_pi = property(fget=howEnteringPI)
     alternative1 = property(fget=getAlternative1)
     alternative2 = property(fget=getAlternative2)
 

@@ -54,7 +54,7 @@ class ITInconsistencySolver(InconsistencySolver):
         est le suivant :
         Sachant que l'union de dominanceAsymmetricPart et de dominanceSymmetricPart est un ensemble
         inconsistant, le sous-ensemble (consistant) calculé est le plus grand inclus au sens strict dans
-        l'union de dominanceAsymmetricPart et de dominanceSymmetricPart dont l'information fournie
+        l'union de dominanceAsymmetricPart et de dominanceSymmetricPart et dont l'information fournie
         le plus récemment est la plus vieille."""
     def __init__(self, mcda_problem_description, dominanceAsymmetricPart=[], datesAsymmetricPart=[],
                  dominanceSymmetricPart=[], datesSymmetricPart=[], matchingInfoCoupleAlt=dict()):
@@ -91,7 +91,9 @@ class ITInconsistencySolver(InconsistencySolver):
         date_of_set_of_coupleAlt = lambda C: max([date_of(elmt) for elmt in C])
 
         for k in range(len(self._store), -1, -1):
+            print("k", k)
             kList_of_parts_of_store_copy = list(ite.combinations(self._store, k))
+            print("--- {}".format(len(kList_of_parts_of_store_copy)))
             if k != 0:
                 kList_of_parts_of_store_copy.sort(key=lambda C: date_of_set_of_coupleAlt(C))
             for elmtK in kList_of_parts_of_store_copy:
@@ -106,6 +108,7 @@ class ITInconsistencySolver(InconsistencySolver):
                 # elif model.status == GRB.INFEASIBLE:
                 #     print("INFEASIBLE")
         raise Exception("Error in IT InconsistencySolver")
+
 
 
 class InconsistencySolverWrapper():
@@ -127,7 +130,7 @@ class InconsistencySolverWrapper():
         # print("AS", newDominanceAsymmetricPart)
         self._infoToDeleteStore = list()
         for information in self._store:
-            coupleMatchingWithInfo = self.iso.matchingInfoCoupleAlt[information.id]
+            coupleMatchingWithInfo = self.iso.matchingInfoCoupleAlt[information]
             #print("couple", coupleMatchingWithInfo)
             if not coupleMatchingWithInfo in newDominanceAsymmetricPart\
                     and not coupleMatchingWithInfo in newDominanceSymmetricPart:
@@ -138,7 +141,7 @@ class InconsistencySolverWrapper():
     def solve(self):
         print("Inconsistency Solver : Info removed from PI :")
         for info in self._infoToDeleteStore:
-            print(info)
+            print(info, "added at {} by {}".format(info.last_commit_date, info.how_entering_pi))
         self._store.removeAll(self._infoToDeleteStore)
 
 

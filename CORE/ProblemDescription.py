@@ -18,6 +18,11 @@ class ProblemDescription:
         self._performanceTableFileName = performanceTableFileName
         self._alternativesDict = dict()
         self._set_up()
+        # n = 0
+        # for info in self._list_of_information:
+        #     if info.difficultyLevel == 4:
+        #         n += 1
+        # print(n)
 
     def _set_up(self):
         """Méthode de set-up général"""

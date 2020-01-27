@@ -58,3 +58,5 @@ class Alternative:
         return "[{:>2}] : {}".format(str(self._idAlt), self._symbolicName)
 
 
+    def __hash__(self):
+        return self._idAlt
