@@ -113,15 +113,25 @@ class PI(InformationStore):
     def getRelation(self):
         RelationDict = dict()
         relationElementList = list()
+        datesInRelation = list()
+        relationElementInfoDict = dict()
         for information in self:
+            datesInRelation.append(information.last_commit_date)
             if information.termP is AS_LEAST_AS_GOOD_AS():
-                relationElementList.append((information.alternative1, information.alternative2))
+                element = (information.alternative1, information.alternative2)
+                relationElementList.append(element)
+                relationElementInfoDict[information] = element
             elif information.termP is NOT_AS_LEAST_AS_GOOD_AS():
-                relationElementList.append((information.alternative2, information.alternative1))
+                element = (information.alternative2, information.alternative1)
+                relationElementList.append(element)
+                relationElementInfoDict[information] = element
             else :
                 raise Exception("Error getRelation in PI()")
 
         RelationDict["dominanceRelation"] = relationElementList
+        RelationDict["datesInRelation"] = datesInRelation
+        RelationDict["matchingInfoCoupleAlt"] = relationElementInfoDict
+
         return RelationDict
 
 
@@ -199,14 +209,14 @@ class N(InformationStore):
         self._infoPicker = infoPicker
 
 
-    def update(self,  problemDescription=None, dominanceRelation=list()):
+    def update(self,  problemDescription, **kwargs):
         if not self.is_empty(): return
         # indispensable car des effets de bords se produisent lorsque des éléments entrent ds N
         nonPI_copy = [info for info in NonPI()]
         for info in nonPI_copy:
-            if NecessaryPreference.adjudicate(problemDescription, dominanceRelation, (info.alternative1, info.alternative2)):
+            if NecessaryPreference.adjudicate(problemDescription, kwargs["dominanceRelation"], (info.alternative1, info.alternative2)):
                 info.termN = AS_LEAST_AS_GOOD_AS()
-            elif NecessaryPreference.adjudicate(problemDescription, dominanceRelation, (info.alternative2, info.alternative1)):
+            elif NecessaryPreference.adjudicate(problemDescription, kwargs["dominanceRelation"], (info.alternative2, info.alternative1)):
                 info.termN = NOT_AS_LEAST_AS_GOOD_AS()
 
 

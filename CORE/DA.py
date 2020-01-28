@@ -80,12 +80,15 @@ class DA:
                 except DMdoesntValidateNElementException:
                     self.inconsistencySolver.update(self._problemDescription)
                     self.inconsistencySolver.solve()
+                    N().clear()
 
+
+            self._recommendationMaker.update(self._problemDescription, **PI().getRelation())  # Les 2 sont nécessaires
             if not N_initial_empty_state: continue # Une question à chaque tour
 
             info = NonPI().pick()
             Dialog(info).madeWith(dm)
-            self._recommendationMaker.update(self._problemDescription, **PI().getRelation())
+            self._recommendationMaker.update(self._problemDescription, **PI().getRelation())  # Les 2 sont nécessaires
         self.recommendation = self._recommendationMaker.recommendation
 
 
