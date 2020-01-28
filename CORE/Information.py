@@ -2,7 +2,7 @@ from CORE.AppreciationObject import PairwiseInformation, NInformation, PInformat
 from CORE.Commitment import *
 from CORE.Exceptions import DMdoesntValidateNElementException
 from CORE.InformationStore import NonPI, N, PI
-from CORE.Tools import difficultyLevel
+from CORE.Tools import difficultyLevel, covectorOfPairWiseInformationWith2Levels
 
 class Information:
     """ Classe représentant une information. Elle est conçue comme une 'capsule'
@@ -17,6 +17,7 @@ class Information:
         self._id = Information.NB_OBJECT
         Information.NB_OBJECT += 1
         self.difficultyLevel = difficultyLevel((alternative1, alternative2))
+        self.covector = covectorOfPairWiseInformationWith2Levels((alternative1, alternative2))
 
     def _nUpgrade(self, v):
         """Méthode traduisant le passage de l'information de NonPI à N.
@@ -87,6 +88,9 @@ class Information:
     def howEnteringPI(self):
         return CommitmentStore().getWayOfIntroduction(self)
 
+    def getGenericTerm(self):
+        return self.o.term
+
     id = property(getId)
     termN = property(fset=setTermN, fdel=deleteTerm)
     termP = property(fget=getTermP, fset=setTermP, fdel=deleteTerm)
@@ -95,6 +99,7 @@ class Information:
     alternative1 = property(fget=getAlternative1)
     alternative2 = property(fget=getAlternative2)
 
+    term = property(fget=getGenericTerm)
 
     def __str__(self):
         return self.o.__str__()

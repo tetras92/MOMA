@@ -1,21 +1,18 @@
-from gurobipy import *
-
-from CORE.Tools import EPSILON
+from CORE.NecessaryPreference import *
 
 
 class Recommendation:
     """ Classe (de base) modélisant une Recommandation."""
-    def __init__(self, problemDescription=None, dominanceAsymmetricPart=list(), dominanceSymmetricPart=list()):
+    def __init__(self, problemDescription=None, dominanceRelation=list()):
         """Type des paramètres :
         mcda_problem_description : ProblemDescription
         dominanceAsymmetricPart : List[Couple[Alternative, Alternative]]
         dominanceSymmetricPart : List[Couple[Alternative, Alternative]]
         """
-        self._dominanceAsymmetricPart = dominanceAsymmetricPart
-        self._dominanceSymmetricPart = dominanceSymmetricPart
+        self._dominanceRelation = dominanceRelation
         self._ListOfRepresentedAlternatives = list()
 
-        for alt1, alt2 in dominanceAsymmetricPart + dominanceSymmetricPart:
+        for alt1, alt2 in dominanceRelation:
             if alt1 not in self._ListOfRepresentedAlternatives:
                 self._ListOfRepresentedAlternatives.append(alt1)
             if alt2 not in self._ListOfRepresentedAlternatives:
@@ -23,46 +20,28 @@ class Recommendation:
 
         self._problemDescription = problemDescription
 
-    def generate_recommendation_model_and_its_varDict(self):
-        """Retourne le corps complet d'un programme linéaire dont la résolution
-        avec différents objectifs permettra de faire ou non la recommandation requise."""
-        model, VarDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA Model For Recommendation")
-
-        for alt1, alt2 in self._dominanceAsymmetricPart:
-            model.addConstr(alt1.linear_expr(VarDict) >= alt2.linear_expr(VarDict) + EPSILON)
-
-        for alt1, alt2 in self._dominanceSymmetricPart:
-            model.addConstr(alt1.linear_expr(VarDict) == alt2.linear_expr(VarDict))
-
-        model.update()
-        return model, VarDict
-
 class KRankingRecommendation(Recommendation):
     """Classe modélisant une recommandation du type k-Best ordonné.
         La recommandation, lorsqu'elle peut être faite, est composée des k
         meilleures alternatives qui, par ailleurs, sont ordonnées suivant
         les préférences du DM"""
-    def __init__(self, k, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart):
-        Recommendation.__init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart)
+    def __init__(self, k, problemDescription, dominanceRelation):
+        Recommendation.__init__(self, problemDescription, dominanceRelation)
         self.K = k
 
     def _oneBest(self, ListOfPreviousBest):
-        model, varDict = Recommendation.generate_recommendation_model_and_its_varDict(self)
         for altB in self._ListOfRepresentedAlternatives:
-            if altB in ListOfPreviousBest:
-                continue
+            if altB in ListOfPreviousBest : continue
             isBest = True
             for alt in self._ListOfRepresentedAlternatives:
-                if alt in ListOfPreviousBest:
-                    continue          # omet les previous Bests
-                model.setObjective(altB.linear_expr(varDict) - alt.linear_expr(varDict), GRB.MINIMIZE)
-                model.update()
-                model.optimize()
-                if model.objVal < 0:
+                if alt in ListOfPreviousBest or alt == altB: continue          # omet les previous Bests
+
+                if not NecessaryPreference.adjudicate(mcda_problemDescription=self._problemDescription,
+                                                      Relation=self._dominanceRelation, object=(altB, alt)):
                     isBest = False
-                    continue
+                    break
             if isBest:
-                ListOfPreviousBest.append(altB)           # effet de bord
+                ListOfPreviousBest.append(altB)                                # effet de bord
                 return True
         return False
 
@@ -91,23 +70,20 @@ class KBestRecommendation(Recommendation):
     """Classe modélisant une recommandation du type k-Best.
         La recommandation, lorsqu'elle peut être faite, est composée des k
         meilleures alternatives"""
-    def __init__(self, k, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart):
-        Recommendation.__init__(self, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart)
+    def __init__(self, k, problemDescription, dominanceRelation):
+        Recommendation.__init__(self, problemDescription, dominanceRelation)
         self.K = k
 
     def _generate_recommendation(self):
-        model, varDict = Recommendation.generate_recommendation_model_and_its_varDict(self)
         ListKBest = list()
         for altB in self._ListOfRepresentedAlternatives:
             nb_alt_domined_by_altB = 0
             for alt in self._ListOfRepresentedAlternatives:
-                if alt == altB : continue
-                model.setObjective(altB.linear_expr(varDict) - alt.linear_expr(varDict), GRB.MINIMIZE)
-                model.update()
-                model.optimize()
-                if model.objVal >= 0:
+                if alt == altB: continue
+                if NecessaryPreference.adjudicate(mcda_problemDescription=self._problemDescription,
+                                                      Relation=self._dominanceRelation, object=(altB, alt)):
                     nb_alt_domined_by_altB += 1
-            if nb_alt_domined_by_altB >= self._problemDescription.numberOfAlternatives - self.K :
+            if nb_alt_domined_by_altB >= self._problemDescription.numberOfAlternatives - self.K:
                 ListKBest.append(altB)
         return len(ListKBest) >= self.K, ListKBest
 
@@ -134,9 +110,8 @@ class RecommendationWrapper():
         self._recommendationType = recommendationType
 
     def update(self, problemDescription, **kwargs):
-        dominanceAsymmetricPart = kwargs["dominanceAsymmetricPart"]
-        dominanceSymmetricPart = kwargs["dominanceSymmetricPart"]
-        self.ro = self._recommendationType(*self.args, problemDescription, dominanceAsymmetricPart, dominanceSymmetricPart)
+        dominanceRelation = kwargs["dominanceRelation"]
+        self.ro = self._recommendationType(*self.args, problemDescription, dominanceRelation)
 
     def isAbleToRecommend(self):
         return self.ro.canRecommend
@@ -146,7 +121,6 @@ class RecommendationWrapper():
 
     canRecommend = property(isAbleToRecommend)
     recommendation = property(getRecommendation)
-
 
 from CORE.ProblemDescription import ProblemDescription
 if __name__ == "__main__" :
@@ -158,7 +132,7 @@ if __name__ == "__main__" :
                                     (mcda_problem_description[13], mcda_problem_description[11]),
                                     (mcda_problem_description[13], mcda_problem_description[14])])
     dominanceSymmetricPart = []
-    recommendation = KRankingRecommendation(4, mcda_problem_description, dominanceAsymmetricPart, dominanceSymmetricPart)
+    recommendation = KRankingRecommendation(4, mcda_problem_description, dominanceAsymmetricPart)
     # recommendation = KBestRecommendation(mcda_problem_description, dominanceAsymmetricPart, dominanceSymmetricPart, 4)
 
     if recommendation.canRecommend:

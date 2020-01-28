@@ -139,6 +139,29 @@ class ProblemDescription:
 
         return gurobi_model, VarDict
 
+    def generate_kb_basic_gurobi_model_and_its_VarM(self, modelName):
+        """Retourne le programme linéaire de base prenant en considération le sens
+        d'optimisation sur chacun des critères selon la version de la thèse de KB.
+        Celui-ci sera étoffé par les éléments de PI pour le calcul de la relation nécessaire.
+        """
+        gurobi_model = Model(modelName)
+        gurobi_model.setParam('OutputFlag', False)
+        gurobi_model.Params.IntFeasTol = CONSTRAINTSFEASIBILITYTOL
+        gurobi_model.Params.DualReductions = 0   # indispensable pour discriminer entre PL InFeasible or unBounded
+        # Borne sup choisie arbitrairement égale à 1 (UTA GMS).
+        VarM = [gurobi_model.addVar(vtype=GRB.INTEGER, lb=0, name="M_{}".format(criterion))
+                   for criterion in self._criteriaOrderedList]
+
+        # VarL = [gurobi_model.addVar(vtype=GRB.INTEGER, lb=0, name="L_{}".format(criterion))
+        #            for criterion in self._criteriaOrderedList]
+        #
+        # VarN = [gurobi_model.addVar(vtype=GRB.INTEGER, lb=1, name="N_{}".format(criterion))
+        #            for criterion in self._criteriaOrderedList]
+
+        gurobi_model.update()
+
+        return gurobi_model, VarM
+
     def __str__(self):
         s = ""
         for alt in self._alternativesDict.values():

@@ -65,7 +65,7 @@ class NInformation(AppreciationObject):
                                                      self.alternative2.id)
 
 
-
+    term = property(getTermN)
 
 class PInformation(AppreciationObject):
     """Classe modélisant une paire d'alternatives sur laquelle s'est
@@ -96,3 +96,5 @@ class PInformation(AppreciationObject):
 
     def linear_expr(self, VarDict):
         return AppreciationObject.linear_expr(self, VarDict)
+
+    term = property(getTermP)

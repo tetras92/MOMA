@@ -58,10 +58,14 @@ class DA:
         Méthode principale qui simule l'interaction entre le DA et le DM"""
 
 
-        self._recommendationMaker.update(self._problemDescription, **PI().getAsymmetricAndSymmetricParts())
+        # self._recommendationMaker.update(self._problemDescription, **PI().getAsymmetricAndSymmetricParts())
+        self._recommendationMaker.update(self._problemDescription, **PI().getRelation())
         while not self._recommendationMaker.canRecommend and not self._stopCriterion.stop():
-            model, varDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
-            N().update(varDict, model)
+        # while not self._stopCriterion.stop():
+            # model, tupleVar = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
+            # model, tupleVar = self._problemDescription.generate_kb_basic_gurobi_model_and_its_VarM("MOMA_MCDA")
+
+            N().update(self._problemDescription, **PI().getRelation())
             N_initial_empty_state = N().is_empty()
 
             assert len(N()) + len(PI()) + len(NonPI()) == self._problemDescription.numberOfInformation
@@ -81,8 +85,7 @@ class DA:
 
             info = NonPI().pick()
             Dialog(info).madeWith(dm)
-            self._recommendationMaker.update(self._problemDescription, **PI().getAsymmetricAndSymmetricParts())
-
+            self._recommendationMaker.update(self._problemDescription, **PI().getRelation())
         self.recommendation = self._recommendationMaker.recommendation
 
 

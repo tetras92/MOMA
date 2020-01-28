@@ -1,7 +1,6 @@
-from gurobipy import *
-
 from CORE.ComparisonTerm import *
-from CORE.Tools import EPSILON
+from CORE.NecessaryPreference import *
+from CORE.Tools import EPSILON, AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS
 from CORE.decorators import singleton
 
 
@@ -10,20 +9,32 @@ class InformationStore:
         self._store = list()
         self._strlen = strlen
 
-    @staticmethod
-    def addInformationToModel(store, model, varDict):
-        for information in store:
-            linexpr = information.linear_expr(varDict)
-            term = information.termP
-            if term == ComparisonTerm.IS_LESS_PREFERRED_THAN:
-                model.addConstr(- linexpr >=  EPSILON)
-            elif term == ComparisonTerm.IS_PREFERRED_TO:
-                model.addConstr(linexpr >= EPSILON)
-            elif term == ComparisonTerm.IS_INDIFERRENT_TO:
-                model.addConstr(linexpr == 0)
-            else:
-                raise Exception("Error in PI")
-            model.update()
+    # @staticmethod
+    # def addInformationToModel(store, model, varDict):
+    #     for information in store:
+    #         linexpr = information.linear_expr(varDict)
+    #         term = information.termP
+    #         if term == ComparisonTerm.IS_LESS_PREFERRED_THAN:
+    #             model.addConstr(- linexpr >=  EPSILON)
+    #         elif term == ComparisonTerm.IS_PREFERRED_TO:
+    #             model.addConstr(linexpr >= EPSILON)
+    #         elif term == ComparisonTerm.IS_INDIFERRENT_TO:
+    #             model.addConstr(linexpr == 0)
+    #         else:
+    #             raise Exception("Error in PI")
+    #         model.update()
+
+    # @staticmethod
+    # def getEquivalentCovectorList(store):
+    #     L = list()
+    #     for information in store:
+    #         if information.term is AS_LEAST_AS_GOOD_AS():
+    #             L.append(information.covector)
+    #         elif information.term is NOT_AS_LEAST_AS_GOOD_AS():
+    #             L.append(-information.covector)
+    #         else:
+    #             raise Exception("Error in InformationStore.addInformationToModel")
+    #     return L
 
     def clear(self):
         pass
@@ -67,37 +78,52 @@ class PI(InformationStore):
     def __iter__(self):
         return self._store.__iter__()
 
-    def getAsymmetricAndSymmetricParts(self):
-        R = dict()
-        AL = list()
-        AD = list()
-        SL = list()
-        SD = list()
-        relationElementInfoDict = dict()
+    # def getAsymmetricAndSymmetricParts(self):
+    #     R = dict()
+    #     AL = list()
+    #     AD = list()
+    #     SL = list()
+    #     SD = list()
+    #     relationElementInfoDict = dict()
+    #     for information in self:
+    #         if information.termP == ComparisonTerm.IS_PREFERRED_TO:
+    #             element = (information.alternative1, information.alternative2)
+    #             AL.append((information.alternative1, information.alternative2))
+    #             relationElementInfoDict[information] = element
+    #             AD.append(information.last_commit_date)
+    #         elif information.termP == ComparisonTerm.IS_LESS_PREFERRED_THAN:
+    #             element = (information.alternative2, information.alternative1)
+    #             AL.append((information.alternative2, information.alternative1))
+    #             relationElementInfoDict[information] = element
+    #             AD.append(information.last_commit_date)
+    #         elif information.termP == ComparisonTerm.IS_INDIFERRENT_TO:
+    #             element = (information.alternative1, information.alternative2)
+    #             SL.append((information.alternative1, information.alternative2))
+    #             relationElementInfoDict[information] = element
+    #             SD.append(information.last_commit_date)
+    #         else:
+    #             raise Exception("Error getAsymmetricAndSymmetricParts in PI()")
+    #     R["dominanceAsymmetricPart"] = AL
+    #     R["datesAsymmetricPart"] = AD
+    #     R["dominanceSymmetricPart"] = SL
+    #     R["datesSymmetricPart"] = SD
+    #     R["matchingInfoCoupleAlt"] = relationElementInfoDict
+    #     return R
+
+    def getRelation(self):
+        RelationDict = dict()
+        relationElementList = list()
         for information in self:
-            if information.termP == ComparisonTerm.IS_PREFERRED_TO:
-                element = (information.alternative1, information.alternative2)
-                AL.append((information.alternative1, information.alternative2))
-                relationElementInfoDict[information] = element
-                AD.append(information.last_commit_date)
-            elif information.termP == ComparisonTerm.IS_LESS_PREFERRED_THAN:
-                element = (information.alternative2, information.alternative1)
-                AL.append((information.alternative2, information.alternative1))
-                relationElementInfoDict[information] = element
-                AD.append(information.last_commit_date)
-            elif information.termP == ComparisonTerm.IS_INDIFERRENT_TO:
-                element = (information.alternative1, information.alternative2)
-                SL.append((information.alternative1, information.alternative2))
-                relationElementInfoDict[information] = element
-                SD.append(information.last_commit_date)
-            else:
-                raise Exception("Error getAsymmetricAndSymmetricParts in PI()")
-        R["dominanceAsymmetricPart"] = AL
-        R["datesAsymmetricPart"] = AD
-        R["dominanceSymmetricPart"] = SL
-        R["datesSymmetricPart"] = SD
-        R["matchingInfoCoupleAlt"] = relationElementInfoDict
-        return R
+            if information.termP is AS_LEAST_AS_GOOD_AS():
+                relationElementList.append((information.alternative1, information.alternative2))
+            elif information.termP is NOT_AS_LEAST_AS_GOOD_AS():
+                relationElementList.append((information.alternative2, information.alternative1))
+            else :
+                raise Exception("Error getRelation in PI()")
+
+        RelationDict["dominanceRelation"] = relationElementList
+        return RelationDict
+
 
     def clear(self):
         store_copy = [info for info in self._store] # important car retire des éléments de PI
@@ -172,36 +198,17 @@ class N(InformationStore):
     def setInfoPicker(self, infoPicker):
         self._infoPicker = infoPicker
 
-    def update(self, VarDict, gurobi_model):
-        N().clear() # vider pour recalculer
-        InformationStore.addInformationToModel(PI(), gurobi_model, VarDict)  # effet de bord sur gurobi_model
-        nonPI_copy = [info for info in NonPI()]          # indispensable car des effets de bords se produisent lorsque des éléments entrent ds N
+
+    def update(self,  problemDescription=None, dominanceRelation=list()):
+        if not self.is_empty(): return
+        # indispensable car des effets de bords se produisent lorsque des éléments entrent ds N
+        nonPI_copy = [info for info in NonPI()]
         for info in nonPI_copy:
-            # print("N : INFO EVALUATED : {}".format(str(info)))
-            pco_linexpr = info.linear_expr(VarDict)
-            gurobi_model.setObjective(pco_linexpr, GRB.MINIMIZE)
-            gurobi_model.update()
-            gurobi_model.optimize()
+            if NecessaryPreference.adjudicate(problemDescription, dominanceRelation, (info.alternative1, info.alternative2)):
+                info.termN = AS_LEAST_AS_GOOD_AS()
+            elif NecessaryPreference.adjudicate(problemDescription, dominanceRelation, (info.alternative2, info.alternative1)):
+                info.termN = NOT_AS_LEAST_AS_GOOD_AS()
 
-            # print("NonPI --")
-            # print(info, gurobi_model.objVal)
-
-            if gurobi_model.objVal >= 0:
-                if gurobi_model.objVal == 0.0:
-                    info.termN = ComparisonTerm.IS_INDIFERRENT_TO
-                else:
-                    info.termN = ComparisonTerm.IS_PREFERRED_TO
-            else:
-                gurobi_model.setObjective(- pco_linexpr, GRB.MINIMIZE)
-                gurobi_model.update()
-                gurobi_model.optimize()
-
-                # print(info, gurobi_model.objVal)
-                if gurobi_model.objVal >= 0:
-                    if gurobi_model.objVal == 0.0:
-                        info.termN = ComparisonTerm.IS_INDIFERRENT_TO
-                    else:
-                        info.termN = ComparisonTerm.IS_LESS_PREFERRED_THAN
 
     def add(self, information):
         self._store.append(information)
