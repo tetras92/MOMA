@@ -14,8 +14,10 @@ class NecessaryPreference:
 
         LCovPIList = [covectorOfPairWiseInformationWith2Levels(coupleAlt) for coupleAlt in Relation]
         VarMArray = np.array(VarMList)
-        varL = [model.addVar(vtype=GRB.INTEGER, lb=0, name="L_pi_".format(i)) for i in range(len(Relation))]
-        varN = model.addVar(vtype=GRB.INTEGER, lb=1, name="N")
+        # varL = [model.addVar(vtype=GRB.INTEGER, lb=0, name="L_pi_".format(i)) for i in range(len(Relation))]
+        varL = [model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="L_pi_".format(i)) for i in range(len(Relation))]
+
+        # varN = model.addVar(vtype=GRB.INTEGER, lb=1, name="N")
         model.update()
         varLDup = [np.array([vl]*len(VarMArray)) for vl in varL]
         varLDupCovPI = [varLDup[i] * LCovPIList[i] for i in range(len(LCovPIList))]
@@ -23,10 +25,14 @@ class NecessaryPreference:
         L2_2 = VarMArray
 
         object_covector = covectorOfPairWiseInformationWith2Levels(object)
-        L1 = object_covector * np.array([varN]*len(object_covector))
+        # L1 = object_covector * np.array([varN]*len(object_covector))
+        L1 = object_covector
 
         for i in range(len(object_covector)):
-            model.addConstr(L1[i] == L2_1[i] + L2_2[i])
+            # print(L1[i])
+            # print(L2_1[i])
+            # print(L2_2[i])
+            model.addConstr(L2_1[i] + L2_2[i] == L1[i])
 
         model.update()
         model.optimize()
