@@ -26,6 +26,18 @@ class RandomPicker(InformationPicker):
         return store[self._generator.randrange(storeSize)]
 
 
+class DeterministicPicker(InformationPicker):
+    def __init__(self):
+        self.L = [(45, 60), (46, 60)]
+
+    def pick(self, store):
+        elmt = self.L.pop()
+        for info in store:
+            # print(info, elmt)
+            if info.alternative1.id == elmt[0] and info.alternative2.id == elmt[1]:
+                return info
+
+
 if __name__ == "__main__":
     r1 = RandomPicker(0)
     r2 = RandomPicker(1)

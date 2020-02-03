@@ -4,6 +4,7 @@ import numpy as np
 
 from CORE.Tools import NOT_AS_LEAST_AS_GOOD_AS, AS_LEAST_AS_GOOD_AS
 
+import random as rdm
 
 class DM:
     """Classe (de base) modélisant un DM. Différents modèles héritent de cette
@@ -14,12 +15,15 @@ class NoisyWS_DM(DM):
     """Classe modélisant un DM dont la fonction d'évaluation (une somme pondérée)
     d'une alternative est bruité. Le bruit à un moment de l'interaction est une réalisation d'une
     loi normale d'espérance nulle et d'écart-type sigma constant."""
-    def __init__(self, utilityFunctionFileName, sigma):
+    def __init__(self, utilityFunctionFileName, sigma, seedValue=None):
         """str * float -> NoneType
         l'initialisation se fait à l'aide d'un fichier csv dans lequel on
         trouve les poids attribués à chaque critère.
          HYP : l'ordre (de gauche à droite) d'énumération des critères est le même
          que celui (du haut vers le bas) du fichier de description des critères."""
+        self._generator = rdm.Random()
+        if not seedValue is None:
+            self._generator.seed(seedValue)
         self._sigma = sigma
         with open(utilityFunctionFileName) as utilityFile:
             reader = csv.DictReader(utilityFile)
@@ -32,7 +36,7 @@ class NoisyWS_DM(DM):
         """Alternative -> float
         retourne l'évaluation de l'alternative."""
         return np.vdot(np.array(self.utilitiesList), np.array(alternative.attributeLevelsList)) \
-                                + np.random.normal(0, self._sigma)
+                                + self._generator.gauss(0, self._sigma)#np.random.normal(0, self._sigma)
 
     def evaluate(self, info):
         """Alternative -> float
@@ -84,7 +88,7 @@ class VNoisyWS_DM(NoisyWS_DM):
         NoisyWS_DM.evaluate(self, info)
         self._sigma *= self._raisonLoiGeo
 
-class RelativeNoisyDMWS_DM(NoisyWS_DM):
+class RelativeNoisyWS_DM(NoisyWS_DM):
     def __init__(self, utilityFunctionFileName, sigma):
         NoisyWS_DM.__init__(self, utilityFunctionFileName, sigma)
 

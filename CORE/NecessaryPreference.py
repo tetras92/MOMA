@@ -9,7 +9,7 @@ class NecessaryPreference:
     def adjudicate(mcda_problemDescription=None, Relation=list(), object=(None, None)):
         if object in Relation: return True
         elmt1, elmt2 = object
-        if (elmt2, elmt1) in Relation :  return False # Dois-on prendre garde à l'équivalence?
+        if (elmt2, elmt1) in Relation: return False # Doit-on prendre garde à l'équivalence?
         model, VarMList = mcda_problemDescription.generate_kb_basic_gurobi_model_and_its_VarM("MOMA Necessary Preference")
 
         LCovPIList = [covectorOfPairWiseInformationWith2Levels(coupleAlt) for coupleAlt in Relation]
@@ -31,3 +31,29 @@ class NecessaryPreference:
         model.update()
         model.optimize()
         return model.status == GRB.OPTIMAL
+
+
+    # @staticmethod
+    # def transitivity(mcda_problemDescription=None, Relation=None, object=(None, None)):
+    #     if Relation is None:
+    #         Relation = list()
+    #     o1, o2 = object
+    #     nonObject = (o2, o1)
+    #     NonRelation = list()
+    #     for Ci in Relation:
+    #         elmt1, elmt2 = Ci
+    #         nonCi = (elmt2, elmt1)
+    #         NonRelation.append(nonCi)
+    #
+    #     return NecessaryPreference.adjudicate(mcda_problemDescription, NonRelation, nonObject)
+    #
+    #
+    # @staticmethod
+    # def nonTransitivity(mcda_problemDescription=None, Relation=None, object=(None, None)):
+    #
+    #     if Relation is None:
+    #         Relation = list()
+    #     o1, o2 = object
+    #     nonObject = (o2, o1)
+    #
+    #     return NecessaryPreference.adjudicate(mcda_problemDescription, Relation, nonObject)

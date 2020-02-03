@@ -216,8 +216,12 @@ class N(InformationStore):
         for info in nonPI_copy:
             if NecessaryPreference.adjudicate(problemDescription, kwargs["dominanceRelation"], (info.alternative1, info.alternative2)):
                 info.termN = AS_LEAST_AS_GOOD_AS()
+                # if NecessaryPreference.transitivity(problemDescription, kwargs["dominanceRelation"], (info.alternative1, info.alternative2)):
+                #     print("info", info, "by transitivity")
             elif NecessaryPreference.adjudicate(problemDescription, kwargs["dominanceRelation"], (info.alternative2, info.alternative1)):
                 info.termN = NOT_AS_LEAST_AS_GOOD_AS()
+                # if NecessaryPreference.transitivity(problemDescription, kwargs["dominanceRelation"], (info.alternative2, info.alternative1)):
+                #     print("info", info, " by transitivity")
 
 
     def add(self, information):
