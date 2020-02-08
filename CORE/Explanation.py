@@ -10,7 +10,7 @@ class Explain:
     def Order2SwapExplanation(mcda_problemDescription=None, Relation=None, object=(None, None)):
         if Relation is None:
             Relation = list()
-
+        s = "Explanation by at most 2-order swaps\n"
         object_covector = covectorOfPairWiseInformationWith2Levels(object)
         SigmaP = [i for i in range(len(object_covector)) if object_covector[i] == 1]
         SigmaD = [i for i in range(len(object_covector)) if object_covector[i] == -1]
@@ -44,7 +44,7 @@ class Explain:
 
         matching_gurobi_model.optimize()
         explainable = matching_gurobi_model.objVal == len(SigmaD)
-        if not explainable : return "Can not explain by swaps of order at most 2"
+        if not explainable : return False, s + "\tCan not explain by swaps of order at most 2"
         edgeSelected = list()
         for i, j in booleanVarDict:
             if booleanVarDict[(i, j)].x == 1:
@@ -59,11 +59,59 @@ class Explain:
             Explanation.append(suiv)
             ListAttributeLevelsList.append(suiv.alternative2)
 
-        s = "Explanation\n"
-        i = 1
         for elm in Explanation:
-            s += str(elm)
-            s += "\n" + "\t"*i
-            i += 1
+            s += "\t" + str(elm) + "\n"
 
-        return s
+
+        return True, s
+
+
+    @staticmethod
+    def TransitiveExplanation(mcda_problemDescription=None, Relation=None, object=(None, None)):
+        if Relation is None:
+            Relation = list()
+        dominationDict = dict()
+        for (altD, altd) in Relation:
+            if altD not in dominationDict:
+                dominationDict[altD] = list()
+            dominationDict[altD].append(altd)
+
+
+        def is_a_path(altSource, altDest, path):
+            if len(path) == 0 : path.append(altSource)
+            if altSource not in dominationDict : return False
+            for altDominatedBySource in dominationDict[altSource]:
+                path.append(altDominatedBySource)
+                if altDominatedBySource == altDest: return True
+                elif is_a_path(altDominatedBySource, altDest, path): return True
+                else : path.pop()
+
+        s = "Explanation by Transitivity\n"
+        path = list()
+        Explanation = list()
+        if is_a_path(object[0], object[1], path) and len(path) >= 3:
+            for i in range(0, len(path)-1):
+                Explanation.append(mcda_problemDescription.getTransitiveObject(path[i], path[i+1]))
+
+            for elm in Explanation:
+                s += "\t" + str(elm) + "\n"
+
+            return True, s
+        else:
+            return False, s + "\tCan not explain by transitivity"
+
+
+class ExplanationWrapper():
+    def __init__(self, ListOfExplanationEngines, UseAll=True):
+        self.ListOfExplanationEngines = ListOfExplanationEngines
+        self.useAllEngines = UseAll
+        self.explanation = ""
+
+    def computeExplanation(self, problemDescription, object, **kwargs):
+        self.explanation = ""
+        dominanceRelation = kwargs["dominanceRelation"]
+        for engine in self.ListOfExplanationEngines:
+            result, detail = engine(problemDescription, dominanceRelation, object)
+            if result :
+                self.explanation += detail
+                if not self.useAllEngines : return

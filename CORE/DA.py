@@ -1,6 +1,6 @@
 from CORE.Dialog import Dialog
 from CORE.Exceptions import DMdoesntValidateNElementException
-from CORE.Explain import Explain
+from CORE.Explanation import Explain
 from CORE.InformationStore import *
 from CORE.Recommendation import RecommendationWrapper, KBestRecommendation
 
@@ -18,7 +18,7 @@ class DA:
 
     def __init__(self, problemDescription=None, NonPI_InfoPicker=None, N_InfoPicker=None,
                  stopCriterion=None, recommandationMaker=RecommendationWrapper(KBestRecommendation, 1),
-                 InconsistencySolverType=None):
+                 InconsistencySolverType=None, ExplanationWrapper=None):
         # -- Types des attributs :
         # - problemDescription : ProblemDescription (ProblemDescription.py)
         # - NonPI_InfoPicker : InformationPicker (InformationPicker.py)
@@ -46,6 +46,7 @@ class DA:
         self.inconsistencySolver = InconsistencySolverType
         self.inconsistencySolver.initialize_store(PI())
 
+        self.explanationEngine = ExplanationWrapper
         self.recommendation = None
 
     def show(self):
@@ -79,8 +80,12 @@ class DA:
                 try:
                     Dialog(info).madeWith(dm)
                 except DMdoesntValidateNElementException as dme:
-                    print(Explain.Order2SwapExplanation(self._problemDescription,
-                                                        PI().getRelation()["dominanceRelation"], dme.dominanceObject))
+                    self.explanationEngine.computeExplanation(self._problemDescription, dme.dominanceObject, **PI().getRelation())
+                    # print(Explain.Order2SwapExplanation(self._problemDescription,
+                    #                                     PI().getRelation()["dominanceRelation"], dme.dominanceObject))
+                    # print(Explain.TransitiveExplanation(self._problemDescription,
+                    #                                     PI().getRelation()["dominanceRelation"], dme.dominanceObject))
+                    print(self.explanationEngine.explanation)
                     self.inconsistencySolver.update(self._problemDescription)
                     self.inconsistencySolver.solve()
                     N().clear()

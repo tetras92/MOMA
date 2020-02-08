@@ -4,7 +4,7 @@ import itertools as it
 from gurobipy import *
 
 from CORE.Alternative import Alternative
-from CORE.AppreciationObject import SwapObject
+from CORE.AppreciationObject import SwapObject, TransitiveObject
 from CORE.Information import Information
 from CORE.Tools import attribute_creator, CONSTRAINTSFEASIBILITYTOL, symbol
 
@@ -221,3 +221,5 @@ class ProblemDescription:
                                        "".join([symbol(v) for v in attributeLevelsList]))
         return SwapObject(alternative, corr_alt_suc)
 
+    def getTransitiveObject(self, alternativeD, alternatived):
+        return TransitiveObject(alternativeD, alternatived)

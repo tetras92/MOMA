@@ -124,3 +124,15 @@ class SwapObject(AppreciationObject):
 
     def __str__(self):
         return AppreciationObject.__str__(self)
+
+class TransitiveObject(AppreciationObject):
+    def __init__(self, alternativeD, alternatived):
+        AppreciationObject.__init__(self, alternativeD, alternatived)
+
+    def __getattr__(self, item):
+        return AS_LEAST_AS_GOOD_AS()
+
+    def __str__(self):
+        return AppreciationObject.__str__(self)
+
+

@@ -151,7 +151,7 @@ class InconsistencySolverWrapper():
         # print("{} elements to remove".format(str(len(self._infoToDeleteStore))))
 
     def solve(self):
-        print("Inconsistency Solver : Info removed from PI :")
+        print("\nInconsistency Solver : Info removed from PI :")
         for info in self._infoToDeleteStore:
             print(info, "added at {} by {}".format(info.last_commit_date, info.how_entering_pi))
         self._store.removeAll(self._infoToDeleteStore)
