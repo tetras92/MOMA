@@ -1,6 +1,7 @@
-from CORE.ComparisonTerm import *
 from CORE.Dialog import Dialog
+from CORE.Tools import NO_TERM
 from CORE.Tools import colored_expression
+
 
 class Commitment:
     """Classe modélisant une déclaration du DM durant l'interaction.
@@ -31,7 +32,7 @@ class AnswerCommitment(Commitment):
     def __str__(self):
         symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
         return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}]\n\tDM answers {}.".format(self.__class__, self.date,
-                                                                 self.info.alternative1.id, symb1, ComparisonTerm.NO_TERM,
+                                                                 self.info.alternative1.id, symb1, NO_TERM(),
                                                                  symb2, self.info.alternative2.id, self.term)
 
 class ValidationCommitment(Commitment):

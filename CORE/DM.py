@@ -1,10 +1,10 @@
 import csv
+import random as rdm
 
 import numpy as np
 
 from CORE.Tools import NOT_AS_LEAST_AS_GOOD_AS, AS_LEAST_AS_GOOD_AS
 
-import random as rdm
 
 class DM:
     """Classe (de base) modélisant un DM. Différents modèles héritent de cette
@@ -89,8 +89,8 @@ class VNoisyWS_DM(NoisyWS_DM):
         self._sigma *= self._raisonLoiGeo
 
 class RelativeNoisyWS_DM(NoisyWS_DM):
-    def __init__(self, utilityFunctionFileName, sigma):
-        NoisyWS_DM.__init__(self, utilityFunctionFileName, sigma)
+    def __init__(self, utilityFunctionFileName, sigma, seedValue=None):
+        NoisyWS_DM.__init__(self, utilityFunctionFileName, sigma, seedValue)
 
     def evaluate(self, info):
         if info.difficultyLevel == 4:

@@ -57,6 +57,5 @@ class Alternative:
     def __repr__(self):
         return "[{:>2}] : {}".format(str(self._idAlt), self._symbolicName)
 
-
     def __hash__(self):
         return self._idAlt

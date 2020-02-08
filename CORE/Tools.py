@@ -6,6 +6,8 @@ attribute_creator = lambda criterion, attribute_value : '{}:{}'.format(criterion
 colored_character = lambda c, o, color : colored(c, color) if c != o else c
 colored_expression = lambda alternative1, alternative2 : ("".join([colored_character(alternative1[i], alternative2[i], COLOR) for i in range(len(alternative1))]),
                                                           "".join([colored_character(alternative2[i], alternative1[i], COLOR) for i in range(len(alternative1))]))
+
+symbol = lambda x : "+" if x == 1 else "-"
 EPSILON = 0.000001                      #
 CONSTRAINTSFEASIBILITYTOL = 0.01 # borne min dans Gurobi 1e-9
 
@@ -34,6 +36,7 @@ from CORE.decorators import singleton
 class NO_TERM():
     def __str__(self):
         return "?"
+
 @singleton
 class AS_LEAST_AS_GOOD_AS():
 
@@ -49,6 +52,12 @@ class NOT_AS_LEAST_AS_GOOD_AS():
 
     def __neg__(self):
         return AS_LEAST_AS_GOOD_AS()
+
+@singleton
+class NO_TERM():
+
+    def __str__(self):
+        return "?"
 
 
 if __name__ == "__main__" :

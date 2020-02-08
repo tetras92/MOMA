@@ -1,6 +1,7 @@
-from CORE.ComparisonTerm import ComparisonTerm
 from CORE.InformationStore import NonPI, PI, N
-from CORE.Tools import colored_expression
+from CORE.Tools import NO_TERM
+from CORE.Tools import colored_expression, AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS
+
 
 class AppreciationObject:
     """Classe de base modélisation une paire d'alternatives"""
@@ -11,6 +12,10 @@ class AppreciationObject:
     def linear_expr(self, VarDict):
         return (self.alternative1.linear_expr(VarDict) - self.alternative2.linear_expr(VarDict))
 
+    def __str__(self):
+        symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
+        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
+                                                     self.alternative2.id)
 
 class PairwiseInformation(AppreciationObject):
     """Classe modélisant une paire d'alternatives sur
@@ -31,7 +36,7 @@ class PairwiseInformation(AppreciationObject):
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
-        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, ComparisonTerm.NO_TERM, symb2, self.alternative2.id)
+        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, NO_TERM(), symb2, self.alternative2.id)
 
     def __repr__(self):
         return self.__str__()
@@ -49,7 +54,7 @@ class NInformation(AppreciationObject):
          la paire d'alternative."""
         N().add(information)
         AppreciationObject.__init__(self, alternative1, alternative2)
-        self._termN = ComparisonTerm.NO_TERM
+        self._termN = NO_TERM()
 
     def getTermN(self):
         return self._termN
@@ -60,12 +65,21 @@ class NInformation(AppreciationObject):
     termN = property(getTermN, setTermN)
 
     def __str__(self):
-        symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
-        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self._termN, symb2,
-                                                     self.alternative2.id)
+        return AppreciationObject.__str__(self)
+        # symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
+        # return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
+        #                                              self.alternative2.id)
 
 
     term = property(getTermN)
+
+    def _getCorrespondingObject(self):
+        if self._termN is AS_LEAST_AS_GOOD_AS():
+            return self.alternative1, self.alternative2
+        elif self._termN is NOT_AS_LEAST_AS_GOOD_AS():
+            return self.alternative2, self.alternative1
+
+    dominanceObject = property(fget=_getCorrespondingObject)
 
 class PInformation(AppreciationObject):
     """Classe modélisant une paire d'alternatives sur laquelle s'est
@@ -78,7 +92,7 @@ class PInformation(AppreciationObject):
          la paire d'alternative."""
         PI().add(information)
         AppreciationObject.__init__(self, alternative1, alternative2)
-        self._termP = ComparisonTerm.NO_TERM
+        self._termP = NO_TERM()
 
 
     def getTermP(self):
@@ -90,11 +104,23 @@ class PInformation(AppreciationObject):
     termP = property(getTermP, setTermP)
 
     def __str__(self):
-        symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
-        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self._termP, symb2,
-                                                     self.alternative2.id)
+        return AppreciationObject.__str__(self)
+        # symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
+        # return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
+        #                                              self.alternative2.id)
 
     def linear_expr(self, VarDict):
         return AppreciationObject.linear_expr(self, VarDict)
 
     term = property(getTermP)
+
+
+class SwapObject(AppreciationObject):
+    def __init__(self, alternativeD, alternatived):
+        AppreciationObject.__init__(self, alternativeD, alternatived)
+
+    def __getattr__(self, item):
+        return AS_LEAST_AS_GOOD_AS()
+
+    def __str__(self):
+        return AppreciationObject.__str__(self)

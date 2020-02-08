@@ -4,8 +4,9 @@ import itertools as it
 from gurobipy import *
 
 from CORE.Alternative import Alternative
+from CORE.AppreciationObject import SwapObject
 from CORE.Information import Information
-from CORE.Tools import attribute_creator, CONSTRAINTSFEASIBILITYTOL
+from CORE.Tools import attribute_creator, CONSTRAINTSFEASIBILITYTOL, symbol
 
 
 class ProblemDescription:
@@ -17,12 +18,9 @@ class ProblemDescription:
         self._criteriaFileName = criteriaFileName
         self._performanceTableFileName = performanceTableFileName
         self._alternativesDict = dict()
+        self._fictious_pairs_of_alternatives = dict()
         self._set_up()
-        # n = 0
-        # for info in self._list_of_information:
-        #     if info.difficultyLevel == 4:
-        #         n += 1
-        # print(n)
+
 
     def _set_up(self):
         """Méthode de set-up général"""
@@ -31,6 +29,7 @@ class ProblemDescription:
         self._remove_dominated_alternatives()
         self._generate_Information()
         self._generate_list_of_list_of_ordered_criterion_attributes()
+        self._generate_dict_of_fictious_pairs_of_alternatives()
 
     def _set_up_alternatives(self):
         """Instanciation des alternatives à partir de la table de performance."""
@@ -110,6 +109,23 @@ class ProblemDescription:
             NSL.sort(key=lambda x : D[x])
         self._list_of_list_of_ordered_criterion_attributes = L
 
+
+    def _generate_dict_of_fictious_pairs_of_alternatives(self):
+        def fictious_alternative(j):
+            levels_list = list()
+            for k in range(len(self._criteriaOrderedList)):
+                if k == j:
+                    levels_list.append(0)
+                else :
+                    levels_list.append(1)
+            return Alternative(float("inf"), None, levels_list, list())
+        for i in range(len(self._criteriaOrderedList)):
+            for j in range(len(self._criteriaOrderedList)):
+                if i != j:
+                    self._fictious_pairs_of_alternatives[(i, j)] = \
+                        (fictious_alternative(j), fictious_alternative(i))
+
+
     def generate_basic_gurobi_model_and_its_varDict(self, modelName):
         """Retourne un programme linéaire de base prenant en considération le sens
         d'optimisation sur chacun des critères. Celui-ci sera étoffé par les éléments de PI
@@ -146,23 +162,27 @@ class ProblemDescription:
         """
         gurobi_model = Model(modelName)
         gurobi_model.setParam('OutputFlag', False)
-        # gurobi_model.Params.IntFeasTol = CONSTRAINTSFEASIBILITYTOL
-        gurobi_model.Params.FeasibilityTol = CONSTRAINTSFEASIBILITYTOL
-        gurobi_model.Params.DualReductions = 0   # indispensable pour discriminer entre PL InFeasible or unBounded
-        # Borne sup choisie arbitrairement égale à 1 (UTA GMS).
-        # VarM = [gurobi_model.addVar(vtype=GRB.INTEGER, lb=0, name="M_{}".format(criterion))
-        #            for criterion in self._criteriaOrderedList]
 
-        VarM = [gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="M_{}".format(criterion))
+        # gurobi_model.Params.IntFeasTol = CONSTRAINTSFEASIBILITYTOL
+        # gurobi_model.Params.FeasibilityTol = CONSTRAINTSFEASIBILITYTOL
+        # gurobi_model.Params.DualReductions = 0   # indispensable pour discriminer entre PL InFeasible or unBounded
+        # Borne sup choisie arbitrairement égale à 1 (UTA GMS).
+
+        VarM = [gurobi_model.addVar(vtype=GRB.INTEGER, lb=0, name="M_{}".format(criterion))
                    for criterion in self._criteriaOrderedList]
+
+        # VarM = [gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="M_{}".format(criterion))
+        #            for criterion in self._criteriaOrderedList]
         gurobi_model.update()
 
         return gurobi_model, VarM
 
     def __str__(self):
         s = ""
-        for alt in self._alternativesDict.values():
-            s += str(alt) + "\n"
+        # for alt in self._alternativesDict.values():
+        #     s += str(alt) + "\n"
+        for info in self._list_of_information:
+            s += str(info) + "\n"
         return s
 
     def __getitem__(self, item):
@@ -174,5 +194,30 @@ class ProblemDescription:
     def getNumberOfInformation(self):
         return len(self._list_of_information)
 
+    def getFictiousPairsOfAlternatives(self):
+        return self._fictious_pairs_of_alternatives
+
     numberOfAlternatives = property(getNumberOfAlternatives)
     numberOfInformation = property(getNumberOfInformation)
+    fictiousPairsOfAlternatives = property(getFictiousPairsOfAlternatives)
+
+    def getCorrespondingAlternative(self, alternative):
+        for alt in self._alternativesDict.values():
+            if alternative == alt:
+                return alt
+
+        return alternative
+
+    def getSwapObject(self, alternative, edge):
+        attributeLevelsList = alternative.attributeLevelsList.copy()
+        i, j = edge
+        attributeLevelsList[i] = (attributeLevelsList[i] + 1)%2
+        attributeLevelsList[j] = (attributeLevelsList[j] + 1)%2
+        alt_suc = Alternative(float("inf"), None, attributeLevelsList, list())
+        corr_alt_suc = self.getCorrespondingAlternative(alt_suc)
+        if alt_suc is corr_alt_suc:
+            # absence de l'alternative dans le jeu considéré
+            corr_alt_suc = Alternative("--", None, attributeLevelsList,
+                                       "".join([symbol(v) for v in attributeLevelsList]))
+        return SwapObject(alternative, corr_alt_suc)
+

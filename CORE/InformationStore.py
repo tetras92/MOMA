@@ -1,6 +1,5 @@
-from CORE.ComparisonTerm import *
 from CORE.NecessaryPreference import *
-from CORE.Tools import EPSILON, AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS
+from CORE.Tools import AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS
 from CORE.decorators import singleton
 
 

@@ -1,8 +1,5 @@
-from gurobipy import *
-
-from CORE.Tools import EPSILON, covectorOfPairWiseInformationWith2Levels
 from CORE.NecessaryPreference import *
-import numpy as np
+
 
 class Recommendation:
     """ Classe (de base) modélisant une Recommandation."""

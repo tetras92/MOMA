@@ -39,7 +39,7 @@ class Information:
             N().remove(self)
             if not oldO.termN is v: # DM ne valide pas la valeur inférée
                 CommitmentStore().add(InvalidationCommitment(self, oldO.termN))
-                raise DMdoesntValidateNElementException(self)
+                raise DMdoesntValidateNElementException(oldO.dominanceObject)
             CommitmentStore().add(ValidationCommitment(self, v))
 
         elif isinstance(oldO, PairwiseInformation):
@@ -106,3 +106,4 @@ class Information:
 
     def __hash__(self):
         return self._id
+

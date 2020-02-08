@@ -1,5 +1,6 @@
 from CORE.Dialog import Dialog
 from CORE.Exceptions import DMdoesntValidateNElementException
+from CORE.Explain import Explain
 from CORE.InformationStore import *
 from CORE.Recommendation import RecommendationWrapper, KBestRecommendation
 
@@ -77,7 +78,9 @@ class DA:
                 info = N().pick()
                 try:
                     Dialog(info).madeWith(dm)
-                except DMdoesntValidateNElementException:
+                except DMdoesntValidateNElementException as dme:
+                    print(Explain.Order2SwapExplanation(self._problemDescription,
+                                                        PI().getRelation()["dominanceRelation"], dme.dominanceObject))
                     self.inconsistencySolver.update(self._problemDescription)
                     self.inconsistencySolver.solve()
                     N().clear()

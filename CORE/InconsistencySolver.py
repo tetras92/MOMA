@@ -1,6 +1,3 @@
-
-
-from CORE.Tools import EPSILON
 from CORE.NecessaryPreference import *
 
 class InconsistencySolver:
