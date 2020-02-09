@@ -197,10 +197,13 @@ class ProblemDescription:
     def getFictiousPairsOfAlternatives(self):
         return self._fictious_pairs_of_alternatives
 
+    def getListOfInformation(self):
+        return self._list_of_information
+
     numberOfAlternatives = property(getNumberOfAlternatives)
     numberOfInformation = property(getNumberOfInformation)
     fictiousPairsOfAlternatives = property(getFictiousPairsOfAlternatives)
-
+    listOfInformation = property(fget=getListOfInformation)
     def getCorrespondingAlternative(self, alternative):
         for alt in self._alternativesDict.values():
             if alternative == alt:

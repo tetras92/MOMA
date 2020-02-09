@@ -8,20 +8,32 @@ class InformationStore:
         self._store = list()
         self._strlen = strlen
 
-    # @staticmethod
-    # def addInformationToModel(store, model, varDict):
-    #     for information in store:
-    #         linexpr = information.linear_expr(varDict)
-    #         term = information.termP
-    #         if term == ComparisonTerm.IS_LESS_PREFERRED_THAN:
-    #             model.addConstr(- linexpr >=  EPSILON)
-    #         elif term == ComparisonTerm.IS_PREFERRED_TO:
-    #             model.addConstr(linexpr >= EPSILON)
-    #         elif term == ComparisonTerm.IS_INDIFERRENT_TO:
-    #             model.addConstr(linexpr == 0)
-    #         else:
-    #             raise Exception("Error in PI")
-    #         model.update()
+    @staticmethod
+    def addInformationToModel(store, model, varDict):
+        for information in store:
+            linexpr = information.linear_expr(varDict)
+
+            if information.term is AS_LEAST_AS_GOOD_AS():
+                model.addConstr(linexpr >= 0)
+            elif information.term is NOT_AS_LEAST_AS_GOOD_AS():
+                model.addConstr(- linexpr >= 0)
+            else:
+                raise Exception("Error in PI")
+            model.update()
+
+    @staticmethod
+    def computeRegrets(problemDescription, model, varDict):
+            for info in problemDescription.listOfInformation:
+                model.setObjective(info.linear_expr(varDict), GRB.MINIMIZE)
+                model.update()
+                model.optimize()
+                minRegretValue = model.objVal
+                model.setObjective(info.linear_expr(varDict), GRB.MAXIMIZE)
+                model.update()
+                model.optimize()
+                maxRegretValue = model.objVal
+                info.addMinMaxRegretList((minRegretValue, maxRegretValue))
+
 
     # @staticmethod
     # def getEquivalentCovectorList(store):

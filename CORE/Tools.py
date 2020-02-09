@@ -8,8 +8,8 @@ colored_expression = lambda alternative1, alternative2 : ("".join([colored_chara
                                                           "".join([colored_character(alternative2[i], alternative1[i], COLOR) for i in range(len(alternative1))]))
 
 symbol = lambda x : "+" if x == 1 else "-"
-EPSILON = 0.000001                      #
-CONSTRAINTSFEASIBILITYTOL = 0.01 # borne min dans Gurobi 1e-9
+# EPSILON = 0.000001                      #
+CONSTRAINTSFEASIBILITYTOL = 0.0000001 # borne min dans Gurobi 1e-9
 
 def covectorOfPairWiseInformationWith2Levels(coupleAlt):
     alt1, alt2 = coupleAlt

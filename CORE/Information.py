@@ -19,6 +19,17 @@ class Information:
         self.difficultyLevel = difficultyLevel((alternative1, alternative2))
         self.covector = covectorOfPairWiseInformationWith2Levels((alternative1, alternative2))
 
+        self.MinMaxRegretList = list()
+
+    def addMinMaxRegretList(self, tupleOfValues):
+        self.MinMaxRegretList.append(tupleOfValues)
+
+    def showMinMaxRegretHistory(self):
+        s = str(self) + "\n"
+        for tvalues in self.MinMaxRegretList:
+            s += str(tvalues) + "\n"
+        print(s)
+
     def _nUpgrade(self, v):
         """Méthode traduisant le passage de l'information de NonPI à N.
         Elle est privée et appelée lorsque le termN de l'information (property)

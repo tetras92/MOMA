@@ -60,12 +60,12 @@ class DA:
         Méthode principale qui simule l'interaction entre le DA et le DM"""
 
 
-        # self._recommendationMaker.update(self._problemDescription, **PI().getAsymmetricAndSymmetricParts())
         self._recommendationMaker.update(self._problemDescription, **PI().getRelation())
         while not self._recommendationMaker.canRecommend and not self._stopCriterion.stop():
-        # while not self._stopCriterion.stop():
-            # model, tupleVar = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
-            # model, tupleVar = self._problemDescription.generate_kb_basic_gurobi_model_and_its_VarM("MOMA_MCDA")
+
+            # model, VarDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
+            # InformationStore.addInformationToModel(PI(), model, VarDict)
+            # InformationStore.computeRegrets(self._problemDescription, model, VarDict)
 
             N().update(self._problemDescription, **PI().getRelation())
             N_initial_empty_state = N().is_empty()
@@ -81,10 +81,6 @@ class DA:
                     Dialog(info).madeWith(dm)
                 except DMdoesntValidateNElementException as dme:
                     self.explanationEngine.computeExplanation(self._problemDescription, dme.dominanceObject, **PI().getRelation())
-                    # print(Explain.Order2SwapExplanation(self._problemDescription,
-                    #                                     PI().getRelation()["dominanceRelation"], dme.dominanceObject))
-                    # print(Explain.TransitiveExplanation(self._problemDescription,
-                    #                                     PI().getRelation()["dominanceRelation"], dme.dominanceObject))
                     print(self.explanationEngine.explanation)
                     self.inconsistencySolver.update(self._problemDescription)
                     self.inconsistencySolver.solve()
@@ -99,5 +95,8 @@ class DA:
             self._recommendationMaker.update(self._problemDescription, **PI().getRelation())  # Les 2 sont nécessaires
         self.recommendation = self._recommendationMaker.recommendation
 
+        # model, VarDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
+        # InformationStore.addInformationToModel(PI(), model, VarDict)
+        # InformationStore.computeRegrets(self._problemDescription, model, VarDict)
 
 

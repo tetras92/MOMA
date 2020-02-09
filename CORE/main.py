@@ -28,3 +28,4 @@ if __name__ == "__main__":
     DA().interactWith(dm)
     DA().show()
     # print(CommitmentStore())
+    # mcda_problem_description.listOfInformation[3].showMinMaxRegretHistory()
