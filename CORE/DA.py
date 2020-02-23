@@ -78,6 +78,9 @@ class DA:
             if not N_initial_empty_state:
                 info = N().pick()
                 try:
+                    self.explanationEngine.computeExplanation(self._problemDescription, info.o.dominanceObject, **PI().getRelation())
+                    if self.explanationEngine.explanation == "": print("NO_EXPLANATION")
+                    else: print(self.explanationEngine.explanation)
                     Dialog(info).madeWith(dm)
                 except DMdoesntValidateNElementException as dme:
                     self.explanationEngine.computeExplanation(self._problemDescription, dme.dominanceObject, **PI().getRelation())
