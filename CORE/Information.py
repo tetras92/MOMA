@@ -48,6 +48,8 @@ class Information:
 
         if isinstance(oldO, NInformation):
             N().remove(self)
+            # À COMMENTER
+            # PI().remove(self) # CREER_UN SYSTEME INTERMEDIAIRE
             if not oldO.termN is v: # DM ne valide pas la valeur inférée
                 CommitmentStore().add(InvalidationCommitment(self, oldO.termN))
                 raise DMdoesntValidateNElementException(oldO.dominanceObject)

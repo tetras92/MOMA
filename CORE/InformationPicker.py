@@ -28,7 +28,13 @@ class RandomPicker(InformationPicker):
 
 class DeterministicPicker(InformationPicker):
     def __init__(self):
-        self.L = [(45, 60), (46, 60)]
+        self.L = [(15, 23), (15, 27), (15, 29), (15, 30), (15, 39), (15, 43), (15, 45), (23, 27),
+                  (45, 58), (15, 58), (45, 54), (15, 54),
+                  (23, 58), (23, 43),
+                  (23, 57),
+                  (29, 43), (29, 39),
+                  (29, 54), (29, 58), (30, 45), (39, 58), (43, 53), (53, 58)]
+        self.L.reverse()
 
     def pick(self, store):
         elmt = self.L.pop()
@@ -36,6 +42,7 @@ class DeterministicPicker(InformationPicker):
             # print(info, elmt)
             if info.alternative1.id == elmt[0] and info.alternative2.id == elmt[1]:
                 return info
+
 
 
 if __name__ == "__main__":

@@ -7,10 +7,15 @@ colored_character = lambda c, o, color : colored(c, color) if c != o else c
 colored_expression = lambda alternative1, alternative2 : ("".join([colored_character(alternative1[i], alternative2[i], COLOR) for i in range(len(alternative1))]),
                                                           "".join([colored_character(alternative2[i], alternative1[i], COLOR) for i in range(len(alternative1))]))
 
-symbol = lambda x : "+" if x == 1 else "-"
-# EPSILON = 0.000001                      #
-CONSTRAINTSFEASIBILITYTOL = 0.0000001 # borne min dans Gurobi 1e-9
 
+tradeoff = lambda s, VarList : "[{bj_sup} -> {bj_inf}, {bi_inf} -> {bi_sup}]".format(bi_inf=VarList[s[0]][s[2]][0],
+                                                                                     bi_sup=VarList[s[0]][s[3]][0],
+                                                                                     bj_inf=VarList[s[1]][s[4]][0],
+                                                                                     bj_sup=VarList[s[1]][s[5]][0])
+symbol = lambda x : "+" if x == 1 else "-"
+EPSILON = 0.000001                      #
+CONSTRAINTSFEASIBILITYTOL = 1e-9 #0.000000001 # borne min dans Gurobi 1e-9
+INTEGERFEASIBILITYTOL = 1e-9
 def covectorOfPairWiseInformationWith2Levels(coupleAlt):
     alt1, alt2 = coupleAlt
     cov = list()

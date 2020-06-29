@@ -6,10 +6,12 @@ from CORE.Tools import covectorOfPairWiseInformationWith2Levels
 
 class NecessaryPreference:
     @staticmethod
-    def adjudicate(mcda_problemDescription=None, Relation=list(), object=(None, None)):
+    def adjudicate(mcda_problemDescription=None, Relation=None, object=(None, None)):
+        if Relation is None:
+            Relation = list()
         if object in Relation: return True
         elmt1, elmt2 = object
-        if (elmt2, elmt1) in Relation: return False # Doit-on prendre garde à l'équivalence?
+        # if (elmt2, elmt1) in Relation: return False # Doit-on prendre garde à l'équivalence?       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         model, VarMList = mcda_problemDescription.generate_kb_basic_gurobi_model_and_its_VarM("MOMA Necessary Preference")
 
         LCovPIList = [covectorOfPairWiseInformationWith2Levels(coupleAlt) for coupleAlt in Relation]
@@ -36,6 +38,18 @@ class NecessaryPreference:
 
         model.update()
         model.optimize()
+        # if model.status == GRB.OPTIMAL :
+        #     xvarL = list()
+        #     for va in varL :
+        #         xvarL.append(va.x)
+        #     xvarM = list()
+        #     for va in VarMList:
+        #         xvarM.append(va.x)
+        #     if varN.x != 1: print("Boom", varN.x, object, "=", xvarL, xvarM)
+            # print("NV", varN.x)
+
+
+
         return model.status == GRB.OPTIMAL
 
 

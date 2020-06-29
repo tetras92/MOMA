@@ -1,17 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/MOMBA.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MOMBA.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/Alternative.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Alternative.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/AppreciationObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/AppreciationObject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/Commitment.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Commitment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/DA.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/DA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/Explanation.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Explanation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/Information.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Information.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/InformationPicker.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/InformationPicker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/NecessaryPreference.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/NecessaryPreference.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/ProblemDescription.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/ProblemDescription.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/Tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Tools.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/gurobi.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,18 +50,10 @@
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IgnoredFileRootStore">
-    <option name="generatedRoots">
-      <set>
-        <option value="C:\Users\MICS\PycharmProjects\MOMBA\.idea" />
-      </set>
-    </option>
-  </component>
   <component name="ProjectId" id="1Vvqg9k7Hfjlj0tQ8sKEy0zBAzq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -55,7 +67,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -186,18 +198,6 @@
         <item itemvalue="Python.Mesures" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -499,14 +499,14 @@
         </entry>
       </map>
     </option>
-    <option name="OPEN_TABS">
-      <set>
-        <option value="1" />
-      </set>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="1" value="TOOL_WINDOW" />
+      </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="commit" />
     <MESSAGE value="commit CORE" />
     <MESSAGE value="InformationStore (premières simplifications)" />
     <MESSAGE value="some outputs (outputs.txt)" />
@@ -531,114 +531,37 @@
     <MESSAGE value="AFFICHAGE COLORE DES PAIRES D'ALTERNATIVES" />
     <MESSAGE value="IT InconsistencySolver.py CODE mais reste des tests à faire" />
     <MESSAGE value="généralisation de l'utilisation des solveurs d'inconsistance (suppression de InconsistencySolverFactory" />
-    <option name="LAST_COMMIT_MESSAGE" value="généralisation de l'utilisation des solveurs d'inconsistance (suppression de InconsistencySolverFactory" />
+    <MESSAGE value="restauration apres crash mardi 18/02/20" />
+    <option name="LAST_COMMIT_MESSAGE" value="restauration apres crash mardi 18/02/20" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="233" y="0" key="#Notifications" timestamp="1578241940759">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1897" height="913" key="GridCell.Tab.0.bottom" timestamp="1593443693170">
+      <screen x="357" y="0" width="1563" height="1080" />
     </state>
-    <state x="233" y="0" key="#Notifications/0.0.1280.680@0.0.1280.680" timestamp="1578241940759" />
-    <state x="403" y="145" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1579097869293">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1897" height="913" key="GridCell.Tab.0.bottom/290.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1593443693170" />
+    <state width="1276" height="298" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1593368691981" />
+    <state width="1897" height="913" key="GridCell.Tab.0.center" timestamp="1593443693170">
+      <screen x="357" y="0" width="1563" height="1080" />
     </state>
-    <state x="403" y="145" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680@0.0.1280.680" timestamp="1579097869293" />
-    <state x="-1651" y="-272" width="1124" height="1040" key="CommitChangelistDialog2" timestamp="1579510352304">
-      <screen x="-1920" y="-272" width="1920" height="1040" />
+    <state width="1897" height="913" key="GridCell.Tab.0.center/290.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1593443693170" />
+    <state width="1276" height="298" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1593368691980" />
+    <state width="1897" height="913" key="GridCell.Tab.0.left" timestamp="1593443693170">
+      <screen x="357" y="0" width="1563" height="1080" />
     </state>
-    <state x="-1651" y="-272" width="1124" height="1040" key="CommitChangelistDialog2/0.0.1280.680/-1920.-272.1920.1040@-1920.-272.1920.1040" timestamp="1579510352304" />
-    <state x="-1651" y="9" width="749" height="800" key="CommitChangelistDialog2/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579268845075" />
-    <state x="179" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1579485926091" />
-    <state x="121" y="57" key="DiffContextDialog" timestamp="1578153727117">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1897" height="913" key="GridCell.Tab.0.left/290.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1593443693170" />
+    <state width="1276" height="298" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1593368691979" />
+    <state width="1897" height="913" key="GridCell.Tab.0.right" timestamp="1593443693170">
+      <screen x="357" y="0" width="1563" height="1080" />
     </state>
-    <state x="121" y="57" key="DiffContextDialog/0.0.1280.680@0.0.1280.680" timestamp="1578153727117" />
-    <state x="421" y="95" key="FileChooserDialogImpl" timestamp="1578153131991">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1578153131991" />
-    <state width="1897" height="443" key="GridCell.Tab.0.bottom" timestamp="1579541866333">
-      <screen x="0" y="339" width="3286" height="741" />
-    </state>
-    <state width="1877" height="520" key="GridCell.Tab.0.bottom/0.0.1280.680/-1920.-272.1920.1040@-1920.-272.1920.1040" timestamp="1579525863913" />
-    <state width="1237" height="161" key="GridCell.Tab.0.bottom/0.0.1280.680/-1920.-272.1920.1040@0.0.1280.680" timestamp="1579509968359" />
-    <state width="1877" height="466" key="GridCell.Tab.0.bottom/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579269433198" />
-    <state width="1237" height="324" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1579511490224" />
-    <state width="1897" height="443" key="GridCell.Tab.0.bottom/0.339.3286.741@0.339.3286.741" timestamp="1579541866333" />
-    <state width="1897" height="443" key="GridCell.Tab.0.center" timestamp="1579541866332">
-      <screen x="0" y="339" width="3286" height="741" />
-    </state>
-    <state width="1877" height="520" key="GridCell.Tab.0.center/0.0.1280.680/-1920.-272.1920.1040@-1920.-272.1920.1040" timestamp="1579525863912" />
-    <state width="1237" height="161" key="GridCell.Tab.0.center/0.0.1280.680/-1920.-272.1920.1040@0.0.1280.680" timestamp="1579509968358" />
-    <state width="1877" height="466" key="GridCell.Tab.0.center/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579269433197" />
-    <state width="1237" height="324" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1579511490224" />
-    <state width="1897" height="443" key="GridCell.Tab.0.center/0.339.3286.741@0.339.3286.741" timestamp="1579541866332" />
-    <state width="1897" height="443" key="GridCell.Tab.0.left" timestamp="1579541866332">
-      <screen x="0" y="339" width="3286" height="741" />
-    </state>
-    <state width="1877" height="520" key="GridCell.Tab.0.left/0.0.1280.680/-1920.-272.1920.1040@-1920.-272.1920.1040" timestamp="1579525863912" />
-    <state width="1237" height="161" key="GridCell.Tab.0.left/0.0.1280.680/-1920.-272.1920.1040@0.0.1280.680" timestamp="1579509968358" />
-    <state width="1877" height="466" key="GridCell.Tab.0.left/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579269433197" />
-    <state width="1237" height="324" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1579511490224" />
-    <state width="1897" height="443" key="GridCell.Tab.0.left/0.339.3286.741@0.339.3286.741" timestamp="1579541866332" />
-    <state width="1897" height="443" key="GridCell.Tab.0.right" timestamp="1579541866333">
-      <screen x="0" y="339" width="3286" height="741" />
-    </state>
-    <state width="1877" height="520" key="GridCell.Tab.0.right/0.0.1280.680/-1920.-272.1920.1040@-1920.-272.1920.1040" timestamp="1579525863913" />
-    <state width="1237" height="161" key="GridCell.Tab.0.right/0.0.1280.680/-1920.-272.1920.1040@0.0.1280.680" timestamp="1579509968358" />
-    <state width="1877" height="466" key="GridCell.Tab.0.right/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579269433197" />
-    <state width="1237" height="324" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1579511490224" />
-    <state width="1897" height="443" key="GridCell.Tab.0.right/0.339.3286.741@0.339.3286.741" timestamp="1579541866333" />
-    <state width="1237" height="321" key="GridCell.Tab.1.bottom" timestamp="1579485942329">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1877" height="538" key="GridCell.Tab.1.bottom/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579255903132" />
-    <state width="1237" height="321" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1579485942329" />
-    <state width="1237" height="321" key="GridCell.Tab.1.center" timestamp="1579485942329">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1877" height="538" key="GridCell.Tab.1.center/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579255903132" />
-    <state width="1237" height="321" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1579485942329" />
-    <state width="1237" height="321" key="GridCell.Tab.1.left" timestamp="1579485942329">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1877" height="538" key="GridCell.Tab.1.left/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579255903132" />
-    <state width="1237" height="321" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1579485942329" />
-    <state width="1237" height="321" key="GridCell.Tab.1.right" timestamp="1579485942329">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1877" height="538" key="GridCell.Tab.1.right/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579255903132" />
-    <state width="1237" height="321" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1579485942329" />
-    <state x="211" y="27" key="SettingsEditor" timestamp="1579526513569">
+    <state width="1897" height="913" key="GridCell.Tab.0.right/290.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1593443693170" />
+    <state width="1276" height="298" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1593368691980" />
+    <state x="211" y="27" key="SettingsEditor" timestamp="1587216003880">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="-1707" y="0" key="SettingsEditor/0.0.1280.680/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1579267044593" />
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1579438327934" />
-    <state x="211" y="27" key="SettingsEditor/67.27.1299.741@67.27.1299.741" timestamp="1579526513569" />
-    <state x="598" y="421" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1579541900575">
-      <screen x="0" y="339" width="3286" height="741" />
+    <state x="211" y="27" key="SettingsEditor/67.27.1299.741@67.27.1299.741" timestamp="1587216003880" />
+    <state x="379" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1593175228395">
+      <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="233" y="75" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1578905456719" />
-    <state x="598" y="421" width="800" height="528" key="Vcs.Push.Dialog.v2/0.339.3286.741@0.339.3286.741" timestamp="1579541900575" />
-    <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1578144798085">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="93" y="93" width="1095" height="495" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1280.680@0.0.1280.680" timestamp="1578144798085" />
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1579505360259">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1579254767923" />
-    <state x="337" y="166" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1579505360259" />
-    <state x="203" y="78" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1578237520081">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="203" y="78" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1280.680@0.0.1280.680" timestamp="1578237520081" />
-    <state x="378" y="133" key="git4idea.merge.GitPullDialog" timestamp="1578155320168">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="378" y="133" key="git4idea.merge.GitPullDialog/0.0.1280.680@0.0.1280.680" timestamp="1578155320168" />
-    <state x="104" y="95" key="vcs.ApplyPatchDifferentiatedDialog" timestamp="1579273463357">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="104" y="95" key="vcs.ApplyPatchDifferentiatedDialog/0.0.1280.680/-1920.0.1920.1040@0.0.1280.680" timestamp="1579273463357" />
+    <state x="379" y="89" width="672" height="678" key="search.everywhere.popup/67.27.1299.741@67.27.1299.741" timestamp="1593175228395" />
   </component>
 </project>

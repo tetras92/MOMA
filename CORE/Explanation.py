@@ -1,7 +1,7 @@
 from gurobipy import *
 
 from CORE.NecessaryPreference import NecessaryPreference
-from CORE.Tools import covectorOfPairWiseInformationWith2Levels
+from CORE.Tools import covectorOfPairWiseInformationWith2Levels, EPSILON, tradeoff
 
 
 class Explain:
@@ -10,7 +10,7 @@ class Explain:
     def Order2SwapExplanation(mcda_problemDescription=None, Relation=None, object=(None, None)):
         if Relation is None:
             Relation = list()
-        s = "Explanation by at most 2-order swaps\n"
+        s = "Explanation by at most 2-order necessary swaps\n"
         object_covector = covectorOfPairWiseInformationWith2Levels(object)
         SigmaP = [i for i in range(len(object_covector)) if object_covector[i] == 1]
         SigmaD = [i for i in range(len(object_covector)) if object_covector[i] == -1]
@@ -27,6 +27,7 @@ class Explain:
                 else :
                     edgeCoeffDict[(i, j)] = 0
 
+        print("NECESSAIRE", edgeCoeffDict)
         matching_gurobi_model = Model("Explain Matching Model")
         matching_gurobi_model.setParam('OutputFlag', False)
         for i, j in edgeCoeffDict:
@@ -93,7 +94,7 @@ class Explain:
             concernedBooleanVarDict[i].append(var_ij)
             concernedBooleanVarDict[j].append(var_ij)
             booleanVarDict[(i, j)] = var_ij
-
+        print("POSSIBLE", edgeCoeffDict)
         matching_gurobi_model.update()
         for i, VarList in concernedBooleanVarDict.items():
             matching_gurobi_model.addConstr(quicksum(VarList) <= 1)
@@ -160,6 +161,102 @@ class Explain:
         else:
             return False, s + "\tCan not explain by transitivity"
 
+    @staticmethod
+    def Order2SwapMixedExplanation(mcda_problemDescription=None, Relation=None, object=(None, None)):
+        plne_model, VarList, VarDict = mcda_problemDescription.generate_gurobi_model_for_explanation_purposes_and_its_varDict_and_varList("2-Swap Mixed Explanation", EPSILON)
+        x, y = object
+        object_covector = covectorOfPairWiseInformationWith2Levels(object)
+        Bxy = [i for i in range(len(object_covector)) if object_covector[i] == 1]
+        Lxy = [i for i in range(len(object_covector)) if object_covector[i] == -1]
+
+        if len(Bxy) == len(Lxy) and len(Bxy) == 1:
+            return True, "Exempted of 2-Swap Explanation"
+        def l_i(i, alt):
+            return alt.attributeLevelsList[i]
+
+        S = list()  # Swaps space
+        for i in Bxy:
+            for j in Lxy:
+                for bi_inf in range(l_i(i, y), l_i(i, x)):
+                    for bi_sup in range(l_i(i, y) + 1, l_i(i, x) + 1 ):
+                        if bi_inf < bi_sup :
+                            for bj_inf in range(l_i(j, x), l_i(j, y)):
+                                for bj_sup in range(l_i(j, x) + 1, l_i(j, y) + 1):
+                                    if bj_inf < bj_sup:
+                                        S.append((i,j,bi_inf,bi_sup,bj_inf,bj_sup))
+        # print(VarList)
+        VarS = {s : plne_model.addVar(vtype=GRB.BINARY, name=tradeoff(s, VarList)) for s in S}
+
+        plne_model.update()
+        # print(VarS.values())
+
+        # Swaps constraints
+        for s, bs in VarS.items():
+            i, j, bi_inf, bi_sup, bj_inf, bj_sup = s
+            # plne_model.addConstr(VarList[i][bi_sup][1] - VarList[i][bi_inf][1] - VarList[j][bj_sup][1] + VarList[j][bj_inf][1] >= (1 + EPSILON)*bs - 1)
+            plne_model.addConstr(VarList[i][bi_sup][1] - VarList[i][bi_inf][1] - VarList[j][bj_sup][1] + VarList[j][bj_inf][1] >= bs - 1)
+
+        plne_model.update()
+
+        #Lxy Constraints
+        for j in Lxy:
+            for Ij in range(l_i(j, x), l_i(j, y)):
+                cst = LinExpr()
+                for s, bs in VarS.items():
+                    if j == s[1] and Ij >= s[4] and Ij + 1 <= s[5]:
+                        cst += bs
+            plne_model.addConstr(cst == 1)
+
+        plne_model.update()
+
+        #Bxy Constraints
+        for i in Bxy:
+            for Ii in range(l_i(i, y), l_i(i, x)):
+                cst =LinExpr()
+                for s, bs in VarS.items():
+                    if i == s[0] and Ii >= s[2] and Ii + 1 <= s[3]:
+                        cst += bs
+            plne_model.addConstr(cst <= 1)
+        plne_model.update()
+
+        #PI constraints
+        if Relation is None:
+            Relation = list()
+        for (altD, altd) in Relation:
+            plne_model.addConstr(altD.linear_expr(VarDict) - altd.linear_expr(VarDict) >= EPSILON)
+            # plne_model.addConstr(altD.linear_expr(VarDict) - altd.linear_expr(VarDict) >= 0)
+        plne_model.update()
+
+        plne_model.optimize()
+        explainable = plne_model.status == GRB.OPTIMAL
+        if not explainable:
+            return False, ""
+
+        Explanation_text = "Mixed Explanation computable\n"
+        edgeSelected = list()
+        for s, bs in VarS.items():
+            # print(s, bs.x)
+            if bs.x == 1:
+                edgeSelected.append((s[0], s[1]))
+                # Explanation_text += "\t" + bs.VarName + "\n"
+
+        # ---
+        Explanation = list()
+        ListAttributeLevelsList = list()
+        ListAttributeLevelsList.append(object[0])
+        for i, j in edgeSelected:
+            prec = ListAttributeLevelsList[-1]
+            suiv = mcda_problemDescription.getSwapObject(prec, (i, j))
+            Explanation.append(suiv)
+            ListAttributeLevelsList.append(suiv.alternative2)
+
+        for elm in Explanation:
+            Explanation_text += "\t" + str(elm) + "\n"
+
+
+        return True, Explanation_text
+
+        # return explainable, tradeoff_used
 
 class ExplanationWrapper():
     def __init__(self, ListOfExplanationEngines, UseAll=True):

@@ -6,7 +6,7 @@ from gurobipy import *
 from CORE.Alternative import Alternative
 from CORE.AppreciationObject import SwapObject, TransitiveObject
 from CORE.Information import Information
-from CORE.Tools import attribute_creator, CONSTRAINTSFEASIBILITYTOL, symbol
+from CORE.Tools import attribute_creator, CONSTRAINTSFEASIBILITYTOL, symbol, INTEGERFEASIBILITYTOL
 
 
 class ProblemDescription:
@@ -104,6 +104,7 @@ class ProblemDescription:
                     list(zip(self._criterionAtrributesDict[criterion], self._criterionLevelsDict[criterion])):
                 D[attribute_creator(criterion, attribute)] = level
                 LA.append(attribute_creator(criterion, attribute))
+            # print(LA)
             L.append(LA)
         for NSL in L:
             NSL.sort(key=lambda x : D[x])
@@ -124,6 +125,7 @@ class ProblemDescription:
                 if i != j:
                     self._fictious_pairs_of_alternatives[(i, j)] = \
                         (fictious_alternative(j), fictious_alternative(i))
+
 
 
     def generate_basic_gurobi_model_and_its_varDict(self, modelName):
@@ -153,7 +155,37 @@ class ProblemDescription:
             cst += VarDict[LOCA[-1]]
         gurobi_model.addConstr(cst == 1)
 
+        gurobi_model.update()
         return gurobi_model, VarDict
+
+    def generate_gurobi_model_for_explanation_purposes_and_its_varDict_and_varList(self, modelName, epsilon=0):
+        """Retourne un programme lineaire en nombres entiers conforme au modele decrit dans le document de
+         synthese. Parmi ses variables on retrouve les variables booleennes correspondant à des swaps."""
+
+
+        listOfListOfOrderedCriterionAttributesCopy = [L.copy() for L in self._list_of_list_of_ordered_criterion_attributes]
+        gurobi_model = Model(modelName)
+        gurobi_model.setParam('OutputFlag', False)
+        gurobi_model.Params.FeasibilityTol = CONSTRAINTSFEASIBILITYTOL
+        gurobi_model.Params.IntFeasTol = INTEGERFEASIBILITYTOL
+        # print("FEASABILITY TOL", gurobi_model.Params.FeasibilityTol)
+        VarDict = {varname: gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0, ub=1, name=varname)
+                   for L in listOfListOfOrderedCriterionAttributesCopy for varname in L}
+        VarList = [[(varname, VarDict[varname]) for varname in L]
+                   for L in listOfListOfOrderedCriterionAttributesCopy]
+        gurobi_model.update()
+        # print(VarList)
+        cst = LinExpr()
+        for ListOfCoupleNameVar in VarList:
+            for i in range(1, len(ListOfCoupleNameVar)):
+                gurobi_model.addConstr(ListOfCoupleNameVar[i][1] >= ListOfCoupleNameVar[i - 1][1] + epsilon)
+            gurobi_model.addConstr(ListOfCoupleNameVar[0][1] == 0)
+            cst += ListOfCoupleNameVar[-1][1]
+        gurobi_model.addConstr(cst == 1)
+
+        gurobi_model.update()
+        return gurobi_model, VarList, VarDict
+
 
     def generate_kb_basic_gurobi_model_and_its_VarM(self, modelName):
         """Retourne le programme linéaire de base prenant en considération le sens
@@ -163,8 +195,8 @@ class ProblemDescription:
         gurobi_model = Model(modelName)
         gurobi_model.setParam('OutputFlag', False)
 
-        # gurobi_model.Params.IntFeasTol = CONSTRAINTSFEASIBILITYTOL
-        # gurobi_model.Params.FeasibilityTol = CONSTRAINTSFEASIBILITYTOL
+        gurobi_model.Params.IntFeasTol = INTEGERFEASIBILITYTOL # 29/06/20 : https://www.gurobi.com/documentation/9.0/refman/intfeastol.html
+        # gurobi_model.Params.FeasibilityTol = CONSTRAINTSFEASIBILITYTOL # https://www.gurobi.com/documentation/9.0/refman/feasibilitytol.html
         # gurobi_model.Params.DualReductions = 0   # indispensable pour discriminer entre PL InFeasible or unBounded
         # Borne sup choisie arbitrairement égale à 1 (UTA GMS).
 

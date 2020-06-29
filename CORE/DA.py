@@ -59,7 +59,9 @@ class DA:
         """DM --> NoneType
         Méthode principale qui simule l'interaction entre le DA et le DM"""
 
-
+        n = 0
+        n_exp = 0
+        exp = 0
         self._recommendationMaker.update(self._problemDescription, **PI().getRelation())
         while not self._recommendationMaker.canRecommend and not self._stopCriterion.stop():
 
@@ -76,11 +78,14 @@ class DA:
             print("N : \n{}".format(str(N())))
 
             if not N_initial_empty_state:
+
                 info = N().pick()
                 try:
                     self.explanationEngine.computeExplanation(self._problemDescription, info.o.dominanceObject, **PI().getRelation())
-                    if self.explanationEngine.explanation == "": print("NO_EXPLANATION")
-                    else: print(self.explanationEngine.explanation)
+                    if info.difficultyLevel > 2:
+                        n += 1
+                        if self.explanationEngine.explanation == "": print("NO_EXPLANATION"); n_exp += 1
+                        else: print(self.explanationEngine.explanation); exp += 1
                     Dialog(info).madeWith(dm)
                 except DMdoesntValidateNElementException as dme:
                     self.explanationEngine.computeExplanation(self._problemDescription, dme.dominanceObject, **PI().getRelation())
@@ -97,7 +102,7 @@ class DA:
             Dialog(info).madeWith(dm)
             self._recommendationMaker.update(self._problemDescription, **PI().getRelation())  # Les 2 sont nécessaires
         self.recommendation = self._recommendationMaker.recommendation
-
+        print("Bilan", n, exp, n_exp)
         # model, VarDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
         # InformationStore.addInformationToModel(PI(), model, VarDict)
         # InformationStore.computeRegrets(self._problemDescription, model, VarDict)
