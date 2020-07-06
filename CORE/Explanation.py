@@ -27,7 +27,7 @@ class Explain:
                 else :
                     edgeCoeffDict[(i, j)] = 0
 
-        print("NECESSAIRE", edgeCoeffDict)
+        # print("NECESSAIRE", edgeCoeffDict)
         matching_gurobi_model = Model("Explain Matching Model")
         matching_gurobi_model.setParam('OutputFlag', False)
         for i, j in edgeCoeffDict:
@@ -284,5 +284,5 @@ class ExplanationWrapper():
     def __str__(self):
         s = "\n** EXPLANATION ENGINES PERFORMANCE **\n"
         for engine, n in self.summary.items():
-                s += "{} : {} / {}\n".format(engine, n, ExplanationWrapper.counter.nb)
+                s += "\t{:<30} : {} / {}\n".format(engine, n, ExplanationWrapper.counter.nb)
         return s
