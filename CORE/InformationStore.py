@@ -1,7 +1,7 @@
 from CORE.NecessaryPreference import *
 from CORE.Tools import AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS
 from CORE.decorators import singleton
-
+from CORE.Commitment import AnswerCommitment
 
 class InformationStore:
     def __init__(self, strlen=105):
@@ -127,14 +127,17 @@ class PI(InformationStore):
         datesInRelation = list()
         relationElementInfoDict = dict()
         for information in self:
+
             datesInRelation.append(information.last_commit_date)
             if information.termP is AS_LEAST_AS_GOOD_AS():
                 element = (information.alternative1, information.alternative2)
                 relationElementList.append(element)
+                # if information.how_entering_pi is AnswerCommitment : relationElementList.append(element)
                 relationElementInfoDict[information] = element
             elif information.termP is NOT_AS_LEAST_AS_GOOD_AS():
                 element = (information.alternative2, information.alternative1)
                 relationElementList.append(element)
+                # if information.how_entering_pi is AnswerCommitment : relationElementList.append(element)
                 relationElementInfoDict[information] = element
             else :
                 raise Exception("Error getRelation in PI()")

@@ -1,8 +1,8 @@
 from gurobipy import *
 
 from CORE.NecessaryPreference import NecessaryPreference
-from CORE.Tools import covectorOfPairWiseInformationWith2Levels, EPSILON, tradeoff
-
+from CORE.Tools import covectorOfPairWiseInformationWith2Levels, EPSILON, tradeoff, Counter
+from CORE.decorators import counting
 
 class Explain:
 
@@ -184,7 +184,7 @@ class Explain:
                                 for bj_sup in range(l_i(j, x) + 1, l_i(j, y) + 1):
                                     if bj_inf < bj_sup:
                                         S.append((i,j,bi_inf,bi_sup,bj_inf,bj_sup))
-        # print(VarList)
+        # print("======================", Bxy, Lxy)
         VarS = {s : plne_model.addVar(vtype=GRB.BINARY, name=tradeoff(s, VarList)) for s in S}
 
         plne_model.update()
@@ -259,11 +259,16 @@ class Explain:
         # return explainable, tradeoff_used
 
 class ExplanationWrapper():
+    counter = Counter()
     def __init__(self, ListOfExplanationEngines, UseAll=True):
         self.ListOfExplanationEngines = ListOfExplanationEngines
         self.useAllEngines = UseAll
         self.explanation = ""
+        self.summary = {engine.__name__ : 0 for engine in self.ListOfExplanationEngines} # summary of explanations that have been computed
+        self.summary["ALL"] = 0
 
+
+    @counting(counter)
     def computeExplanation(self, problemDescription, object, **kwargs):
         self.explanation = ""
         dominanceRelation = kwargs["dominanceRelation"]
@@ -271,4 +276,13 @@ class ExplanationWrapper():
             result, detail = engine(problemDescription, dominanceRelation, object)
             if result :
                 self.explanation += detail
-                if not self.useAllEngines : return
+                self.summary[engine.__name__] += 1
+                if not self.useAllEngines : break
+        if self.explanation != "" :
+            self.summary["ALL"] += 1
+
+    def __str__(self):
+        s = "\n** EXPLANATION ENGINES PERFORMANCE **\n"
+        for engine, n in self.summary.items():
+                s += "{} : {} / {}\n".format(engine, n, ExplanationWrapper.counter.nb)
+        return s

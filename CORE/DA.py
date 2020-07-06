@@ -53,15 +53,15 @@ class DA:
         """ --> NoneType
         affiche une recommandation partielle, complète ou Échec"""
         print("MY RECOMMENDATION IS : ", self.recommendation)
-
+        print(self.explanationEngine)
 
     def interactWith(self, dm):
         """DM --> NoneType
         Méthode principale qui simule l'interaction entre le DA et le DM"""
 
-        n = 0
-        n_exp = 0
-        exp = 0
+        # n = 0
+        # n_exp = 0
+        # exp = 0
         self._recommendationMaker.update(self._problemDescription, **PI().getRelation())
         while not self._recommendationMaker.canRecommend and not self._stopCriterion.stop():
 
@@ -80,19 +80,20 @@ class DA:
             if not N_initial_empty_state:
 
                 info = N().pick()
-                try:
+                # try:
+
+                if info.difficultyLevel > 2:
                     self.explanationEngine.computeExplanation(self._problemDescription, info.o.dominanceObject, **PI().getRelation())
-                    if info.difficultyLevel > 2:
-                        n += 1
-                        if self.explanationEngine.explanation == "": print("NO_EXPLANATION"); n_exp += 1
-                        else: print(self.explanationEngine.explanation); exp += 1
-                    Dialog(info).madeWith(dm)
-                except DMdoesntValidateNElementException as dme:
-                    self.explanationEngine.computeExplanation(self._problemDescription, dme.dominanceObject, **PI().getRelation())
-                    print(self.explanationEngine.explanation)
-                    self.inconsistencySolver.update(self._problemDescription)
-                    self.inconsistencySolver.solve()
-                    N().clear()
+                    # n += 1
+                    if self.explanationEngine.explanation == "": print("NO_EXPLANATION")#; n_exp += 1
+                    else: print(self.explanationEngine.explanation)#; exp += 1
+                Dialog(info).madeWith(dm)
+                # except DMdoesntValidateNElementException as dme:
+                #     self.explanationEngine.computeExplanation(self._problemDescription, dme.dominanceObject, **PI().getRelation())
+                #     print(self.explanationEngine.explanation)
+                #     self.inconsistencySolver.update(self._problemDescription)
+                #     self.inconsistencySolver.solve()
+                #     N().clear()
 
 
             self._recommendationMaker.update(self._problemDescription, **PI().getRelation())  # Les 2 sont nécessaires
@@ -102,9 +103,71 @@ class DA:
             Dialog(info).madeWith(dm)
             self._recommendationMaker.update(self._problemDescription, **PI().getRelation())  # Les 2 sont nécessaires
         self.recommendation = self._recommendationMaker.recommendation
-        print("Bilan", n, exp, n_exp)
+        # print("Bilan", n, exp, n_exp)
         # model, VarDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
         # InformationStore.addInformationToModel(PI(), model, VarDict)
         # InformationStore.computeRegrets(self._problemDescription, model, VarDict)
 
-
+    # def interactWith(self, dm):
+    #         """DM --> NoneType
+    #         Méthode principale qui simule l'interaction entre le DA et le DM"""
+    #
+    #         n = 0
+    #         n_exp = 0
+    #         exp = 0
+    #         self._recommendationMaker.update(self._problemDescription, **PI().getRelation())
+    #         while not self._recommendationMaker.canRecommend and not self._stopCriterion.stop():
+    #
+    #             # model, VarDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
+    #             # InformationStore.addInformationToModel(PI(), model, VarDict)
+    #             # InformationStore.computeRegrets(self._problemDescription, model, VarDict)
+    #
+    #             N().update(self._problemDescription, **PI().getRelation())
+    #             N_initial_empty_state = N().is_empty()
+    #
+    #             assert len(N()) + len(PI()) + len(NonPI()) == self._problemDescription.numberOfInformation
+    #
+    #             print("PI : \n{}".format(str(PI())))
+    #             print("N : \n{}".format(str(N())))
+    #
+    #             if not N_initial_empty_state:
+    #                 L = list()
+    #                 D = list()
+    #                 while not N().is_empty():
+    #                     info = N().pick()
+    #                     L.append(info.o.dominanceObject)
+    #                     D.append(info.difficultyLevel)
+    #                     Dialog(info).madeWith(dm)
+    #                 try:
+    #                     print("========================================================")
+    #                     print("PI : \n{}".format(str(PI())))
+    #                     for i in range(len(L)):
+    #                         # self.explanationEngine.computeExplanation(self._problemDescription, info.o.dominanceObject, **PI().getRelation())
+    #                         self.explanationEngine.computeExplanation(self._problemDescription, L[i], **PI().getRelation())
+    #
+    #                         if D[i] > 2:
+    #                             n += 1
+    #                             if self.explanationEngine.explanation == "": print("NO_EXPLANATION"); n_exp += 1
+    #                             else: print(self.explanationEngine.explanation); exp += 1
+    #
+    #                 except DMdoesntValidateNElementException as dme:
+    #                     self.explanationEngine.computeExplanation(self._problemDescription, dme.dominanceObject, **PI().getRelation())
+    #                     print(self.explanationEngine.explanation)
+    #                     self.inconsistencySolver.update(self._problemDescription)
+    #                     self.inconsistencySolver.solve()
+    #                     N().clear()
+    #
+    #
+    #             self._recommendationMaker.update(self._problemDescription, **PI().getRelation())  # Les 2 sont nécessaires
+    #             if not N_initial_empty_state: continue # Une question à chaque tour
+    #
+    #             info = NonPI().pick()
+    #             Dialog(info).madeWith(dm)
+    #             self._recommendationMaker.update(self._problemDescription, **PI().getRelation())  # Les 2 sont nécessaires
+    #         self.recommendation = self._recommendationMaker.recommendation
+    #         print("Bilan", n, exp, n_exp)
+    #         # model, VarDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
+    #         # InformationStore.addInformationToModel(PI(), model, VarDict)
+    #         # InformationStore.computeRegrets(self._problemDescription, model, VarDict)
+    #
+    #

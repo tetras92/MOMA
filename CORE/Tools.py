@@ -64,6 +64,12 @@ class NO_TERM():
     def __str__(self):
         return "?"
 
+class Counter:
+        def __init__(self):
+            self.nb = 0
+        def count(self):
+            # print("===================================")
+            self.nb += 1
 
 if __name__ == "__main__" :
     print(- AS_LEAST_AS_GOOD_AS())

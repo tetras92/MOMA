@@ -115,4 +115,4 @@ class CommitmentStore():
     info_store = property(fget=getInfoStore)
 
     def getWayOfIntroduction(self, info):
-        return str(self._store_info_commitment[info][-1].__class__)
+        return self._store_info_commitment[info][-1].__class__

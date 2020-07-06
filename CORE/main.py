@@ -16,13 +16,13 @@ if __name__ == "__main__":
 
     DA(problemDescription=mcda_problem_description,
        NonPI_InfoPicker= RandomPicker(), # DeterministicPicker(), #,
-       stopCriterion=DialogDurationStopCriterion(105),
+       stopCriterion=DialogDurationStopCriterion(float("inf")),
        N_InfoPicker=RandomPicker(0),
        recommandationMaker=RecommendationWrapper(KRankingRecommendation, mcda_problem_description.getNumberOfAlternatives()),
        InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver),
-       ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.Order2SwapMixedExplanation, Explain.TransitiveExplanation]),
+       ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.Order2SwapExplanation, Explain.Order2SwapMixedExplanation, Explain.TransitiveExplanation]),
                                                                             # Explain.Order2SwapPossibleExplanation, Explain.Order2SwapExplanation,]),
-                                                                            # Explain.TransitiveExplanation]),
+                                                                            #  Explain.TransitiveExplanation]),
                                              UseAll=True)
        )
 
@@ -30,3 +30,4 @@ if __name__ == "__main__":
     DA().show()
     # print(CommitmentStore())
     # mcda_problem_description.listOfInformation[3].showMinMaxRegretHistory()
+# MY RECOMMENDATION IS :  [[46] : +-+++-, [60] : ++++--, [45] : +-++-+, [30] : -++++-, [15] : --++++, [54] : ++-++-, [29] : -+++-+, [39] : +--+++, [58] : +++-+-, [53] : ++-+-+, [43] : +-+-++, [57] : +++--+, [23] : -+-+++, [27] : -++-++, [51] : ++--++]

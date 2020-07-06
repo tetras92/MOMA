@@ -11,7 +11,7 @@ class NecessaryPreference:
             Relation = list()
         if object in Relation: return True
         elmt1, elmt2 = object
-        # if (elmt2, elmt1) in Relation: return False # Doit-on prendre garde à l'équivalence?       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        if (elmt2, elmt1) in Relation: return False # Doit-on prendre garde à l'équivalence?       !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         model, VarMList = mcda_problemDescription.generate_kb_basic_gurobi_model_and_its_VarM("MOMA Necessary Preference")
 
         LCovPIList = [covectorOfPairWiseInformationWith2Levels(coupleAlt) for coupleAlt in Relation]
