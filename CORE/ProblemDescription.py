@@ -195,16 +195,16 @@ class ProblemDescription:
         gurobi_model = Model(modelName)
         gurobi_model.setParam('OutputFlag', False)
 
-        gurobi_model.Params.IntFeasTol = INTEGERFEASIBILITYTOL # 29/06/20 : https://www.gurobi.com/documentation/9.0/refman/intfeastol.html
+        # gurobi_model.Params.IntFeasTol = INTEGERFEASIBILITYTOL # 29/06/20 : https://www.gurobi.com/documentation/9.0/refman/intfeastol.html
         gurobi_model.Params.FeasibilityTol = CONSTRAINTSFEASIBILITYTOL # https://www.gurobi.com/documentation/9.0/refman/feasibilitytol.html
         # gurobi_model.Params.DualReductions = 0   # indispensable pour discriminer entre PL InFeasible or unBounded
 
 
-        VarM = [gurobi_model.addVar(vtype=GRB.INTEGER, lb=0, name="M_{}".format(criterion))
-                   for criterion in self._criteriaOrderedList]
-
-        # VarM = [gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="M_{}".format(criterion))
+        # VarM = [gurobi_model.addVar(vtype=GRB.INTEGER, lb=0, name="M_{}".format(criterion))
         #            for criterion in self._criteriaOrderedList]
+
+        VarM = [gurobi_model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="M_{}".format(criterion))
+                   for criterion in self._criteriaOrderedList]
         gurobi_model.update()
 
         return gurobi_model, VarM

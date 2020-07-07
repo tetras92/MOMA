@@ -1,9 +1,9 @@
 from CORE.DA import DA
 from CORE.DM import NoisyWS_DM
 from CORE.InconsistencySolver import InconsistencySolverWrapper, RadicalInconsistencySolver
-from CORE.InformationPicker import RandomPicker, DifficultyLevelPicker, DeterministicPicker
+from CORE.InformationPicker import RandomPicker, DifficultyLevelPicker, DeterministicPicker, DiscoveryPicker
 from CORE.ProblemDescription import *
-from CORE.Recommendation import RecommendationWrapper, KRankingRecommendation
+from CORE.Recommendation import RecommendationWrapper, KRankingRecommendation, KBestRecommendation
 from CORE.StopCriterion import *
 from CORE.Explanation import ExplanationWrapper, Explain
 
@@ -15,7 +15,7 @@ if __name__ == "__main__":
     dm = NoisyWS_DM("CSVFILES/DM_Utility_Function6.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
 
     DA(problemDescription=mcda_problem_description,
-       NonPI_InfoPicker= RandomPicker(), # DeterministicPicker(), #,
+       NonPI_InfoPicker=RandomPicker(), #,
        stopCriterion=DialogDurationStopCriterion(float("inf")),
        N_InfoPicker=RandomPicker(0),
        recommandationMaker=RecommendationWrapper(KRankingRecommendation, mcda_problem_description.getNumberOfAlternatives()),

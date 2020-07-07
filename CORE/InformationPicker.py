@@ -25,10 +25,37 @@ class RandomPicker(InformationPicker):
         storeSize = len(store)
         return store[self._generator.randrange(storeSize)]
 
+class DiscoveryPicker(RandomPicker):
+    def __init__(self, seedValue=None):
+        RandomPicker.__init__(self, seedValue)
+        self.alternativesSet = set()
+
+    def pick(self, store):
+        storeCopy = [info for info in store]
+        rdm.shuffle(storeCopy)
+        for info in storeCopy:
+            if info.alternative1 not in self.alternativesSet \
+                    and info.alternative2 not in self.alternativesSet:
+                self.alternativesSet.add(info.alternative1)
+                self.alternativesSet.add(info.alternative2)
+                return info
+
+        for info in storeCopy:
+            if info.alternative1 not in self.alternativesSet \
+                    or info.alternative2 not in self.alternativesSet:
+                self.alternativesSet.add(info.alternative1)
+                self.alternativesSet.add(info.alternative2)
+                return info
+        infoToPick = RandomPicker.pick(self, store)
+        self.alternativesSet.add(infoToPick.alternative1)
+        self.alternativesSet.add(infoToPick.alternative2)
+
+        return infoToPick
 
 class DeterministicPicker(InformationPicker):
     def __init__(self):
-        self.L = [(30, 39), (43, 54), (58, 60), (43, 45), (51, 53), (27, 29), (27, 43), (46, 53)]
+        # self.L = [(57, 60), (45, 51), (46, 53), (27, 58), (43, 54), (30, 39), (23, 29), (15, 30), (46, 54), (46, 57), (27, 45), (57, 58), (43, 45), (39, 43)] #(23, 58)
+        self.L = [(53, 58), (23, 46), (29, 30), (43, 53)] #(39, 58)
         # self.L = [(15, 23), (15, 27), (15, 29), (15, 30), (15, 39), (15, 43), (15, 45), (23, 27),
         #           (45, 58), (15, 58), (45, 54), (15, 54),
         #           (23, 58), (23, 43),
@@ -37,7 +64,7 @@ class DeterministicPicker(InformationPicker):
         #           (29, 54), (29, 58), (30, 45), (39, 58), (43, 53), (53, 58)]
         self.L.reverse()
 
-        #(23, 58)
+
     def pick(self, store):
         elmt = self.L.pop()
         for info in store:

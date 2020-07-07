@@ -69,11 +69,15 @@ class DA:
             # InformationStore.addInformationToModel(PI(), model, VarDict)
             # InformationStore.computeRegrets(self._problemDescription, model, VarDict)
 
+            # print("==============Non-PI : \n{}".format(str(NonPI())))
+            # print("===============N : \n{}".format(str(N())))
+            # print("============= ", PI().getRelation()["dominanceRelation"])
             N().update(self._problemDescription, **PI().getRelation())
             N_initial_empty_state = N().is_empty()
 
             assert len(N()) + len(PI()) + len(NonPI()) == self._problemDescription.numberOfInformation
 
+            print("Non-PI : \n{}".format(str(NonPI())))
             print("PI : \n{}".format(str(PI())))
             print("N : \n{}".format(str(N())))
 
@@ -85,8 +89,8 @@ class DA:
                 if info.difficultyLevel > 2:
                     self.explanationEngine.computeExplanation(self._problemDescription, info.o.dominanceObject, **PI().getRelation())
                     # n += 1
-                    if self.explanationEngine.explanation == "": print("NO_EXPLANATION")#; n_exp += 1
-                    else: print(self.explanationEngine.explanation)#; exp += 1
+                    if self.explanationEngine.explanation == "": print("NO_EXPLANATION")
+                    else: print(self.explanationEngine.explanation)
                 Dialog(info).madeWith(dm)
                 # except DMdoesntValidateNElementException as dme:
                 #     self.explanationEngine.computeExplanation(self._problemDescription, dme.dominanceObject, **PI().getRelation())

@@ -271,7 +271,7 @@ class ExplanationWrapper():
     @counting(counter)
     def computeExplanation(self, problemDescription, object, **kwargs):
         self.explanation = ""
-        dominanceRelation = kwargs["dominanceRelation"]
+        dominanceRelation = kwargs["recommendationDominanceRelation"]
         for engine in self.ListOfExplanationEngines:
             result, detail = engine(problemDescription, dominanceRelation, object)
             if result :

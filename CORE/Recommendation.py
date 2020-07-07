@@ -110,7 +110,7 @@ class RecommendationWrapper():
         self._recommendationType = recommendationType
 
     def update(self, problemDescription, **kwargs):
-        dominanceRelation = kwargs["dominanceRelation"]
+        dominanceRelation = kwargs["recommendationDominanceRelation"]
         self.ro = self._recommendationType(*self.args, problemDescription, dominanceRelation)
 
     def isAbleToRecommend(self):
