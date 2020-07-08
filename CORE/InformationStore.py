@@ -199,6 +199,9 @@ class NonPI(InformationStore):
 
     def add(self, information):
         self._store.append(information)
+        # - 08 / 07 / 20
+        self._store.sort(key=lambda info : info.id)
+        # - #
 
     def remove(self, info):
         InformationStore.remove(self, info) # est utilisée

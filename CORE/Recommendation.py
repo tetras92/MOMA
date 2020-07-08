@@ -72,7 +72,7 @@ class KBestRecommendation(Recommendation):
         meilleures alternatives"""
     def __init__(self, k, problemDescription, dominanceRelation):
         Recommendation.__init__(self, problemDescription, dominanceRelation)
-        self.K = k
+        self._K = k
 
     def _generate_recommendation(self):
         ListKBest = list()
@@ -83,19 +83,19 @@ class KBestRecommendation(Recommendation):
                 if NecessaryPreference.adjudicate(mcda_problemDescription=self._problemDescription,
                                                       Relation=self._dominanceRelation, object=(altB, alt)):
                     nb_alt_domined_by_altB += 1
-            if nb_alt_domined_by_altB >= self._problemDescription.numberOfAlternatives - self.K:
+            if nb_alt_domined_by_altB >= self._problemDescription.numberOfAlternatives - self._K:
                 ListKBest.append(altB)
-        return len(ListKBest) >= self.K, ListKBest
+        return len(ListKBest) >= self._K, ListKBest
 
 
     def isAbleToRecommend(self):
-        answer, self.ListOfKBest = self._generate_recommendation()  # passe en premier pour pouvoir instancier self.ListOfKBest
+        answer, self._ListOfKBest = self._generate_recommendation()  # passe en premier pour pouvoir instancier self.ListOfKBest
         if len(self._ListOfRepresentedAlternatives) != self._problemDescription.numberOfAlternatives:
             return False
         return answer
 
     def getRecommendation(self):
-        return self.ListOfKBest
+        return self._ListOfKBest
 
     canRecommend = property(isAbleToRecommend)
     recommendation = property(getRecommendation)
@@ -122,6 +122,8 @@ class RecommendationWrapper():
     canRecommend = property(isAbleToRecommend)
     recommendation = property(getRecommendation)
 
+    def reset(self):
+        pass
 from CORE.ProblemDescription import ProblemDescription
 if __name__ == "__main__" :
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria4.csv",

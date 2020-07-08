@@ -13,9 +13,9 @@ class Information:
     NB_OBJECT = 0
     def __init__(self, alternative1, alternative2):
         """À l'initialisation, cet objet contient un simple PairwiseInformation (élément de NonPI)"""
-        self.o = PairwiseInformation(self, alternative1, alternative2)
-        self._id = Information.NB_OBJECT
         Information.NB_OBJECT += 1
+        self._id = Information.NB_OBJECT
+        self.o = PairwiseInformation(self, alternative1, alternative2)
         self.difficultyLevel = difficultyLevel((alternative1, alternative2))
         self.covector = covectorOfPairWiseInformationWith2Levels((alternative1, alternative2))
 

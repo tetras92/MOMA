@@ -286,3 +286,8 @@ class ExplanationWrapper():
         for engine, n in self.summary.items():
                 s += "\t{:<30} : {} / {}\n".format(engine, n, ExplanationWrapper.counter.nb)
         return s
+
+    def reset(self):
+        ExplanationWrapper.counter.nb = 0
+        for engine_name in self.summary :
+            self.summary[engine_name] = 0

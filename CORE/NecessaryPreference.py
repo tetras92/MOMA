@@ -21,7 +21,7 @@ class NecessaryPreference:
         # varL = [model.addVar(vtype=GRB.INTEGER, lb=0, name="L_pi_".format(i)) for i in range(len(Relation))]
         varL = [model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="L_pi_".format(i)) for i in range(len(Relation))]
 
-        varN = model.addVar(vtype=GRB.INTEGER, lb=1, name="N")
+        # varN = model.addVar(vtype=GRB.INTEGER, lb=1, name="N")
         model.update()
         varLDup = [np.array([vl]*len(VarMArray)) for vl in varL]
         varLDupCovPI = [varLDup[i] * LCovPIList[i] for i in range(len(LCovPIList))]
@@ -50,7 +50,7 @@ class NecessaryPreference:
         #     if varN.x != 1: print("Boom", varN.x, object, "=", xvarL, xvarM)
             # print("NV", varN.x)
 
-        # if (elmt1.id == 23 and elmt2.id == 58):
+        # if (elmt1.id == 53 and elmt2.id == 15):
         #     print("========================================> FOund", model.status == GRB.OPTIMAL)
         #     if model.status == GRB.OPTIMAL :
         #         xvarL = list()
@@ -60,7 +60,7 @@ class NecessaryPreference:
         #         for va in VarMList:
         #             xvarM.append(va.x)
         #         # if varN.x != 1: print("Boom", varN.x, object, "=", xvarL, xvarM)
-        #         print("VarL", xvarL, "VarM", xvarM, "VarN", round(varN.x, 5), "covector", object_covector)
+        #         print("VarL", xvarL, "VarM", xvarM, "VarN", "covector", object_covector)
         # if (elmt1.id == 58 and elmt2.id == 23):
         #     print("========================================> FOundR", model.status == GRB.OPTIMAL)
             # if model.status == GRB.OPTIMAL :

@@ -42,6 +42,7 @@ class InconsistencySolver:
     def solve(self):
         pass
 
+
 class RadicalInconsistencySolver(InconsistencySolver):
     """Classe modélisant un solveur (radical) d'une inconsistance.
         Le sous-ensemble  consistant retourné est vide."""
@@ -156,7 +157,8 @@ class InconsistencySolverWrapper():
             print(info, "added at {} by {}".format(info.last_commit_date, info.how_entering_pi))
         self._store.removeAll(self._infoToDeleteStore)
 
-
+    def reset(self):
+        pass
 
 
 

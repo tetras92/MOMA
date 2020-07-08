@@ -8,6 +8,8 @@ class StopCriterion:
     def stop(self):
         return True
 
+    def reset(self):
+        pass
 
 class DialogDurationStopCriterion(StopCriterion):
     """Critère d'arrêt lié à la durée des échanges."""
@@ -17,6 +19,8 @@ class DialogDurationStopCriterion(StopCriterion):
     def stop(self):
         return self._nbDialogsMax == Dialog.NB
 
+    def reset(self):
+        StopCriterion.reset(self)
 
 class DMVolatilityStopCriterion(StopCriterion):
     """Critère d'arrêt lié au traque de la versalité du DM"""
@@ -30,4 +34,6 @@ class DMVolatilityStopCriterion(StopCriterion):
                 return True
         return False
 
+    def reset(self):
+        StopCriterion.reset(self)
 

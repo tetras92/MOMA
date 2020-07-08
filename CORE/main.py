@@ -15,9 +15,9 @@ if __name__ == "__main__":
     dm = NoisyWS_DM("CSVFILES/DM_Utility_Function6.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
 
     DA(problemDescription=mcda_problem_description,
-       NonPI_InfoPicker=RandomPicker(), #,
+       NonPI_InfoPicker=RandomPicker(0), #,
        stopCriterion=DialogDurationStopCriterion(float("inf")),
-       N_InfoPicker=RandomPicker(0),
+       N_InfoPicker=RandomPicker(),
        recommandationMaker=RecommendationWrapper(KRankingRecommendation, mcda_problem_description.getNumberOfAlternatives()),
        InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver),
        ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.Order2SwapExplanation, Explain.Order2SwapMixedExplanation, Explain.TransitiveExplanation]),
@@ -26,6 +26,10 @@ if __name__ == "__main__":
                                              UseAll=True)
        )
 
+    DA().interactWith(dm)
+    DA().show()
+
+    DA().reset()
     DA().interactWith(dm)
     DA().show()
     # print(CommitmentStore())

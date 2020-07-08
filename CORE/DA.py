@@ -28,7 +28,10 @@ class DA:
         # - InconsistencySolverType : InconsistencySolver (InconsistencySolver.py)
 
         self._problemDescription = problemDescription
-
+        # - 08 / 07 / 20
+        self._nonPIPicker = NonPI_InfoPicker
+        self._NPicker = N_InfoPicker
+        # -
         # Initialization of the InformationStore Objects
             # NonPi
         NonPI()
@@ -111,6 +114,23 @@ class DA:
         # model, VarDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
         # InformationStore.addInformationToModel(PI(), model, VarDict)
         # InformationStore.computeRegrets(self._problemDescription, model, VarDict)
+
+    def reset(self):
+
+        self._nonPIPicker.reset()
+        self._NPicker.reset()
+        self._stopCriterion.reset()
+        # -
+        self._recommendationMaker.reset()
+        self.recommendation = ""
+        # - #
+        self.inconsistencySolver.reset()
+        self.explanationEngine.reset()
+
+        Dialog.NB = 0
+        PI().clear()
+        N().clear()
+
 
     # def interactWith(self, dm):
     #         """DM --> NoneType
