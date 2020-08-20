@@ -1,7 +1,7 @@
 from CORE.InformationStore import NonPI, PI, N
 from CORE.Tools import NO_TERM
 from CORE.Tools import colored_expression, AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS
-
+from CORE.NecessaryPreference import NecessaryPreference
 
 class AppreciationObject:
     """Classe de base modélisation une paire d'alternatives"""
@@ -124,6 +124,9 @@ class SwapObject(AppreciationObject):
 
     def __str__(self):
         return AppreciationObject.__str__(self)
+
+    def is_necessary(self, mcda_problemDescription=None, Relation=None):
+        return NecessaryPreference.adjudicate(mcda_problemDescription, Relation, (self.alternative1, self.alternative2))
 
 class TransitiveObject(AppreciationObject):
     def __init__(self, alternativeD, alternatived):
