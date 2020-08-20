@@ -227,12 +227,28 @@ class Explain:
             # plne_model.addConstr(altD.linear_expr(VarDict) - altd.linear_expr(VarDict) >= 0)
         plne_model.update()
 
+
+        # VERY VERY SPECIFIC TO BINARY CASE (+ and -)
+        NSS = set()       # necessary swap set
+        for s, bs in VarS.items():
+            i, j, bi_inf, bi_sup, bj_inf, bj_sup = s
+            fictious_pair = mcda_problemDescription.fictiousPairsOfAlternatives[(i, j)]
+            # print("#####", i, j, covectorOfPairWiseInformationWith2Levels(fictious_pair))
+            if NecessaryPreference.adjudicate(mcda_problemDescription, Relation, fictious_pair):
+                NSS.add(bs)
+        # OBJECTIVE
+        plne_model.setObjective(quicksum([bool_var for bool_var in NSS]), GRB.MAXIMIZE)
+        plne_model.update()
+        # STOP VERY VERY
+
         plne_model.optimize()
         explainable = plne_model.status == GRB.OPTIMAL
         if not explainable:
             return False, ""
 
         Explanation_text = "Mixed Explanation computable\n"
+        # if plne_model.objVal > 0:
+        #     Explanation_text += "... at least one necessary swap\n"
         edgeSelected = list()
         for s, bs in VarS.items():
             # print(s, bs.x)
@@ -242,16 +258,22 @@ class Explain:
 
         # ---
         Explanation = list()
+        NecessaryIconeList = list()
         ListAttributeLevelsList = list()
         ListAttributeLevelsList.append(object[0])
         for i, j in edgeSelected:
             prec = ListAttributeLevelsList[-1]
             suiv = mcda_problemDescription.getSwapObject(prec, (i, j))
             Explanation.append(suiv)
+            if suiv.is_necessary(mcda_problemDescription, Relation) :
+                NecessaryIconeList.append(" * ")
+            else:
+                NecessaryIconeList.append("   ")
             ListAttributeLevelsList.append(suiv.alternative2)
 
-        for elm in Explanation:
-            Explanation_text += "\t" + str(elm) + "\n"
+        for i in range(len(Explanation)):
+            elm = str(Explanation[i]) + NecessaryIconeList[i]
+            Explanation_text += "\t" + elm + "\n"
 
 
         return True, Explanation_text

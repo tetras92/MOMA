@@ -66,7 +66,7 @@ class DA:
         # n_exp = 0
         # exp = 0
         self._recommendationMaker.update(self._problemDescription, **PI().getRelation())
-        while not self._recommendationMaker.canRecommend and not self._stopCriterion.stop():
+        while (not self._recommendationMaker.canRecommend and not self._stopCriterion.stop()) or not N().is_empty():
 
             # model, VarDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
             # InformationStore.addInformationToModel(PI(), model, VarDict)
@@ -80,10 +80,10 @@ class DA:
 
             assert len(N()) + len(PI()) + len(NonPI()) == self._problemDescription.numberOfInformation
 
-            print("Non-PI : \n{}".format(str(NonPI())))
-            print("PI : \n{}".format(str(PI())))
+            # print("Non-PI : \n{}".format(str(NonPI())))
+            # print("PI : \n{}".format(str(PI())))
             print("N : \n{}".format(str(N())))
-
+            print("===> RECOMMENDATION ", self._recommendationMaker.recommendation)
             if not N_initial_empty_state:
 
                 info = N().pick()
@@ -104,12 +104,15 @@ class DA:
 
 
             self._recommendationMaker.update(self._problemDescription, **PI().getRelation())  # Les 2 sont nécessaires
+
             if not N_initial_empty_state: continue # Une question à chaque tour
 
             info = NonPI().pick()
             Dialog(info).madeWith(dm)
+            N().update(self._problemDescription, **PI().getRelation())
             self._recommendationMaker.update(self._problemDescription, **PI().getRelation())  # Les 2 sont nécessaires
         self.recommendation = self._recommendationMaker.recommendation
+        # print("N (Final): \n{}".format(str(N())))
         # print("Bilan", n, exp, n_exp)
         # model, VarDict = self._problemDescription.generate_basic_gurobi_model_and_its_varDict("MOMA_MCDA")
         # InformationStore.addInformationToModel(PI(), model, VarDict)

@@ -7,18 +7,20 @@ from CORE.Recommendation import RecommendationWrapper, KRankingRecommendation, K
 from CORE.StopCriterion import *
 from CORE.Explanation import ExplanationWrapper, Explain
 
+import time
 if __name__ == "__main__":
 
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
-                                                  performanceTableFileName="CSVFILES/PerfTable4+.csv")
+                                                  performanceTableFileName="CSVFILES/test_da2pl_test.csv")
+                                                  # performanceTableFileName="CSVFILES/PerfTable4+.csv")
     print(mcda_problem_description)
     dm = NoisyWS_DM("CSVFILES/DM_Utility_Function6.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
 
     DA(problemDescription=mcda_problem_description,
-       NonPI_InfoPicker=RandomPicker(0), #,
+       NonPI_InfoPicker=DeterministicPicker(), #,
        stopCriterion=DialogDurationStopCriterion(float("inf")),
        N_InfoPicker=RandomPicker(),
-       recommandationMaker=RecommendationWrapper(KRankingRecommendation, mcda_problem_description.getNumberOfAlternatives()),
+       recommandationMaker=RecommendationWrapper(KBestRecommendation, 4),
        InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver),
        ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.Order2SwapExplanation, Explain.Order2SwapMixedExplanation, Explain.TransitiveExplanation]),
                                                                             # Explain.Order2SwapPossibleExplanation, Explain.Order2SwapExplanation,]),
@@ -28,10 +30,12 @@ if __name__ == "__main__":
 
     DA().interactWith(dm)
     DA().show()
-
-    DA().reset()
-    DA().interactWith(dm)
-    DA().show()
+    # t = time.time()
+    # for i in range(100):
+    #     DA().reset()
+    #     DA().interactWith(dm)
+    #     DA().show()
+    # print((time.time() - t) / 100, "secondes en moyenne" )
     # print(CommitmentStore())
     # mcda_problem_description.listOfInformation[3].showMinMaxRegretHistory()
 # MY RECOMMENDATION IS :  [[46] : +-+++-, [60] : ++++--, [45] : +-++-+, [30] : -++++-, [15] : --++++, [54] : ++-++-, [29] : -+++-+, [39] : +--+++, [58] : +++-+-, [53] : ++-+-+, [43] : +-+-++, [57] : +++--+, [23] : -+-+++, [27] : -++-++, [51] : ++--++]
