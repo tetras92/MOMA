@@ -244,17 +244,64 @@ class ProblemDescription:
         return alternative
 
     def getSwapObject(self, alternative, edge):
+        corr_alt_suc = self.swap_translation(alternative, edge)
+        return SwapObject(alternative, corr_alt_suc)
+
+    def swap_translation(self, alternative, edge):
         attributeLevelsList = alternative.attributeLevelsList.copy()
         i, j = edge
-        attributeLevelsList[i] = (attributeLevelsList[i] + 1)%2
-        attributeLevelsList[j] = (attributeLevelsList[j] + 1)%2
+        attributeLevelsList[i] = (attributeLevelsList[i] + 1) % 2
+        attributeLevelsList[j] = (attributeLevelsList[j] + 1) % 2
         alt_suc = Alternative(float("inf"), None, attributeLevelsList, list())
         corr_alt_suc = self.getCorrespondingAlternative(alt_suc)
         if alt_suc is corr_alt_suc:
             # absence de l'alternative dans le jeu considéré
             corr_alt_suc = Alternative("--", None, attributeLevelsList,
                                        "".join([symbol(v) for v in attributeLevelsList]))
-        return SwapObject(alternative, corr_alt_suc)
+        return corr_alt_suc
+
+    def pareto_translation(self, alternative, i):
+        attributeLevelsList = alternative.attributeLevelsList.copy()
+        if attributeLevelsList[i] != 1 :
+            raise Exception("Pareto translation Exception")
+        attributeLevelsList[i] = 0
+        alt_suc = Alternative(float("inf"), None, attributeLevelsList, list())
+        corr_alt_suc = self.getCorrespondingAlternative(alt_suc)
+        if alt_suc is corr_alt_suc:
+            # absence de l'alternative dans le jeu considéré
+            corr_alt_suc = Alternative("--", None, attributeLevelsList,
+                                       "".join([symbol(v) for v in attributeLevelsList]))
+        return corr_alt_suc
 
     def getTransitiveObject(self, alternativeD, alternatived):
         return TransitiveObject(alternativeD, alternatived)
+
+    def atMost2OrderSwapNeighborhood(self, alternative):
+        NeighborhoodList = list()
+        i_up = [i for i in range(len(alternative.attributeLevelsList)) if alternative.attributeLevelsList[i] == 1]
+        i_down = [i for i in range(len(alternative.attributeLevelsList)) if alternative.attributeLevelsList[i] == 0]
+
+        swap_couple = list(it.product(i_up, i_down))
+        for i, j in swap_couple:
+            corr_alt_suc = self.swap_translation(alternative, (i,j))
+            NeighborhoodList.append(corr_alt_suc)
+
+        for i in i_up:
+            NeighborhoodList.append(self.pareto_translation(alternative, i))
+
+        return NeighborhoodList
+
+    def relationDominatingNeighborhood(self, alternative, Relation):
+        NeighborhoodList = list()
+        for altD, altd in Relation:
+            if altD == alternative :
+                NeighborhoodList.append(altd)
+        return NeighborhoodList
+
+    def neighborhoodSet(self, alternative, Relation):
+        return set(self.relationDominatingNeighborhood(alternative, Relation) + self.atMost2OrderSwapNeighborhood(alternative))
+
+
+    def getN(self):
+        return len(self._criteriaOrderedList)
+    n = property(getN)

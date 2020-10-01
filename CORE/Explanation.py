@@ -238,6 +238,7 @@ class Explain:
                 NSS.add(bs)
         # OBJECTIVE
         plne_model.setObjective(quicksum([bool_var for bool_var in NSS]), GRB.MAXIMIZE)
+        # plne_model.setObjective(quicksum([bool_var for bool_var in NSS]), GRB.MINIMIZE)
         plne_model.update()
         # STOP VERY VERY
 
@@ -279,6 +280,77 @@ class Explain:
         return True, Explanation_text
 
         # return explainable, tradeoff_used
+
+    @staticmethod
+    def atMost2OrderNecessarySwapAndPIExplanation(mcda_problemDescription=None, Relation=None, object=(None, None)):
+        if Relation is None:
+            Relation = list()
+
+        def get_links(G, s, d, OngoingLinkList, ExplanationList):
+            if s == d :
+                ExplanationList.append(OngoingLinkList + [d])
+            if s in G:
+                OngoingLinkList.append(s)
+                for succ in G[s]:
+                    get_links(G, succ, d, OngoingLinkList, ExplanationList)
+                OngoingLinkList.pop()
+
+        source_alternative, dest_alternative = object
+        # l : explanation max length (by default equal to n (size of alternatives))
+        l = mcda_problemDescription.n
+        Graph_of_dominance = dict()
+        ListOfESet = [{source_alternative}]
+        while len(ListOfESet[-1]) != 0 and l > 0:
+            l -= 1
+            E_0 = ListOfESet[-1]
+            E_1 = set()
+            E_0_updated = set()
+            while len(E_0) != 0:
+                x = E_0.pop()
+                Sx = mcda_problemDescription.neighborhoodSet(x, Relation)
+                for y in Sx:
+                    if ((x, y) in Relation or NecessaryPreference.adjudicate(mcda_problemDescription, Relation, (x,y))) and \
+                            NecessaryPreference.adjudicate(mcda_problemDescription, Relation, (source_alternative, x)) and \
+                            NecessaryPreference.adjudicate(mcda_problemDescription, Relation, (y, dest_alternative)):
+                        E_0_updated.add(x)
+                        E_1.add(y)
+                        if x not in Graph_of_dominance:
+                            Graph_of_dominance[x] = set()
+                        Graph_of_dominance[x].add(y)
+
+            ListOfESet[-1] = E_0_updated
+            ListOfESet.append(E_1)
+            # print(ListOfESet)
+        ExplanationList = list()
+        Explanations = list()
+        PI_Icone_List = list()
+
+        L = list()
+        get_links(Graph_of_dominance, source_alternative, dest_alternative, L, ExplanationList)
+        ExplanationList.sort(key=lambda x : len(x))
+        Explanation_text = "All ({}) 2-order necessary swaps + PI (#) Explanations \n".format(len(ExplanationList))
+        for path in ExplanationList:
+            CorrespondingExplanation = list()
+            CorrespondingPIIcone = list()
+            for i in range(0, len(path)-1):
+                if (path[i], path[i+1]) in Relation :
+                    CorrespondingPIIcone.append(" # ")
+                else :
+                    CorrespondingPIIcone.append("   ")
+                CorrespondingExplanation.append(mcda_problemDescription.getTransitiveObject(path[i], path[i+1]))
+            Explanations.append(CorrespondingExplanation)
+            PI_Icone_List.append(CorrespondingPIIcone)
+
+        for expl_number in range(len(Explanations)):
+            Explanation = Explanations[expl_number]
+            Explanation_text += "\tExplanation n° {}\n".format(expl_number+1)
+            for i in range(len(Explanation)):
+                elm = Explanation[i]
+                Explanation_text += "\t" + str(elm) + PI_Icone_List[expl_number][i] + "\n"
+            Explanation_text += "\n"
+        return True, Explanation_text
+
+
 
 class ExplanationWrapper():
     counter = Counter()

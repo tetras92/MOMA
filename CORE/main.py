@@ -15,17 +15,20 @@ if __name__ == "__main__":
                                                   # performanceTableFileName="CSVFILES/PerfTable4+.csv")
     print(mcda_problem_description)
     dm = NoisyWS_DM("CSVFILES/DM_Utility_Function6.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
+    # dm = NoisyWS_DM("CSVFILES/DM_Utility_Function_da2pl.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
 
     DA(problemDescription=mcda_problem_description,
+       # NonPI_InfoPicker=RandomPicker(), #,
        NonPI_InfoPicker=DeterministicPicker(), #,
        stopCriterion=DialogDurationStopCriterion(float("inf")),
        N_InfoPicker=RandomPicker(),
        recommandationMaker=RecommendationWrapper(KBestRecommendation, 4),
+       # recommandationMaker=RecommendationWrapper(KRankingRecommendation, 9),
        InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver),
-       ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.Order2SwapExplanation, Explain.Order2SwapMixedExplanation, Explain.TransitiveExplanation]),
+       ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.atMost2OrderNecessarySwapAndPIExplanation, Explain.Order2SwapExplanation, Explain.Order2SwapMixedExplanation, Explain.TransitiveExplanation]),
                                                                             # Explain.Order2SwapPossibleExplanation, Explain.Order2SwapExplanation,]),
                                                                             #  Explain.TransitiveExplanation]),
-                                             UseAll=True)
+                                             UseAll=False)
        )
 
     DA().interactWith(dm)
