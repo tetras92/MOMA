@@ -25,10 +25,10 @@ if __name__ == "__main__":
        recommandationMaker=RecommendationWrapper(KBestRecommendation, 4),
        # recommandationMaker=RecommendationWrapper(KRankingRecommendation, 9),
        InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver),
-       ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.atMost2OrderNecessarySwapAndPIExplanation, Explain.Order2SwapExplanation, Explain.Order2SwapMixedExplanation, Explain.TransitiveExplanation]),
+       ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.atMost2OrderNecessarySwapAndPIExplanationAndAtMostOnePossibleSwap]), #, Explain.Order2SwapExplanationExplain.Order2SwapMixedExplanation, Explain.TransitiveExplanation]),
                                                                             # Explain.Order2SwapPossibleExplanation, Explain.Order2SwapExplanation,]),
                                                                             #  Explain.TransitiveExplanation]),
-                                             UseAll=False)
+                                             UseAll=True)
        )
 
     DA().interactWith(dm)

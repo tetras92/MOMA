@@ -4,6 +4,7 @@ from CORE.NecessaryPreference import NecessaryPreference
 from CORE.Tools import covectorOfPairWiseInformationWith2Levels, EPSILON, tradeoff, Counter
 from CORE.decorators import counting
 
+
 class Explain:
 
     @staticmethod
@@ -16,15 +17,15 @@ class Explain:
         SigmaD = [i for i in range(len(object_covector)) if object_covector[i] == -1]
 
         edgeCoeffDict = dict()
-        concernedBooleanVarDict = {i : list() for i in set(SigmaD) | set(SigmaP)}
+        concernedBooleanVarDict = {i: list() for i in set(SigmaD) | set(SigmaP)}
         booleanVarDict = dict()
 
-        for i in SigmaP :
-            for j in SigmaD :
+        for i in SigmaP:
+            for j in SigmaD:
                 fictious_pair = mcda_problemDescription.fictiousPairsOfAlternatives[(i, j)]
                 if NecessaryPreference.adjudicate(mcda_problemDescription, Relation, fictious_pair):
                     edgeCoeffDict[(i, j)] = 1
-                else :
+                else:
                     edgeCoeffDict[(i, j)] = 0
 
         # print("NECESSAIRE", edgeCoeffDict)
@@ -40,12 +41,13 @@ class Explain:
         for i, VarList in concernedBooleanVarDict.items():
             matching_gurobi_model.addConstr(quicksum(VarList) <= 1)
 
-        matching_gurobi_model.setObjective(quicksum([edgeCoeffDict[(i, j)]*booleanVarDict[(i, j)] for i, j in edgeCoeffDict]), GRB.MAXIMIZE)
+        matching_gurobi_model.setObjective(
+            quicksum([edgeCoeffDict[(i, j)] * booleanVarDict[(i, j)] for i, j in edgeCoeffDict]), GRB.MAXIMIZE)
         matching_gurobi_model.update()
 
         matching_gurobi_model.optimize()
         explainable = matching_gurobi_model.objVal == len(SigmaD)
-        if not explainable : return False, s + "\tCan not explain by swaps of order at most 2"
+        if not explainable: return False, s + "\tCan not explain by swaps of order at most 2"
         edgeSelected = list()
         for i, j in booleanVarDict:
             if booleanVarDict[(i, j)].x == 1:
@@ -63,7 +65,6 @@ class Explain:
         for elm in Explanation:
             s += "\t" + str(elm) + "\n"
 
-
         return True, s
 
     @staticmethod
@@ -76,15 +77,15 @@ class Explain:
         SigmaD = [i for i in range(len(object_covector)) if object_covector[i] == -1]
 
         edgeCoeffDict = dict()
-        concernedBooleanVarDict = {i : list() for i in set(SigmaD) | set(SigmaP)}
+        concernedBooleanVarDict = {i: list() for i in set(SigmaD) | set(SigmaP)}
         booleanVarDict = dict()
 
-        for i in SigmaP :
-            for j in SigmaD :
+        for i in SigmaP:
+            for j in SigmaD:
                 fictious_pair = mcda_problemDescription.fictiousPairsOfAlternatives[(j, i)]
                 if not NecessaryPreference.adjudicate(mcda_problemDescription, Relation, fictious_pair):
                     edgeCoeffDict[(i, j)] = 1
-                else :
+                else:
                     edgeCoeffDict[(i, j)] = 0
 
         matching_gurobi_model = Model("Explain Matching Model")
@@ -99,12 +100,13 @@ class Explain:
         for i, VarList in concernedBooleanVarDict.items():
             matching_gurobi_model.addConstr(quicksum(VarList) <= 1)
 
-        matching_gurobi_model.setObjective(quicksum([edgeCoeffDict[(i, j)]*booleanVarDict[(i, j)] for i, j in edgeCoeffDict]), GRB.MAXIMIZE)
+        matching_gurobi_model.setObjective(
+            quicksum([edgeCoeffDict[(i, j)] * booleanVarDict[(i, j)] for i, j in edgeCoeffDict]), GRB.MAXIMIZE)
         matching_gurobi_model.update()
 
         matching_gurobi_model.optimize()
         explainable = matching_gurobi_model.objVal == len(SigmaD)
-        if not explainable : return False, s + "\tCan not explain by swaps of order at most 2"
+        if not explainable: return False, s + "\tCan not explain by swaps of order at most 2"
         edgeSelected = list()
         for i, j in booleanVarDict:
             if booleanVarDict[(i, j)].x == 1:
@@ -122,10 +124,7 @@ class Explain:
         for elm in Explanation:
             s += "\t" + str(elm) + "\n"
 
-
         return True, s
-
-
 
     @staticmethod
     def TransitiveExplanation(mcda_problemDescription=None, Relation=None, object=(None, None)):
@@ -137,22 +136,24 @@ class Explain:
                 dominationDict[altD] = list()
             dominationDict[altD].append(altd)
 
-
         def is_a_path(altSource, altDest, path):
-            if len(path) == 0 : path.append(altSource)
-            if altSource not in dominationDict : return False
+            if len(path) == 0: path.append(altSource)
+            if altSource not in dominationDict: return False
             for altDominatedBySource in dominationDict[altSource]:
                 path.append(altDominatedBySource)
-                if altDominatedBySource == altDest: return True
-                elif is_a_path(altDominatedBySource, altDest, path): return True
-                else : path.pop()
+                if altDominatedBySource == altDest:
+                    return True
+                elif is_a_path(altDominatedBySource, altDest, path):
+                    return True
+                else:
+                    path.pop()
 
         s = "Explanation by Transitivity\n"
         path = list()
         Explanation = list()
         if is_a_path(object[0], object[1], path) and len(path) >= 3:
-            for i in range(0, len(path)-1):
-                Explanation.append(mcda_problemDescription.getTransitiveObject(path[i], path[i+1]))
+            for i in range(0, len(path) - 1):
+                Explanation.append(mcda_problemDescription.getTransitiveObject(path[i], path[i + 1]))
 
             for elm in Explanation:
                 s += "\t" + str(elm) + "\n"
@@ -163,7 +164,8 @@ class Explain:
 
     @staticmethod
     def Order2SwapMixedExplanation(mcda_problemDescription=None, Relation=None, object=(None, None)):
-        plne_model, VarList, VarDict = mcda_problemDescription.generate_gurobi_model_for_explanation_purposes_and_its_varDict_and_varList("2-Swap Mixed Explanation", EPSILON)
+        plne_model, VarList, VarDict = mcda_problemDescription.generate_gurobi_model_for_explanation_purposes_and_its_varDict_and_varList(
+            "2-Swap Mixed Explanation", EPSILON)
         x, y = object
         object_covector = covectorOfPairWiseInformationWith2Levels(object)
         Bxy = [i for i in range(len(object_covector)) if object_covector[i] == 1]
@@ -171,6 +173,7 @@ class Explain:
 
         if len(Bxy) == len(Lxy) and len(Bxy) == 1:
             return True, "Exempted of 2-Swap Explanation"
+
         def l_i(i, alt):
             return alt.attributeLevelsList[i]
 
@@ -178,14 +181,14 @@ class Explain:
         for i in Bxy:
             for j in Lxy:
                 for bi_inf in range(l_i(i, y), l_i(i, x)):
-                    for bi_sup in range(l_i(i, y) + 1, l_i(i, x) + 1 ):
-                        if bi_inf < bi_sup :
+                    for bi_sup in range(l_i(i, y) + 1, l_i(i, x) + 1):
+                        if bi_inf < bi_sup:
                             for bj_inf in range(l_i(j, x), l_i(j, y)):
                                 for bj_sup in range(l_i(j, x) + 1, l_i(j, y) + 1):
                                     if bj_inf < bj_sup:
-                                        S.append((i,j,bi_inf,bi_sup,bj_inf,bj_sup))
+                                        S.append((i, j, bi_inf, bi_sup, bj_inf, bj_sup))
         # print("======================", Bxy, Lxy)
-        VarS = {s : plne_model.addVar(vtype=GRB.BINARY, name=tradeoff(s, VarList)) for s in S}
+        VarS = {s: plne_model.addVar(vtype=GRB.BINARY, name=tradeoff(s, VarList)) for s in S}
 
         plne_model.update()
         # print(VarS.values())
@@ -194,11 +197,12 @@ class Explain:
         for s, bs in VarS.items():
             i, j, bi_inf, bi_sup, bj_inf, bj_sup = s
             # plne_model.addConstr(VarList[i][bi_sup][1] - VarList[i][bi_inf][1] - VarList[j][bj_sup][1] + VarList[j][bj_inf][1] >= (1 + EPSILON)*bs - 1)
-            plne_model.addConstr(VarList[i][bi_sup][1] - VarList[i][bi_inf][1] - VarList[j][bj_sup][1] + VarList[j][bj_inf][1] >= bs - 1)
+            plne_model.addConstr(
+                VarList[i][bi_sup][1] - VarList[i][bi_inf][1] - VarList[j][bj_sup][1] + VarList[j][bj_inf][1] >= bs - 1)
 
         plne_model.update()
 
-        #Lxy Constraints
+        # Lxy Constraints
         for j in Lxy:
             for Ij in range(l_i(j, x), l_i(j, y)):
                 cst = LinExpr()
@@ -209,17 +213,17 @@ class Explain:
 
         plne_model.update()
 
-        #Bxy Constraints
+        # Bxy Constraints
         for i in Bxy:
             for Ii in range(l_i(i, y), l_i(i, x)):
-                cst =LinExpr()
+                cst = LinExpr()
                 for s, bs in VarS.items():
                     if i == s[0] and Ii >= s[2] and Ii + 1 <= s[3]:
                         cst += bs
             plne_model.addConstr(cst <= 1)
         plne_model.update()
 
-        #PI constraints
+        # PI constraints
         if Relation is None:
             Relation = list()
         for (altD, altd) in Relation:
@@ -227,9 +231,8 @@ class Explain:
             # plne_model.addConstr(altD.linear_expr(VarDict) - altd.linear_expr(VarDict) >= 0)
         plne_model.update()
 
-
         # VERY VERY SPECIFIC TO BINARY CASE (+ and -)
-        NSS = set()       # necessary swap set
+        NSS = set()  # necessary swap set
         for s, bs in VarS.items():
             i, j, bi_inf, bi_sup, bj_inf, bj_sup = s
             fictious_pair = mcda_problemDescription.fictiousPairsOfAlternatives[(i, j)]
@@ -266,16 +269,15 @@ class Explain:
             prec = ListAttributeLevelsList[-1]
             suiv = mcda_problemDescription.getSwapObject(prec, (i, j))
             Explanation.append(suiv)
-            if suiv.is_necessary(mcda_problemDescription, Relation) :
+            if suiv.is_necessary(mcda_problemDescription, Relation):
                 NecessaryIconeList.append(" * ")
             else:
-                NecessaryIconeList.append("   ")
+                NecessaryIconeList.append(" ~ ")
             ListAttributeLevelsList.append(suiv.alternative2)
 
         for i in range(len(Explanation)):
             elm = str(Explanation[i]) + NecessaryIconeList[i]
             Explanation_text += "\t" + elm + "\n"
-
 
         return True, Explanation_text
 
@@ -287,7 +289,7 @@ class Explain:
             Relation = list()
 
         def get_links(G, s, d, OngoingLinkList, ExplanationList):
-            if s == d :
+            if s == d:
                 ExplanationList.append(OngoingLinkList + [d])
             if s in G:
                 OngoingLinkList.append(s)
@@ -309,8 +311,10 @@ class Explain:
                 x = E_0.pop()
                 Sx = mcda_problemDescription.neighborhoodSet(x, Relation)
                 for y in Sx:
-                    if ((x, y) in Relation or NecessaryPreference.adjudicate(mcda_problemDescription, Relation, (x,y))) and \
-                            NecessaryPreference.adjudicate(mcda_problemDescription, Relation, (source_alternative, x)) and \
+                    if ((x, y) in Relation or NecessaryPreference.adjudicate(mcda_problemDescription, Relation,
+                                                                             (x, y))) and \
+                            NecessaryPreference.adjudicate(mcda_problemDescription, Relation,
+                                                           (source_alternative, x)) and \
                             NecessaryPreference.adjudicate(mcda_problemDescription, Relation, (y, dest_alternative)):
                         E_0_updated.add(x)
                         E_1.add(y)
@@ -327,23 +331,104 @@ class Explain:
 
         L = list()
         get_links(Graph_of_dominance, source_alternative, dest_alternative, L, ExplanationList)
-        ExplanationList.sort(key=lambda x : len(x))
+        ExplanationList.sort(key=lambda x: len(x))
+
         Explanation_text = "All ({}) 2-order necessary swaps + PI (#) Explanations \n".format(len(ExplanationList))
+        if len(ExplanationList) == 0:
+            return False, Explanation_text + "\tCan not be explained via PI + 2-order necessary swap(s)"
+
         for path in ExplanationList:
             CorrespondingExplanation = list()
             CorrespondingPIIcone = list()
-            for i in range(0, len(path)-1):
-                if (path[i], path[i+1]) in Relation :
+            for i in range(0, len(path) - 1):
+                if (path[i], path[i + 1]) in Relation:
                     CorrespondingPIIcone.append(" # ")
-                else :
-                    CorrespondingPIIcone.append("   ")
-                CorrespondingExplanation.append(mcda_problemDescription.getTransitiveObject(path[i], path[i+1]))
+                else:
+                    CorrespondingPIIcone.append(" * ")
+                CorrespondingExplanation.append(mcda_problemDescription.getTransitiveObject(path[i], path[i + 1]))
             Explanations.append(CorrespondingExplanation)
             PI_Icone_List.append(CorrespondingPIIcone)
 
         for expl_number in range(len(Explanations)):
             Explanation = Explanations[expl_number]
-            Explanation_text += "\tExplanation n° {}\n".format(expl_number+1)
+            Explanation_text += "\tExplanation n° {}\n".format(expl_number + 1)
+            for i in range(len(Explanation)):
+                elm = Explanation[i]
+                Explanation_text += "\t" + str(elm) + PI_Icone_List[expl_number][i] + "\n"
+            Explanation_text += "\n"
+        return True, Explanation_text
+
+    @staticmethod
+    def atMost2OrderNecessarySwapAndPIExplanationAndAtMostOnePossibleSwap(mcda_problemDescription=None, Relation=None,
+                                                                          object=(None, None)):
+        if Relation is None:
+            Relation = list()
+
+        def depth_first_explanation_computing(alternative_from, length, pswap_used, relation, AssumptionList, OngoingLinkList,
+                                              expl_list):
+            if length == 0:
+                return
+            if alternative_from == dest_alternative:
+                if pswap_used:
+                    AssumptionList.append(relation[-1])
+                else:
+                    AssumptionList.append(None)
+                expl_list.append(OngoingLinkList + [dest_alternative])
+            a_f_Successors = mcda_problemDescription.neighborhoodSet(alternative_from, relation)
+            if len(a_f_Successors) != 0:
+                OngoingLinkList.append(alternative_from)
+            for succ in a_f_Successors:
+                if (alternative_from, succ) in relation or NecessaryPreference.adjudicate(mcda_problemDescription,
+                                                                                              relation,
+                                                                                              (alternative_from, succ)):
+                    if NecessaryPreference.adjudicate(mcda_problemDescription, relation,
+                                                      (source_alternative, alternative_from)) and \
+                            NecessaryPreference.adjudicate(mcda_problemDescription, Relation, (succ, dest_alternative)):
+
+                            depth_first_explanation_computing(succ, length - 1, pswap_used, relation, AssumptionList, OngoingLinkList,
+                                                              expl_list)
+                elif not pswap_used and not NecessaryPreference.adjudicate(mcda_problemDescription, Relation, (succ, alternative_from)):
+                    new_relation = relation + [(alternative_from, succ)]
+                    depth_first_explanation_computing(succ, length - 1, True,
+                                                      new_relation, AssumptionList, OngoingLinkList, expl_list)
+            OngoingLinkList.pop()
+
+        source_alternative, dest_alternative = object
+        # l : explanation max length (by default equal to n (size of alternatives))
+        l = mcda_problemDescription.n
+        ExplanationList = list()
+        AssumptionList = list()
+        L = list()
+        depth_first_explanation_computing(source_alternative, l, False, Relation, AssumptionList, L, ExplanationList)
+        Explanations = list()
+        PI_Icone_List = list()
+
+        # ExplanationList.sort(key=lambda x: len(x))
+
+        Explanation_text = "All ({}) 2-order necessary swaps (*) + PI (#) Explanations + 2-order possible swap (~)\n".format(
+            len(ExplanationList))
+        if len(ExplanationList) == 0:
+            return False, Explanation_text + "\tCan not be explained via PI + 2-order necessary swap(s) + at most one Possible swap"
+
+        for path in ExplanationList:
+            CorrespondingExplanation = list()
+            CorrespondingPIIcone = list()
+            for i in range(0, len(path) - 1):
+                if (path[i], path[i + 1]) in Relation:
+                    CorrespondingPIIcone.append(" # ")
+                elif not NecessaryPreference.adjudicate(mcda_problemDescription, Relation, (path[i], path[i + 1])):
+                    CorrespondingPIIcone.append(" ~ ")
+                else:
+                    CorrespondingPIIcone.append(" * ")
+                CorrespondingExplanation.append(mcda_problemDescription.getTransitiveObject(path[i], path[i + 1]))
+            Explanations.append(CorrespondingExplanation)
+            PI_Icone_List.append(CorrespondingPIIcone)
+
+        for expl_number in range(len(Explanations)):
+            Explanation = Explanations[expl_number]
+            Explanation_text += "\tExplanation n° {}\n".format(expl_number + 1)
+            if not (AssumptionList[expl_number] is None):
+                Explanation_text += "\t{} H \n\n".format(str(mcda_problemDescription.getTransitiveObject(*AssumptionList[expl_number])))
             for i in range(len(Explanation)):
                 elm = Explanation[i]
                 Explanation_text += "\t" + str(elm) + PI_Icone_List[expl_number][i] + "\n"
@@ -351,37 +436,38 @@ class Explain:
         return True, Explanation_text
 
 
-
 class ExplanationWrapper():
     counter = Counter()
+
     def __init__(self, ListOfExplanationEngines, UseAll=True):
         self.ListOfExplanationEngines = ListOfExplanationEngines
         self.useAllEngines = UseAll
         self.explanation = ""
-        self.summary = {engine.__name__ : 0 for engine in self.ListOfExplanationEngines} # summary of explanations that have been computed
+        self.summary = {engine.__name__: 0 for engine in
+                        self.ListOfExplanationEngines}  # summary of explanations that have been computed
         self.summary["ALL"] = 0
-
 
     @counting(counter)
     def computeExplanation(self, problemDescription, object, **kwargs):
         self.explanation = ""
-        dominanceRelation = kwargs["recommendationDominanceRelation"]
+        # dominanceRelation = kwargs["recommendationDominanceRelation"]
+        dominanceRelation = kwargs["dominanceRelation"]
         for engine in self.ListOfExplanationEngines:
             result, detail = engine(problemDescription, dominanceRelation, object)
-            if result :
+            if result:
                 self.explanation += detail
                 self.summary[engine.__name__] += 1
-                if not self.useAllEngines : break
-        if self.explanation != "" :
+                if not self.useAllEngines: break
+        if self.explanation != "":
             self.summary["ALL"] += 1
 
     def __str__(self):
         s = "\n** EXPLANATION ENGINES PERFORMANCE **\n"
         for engine, n in self.summary.items():
-                s += "\t{:<30} : {} / {}\n".format(engine, n, ExplanationWrapper.counter.nb)
+            s += "\t{:<30} : {} / {}\n".format(engine, n, ExplanationWrapper.counter.nb)
         return s
 
     def reset(self):
         ExplanationWrapper.counter.nb = 0
-        for engine_name in self.summary :
+        for engine_name in self.summary:
             self.summary[engine_name] = 0
