@@ -2,7 +2,8 @@ from CORE.InformationStore import NonPI, PI, N
 from CORE.Tools import NO_TERM
 from CORE.Tools import colored_expression, AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS
 from CORE.NecessaryPreference import NecessaryPreference
-
+from gurobipy import GRB
+from CORE.Tools import ROUNDED_NUMBER_OF_DECIMALS
 class AppreciationObject:
     """Classe de base modélisation une paire d'alternatives"""
     def __init__(self, alternative1, alternative2):
@@ -138,4 +139,9 @@ class TransitiveObject(AppreciationObject):
     def __str__(self):
         return AppreciationObject.__str__(self)
 
-
+    def pairwise_max_regret(self, gurobi_model_with_PI_constraints, varDict):
+        objective = - AppreciationObject.linear_expr(self, varDict)
+        gurobi_model_with_PI_constraints.setObjective(objective, GRB.MAXIMIZE)
+        gurobi_model_with_PI_constraints.update()
+        gurobi_model_with_PI_constraints.optimize()
+        return round(gurobi_model_with_PI_constraints.objVal, ROUNDED_NUMBER_OF_DECIMALS)

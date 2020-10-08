@@ -299,7 +299,7 @@ class Explain:
 
         source_alternative, dest_alternative = object
         # l : explanation max length (by default equal to n (size of alternatives))
-        l = mcda_problemDescription.n
+        l = mcda_problemDescription.n + 1
         Graph_of_dominance = dict()
         ListOfESet = [{source_alternative}]
         while len(ListOfESet[-1]) != 0 and l > 0:
@@ -363,17 +363,27 @@ class Explain:
                                                                           object=(None, None)):
         if Relation is None:
             Relation = list()
+        plne_model, VarList, VarDict = mcda_problemDescription.generate_gurobi_model_for_explanation_purposes_and_its_varDict_and_varList(
+            "Regret computer Model for 2-order necessary swaps -- PI -- at most one 2-order possible swap -- Explanations", EPSILON)
+        # PI constraints
+        for (altD, altd) in Relation:
+            plne_model.addConstr(altD.linear_expr(VarDict) - altd.linear_expr(VarDict) >= EPSILON)
+        plne_model.update()
+        # -- End PI constraints
 
-        def depth_first_explanation_computing(alternative_from, length, pswap_used, relation, AssumptionList, OngoingLinkList,
+        def depth_first_explanation_computing(alternative_from, length, pswap_used, relation, OngoingLinkList,
                                               expl_list):
             if length == 0:
                 return
             if alternative_from == dest_alternative:
                 if pswap_used:
-                    AssumptionList.append(relation[-1])
+                    # AssumptionList.append(relation[-1])
+                    expl_list.append((OngoingLinkList + [dest_alternative], relation[-1]))
                 else:
-                    AssumptionList.append(None)
-                expl_list.append(OngoingLinkList + [dest_alternative])
+                    # AssumptionList.append(None)
+                    expl_list.append((OngoingLinkList + [dest_alternative], None))
+                # expl_list.append(OngoingLinkList + [dest_alternative])
+                return
             a_f_Successors = mcda_problemDescription.neighborhoodSet(alternative_from, relation)
             if len(a_f_Successors) != 0:
                 OngoingLinkList.append(alternative_from)
@@ -385,32 +395,32 @@ class Explain:
                                                       (source_alternative, alternative_from)) and \
                             NecessaryPreference.adjudicate(mcda_problemDescription, Relation, (succ, dest_alternative)):
 
-                            depth_first_explanation_computing(succ, length - 1, pswap_used, relation, AssumptionList, OngoingLinkList,
+                            depth_first_explanation_computing(succ, length - 1, pswap_used, relation, OngoingLinkList,
                                                               expl_list)
                 elif not pswap_used and not NecessaryPreference.adjudicate(mcda_problemDescription, Relation, (succ, alternative_from)):
                     new_relation = relation + [(alternative_from, succ)]
                     depth_first_explanation_computing(succ, length - 1, True,
-                                                      new_relation, AssumptionList, OngoingLinkList, expl_list)
+                                                      new_relation, OngoingLinkList, expl_list)
             OngoingLinkList.pop()
 
         source_alternative, dest_alternative = object
         # l : explanation max length (by default equal to n (size of alternatives))
-        l = mcda_problemDescription.n
+        l = mcda_problemDescription.n + 1
         ExplanationList = list()
         AssumptionList = list()
         L = list()
-        depth_first_explanation_computing(source_alternative, l, False, Relation, AssumptionList, L, ExplanationList)
+        depth_first_explanation_computing(source_alternative, l, False, Relation, L, ExplanationList)
         Explanations = list()
         PI_Icone_List = list()
 
-        # ExplanationList.sort(key=lambda x: len(x))
+        ExplanationList.sort(key=lambda x: len(x[0]))
 
-        Explanation_text = "All ({}) 2-order necessary swaps (*) + PI (#) Explanations + 2-order possible swap (~)\n".format(
+        Explanation_text = "All ({}) 2-order necessary swaps (*) + PI (#) + at most one 2-order possible swap (~) Explanations\n".format(
             len(ExplanationList))
         if len(ExplanationList) == 0:
             return False, Explanation_text + "\tCan not be explained via PI + 2-order necessary swap(s) + at most one Possible swap"
 
-        for path in ExplanationList:
+        for path, assumption in ExplanationList:
             CorrespondingExplanation = list()
             CorrespondingPIIcone = list()
             for i in range(0, len(path) - 1):
@@ -423,10 +433,15 @@ class Explain:
                 CorrespondingExplanation.append(mcda_problemDescription.getTransitiveObject(path[i], path[i + 1]))
             Explanations.append(CorrespondingExplanation)
             PI_Icone_List.append(CorrespondingPIIcone)
+            AssumptionList.append(assumption)
+
 
         for expl_number in range(len(Explanations)):
             Explanation = Explanations[expl_number]
-            Explanation_text += "\tExplanation n° {}\n".format(expl_number + 1)
+            # -- PMR Computation
+            pmr_value = max([transitive_obj.pairwise_max_regret(plne_model, VarDict) for transitive_obj in Explanation])
+            # --
+            Explanation_text += "\tExplanation n° {} (PMR = {})\n".format(expl_number + 1, pmr_value)
             if not (AssumptionList[expl_number] is None):
                 Explanation_text += "\t{} H \n\n".format(str(mcda_problemDescription.getTransitiveObject(*AssumptionList[expl_number])))
             for i in range(len(Explanation)):

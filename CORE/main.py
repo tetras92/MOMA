@@ -21,7 +21,7 @@ if __name__ == "__main__":
        # NonPI_InfoPicker=RandomPicker(), #,
        NonPI_InfoPicker=DeterministicPicker(), #,
        stopCriterion=DialogDurationStopCriterion(float("inf")),
-       N_InfoPicker=RandomPicker(),
+       N_InfoPicker=RandomPicker(0),
        recommandationMaker=RecommendationWrapper(KBestRecommendation, 4),
        # recommandationMaker=RecommendationWrapper(KRankingRecommendation, 9),
        InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver),

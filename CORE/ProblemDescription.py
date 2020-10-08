@@ -159,8 +159,8 @@ class ProblemDescription:
         return gurobi_model, VarDict
 
     def generate_gurobi_model_for_explanation_purposes_and_its_varDict_and_varList(self, modelName, epsilon=0):
-        """Retourne un programme lineaire en nombres entiers conforme au modele decrit dans le document de
-         synthese. Parmi ses variables on retrouve les variables booleennes correspondant à des swaps."""
+        """Retourne un programme lineaire en nombres entiers conforme au modele decrit dans l'
+        article DA2PL2020 avec juste les contraintes (7) et (8)."""
 
 
         listOfListOfOrderedCriterionAttributesCopy = [L.copy() for L in self._list_of_list_of_ordered_criterion_attributes]
@@ -252,11 +252,12 @@ class ProblemDescription:
         i, j = edge
         attributeLevelsList[i] = (attributeLevelsList[i] + 1) % 2
         attributeLevelsList[j] = (attributeLevelsList[j] + 1) % 2
-        alt_suc = Alternative(float("inf"), None, attributeLevelsList, list())
+        attributeList = [self._list_of_list_of_ordered_criterion_attributes[cr_i][attributeLevelsList[cr_i]] for cr_i in range(self.n)]
+        alt_suc = Alternative(float("inf"), attributeList, attributeLevelsList, list())
         corr_alt_suc = self.getCorrespondingAlternative(alt_suc)
         if alt_suc is corr_alt_suc:
             # absence de l'alternative dans le jeu considéré
-            corr_alt_suc = Alternative("--", None, attributeLevelsList,
+            corr_alt_suc = Alternative("--", attributeList, attributeLevelsList,
                                        "".join([symbol(v) for v in attributeLevelsList]))
         return corr_alt_suc
 
@@ -265,11 +266,12 @@ class ProblemDescription:
         if attributeLevelsList[i] != 1 :
             raise Exception("Pareto translation Exception")
         attributeLevelsList[i] = 0
-        alt_suc = Alternative(float("inf"), None, attributeLevelsList, list())
+        attributeList = [self._list_of_list_of_ordered_criterion_attributes[cr_i][attributeLevelsList[cr_i]] for cr_i in range(self.n)]
+        alt_suc = Alternative(float("inf"), attributeList, attributeLevelsList, list())
         corr_alt_suc = self.getCorrespondingAlternative(alt_suc)
         if alt_suc is corr_alt_suc:
             # absence de l'alternative dans le jeu considéré
-            corr_alt_suc = Alternative("--", None, attributeLevelsList,
+            corr_alt_suc = Alternative("--", attributeList, attributeLevelsList,
                                        "".join([symbol(v) for v in attributeLevelsList]))
         return corr_alt_suc
 
