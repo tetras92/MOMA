@@ -1,7 +1,7 @@
 from gurobipy import *
 
 from CORE.NecessaryPreference import NecessaryPreference
-from CORE.Tools import covectorOfPairWiseInformationWith2Levels, EPSILON, tradeoff, Counter
+from CORE.Tools import covectorOfPairWiseInformationWith2Levels, EPSILON, tradeoff, Counter, CONSTRAINTSFEASIBILITYTOL
 from CORE.decorators import counting
 from CORE.AppreciationObject import AppreciationObject
 
@@ -481,7 +481,7 @@ class Explain:
         B_lk = {l_: {k: B_kl[k][l_] for k in pro_argument_set} for l_ in con_argument_set}
         plne_model.update()
         # E_kl : dict of e_kl continuous variables
-        E_kl = {k: {l_: plne_model.addVar(vtype=GRB.CONTINUOUS, name="e_{}_{}".format(k, l_), lb=0.0) for l_ in con_argument_set} for k in pro_argument_set}
+        E_kl = {k: {l_: plne_model.addVar(vtype=GRB.CONTINUOUS, name="e_{}_{}".format(k, l_), lb=0.0, ub=1.0) for l_ in con_argument_set} for k in pro_argument_set}
         # Cons counterbalanced Constraints
         for l, D in B_lk.items():
             plne_model.addConstr(quicksum(D.values()) <= 1)
@@ -491,9 +491,12 @@ class Explain:
             plne_model.addConstr(quicksum(D.values()) <= VarList[k][1][1])
             kmax_constr = LinExpr()
             for l, e_kl in D.items():
-                plne_model.addConstr(e_kl <= VarList[k][1][1])
+                # plne_model.addConstr(e_kl <= VarList[k][1][1]) # ERREUR
+                # plne_model.addConstr(e_kl <= B_kl[k][l])
+                # plne_model.addConstr(e_kl >= VarList[k][1][1] + B_kl[k][l] - 1) # ERREUR
+                plne_model.addConstr(e_kl <= VarList[l][1][1])
                 plne_model.addConstr(e_kl <= B_kl[k][l])
-                plne_model.addConstr(e_kl >= VarList[k][1][1] + B_kl[k][l] - 1)
+                plne_model.addConstr(e_kl >= VarList[l][1][1] + B_kl[k][l] - 1)
 
                 kmax_constr += B_kl[k][l]
             plne_model.addConstr(kmax_constr <= k_max)
@@ -501,6 +504,8 @@ class Explain:
         plne_model.update()
 
         plne_model.setObjective(quicksum([b_kl for k, D in B_kl.items() for l, b_kl in D.items()]), GRB.MAXIMIZE)
+        plne_model.update()
+        # print(plne_model.display())
         plne_model.optimize()
 
         if not plne_model.status == GRB.OPTIMAL :
@@ -514,7 +519,10 @@ class Explain:
             SolDict = {k_: [l_ for l_, v in B_kl[k_].items() if int(v.Xn) == 1] for k_ in B_kl}
             OptimalSolutions.append(SolDict)
             # print([VarList[i][1][1].Xn for i in range(len(VarList))], sum([VarList[i][1][1].Xn for i in range(len(VarList))]))
+            # print([VarList[i][0][1].Xn for i in range(len(VarList))], sum([VarList[i][1][1].Xn for i in range(len(VarList))]))
             # print(sol_nb, SolDict, plne_model.PoolObjVal)
+            # print({k_: [(l_, v.Xn) for l_, v in B_kl[k_].items() if int(v.Xn) == 1] for k_ in B_kl})
+            # print({k: {l_: E_kl[k][l_].Xn for l_ in con_argument_set} for k in pro_argument_set})
         # ---
         Explanation_text = "All ({} / {} required) 1 pro VS. {} con(s) Explanations\n".format(plne_model.SolCount, plne_model.params.PoolSolutions, k_max)
         # Explanations = list()

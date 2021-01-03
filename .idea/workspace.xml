@@ -6,19 +6,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CORE/CSVFILES/Fishburn2002-DM_Utility_Function.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/CSVFILES/Fishburn2002-PerfTable4+.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/CSVFILES/Fishburn2002-criteria.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/Fishburn2002-main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/CSVFILES/PerfTable9.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/CSVFILES/criteria9.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/OfflineSimulator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/AppreciationObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/AppreciationObject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/CSVFILES/DM_Utility_Function6.csv" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/CSVFILES/DM_Utility_Function6.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/DA.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/DA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/Explanation.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Explanation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/InformationPicker.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/InformationPicker.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/ProblemDescription.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/ProblemDescription.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/gurobi.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/gurobi.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,8 +62,8 @@
       <recent name="C:\Users\MICS\PycharmProjects\MOMBA" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="Fishburn2002-main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.OfflineSimulator">
+    <configuration name="Explanation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -80,7 +75,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Fishburn2002-main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Explanation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="OfflineSimulator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MOMBA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/OfflineSimulator.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -153,35 +169,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="performanceTableAndAlternativesGenerator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="MOMBA" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/performanceTableAndAlternativesGenerator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.OfflineSimulator" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.Explanation" />
         <item itemvalue="Python.Verif-Propriete" />
         <item itemvalue="Python.main-sim" />
-        <item itemvalue="Python.Fishburn2002-main" />
-        <item itemvalue="Python.performanceTableAndAlternativesGenerator" />
       </list>
     </recent_temporary>
   </component>
@@ -494,7 +488,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="BON AFFICHAGE DE LA COMMITMENTSTORE : LA TRACE DES INTERACTIONS" />
     <MESSAGE value="Exceptions.py : quand DM ne valide pas un element de N&#10;InconsistencySolver.py : Empty et clearPI&#10;N.update : réaliser un clear avant&#10;assertion : nbr constant d'information tout au long du processus" />
     <MESSAGE value="BONNE HIERARCHIE D'HERITAGE AU NIVEAU DU DM" />
     <MESSAGE value="DES MESURES + UN NOUVEAU MODELE DE DM" />
@@ -519,6 +512,7 @@
     <MESSAGE value="IMPLEMENTATION COMPLETE DE LA 2-ORDER + PI EXPLANATIONS ENGINE" />
     <MESSAGE value="IMPLEMENTATION COMPLETE DE LA 2-ORDER + PI EXPLANATIONS ENGINE + AT-MOST-ONE-POSSIBLE SWAP" />
     <MESSAGE value="IMPLEMENTATION COMPLETE DE LA 2-ORDER + PI EXPLANATIONS ENGINE + AT-MOST-ONE-POSSIBLE SWAP + PMR COMPUTATION" />
-    <option name="LAST_COMMIT_MESSAGE" value="IMPLEMENTATION COMPLETE DE LA 2-ORDER + PI EXPLANATIONS ENGINE + AT-MOST-ONE-POSSIBLE SWAP + PMR COMPUTATION" />
+    <MESSAGE value="IMPLEMENTATION DU MOTEUR 1 Vs K MIXED EXPLANATION &#10;k fourni à l'intérieur de la méthode (factorisation pour un wrappeur à envisager)&#10;&#10;à faire main qui mouline directement sur la base de la PI sans interaction avec le DM" />
+    <option name="LAST_COMMIT_MESSAGE" value="IMPLEMENTATION DU MOTEUR 1 Vs K MIXED EXPLANATION &#10;k fourni à l'intérieur de la méthode (factorisation pour un wrappeur à envisager)&#10;&#10;à faire main qui mouline directement sur la base de la PI sans interaction avec le DM" />
   </component>
 </project>
