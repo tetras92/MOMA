@@ -26,7 +26,7 @@ class ProblemDescription:
         """Méthode de set-up général"""
         self._set_up_criteria()
         self._set_up_alternatives()
-        self._remove_dominated_alternatives()
+        # self._remove_dominated_alternatives()
         self._generate_Information()
         self._generate_list_of_list_of_ordered_criterion_attributes()
         self._generate_dict_of_fictious_pairs_of_alternatives()
@@ -249,9 +249,11 @@ class ProblemDescription:
 
     def swap_translation(self, alternative, edge):
         attributeLevelsList = alternative.attributeLevelsList.copy()
-        i, j = edge
-        attributeLevelsList[i] = (attributeLevelsList[i] + 1) % 2
-        attributeLevelsList[j] = (attributeLevelsList[j] + 1) % 2
+        I_set, J_set = edge
+        for i in I_set :
+            attributeLevelsList[i] = (attributeLevelsList[i] + 1) % 2
+        for j in J_set:
+            attributeLevelsList[j] = (attributeLevelsList[j] + 1) % 2
         attributeList = [self._list_of_list_of_ordered_criterion_attributes[cr_i][attributeLevelsList[cr_i]] for cr_i in range(self.n)]
         alt_suc = Alternative(float("inf"), attributeList, attributeLevelsList, list())
         corr_alt_suc = self.getCorrespondingAlternative(alt_suc)

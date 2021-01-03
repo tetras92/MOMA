@@ -10,22 +10,20 @@ from CORE.Explanation import ExplanationWrapper, Explain
 import time
 if __name__ == "__main__":
 
-    mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
-                                                  performanceTableFileName="CSVFILES/test_da2pl_test.csv")
-                                                  # performanceTableFileName="CSVFILES/PerfTable4+.csv")
+    mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/Fishburn2002-criteria.csv",
+                                                  performanceTableFileName="CSVFILES/Fishburn2002-PerfTable4+.csv")
     print(mcda_problem_description)
-    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function6.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
-    # dm = NoisyWS_DM("CSVFILES/DM_Utility_Function_da2pl.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
+    dm = NoisyWS_DM("CSVFILES/Fishburn2002-DM_Utility_Function.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
 
     DA(problemDescription=mcda_problem_description,
        # NonPI_InfoPicker=RandomPicker(), #,
        NonPI_InfoPicker=DeterministicPicker(), #,
        stopCriterion=DialogDurationStopCriterion(float("inf")),
        N_InfoPicker=RandomPicker(0),
-       recommandationMaker=RecommendationWrapper(KBestRecommendation, 4),
-       # recommandationMaker=RecommendationWrapper(KRankingRecommendation, 9),
+       # recommandationMaker=RecommendationWrapper(KBestRecommendation, 4),
+       recommandationMaker=RecommendationWrapper(KRankingRecommendation, mcda_problem_description.numberOfAlternatives),
        InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver),
-       ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.general_1vsk_MixedExplanation, Explain.Order2SwapMixedExplanation]),
+       ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.atMost2OrderNecessarySwapAndPIExplanation, Explain.Order2SwapMixedExplanation, Explain.atMost2OrderNecessarySwapAndPIExplanationAndAtMostOnePossibleSwap]),
                                                                             # Explain.Order2SwapPossibleExplanation, Explain.Order2SwapExplanation,]),
                                                                             #  Explain.TransitiveExplanation]),
                                              UseAll=True)

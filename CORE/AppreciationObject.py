@@ -4,6 +4,7 @@ from CORE.Tools import colored_expression, AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_
 from CORE.NecessaryPreference import NecessaryPreference
 from gurobipy import GRB
 from CORE.Tools import ROUNDED_NUMBER_OF_DECIMALS
+import numpy as np
 class AppreciationObject:
     """Classe de base modélisation une paire d'alternatives"""
     def __init__(self, alternative1, alternative2):
@@ -17,6 +18,20 @@ class AppreciationObject:
         symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
         return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
                                                      self.alternative2.id)
+
+    def number_of_pro_arguments(self):
+        return np.count_nonzero((np.array(self.alternative1.attributeLevelsList) - np.array(self.alternative2.attributeLevelsList)) == 1)
+
+    def number_of_con_arguments(self):
+        return np.count_nonzero((np.array(self.alternative2.attributeLevelsList) - np.array(self.alternative1.attributeLevelsList)) == 1)
+
+    def pro_arguments_set(self):
+        array_dif = np.array(self.alternative1.attributeLevelsList) - np.array(self.alternative2.attributeLevelsList)
+        return set([i for i in range(len(array_dif)) if array_dif[i] == 1])
+
+    def con_arguments_set(self):
+        array_dif = np.array(self.alternative2.attributeLevelsList) - np.array(self.alternative1.attributeLevelsList)
+        return set([i for i in range(len(array_dif)) if array_dif[i] == 1])
 
 class PairwiseInformation(AppreciationObject):
     """Classe modélisant une paire d'alternatives sur

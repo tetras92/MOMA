@@ -78,7 +78,8 @@ class DeterministicPicker(InformationPicker):
         # self.L = [(43, 60), (29, 54), (15, 43), (15, 30), (15, 54), (15, 60)] # {15, 30}
         self.L = [(43, 60), (29, 54), (15, 43), (15, 54), (15, 60), (15, 30)] # {15}
         # self.L = [(43, 60), (29, 54), (15, 54), (15, 30), (15, 43), (15, 60)]# labo
-
+        # self.L = [(3, 7), (1, 5), (4, 6)] # Fishburn2002
+        # self.L = [(1, 2), (3, 6), (29, 54), (15, 43), (43, 60), (15, 54), (15, 60), (15, 30)] #sim 15/12
         # self.L = [(46, 60), (30, 46), (30, 60)]
         # self.L = [(43, 60), (30, 54), (46, 60), (46, 58), (57, 58), (15, 30), (29, 58), (30, 60),  (29, 54)]
         # self.L = [()]
@@ -92,7 +93,7 @@ class DeterministicPicker(InformationPicker):
 
 
     def pick(self, store):
-        if len(self.L) != 0 :
+        if len(self.L) != 0:
             elmt = self.L.pop()
             for info in store:
                 # print(info, elmt)

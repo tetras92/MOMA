@@ -6,13 +6,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/CORE/CSVFILES/Fishburn2002-DM_Utility_Function.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/CSVFILES/Fishburn2002-PerfTable4+.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/CSVFILES/Fishburn2002-criteria.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/Fishburn2002-main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/AppreciationObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/AppreciationObject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/CSVFILES/DM_Utility_Function6.csv" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/CSVFILES/DM_Utility_Function6.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/Explanation.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Explanation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/InformationPicker.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/InformationPicker.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/ProblemDescription.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/ProblemDescription.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/Tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Tools.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/gurobi.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/gurobi.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,17 +57,18 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/CORE/CSVFILES" />
-      <recent name="C:\Users\MICS\PycharmProjects\MOMBA\CORE\CSVFILES" />
-      <recent name="C:\Users\MICS\PycharmProjects\MOMBA" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\MICS\PycharmProjects\MOMBA\MCDA" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/CORE/CSVFILES" />
+      <recent name="$PROJECT_DIR$/CORE" />
+      <recent name="C:\Users\MICS\PycharmProjects\MOMBA\CORE\CSVFILES" />
+      <recent name="C:\Users\MICS\PycharmProjects\MOMBA" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.main">
-    <configuration name="InconsistencySolver" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Fishburn2002-main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -73,8 +80,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/InconsistencySolver.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Fishburn2002-main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -83,7 +89,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Mesures" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Verif-Propriete" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -95,8 +101,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Mesures.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Verif-Propriete.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -105,7 +110,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Recommendation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main-sim" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -117,8 +122,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Recommendation.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/main-sim.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -174,10 +178,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.Verif-Propriete" />
+        <item itemvalue="Python.main-sim" />
+        <item itemvalue="Python.Fishburn2002-main" />
         <item itemvalue="Python.performanceTableAndAlternativesGenerator" />
-        <item itemvalue="Python.Recommendation" />
-        <item itemvalue="Python.Mesures" />
-        <item itemvalue="Python.InconsistencySolver" />
       </list>
     </recent_temporary>
   </component>
@@ -490,7 +494,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="mise à jour reponse binaire du DM : DM can answer yes or No (+ InvalidationCommitment)" />
     <MESSAGE value="BON AFFICHAGE DE LA COMMITMENTSTORE : LA TRACE DES INTERACTIONS" />
     <MESSAGE value="Exceptions.py : quand DM ne valide pas un element de N&#10;InconsistencySolver.py : Empty et clearPI&#10;N.update : réaliser un clear avant&#10;assertion : nbr constant d'information tout au long du processus" />
     <MESSAGE value="BONNE HIERARCHIE D'HERITAGE AU NIVEAU DU DM" />
@@ -515,88 +518,7 @@
     <MESSAGE value="Avancer jus da2pl" />
     <MESSAGE value="IMPLEMENTATION COMPLETE DE LA 2-ORDER + PI EXPLANATIONS ENGINE" />
     <MESSAGE value="IMPLEMENTATION COMPLETE DE LA 2-ORDER + PI EXPLANATIONS ENGINE + AT-MOST-ONE-POSSIBLE SWAP" />
-    <option name="LAST_COMMIT_MESSAGE" value="IMPLEMENTATION COMPLETE DE LA 2-ORDER + PI EXPLANATIONS ENGINE + AT-MOST-ONE-POSSIBLE SWAP" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="614" y="341" width="681" height="396" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1594898385358">
-      <screen x="383" y="0" width="1537" height="1080" />
-    </state>
-    <state x="614" y="341" width="681" height="396" key="#com.intellij.fileTypes.FileTypeChooser/316.1080.1366.768/383.0.1537.1080@383.0.1537.1080" timestamp="1594898385358" />
-    <state x="583" y="0" width="912" height="904" key="CommitChangelistDialog2" timestamp="1601908533535">
-      <screen x="357" y="0" width="1563" height="1080" />
-    </state>
-    <state x="488" y="1107" key="CommitChangelistDialog2/290.1080.1366.768/357.0.1563.1080@290.1080.1366.768" timestamp="1597938960347" />
-    <state x="583" y="0" width="912" height="904" key="CommitChangelistDialog2/290.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1601908533535" />
-    <state x="255" y="27" width="912" height="741" key="CommitChangelistDialog2/290.1080.1366.768/67.27.1299.741@67.27.1299.741" timestamp="1593454201703" />
-    <state x="583" y="0" key="CommitChangelistDialog2/316.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1594131244077" />
-    <state x="605" y="0" width="1169" height="904" key="CommitChangelistDialog2/316.1080.1366.768/383.0.1537.1080@383.0.1537.1080" timestamp="1594205285120" />
-    <state x="743" y="297" width="424" height="484" key="FileChooserDialogImpl" timestamp="1597844101001">
-      <screen x="383" y="0" width="1537" height="1080" />
-    </state>
-    <state x="743" y="297" width="424" height="484" key="FileChooserDialogImpl/316.1080.1366.768/383.0.1537.1080@383.0.1537.1080" timestamp="1597844101001" />
-    <state width="1897" height="658" key="GridCell.Tab.0.bottom" timestamp="1602084292652">
-      <screen x="357" y="0" width="1563" height="1080" />
-    </state>
-    <state width="1276" height="322" key="GridCell.Tab.0.bottom/290.1080.1366.768/357.0.1563.1080@290.1080.1366.768" timestamp="1598351116389" />
-    <state width="1897" height="658" key="GridCell.Tab.0.bottom/290.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1602084292652" />
-    <state width="1897" height="575" key="GridCell.Tab.0.bottom/290.1080.1366.768/383.0.1537.1080@383.0.1537.1080" timestamp="1601495906123" />
-    <state width="1276" height="282" key="GridCell.Tab.0.bottom/290.1080.1366.768/67.27.1299.741@67.27.1299.741" timestamp="1601653860150" />
-    <state width="1276" height="290" key="GridCell.Tab.0.bottom/316.1080.1366.768/357.0.1563.1080@316.1080.1366.768" timestamp="1594285232715" />
-    <state width="1897" height="370" key="GridCell.Tab.0.bottom/316.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1594305677605" />
-    <state width="1276" height="399" key="GridCell.Tab.0.bottom/316.1080.1366.768/383.0.1537.1080@316.1080.1366.768" timestamp="1596326501185" />
-    <state width="1897" height="521" key="GridCell.Tab.0.bottom/316.1080.1366.768/383.0.1537.1080@383.0.1537.1080" timestamp="1599146653378" />
-    <state width="1276" height="335" key="GridCell.Tab.0.bottom/316.1080.1366.768/67.27.1299.741@67.27.1299.741" timestamp="1595930260512" />
-    <state width="1276" height="588" key="GridCell.Tab.0.bottom/357.0.1563.1848@357.0.1563.1848" timestamp="1599745405878" />
-    <state width="1276" height="424" key="GridCell.Tab.0.bottom/67.27.1299.741@67.27.1299.741" timestamp="1599660258162" />
-    <state width="1897" height="658" key="GridCell.Tab.0.center" timestamp="1602084292652">
-      <screen x="357" y="0" width="1563" height="1080" />
-    </state>
-    <state width="1276" height="322" key="GridCell.Tab.0.center/290.1080.1366.768/357.0.1563.1080@290.1080.1366.768" timestamp="1598351116389" />
-    <state width="1897" height="658" key="GridCell.Tab.0.center/290.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1602084292652" />
-    <state width="1897" height="575" key="GridCell.Tab.0.center/290.1080.1366.768/383.0.1537.1080@383.0.1537.1080" timestamp="1601495906122" />
-    <state width="1276" height="282" key="GridCell.Tab.0.center/290.1080.1366.768/67.27.1299.741@67.27.1299.741" timestamp="1601653860150" />
-    <state width="1276" height="290" key="GridCell.Tab.0.center/316.1080.1366.768/357.0.1563.1080@316.1080.1366.768" timestamp="1594285232715" />
-    <state width="1897" height="370" key="GridCell.Tab.0.center/316.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1594305677605" />
-    <state width="1276" height="399" key="GridCell.Tab.0.center/316.1080.1366.768/383.0.1537.1080@316.1080.1366.768" timestamp="1596326501185" />
-    <state width="1897" height="521" key="GridCell.Tab.0.center/316.1080.1366.768/383.0.1537.1080@383.0.1537.1080" timestamp="1599146653378" />
-    <state width="1276" height="335" key="GridCell.Tab.0.center/316.1080.1366.768/67.27.1299.741@67.27.1299.741" timestamp="1595930260511" />
-    <state width="1276" height="588" key="GridCell.Tab.0.center/357.0.1563.1848@357.0.1563.1848" timestamp="1599745405875" />
-    <state width="1276" height="424" key="GridCell.Tab.0.center/67.27.1299.741@67.27.1299.741" timestamp="1599660258161" />
-    <state width="1897" height="658" key="GridCell.Tab.0.left" timestamp="1602084292651">
-      <screen x="357" y="0" width="1563" height="1080" />
-    </state>
-    <state width="1276" height="322" key="GridCell.Tab.0.left/290.1080.1366.768/357.0.1563.1080@290.1080.1366.768" timestamp="1598351116388" />
-    <state width="1897" height="658" key="GridCell.Tab.0.left/290.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1602084292651" />
-    <state width="1897" height="575" key="GridCell.Tab.0.left/290.1080.1366.768/383.0.1537.1080@383.0.1537.1080" timestamp="1601495906122" />
-    <state width="1276" height="282" key="GridCell.Tab.0.left/290.1080.1366.768/67.27.1299.741@67.27.1299.741" timestamp="1601653860150" />
-    <state width="1276" height="290" key="GridCell.Tab.0.left/316.1080.1366.768/357.0.1563.1080@316.1080.1366.768" timestamp="1594285232715" />
-    <state width="1897" height="370" key="GridCell.Tab.0.left/316.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1594305677605" />
-    <state width="1276" height="399" key="GridCell.Tab.0.left/316.1080.1366.768/383.0.1537.1080@316.1080.1366.768" timestamp="1596326501184" />
-    <state width="1897" height="521" key="GridCell.Tab.0.left/316.1080.1366.768/383.0.1537.1080@383.0.1537.1080" timestamp="1599146653378" />
-    <state width="1276" height="335" key="GridCell.Tab.0.left/316.1080.1366.768/67.27.1299.741@67.27.1299.741" timestamp="1595930260511" />
-    <state width="1276" height="588" key="GridCell.Tab.0.left/357.0.1563.1848@357.0.1563.1848" timestamp="1599745405874" />
-    <state width="1276" height="424" key="GridCell.Tab.0.left/67.27.1299.741@67.27.1299.741" timestamp="1599660258160" />
-    <state width="1897" height="658" key="GridCell.Tab.0.right" timestamp="1602084292652">
-      <screen x="357" y="0" width="1563" height="1080" />
-    </state>
-    <state width="1276" height="322" key="GridCell.Tab.0.right/290.1080.1366.768/357.0.1563.1080@290.1080.1366.768" timestamp="1598351116389" />
-    <state width="1897" height="658" key="GridCell.Tab.0.right/290.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1602084292652" />
-    <state width="1897" height="575" key="GridCell.Tab.0.right/290.1080.1366.768/383.0.1537.1080@383.0.1537.1080" timestamp="1601495906122" />
-    <state width="1276" height="282" key="GridCell.Tab.0.right/290.1080.1366.768/67.27.1299.741@67.27.1299.741" timestamp="1601653860150" />
-    <state width="1276" height="290" key="GridCell.Tab.0.right/316.1080.1366.768/357.0.1563.1080@316.1080.1366.768" timestamp="1594285232715" />
-    <state width="1897" height="370" key="GridCell.Tab.0.right/316.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1594305677605" />
-    <state width="1276" height="399" key="GridCell.Tab.0.right/316.1080.1366.768/383.0.1537.1080@316.1080.1366.768" timestamp="1596326501185" />
-    <state width="1897" height="521" key="GridCell.Tab.0.right/316.1080.1366.768/383.0.1537.1080@383.0.1537.1080" timestamp="1599146653378" />
-    <state width="1276" height="335" key="GridCell.Tab.0.right/316.1080.1366.768/67.27.1299.741@67.27.1299.741" timestamp="1595930260512" />
-    <state width="1276" height="588" key="GridCell.Tab.0.right/357.0.1563.1848@357.0.1563.1848" timestamp="1599745405877" />
-    <state width="1276" height="424" key="GridCell.Tab.0.right/67.27.1299.741@67.27.1299.741" timestamp="1599660258162" />
-    <state x="555" y="275" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1594131271420">
-      <screen x="357" y="0" width="1563" height="1080" />
-    </state>
-    <state x="555" y="275" width="800" height="528" key="Vcs.Push.Dialog.v2/316.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1594131271420" />
-    <state x="624" y="246" key="run.anything.popup" timestamp="1601546507223">
-      <screen x="357" y="0" width="1563" height="1080" />
-    </state>
-    <state x="624" y="246" key="run.anything.popup/290.1080.1366.768/357.0.1563.1080@357.0.1563.1080" timestamp="1601546507223" />
+    <MESSAGE value="IMPLEMENTATION COMPLETE DE LA 2-ORDER + PI EXPLANATIONS ENGINE + AT-MOST-ONE-POSSIBLE SWAP + PMR COMPUTATION" />
+    <option name="LAST_COMMIT_MESSAGE" value="IMPLEMENTATION COMPLETE DE LA 2-ORDER + PI EXPLANATIONS ENGINE + AT-MOST-ONE-POSSIBLE SWAP + PMR COMPUTATION" />
   </component>
 </project>
