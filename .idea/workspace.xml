@@ -6,10 +6,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CORE/SIMULATION/Item.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/IJCAI21-OfflineSimulator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/SIMULATION/CBTOprocessing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/Explanation.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Explanation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/OfflineSimulator.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/OfflineSimulator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/SIMULATION/Item.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/SIMULATION/Item.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/gurobi.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/performanceTableAndAlternativesGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/performanceTableAndAlternativesGenerator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +43,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/CORE/CSVFILES" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CORE" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -48,39 +53,18 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\MICS\PycharmProjects\MOMBA\MCDA" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/CORE/CSVFILES" />
       <recent name="$PROJECT_DIR$/CORE" />
+      <recent name="$PROJECT_DIR$/CORE/CSVFILES" />
       <recent name="C:\Users\MICS\PycharmProjects\MOMBA\CORE\CSVFILES" />
       <recent name="C:\Users\MICS\PycharmProjects\MOMBA" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\MICS\PycharmProjects\MOMBA\MCDA" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.Item">
-    <configuration name="Explanation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="MOMBA" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Explanation.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Item" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.OfflineSimulator">
+    <configuration name="CBTOprocessing" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -92,7 +76,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/SIMULATION/Item.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/SIMULATION/CBTOprocessing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="IJCAI21-OfflineSimulator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MOMBA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/IJCAI21-OfflineSimulator.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -114,27 +119,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/OfflineSimulator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Verif-Propriete" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="MOMBA" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Verif-Propriete.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -165,13 +149,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="performanceTableAndAlternativesGenerator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MOMBA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/performanceTableAndAlternativesGenerator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Item" />
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.OfflineSimulator" />
-        <item itemvalue="Python.Explanation" />
-        <item itemvalue="Python.Verif-Propriete" />
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.IJCAI21-OfflineSimulator" />
+        <item itemvalue="Python.performanceTableAndAlternativesGenerator" />
+        <item itemvalue="Python.CBTOprocessing" />
       </list>
     </recent_temporary>
   </component>
@@ -484,7 +489,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="BONNE HIERARCHIE D'HERITAGE AU NIVEAU DU DM" />
     <MESSAGE value="DES MESURES + UN NOUVEAU MODELE DE DM" />
     <MESSAGE value="CORRECTION DU BUG KBESTRECOMMENDATION = K FOIS un OneBest sinon l'ordre d'évaluation joue." />
     <MESSAGE value="AVEC LES AFFICHAGES EN MOINS" />
@@ -509,6 +513,7 @@
     <MESSAGE value="IMPLEMENTATION COMPLETE DE LA 2-ORDER + PI EXPLANATIONS ENGINE + AT-MOST-ONE-POSSIBLE SWAP + PMR COMPUTATION" />
     <MESSAGE value="IMPLEMENTATION DU MOTEUR 1 Vs K MIXED EXPLANATION &#10;k fourni à l'intérieur de la méthode (factorisation pour un wrappeur à envisager)&#10;&#10;à faire main qui mouline directement sur la base de la PI sans interaction avec le DM" />
     <MESSAGE value="CORRECTION BUG :&#10;IMPLEMENTATION DU MOTEUR 1 Vs K MIXED EXPLANATION &#10;&#10;e_kl = u_l * b_kl et non e_kl = u_k * b_kl" />
-    <option name="LAST_COMMIT_MESSAGE" value="CORRECTION BUG :&#10;IMPLEMENTATION DU MOTEUR 1 Vs K MIXED EXPLANATION &#10;&#10;e_kl = u_l * b_kl et non e_kl = u_k * b_kl" />
+    <MESSAGE value="RAJOUT DES COHERENT TERM ORDERS" />
+    <option name="LAST_COMMIT_MESSAGE" value="RAJOUT DES COHERENT TERM ORDERS" />
   </component>
 </project>

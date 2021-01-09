@@ -1,18 +1,18 @@
-class Item():
-    def __init__(self, L):
-        L.sort()
-        self.tupled_item = tuple(L)
-
-    def __len__(self):
-        return len(self.tupled_item)
-
-    def __lt__(self, other):
-        if len(other) > len(self):
-            return False
-        elif len(self) > len(other):
-            return set(other.tupled_item) in set(self.tupled_item)
-        elif len(self) == 1:
-            return self.tupled_item[0] < other.tupled_item[0]
+# class Item():
+#     def __init__(self, L):
+#         L.sort()
+#         self.tupled_item = tuple(L)
+#
+#     def __len__(self):
+#         return len(self.tupled_item)
+#
+#     def __lt__(self, other):
+#         if len(other) > len(self):
+#             return False
+#         elif len(self) > len(other):
+#             return set(other.tupled_item) in set(self.tupled_item)
+#         elif len(self) == 1:
+#             return self.tupled_item[0] < other.tupled_item[0]
 
 from gurobipy import *
 
@@ -97,21 +97,24 @@ def generateCoherentBooleanTermsOrders(n, remainingItems, onGoingTermOrder, coll
 
 # print(allItems(6))
 Collector = list()
-n = 6
+n = 4
 generateCoherentBooleanTermsOrders(n, allItems(n), list(), Collector)
 print(len(Collector))
 
-import csv
+# import csv
+#
+# for i in range(len(Collector)):
+#     to = Collector[i]
+#     # print(to)
+#     to_Context = Context(n, KnownCoherentTermOrder=to)
+#     to_Context.generate_weight_vector()
+#     # with open('CoherentBooleanTermOrders{}/model{}.csv'.format(n, i+1), 'w', newline='') as csvfile:
+#     with open('model{}.csv'.format(n, i+1), 'w', newline='') as csvfile:
+#
+#         fieldnames = ['var{}'.format(j) for j in range(1, n+1)]
+#         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+#
+#         writer.writeheader()
+#         writer.writerow(to_Context.weight_vector)
+#     # print("====")
 
-for i in range(len(Collector)):
-    to = Collector[i]
-    # print(to)
-    to_Context = Context(n, KnownCoherentTermOrder=to)
-    to_Context.generate_weight_vector()
-    with open('CoherentBooleanTermOrders{}/model{}.csv'.format(n, i+1), 'w', newline='') as csvfile:
-        fieldnames = ['var{}'.format(j) for j in range(1, n+1)]
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-        writer.writeheader()
-        writer.writerow(to_Context.weight_vector)
-    # print("====")

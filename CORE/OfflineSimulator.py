@@ -22,12 +22,13 @@ if __name__ == "__main__":
     N().update(mcda_problem_description, **PI().getRelation())
 
     # Explanation Engine
-    ExplanationEngine = Explain.general_1vsk_MixedExplanation
-    for info in N():
-        ok, text = False, ""
-        if (info.alternative1.id, info.alternative2.id) in E:
-            ok, text = ExplanationEngine(mcda_problem_description, PI().getRelation()["dominanceRelation"], object=(info.alternative1, info.alternative2))
-        elif (info.alternative2.id, info.alternative1.id) in E:
-            ok, text = ExplanationEngine(mcda_problem_description, PI().getRelation()["dominanceRelation"], object=(info.alternative2, info.alternative1))
-        if ok:
-            print(text)
+    for ExplanationEngine in [Explain.general_k_vs_1_MixedExplanation, Explain.general_1_vs_k_MixedExplanation]:
+        print(ExplanationEngine)
+        for info in N():
+            ok, text = False, ""
+            if (info.alternative1.id, info.alternative2.id) in E:
+                ok, text = ExplanationEngine(mcda_problem_description, PI().getRelation()["dominanceRelation"], object=(info.alternative1, info.alternative2))
+            elif (info.alternative2.id, info.alternative1.id) in E:
+                ok, text = ExplanationEngine(mcda_problem_description, PI().getRelation()["dominanceRelation"], object=(info.alternative2, info.alternative1))
+            if ok:
+                print(text)

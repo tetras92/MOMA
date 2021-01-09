@@ -18,16 +18,17 @@ if __name__ == "__main__":
     # dm = NoisyWS_DM("CSVFILES/DM_Utility_Function_da2pl.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
 
     DA(problemDescription=mcda_problem_description,
-       NonPI_InfoPicker=RandomPicker(), #,
-       # NonPI_InfoPicker=DeterministicPicker(), #,
+       # NonPI_InfoPicker=RandomPicker(), #,
+       NonPI_InfoPicker=DeterministicPicker(), #,
        stopCriterion=DialogDurationStopCriterion(float("inf")),
        N_InfoPicker=RandomPicker(0),
        recommandationMaker=RecommendationWrapper(KBestRecommendation, 4),
        # recommandationMaker=RecommendationWrapper(KRankingRecommendation, 9),
        InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver),
-       ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.general_1vsk_MixedExplanation, Explain.Order2SwapMixedExplanation]),
-                                                                            # Explain.Order2SwapPossibleExplanation, Explain.Order2SwapExplanation,]),
-                                                                            #  Explain.TransitiveExplanation]),
+       ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.Order2SwapMixedExplanation, Explain.general_1_vs_k_MixedExplanation,
+                                                                            Explain.general_k_vs_1_MixedExplanation]),
+                                             # Explain.Order2SwapPossibleExplanation, Explain.Order2SwapExplanation,]),
+                                             #  Explain.TransitiveExplanation]),
                                              UseAll=True)
        )
 
