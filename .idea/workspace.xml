@@ -7,10 +7,15 @@
   <component name="ChangeListManager">
     <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/CORE/IJCAI21-OfflineSimulator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/SIMULATION/CBTOprocessing.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/IJCAI21.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/__init.py__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/Commitment.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Commitment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/DA.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/DA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/Explanation.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Explanation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/OfflineSimulator.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/OfflineSimulator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/InformationStore.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/InformationStore.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/ProblemDescription.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/ProblemDescription.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/SIMULATION/CBTOprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/SIMULATION/CBTOprocessing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/SIMULATION/Item.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/SIMULATION/Item.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/gurobi.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/main.py" afterDir="false" />
@@ -63,7 +68,7 @@
       <recent name="C:\Users\MICS\PycharmProjects\MOMBA\MCDA" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.OfflineSimulator">
+  <component name="RunManager" selected="Python.IJCAI21">
     <configuration name="CBTOprocessing" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -106,7 +111,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="OfflineSimulator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="IJCAI21" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -118,7 +123,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/OfflineSimulator.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/IJCAI21.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -139,7 +144,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -172,11 +176,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.OfflineSimulator" />
+        <item itemvalue="Python.IJCAI21" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.IJCAI21-OfflineSimulator" />
-        <item itemvalue="Python.performanceTableAndAlternativesGenerator" />
         <item itemvalue="Python.CBTOprocessing" />
+        <item itemvalue="Python.performanceTableAndAlternativesGenerator" />
+        <item itemvalue="Python.IJCAI21-OfflineSimulator" />
       </list>
     </recent_temporary>
   </component>
@@ -489,7 +493,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="DES MESURES + UN NOUVEAU MODELE DE DM" />
     <MESSAGE value="CORRECTION DU BUG KBESTRECOMMENDATION = K FOIS un OneBest sinon l'ordre d'évaluation joue." />
     <MESSAGE value="AVEC LES AFFICHAGES EN MOINS" />
     <MESSAGE value="AVEC UN FICHIER main.py" />
@@ -514,6 +517,7 @@
     <MESSAGE value="IMPLEMENTATION DU MOTEUR 1 Vs K MIXED EXPLANATION &#10;k fourni à l'intérieur de la méthode (factorisation pour un wrappeur à envisager)&#10;&#10;à faire main qui mouline directement sur la base de la PI sans interaction avec le DM" />
     <MESSAGE value="CORRECTION BUG :&#10;IMPLEMENTATION DU MOTEUR 1 Vs K MIXED EXPLANATION &#10;&#10;e_kl = u_l * b_kl et non e_kl = u_k * b_kl" />
     <MESSAGE value="RAJOUT DES COHERENT TERM ORDERS" />
-    <option name="LAST_COMMIT_MESSAGE" value="RAJOUT DES COHERENT TERM ORDERS" />
+    <MESSAGE value="IMPLEMENTATION ENGINE K Vs 1 explanation" />
+    <option name="LAST_COMMIT_MESSAGE" value="IMPLEMENTATION ENGINE K Vs 1 explanation" />
   </component>
 </project>

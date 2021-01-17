@@ -111,6 +111,13 @@ class DA:
             self._recommendationMaker.update(self._problemDescription, **PI().getRelation())  # Les 2 sont nécessaires
         self.recommendation = self._recommendationMaker.recommendation
 
+    def ijcai_interaction(self, dm):
+        """DM --> NoneType
+        Méthode qui simule l'interaction entre le DA et le DM telle que pensée pour IJCAI21"""
+
+        while not self._stopCriterion.stop():
+            info = NonPI().pick()
+            Dialog(info).madeWith(dm)
 
     def reset(self):
 
@@ -127,3 +134,5 @@ class DA:
         Dialog.NB = 0
         PI().clear()
         N().clear()
+
+

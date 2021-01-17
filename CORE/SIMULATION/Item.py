@@ -96,10 +96,10 @@ def generateCoherentBooleanTermsOrders(n, remainingItems, onGoingTermOrder, coll
             generateCoherentBooleanTermsOrders(n, newRemainingItems, newOnGoingTermOrder, collector)
 
 # print(allItems(6))
-Collector = list()
-n = 4
-generateCoherentBooleanTermsOrders(n, allItems(n), list(), Collector)
-print(len(Collector))
+# Collector = list()
+# n = 4
+# generateCoherentBooleanTermsOrders(n, allItems(n), list(), Collector)
+# print(len(Collector))
 
 # import csv
 #

@@ -155,6 +155,9 @@ class ProblemDescription:
             cst += VarDict[LOCA[-1]]
         gurobi_model.addConstr(cst == 1)
 
+        # -- Constraints spécial IJCAI (ordre sur les singletons)
+        # À VOIR (UN PEU D'HÉSITATION)
+
         gurobi_model.update()
         return gurobi_model, VarDict
 
@@ -287,7 +290,7 @@ class ProblemDescription:
 
         swap_couple = list(it.product(i_up, i_down))
         for i, j in swap_couple:
-            corr_alt_suc = self.swap_translation(alternative, (i,j))
+            corr_alt_suc = self.swap_translation(alternative, ({i},{j}))
             NeighborhoodList.append(corr_alt_suc)
 
         for i in i_up:

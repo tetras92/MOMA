@@ -50,6 +50,9 @@ class InformationStore:
     def clear(self):
         pass
 
+    def drop(self):
+        self._store.clear()
+
     def remove(self, info):
         self._store.remove(info)
 
@@ -76,12 +79,12 @@ class InformationStore:
 class PI(InformationStore):
     def __init__(self):
         InformationStore.__init__(self)
-
+        self._frozen_store = list()
     def add(self, information):
         self._store.append(information)
 
     def __len__(self):
-        return len(self._store)
+        return len(self._store) #+ len(self._frozen_store)
 
     def get_linear_constraint(self, VarDict):
         return [pinf.linear_constraint(VarDict) for pinf in self._store]
@@ -128,6 +131,14 @@ class PI(InformationStore):
         relationElementInfoDict = dict()
 
         recommendationRelationElementList = list()
+        for info_frozen in self._frozen_store:
+            if info_frozen.termP is AS_LEAST_AS_GOOD_AS():
+                element = (info_frozen.alternative1, info_frozen.alternative2)
+                relationElementList.append(element)
+            elif info_frozen.termP is NOT_AS_LEAST_AS_GOOD_AS():
+                element = (info_frozen.alternative2, info_frozen.alternative1)
+                relationElementList.append(element)
+
         for information in self:
 
             datesInRelation.append(information.last_commit_date)
@@ -164,6 +175,9 @@ class PI(InformationStore):
 
     def __str__(self):
         return InformationStore.__str__(self)
+
+    def freeze(self):
+        self._frozen_store = self[:]
 
     # def __str__(self):
     #     s = "{} element(s)\n".format(len(self._store))

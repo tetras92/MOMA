@@ -26,7 +26,7 @@ if __name__ == "__main__":
        # recommandationMaker=RecommendationWrapper(KRankingRecommendation, 9),
        InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver),
        ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.Order2SwapMixedExplanation, Explain.general_1_vs_k_MixedExplanation,
-                                                                            Explain.general_k_vs_1_MixedExplanation]),
+                                                                            Explain.brut_force_general_1_vs_k_and_k_vs_1_MixedExplanation]),
                                              # Explain.Order2SwapPossibleExplanation, Explain.Order2SwapExplanation,]),
                                              #  Explain.TransitiveExplanation]),
                                              UseAll=True)

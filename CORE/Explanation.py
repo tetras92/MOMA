@@ -4,6 +4,7 @@ from CORE.NecessaryPreference import NecessaryPreference
 from CORE.Tools import covectorOfPairWiseInformationWith2Levels, EPSILON, tradeoff, Counter, CONSTRAINTSFEASIBILITYTOL
 from CORE.decorators import counting
 from CORE.AppreciationObject import AppreciationObject
+import itertools as iter
 
 class Explain:
 
@@ -332,7 +333,7 @@ class Explain:
         L = list()
         get_links(Graph_of_dominance, source_alternative, dest_alternative, L, ExplanationList)
         ExplanationList.sort(key=lambda x: len(x))
-
+        ExplanationList = [path for path in ExplanationList if len(path) >= 3]
         Explanation_text = "All ({}) 2-order necessary swaps + PI (#) Explanations \n".format(len(ExplanationList))
         if len(ExplanationList) == 0:
             return False, Explanation_text + "\tCan not be explained via PI + 2-order necessary swap(s)"
@@ -468,7 +469,7 @@ class Explain:
         pro_argument_set, con_argument_set = AppreciationObject(source_alternative, dest_alternative).pro_arguments_set(), AppreciationObject(dest_alternative, source_alternative).pro_arguments_set()
         # print("pro", pro_argument_set, "con", con_argument_set)
         # autant que la complexité de la question
-        plne_model.params.PoolSolutions = len(pro_argument_set) + len(con_argument_set)
+        plne_model.params.PoolSolutions = 1#len(pro_argument_set) + len(con_argument_set)
         plne_model.params.PoolSearchMode = 2
         plne_model.params.PoolGap = 0
 
@@ -567,7 +568,7 @@ class Explain:
         pro_argument_set, con_argument_set = AppreciationObject(source_alternative, dest_alternative).pro_arguments_set(), AppreciationObject(dest_alternative, source_alternative).pro_arguments_set()
         # print("pro", pro_argument_set, "con", con_argument_set)
         # autant que la complexité de la question
-        plne_model.params.PoolSolutions = len(pro_argument_set) + len(con_argument_set)
+        plne_model.params.PoolSolutions = 1#len(pro_argument_set) + len(con_argument_set)
         plne_model.params.PoolSearchMode = 2
         plne_model.params.PoolGap = 0
 
@@ -641,6 +642,228 @@ class Explain:
             Explanation_text += "\n"
 
         return True, Explanation_text
+
+    @staticmethod
+    def general_MixedExplanation(mcda_problemDescription=None, Relation=None,
+                                                                          object=(None, None)):
+        ok, ExplanationText = Explain.general_1_vs_k_MixedExplanation(mcda_problemDescription, Relation, object)
+        if ok: return ok, ExplanationText
+        return Explain.general_k_vs_1_MixedExplanation(mcda_problemDescription, Relation, object)
+
+    @staticmethod
+    def general_1_vs_k_and_k_vs_1_MixedExplanation(mcda_problemDescription=None, Relation=None,
+                                                                          object=(None, None)):
+        # if Relation is None:
+        #     Relation = list()
+        # plne_model, VarList, VarDict = mcda_problemDescription.generate_gurobi_model_for_explanation_purposes_and_its_varDict_and_varList(
+        #     "1 pro vs. k cons and k pros vs. 1 con Mixed Mixed Explanations", EPSILON)
+        # # PI constraints
+        # for (altD, altd) in Relation:
+        #     plne_model.addConstr(altD.linear_expr(VarDict) - altd.linear_expr(VarDict) >= EPSILON)
+        # plne_model.update()
+        # # -- End PI constraints
+        #
+        # source_alternative, dest_alternative = object
+        #
+        # pro_argument_set, con_argument_set = AppreciationObject(source_alternative, dest_alternative).pro_arguments_set(), AppreciationObject(dest_alternative, source_alternative).pro_arguments_set()
+        # # print("pro", pro_argument_set, "con", con_argument_set)
+        # # autant que la complexité de la question
+        # plne_model.params.PoolSolutions = 1#len(pro_argument_set) + len(con_argument_set)
+        # plne_model.params.PoolSearchMode = 2
+        # plne_model.params.PoolGap = 0
+        #
+        # k_max = max(len(con_argument_set), len(pro_argument_set))
+        #
+        # # B_kl : dict of b_kl binary variables
+        # B_kl = {k: {l_: plne_model.addVar(vtype=GRB.BINARY, name="b_{}_{}".format(k, l_))for l_ in con_argument_set} for k in pro_argument_set}
+        # # B_lk : same as B_kl but indexed first on l
+        # B_lk = {l_: {k: B_kl[k][l_] for k in pro_argument_set} for l_ in con_argument_set}
+        # plne_model.update()
+        #
+        # # E_lk : dict of e_kl continuous variables
+        # E_lk = {l: {k_: plne_model.addVar(vtype=GRB.CONTINUOUS, name="e_{}_{}".format(l, k_), lb=0.0, ub=1.0) for k_ in pro_argument_set} for l in con_argument_set}
+        # # Each pro is in at most one group which dominates all cons  Constraints
+        # for k, D in B_kl.items():
+        #     plne_model.addConstr(quicksum(D.values()) <= 1)
+        #
+        # # Capacity Constraints and linearization and kMax Constraints
+        # for l, D in E_lk.items():
+        #     plne_model.addConstr(quicksum(D.values()) >= VarList[l][1][1])
+        #
+        #     for k, e_lk in D.items():
+        #         plne_model.addConstr(e_lk <= VarList[k][1][1])
+        #         plne_model.addConstr(e_lk <= B_lk[l][k])
+        #         plne_model.addConstr(e_lk >= VarList[k][1][1] + B_lk[l][k] - 1)
+        #
+        #
+        # plne_model.update()
+        #
+        #
+        #
+        # # C_kl : dict of c_kl binary variables
+        # C_kl = {k: {l_: plne_model.addVar(vtype=GRB.BINARY, name="b_{}_{}".format(k, l_))for l_ in con_argument_set} for k in pro_argument_set}
+        # # C_lk : same as C_kl but indexed first on l
+        # C_lk = {l_: {k: C_kl[k][l_] for k in pro_argument_set} for l_ in con_argument_set}
+        # plne_model.update()
+        # # F_kl : dict of f_kl continuous variables
+        # F_kl = {k: {l_: plne_model.addVar(vtype=GRB.CONTINUOUS, name="e_{}_{}".format(k, l_), lb=0.0, ub=1.0) for l_ in con_argument_set} for k in pro_argument_set}
+        # # Cons counterbalanced Constraints
+        # for l, D in C_lk.items():
+        #     plne_model.addConstr(quicksum(D.values()) <= 1)
+        #
+        # # Capacity Constraints and linearization and kMax Constraints
+        # for k, D in F_kl.items():
+        #     plne_model.addConstr(quicksum(D.values()) <= VarList[k][1][1])
+        #
+        #     for l, f_kl in D.items():
+        #         plne_model.addConstr(f_kl <= VarList[l][1][1])
+        #         plne_model.addConstr(f_kl <= C_kl[k][l])
+        #         plne_model.addConstr(f_kl >= VarList[l][1][1] + C_kl[k][l] - 1)
+        #
+        #
+        #
+        # plne_model.update()
+        #
+        #
+        # for k in C_kl:
+        #     for l in B_lk:
+        #         plne_model.addConstr(C_kl[k][l] + B_lk[l][k] <= 1)      INSUFFISANT !!!!
+        #
+        # plne_model.update()
+        #
+        # plne_model.setObjective(quicksum([c_kl for k, D in C_kl.items() for l, c_kl in D.items()]), GRB.MAXIMIZE)
+        # plne_model.update()
+        #
+        #
+        # # print(plne_model.display())
+        # plne_model.optimize()
+        #
+        # if not plne_model.status == GRB.OPTIMAL :
+        #     return False, "Can not be explained via General {} vs. 1 mixed explanations".format(k_max)
+        #
+        # OptimalSolutions = list()
+        # for sol_nb in range(0, plne_model.SolCount):
+        #     plne_model.params.SolutionNumber = sol_nb
+        #     SolDict = {l_: {k_ for k_, v in B_lk[l_].items() if int(v.Xn) == 1} for l_ in B_lk}
+        #     OptimalSolutions.append(SolDict)
+        #     SolDict = {k_: [l_ for l_, v in B_kl[k_].items() if int(v.Xn) == 1] for k_ in B_kl}
+        # # ---
+        # Explanation_text = "All ({} / {} required) {} pro(s) VS. 1 con Explanations\n".format(plne_model.SolCount, plne_model.params.PoolSolutions, k_max)
+        # for opt_sol_dict in OptimalSolutions:
+        #     Explanation = list()
+        #     NecessaryIconeList = list()
+        #     ListAttributeLevelsList = list()
+        #     ListAttributeLevelsList.append(object[0])
+        #     for j, I in opt_sol_dict.items():
+        #         prec = ListAttributeLevelsList[-1]
+        #         suiv = mcda_problemDescription.getSwapObject(prec, (set(I), {j}))
+        #         Explanation.append(suiv)
+        #         if suiv.is_necessary(mcda_problemDescription, Relation):
+        #             NecessaryIconeList.append(" * ")
+        #         else:
+        #             NecessaryIconeList.append(" ~ ")
+        #         ListAttributeLevelsList.append(suiv.alternative2)
+        #
+        #     for i in range(len(Explanation)):
+        #         elm = str(Explanation[i]) + NecessaryIconeList[i]
+        #         Explanation_text += "\t" + elm + "\n"
+        #
+        #     Explanation_text += "\n"
+        #
+        # return True, Explanation_text
+        pass
+
+    @staticmethod
+    def brut_force_general_1_vs_k_and_k_vs_1_MixedExplanation(mcda_problemDescription=None, Relation=None,
+                                                                          object=(None, None)):
+        if Relation is None:
+            Relation = list()
+        plne_model, VarList, VarDict = mcda_problemDescription.generate_gurobi_model_for_explanation_purposes_and_its_varDict_and_varList(
+            "1 pro vs. k cons Mixed Mixed Explanations", EPSILON)
+        # PI constraints
+
+        # print("list", VarList)
+        # print("dict", VarDict)
+
+        for (altD, altd) in Relation:
+            plne_model.addConstr(altD.linear_expr(VarDict) - altd.linear_expr(VarDict) >= EPSILON)
+        plne_model.update()
+        # -- End PI constraints
+
+        source_alternative, dest_alternative = object
+
+        pro_argument_set, con_argument_set = AppreciationObject(source_alternative, dest_alternative).pro_arguments_set(), AppreciationObject(dest_alternative, source_alternative).pro_arguments_set()
+        # print(pro_argument_set, con_argument_set)
+        pro_combinations = [list(elemt) for i in range(1, len(pro_argument_set)+ 1) for elemt in iter.combinations(pro_argument_set, i)]
+        con_combinations = [list(elemt) for i in range(0, len(con_argument_set)+ 1) for elemt in iter.combinations(con_argument_set, i)]
+
+        filtered_product = [elemt for elemt in iter.product(pro_combinations, con_combinations) if len(elemt[0]) == 1 or len(elemt[1]) == 1]
+        # print("product Brut", filtered_product)
+
+        VarB = list()
+        for i in range(len(filtered_product)):
+            # pro, con = filtered_product[i]
+            VarB.append(plne_model.addVar(vtype=GRB.BINARY, name="b_i".format(i)))
+
+        plne_model.update()
+        for con in con_argument_set:
+            cstr = LinExpr()
+            for i in range(len(filtered_product)):
+                pro_in, con_in = filtered_product[i]
+                if con in con_in:
+                    cstr += VarB[i]
+            plne_model.addConstr(cstr == 1)
+
+        for pro in pro_argument_set:
+            cstr = LinExpr()
+            for i in range(len(filtered_product)):
+                pro_in, con_in = filtered_product[i]
+                if pro in pro_in:
+                    cstr += VarB[i]
+            plne_model.addConstr(cstr == 1)
+        plne_model.update()
+
+
+        for k in range(len(filtered_product)):
+            pro_in, con_in = filtered_product[k]
+            plne_model.addConstr(quicksum([VarList[i][1][1] for i in pro_in]) - quicksum([VarList[j][1][1] for j in con_in]) >= VarB[k] - 1)
+
+        plne_model.update()
+        plne_model.optimize()
+
+        if not plne_model.status == GRB.OPTIMAL :
+            return False, "Can not be explained via brute force 1->k and k->1 mixed explanations"
+
+        Explanation_text = "Brute Force 1->k and k->1 mixed explanations\n"
+
+        edgeSelected = list()
+        for i in range(len(VarB)):
+            varb = VarB[i]
+            if varb.x == 1:
+                edgeSelected.append(filtered_product[i])
+
+
+        # ---
+        Explanation = list()
+        NecessaryIconeList = list()
+        ListAttributeLevelsList = list()
+        ListAttributeLevelsList.append(object[0])
+        for i, j in edgeSelected:
+            prec = ListAttributeLevelsList[-1]
+            suiv = mcda_problemDescription.getSwapObject(prec, (set(i), set(j)))
+            Explanation.append(suiv)
+            if suiv.is_necessary(mcda_problemDescription, Relation):
+                NecessaryIconeList.append(" * ")
+            else:
+                NecessaryIconeList.append(" ~ ")
+            ListAttributeLevelsList.append(suiv.alternative2)
+
+        for i in range(len(Explanation)):
+            elm = str(Explanation[i]) + NecessaryIconeList[i]
+            Explanation_text += "\t" + elm + "\n"
+
+        return True, Explanation_text
+
 
 class ExplanationWrapper():
     counter = Counter()
