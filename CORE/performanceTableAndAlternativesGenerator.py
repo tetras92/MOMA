@@ -50,5 +50,5 @@ def generate(criteriaFileName, performanceTableName):
             writer.writerow(D)
 
 if __name__ == "__main__" :
-    for i in range(3, 4):
+    for i in range(8, 9):
         generate(i, "CSVFILES/ijcai_fullPerfTable{}.csv".format(i))

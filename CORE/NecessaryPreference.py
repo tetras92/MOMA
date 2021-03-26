@@ -49,7 +49,10 @@ class NecessaryPreference:
         #         xvarM.append(va.x)
         #     if varN.x != 1: print("Boom", varN.x, object, "=", xvarL, xvarM)
             # print("NV", varN.x)
-
+        if elmt1.id == 18 and elmt2.id == 13 and model.status == GRB.OPTIMAL:
+            print(Relation)
+            print([varl.x for varl in varL])
+            print([varm.x for varm in VarMList])
         # if (elmt1.id == 53 and elmt2.id == 15):
         #     print("========================================> FOund", model.status == GRB.OPTIMAL)
         #     if model.status == GRB.OPTIMAL :

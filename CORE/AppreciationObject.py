@@ -33,6 +33,12 @@ class AppreciationObject:
         array_dif = np.array(self.alternative2.attributeLevelsList) - np.array(self.alternative1.attributeLevelsList)
         return set([i for i in range(len(array_dif)) if array_dif[i] == 1])
 
+    def is_disjointed(self):
+        for b1, b2 in zip(self.alternative2.attributeLevelsList, self.alternative1.attributeLevelsList):
+            if b1 == b2 == 1:
+                return False
+        return True
+
 class PairwiseInformation(AppreciationObject):
     """Classe modélisant une paire d'alternatives sur
     laquelle ne s'est pas encore (re)prononcé le DM :

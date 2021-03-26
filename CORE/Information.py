@@ -20,6 +20,7 @@ class Information:
         self.covector = covectorOfPairWiseInformationWith2Levels((alternative1, alternative2))
 
         self.MinMaxRegretList = list()
+        self.is_a_disjointed_pair = self.o.is_disjointed()
 
     def addMinMaxRegretList(self, tupleOfValues):
         self.MinMaxRegretList.append(tupleOfValues)

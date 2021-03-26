@@ -80,6 +80,7 @@ class PI(InformationStore):
     def __init__(self):
         InformationStore.__init__(self)
         self._frozen_store = list()
+
     def add(self, information):
         self._store.append(information)
 
@@ -235,6 +236,12 @@ class NonPI(InformationStore):
 
     def __getitem__(self, item):
         return InformationStore.__getitem__(self, item)
+
+    def filter(self, Tn=None):
+        if not Tn is None:
+            self._store = [info for info in self if (info.alternative1.id, info.alternative2.id) in Tn or (info.alternative2.id, info.alternative1.id) in Tn]
+        else:
+            self._store = [info for info in self if info.is_a_disjointed_pair]
 
 @singleton
 class N(InformationStore):
