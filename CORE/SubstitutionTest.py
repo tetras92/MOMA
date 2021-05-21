@@ -7,16 +7,7 @@ from CORE.Dialog import Dialog
 import random
 from CORE.DM import WS_DM
 from datetime import datetime
-
-
-def plot(series):
-    min_v = min(series)
-    max_v = max(series)
-    moitie = (min_v + max_v)//2
-
-    p_inf = round(100*len([e for e in series if e <= moitie])/len(series), 2)
-    p_sup = round(100*len([e for e in series if e > moitie])/len(series), 2)
-    return (min_v, moitie, max_v), p_inf, p_sup
+from CORE.NecessaryPreference import NecessaryPreference
 
 def breakpoint(series):
     V = list()
@@ -24,8 +15,10 @@ def breakpoint(series):
         if series[i] != series[i-1]:
             V.append((series[i-1], i+1))
     return V
+
+
 if __name__ == "__main__":
-    n = 6
+    n = 5
 
     cardSDn = {4: 19,
                5: 64,
@@ -47,7 +40,6 @@ if __name__ == "__main__":
 
     # Engine1 = Explain.general_MixedExplanation
     Engine = Explain.brut_force_general_1_vs_k_and_k_vs_1_MixedExplanation
-    TotalRequirementsChecked = 0
 
 
     criteriaFile = f'/home/manuel239/PycharmProjects/MOMA/CORE/CSVFILES/ijcai_criteria{n}.csv'
@@ -67,11 +59,6 @@ if __name__ == "__main__":
     N().drop()
     NonPI().filter()
     assert len(NonPI()) == len(Tn)
-
-    CPnTemoin, CPnDictTemoin = nCoveringPairs(directory + '/model1.csv', n)
-    DictCumulDif1 = {dif : 0 for dif in CPnDictTemoin}
-    DictCumulDif2 = {dif : 0 for dif in CPnDictTemoin}
-    DictTotalDif = {dif : len(SetAss) for dif, SetAss in CPnDictTemoin.items()}
 
 
     Dict_Non_PI = dict()
@@ -103,14 +90,13 @@ if __name__ == "__main__":
 
     Dn_star = set(Dn) & set(Tn_star)
     Un_star = set(Un) & set(Tn_star)
-    print("to examine", len(Dn_star) + len(Un_star))
+    # print("to examine", len(Dn_star) + len(Un_star))
     niveau = -1
 
 
+    RESULT2 = dict()
     RESULT = dict()
-    A_B_ordering_dict = dict()
-    A_B_xplained_dict = dict()
-
+    CorrespondingSetDict = correspondingSet(n)
     for dmFile in os.listdir(directory):
         niveau += 1
         if niveau % 500 == 0: print(niveau, datetime.now())
@@ -118,13 +104,11 @@ if __name__ == "__main__":
         STn = [(min(pair, key=lambda x: CBTOrder.index(x)),
                 max(pair, key=lambda x: CBTOrder.index(x))) for pair in Tn]
 
-        CriticalPair = [(CBTOrder[j], CBTOrder[j+1]) for j in range(len(CBTOrder)-1) if (CBTOrder[j], CBTOrder[j+1]) in STn]  # contigu et disjoints
-        STn_star = [(min(pair, key=lambda x: CBTOrder.index(x)),
-                    max(pair, key=lambda x: CBTOrder.index(x))) for pair in Tn_star]
-
-
-        SUn_star = Un_star_for_IJCAI(directory + '/' + dmFile, n)
-
+        CriticalPair = [(CBTOrder[j], CBTOrder[j+1]) for j in range(len(CBTOrder)-1) if (CBTOrder[j], CBTOrder[j+1]) in STn] # contigu et disjoints
+        SUn_star = [(min(pair, key=lambda x: CBTOrder.index(x)),
+                     max(pair, key=lambda x: CBTOrder.index(x))) for pair in Un_star]
+        SUn = [(min(pair, key=lambda x: CBTOrder.index(x)),
+                     max(pair, key=lambda x: CBTOrder.index(x))) for pair in Un]
 
         dm = WS_DM(directory+'/'+dmFile)
 
@@ -143,26 +127,51 @@ if __name__ == "__main__":
             Dialog(Dict_Non_PI[(a, b)]).madeWith(dm)        # chargement du modèle
 
 
-        cumul = len(Dn_star)
+        # Un_star_deductible_non_critical_Set = set(SUn_star) - set(CriticalPair)
+        # deductible_len = len(Un_star_deductible_non_critical_Set)
+        #
+        # # Pairs of Un_star deductible non explainable
+        # deductible_but_non_explainable = list()
+        #
+        # for a, b in Un_star_deductible_non_critical_Set:
+        #     altD = mcda_problem_description[a]
+        #     altd = mcda_problem_description[b]
+        #
+        #     ok, text = Engine(mcda_problem_description, PI().getRelation()["dominanceRelation"], object=(altD, altd))
+        #     if not ok:
+        #         deductible_but_non_explainable.append((altD, altd))
+        #     else:
+        #         deductible_but_non_explainable.append((altD, altd))
+        #
+        # Un_star_critical = set(SUn_star) & set(CriticalPair)
+        #
+        # for crit in Un_star_critical:
+        #     a, b = crit
+        #     altD = mcda_problem_description[a]
+        #     altd = mcda_problem_description[b]
+        #
+        #     if NecessaryPreference.adjudicate(mcda_problem_description, deductible_but_non_explainable, (altD, altd)):
+        #         print(CorrespondingSetDict[crit[0]], CorrespondingSetDict[crit[1]])
+        #
+        Un_deductible_non_critical_Set = set(SUn) - set(CriticalPair)
+        deductible_len = len(Un_deductible_non_critical_Set)
 
-        for a, b in SUn_star:
+        # Pairs of Un_star deductible non explainable
+        deductible_but_non_explainable = list()
+
+        for a, b in Un_deductible_non_critical_Set:
             altD = mcda_problem_description[a]
             altd = mcda_problem_description[b]
 
-            ok, text = Engine(mcda_problem_description, PI().getRelation()["dominanceRelation"], object=(altD, altd))
-            if ok:
-                cumul += 1
-        RESULT[dmFile] = cumul
+            deductible_but_non_explainable.append((altD, altd))
 
+        Un_critical = set(SUn) & set(CriticalPair)
 
+        for crit in Un_critical:
+            a, b = crit
+            altD = mcda_problem_description[a]
+            altd = mcda_problem_description[b]
 
-    # print(sorted(RESULT.keys(), key=lambda file : RESULT[file]))
-    SERIES = sorted([round(100*val/(len(Dn_star) + len(Un_star)),2) for val in RESULT.values()])
-    print(SERIES)
-    print(breakpoint(SERIES))
-    print("Minimum", min(SERIES), "Median", SERIES[len(SERIES)//2], "Maximum", max(SERIES))
-
-
-# n = 6 all 1, k ; k, 1
-# [(78.46, 603), (79.23, 2309), (80.0, 8889), (80.77, 19611), (81.54, 26087), (82.31, 34591), (83.08, 42738), (83.85, 52880), (84.62, 62888), (85.38, 72624), (86.15, 81228), (86.92, 89527), (87.69, 95163), (88.46, 100448), (89.23, 103777), (90.0, 106747), (90.77, 109836), (91.54, 112231), (92.31, 114803), (93.08, 116805), (93.85, 118182), (94.62, 120106), (95.38, 121808), (96.15, 123120), (96.92, 123532), (97.69, 123772), (98.46, 124052), (99.23, 124172)]
-# Minimum 78.46 Median 84.62 Maximum 100.0
+            if NecessaryPreference.adjudicate(mcda_problem_description, deductible_but_non_explainable, (altD, altd)):
+                print([(CorrespondingSetDict[a], CorrespondingSetDict[b]) for a, b in Un_deductible_non_critical_Set])
+                print("imply: ", (CorrespondingSetDict[crit[0]], CorrespondingSetDict[crit[1]]))

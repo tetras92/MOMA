@@ -9,6 +9,12 @@ from CORE.DM import WS_DM
 from datetime import datetime
 
 
+def breakpoint(series):
+    V = list()
+    for i in range(1, len(series)):
+        if series[i] != series[i-1]:
+            V.append((series[i-1], i+1))
+    return V
 
 
 if __name__ == "__main__":
@@ -116,19 +122,19 @@ if __name__ == "__main__":
         CPn, CPnDict = nCoveringPairs(directory + '/' + dmFile, n)
         denominateur = len(CPn)
 
-        for pair in CPn:
-            if pair not in A_B_ordering_dict:
-                A_B_ordering_dict[pair] = 0
-            if (pair[1], pair[0]) not in A_B_ordering_dict:
-                A_B_ordering_dict[(pair[1], pair[0])] = 0
-            A_B_ordering_dict[pair] += 1
-
-        for pair in set(CPn) & set(SDn_star):
-            if pair not in A_B_xplained_dict:
-                A_B_xplained_dict[pair] = 0
-            if (pair[1], pair[0]) not in A_B_xplained_dict:
-                A_B_xplained_dict[(pair[1], pair[0])] = 0
-            A_B_xplained_dict[pair] += 1
+        # for pair in CPn:
+        #     if pair not in A_B_ordering_dict:
+        #         A_B_ordering_dict[pair] = 0
+        #     if (pair[1], pair[0]) not in A_B_ordering_dict:
+        #         A_B_ordering_dict[(pair[1], pair[0])] = 0
+        #     A_B_ordering_dict[pair] += 1
+        #
+        # for pair in set(CPn) & set(SDn_star):
+        #     if pair not in A_B_xplained_dict:
+        #         A_B_xplained_dict[pair] = 0
+        #     if (pair[1], pair[0]) not in A_B_xplained_dict:
+        #         A_B_xplained_dict[(pair[1], pair[0])] = 0
+        #     A_B_xplained_dict[pair] += 1
 
 
         dm = WS_DM(directory+'/'+dmFile)
@@ -157,63 +163,64 @@ if __name__ == "__main__":
             ok, text = Engine(mcda_problem_description, PI().getRelation()["dominanceRelation"], object=(altD, altd))
             if ok:
                 cumul += 1
-                if (a, b) not in A_B_xplained_dict:
-                    A_B_xplained_dict[(a, b)] = 0
-                A_B_xplained_dict[(a, b)] += 1
+                # if (a, b) not in A_B_xplained_dict:
+                #     A_B_xplained_dict[(a, b)] = 0
+                # A_B_xplained_dict[(a, b)] += 1
         RESULT[dmFile] = cumul
 
 
 
     # print(sorted(RESULT.keys(), key=lambda file : RESULT[file]))
     SERIES = sorted([round(100*val/denominateur,2) for val in RESULT.values()])
-    # print(SERIES)
+    print(SERIES)
+    print(breakpoint(SERIES))
     print("Minimum", min(SERIES), "Median", SERIES[len(SERIES)//2], "Maximum", max(SERIES))
-    for pair in A_B_ordering_dict.keys() - A_B_xplained_dict.keys():
-        A_B_xplained_dict[pair] = 0
-    # print("ordering", A_B_ordering_dict)
-    # print("xplained", A_B_xplained_dict)
-
-    A_B_ordering_dict_Factorized = {(min(pair), max(pair)): dict() for pair in A_B_ordering_dict}
-    for pair, val in A_B_ordering_dict.items():
-        if pair in A_B_ordering_dict_Factorized:
-            A_B_ordering_dict_Factorized[pair][True] = val
-        elif (pair[1], pair[0]) in A_B_ordering_dict_Factorized:
-            A_B_ordering_dict_Factorized[(pair[1], pair[0])][False] = val
-    print(A_B_ordering_dict_Factorized)
-
-    A_B_xplained_dict_Factorized = {(min(pair), max(pair)): {True : 0, False : 0} for pair in A_B_ordering_dict}
-    for pair, val in A_B_xplained_dict.items():
-        if pair in A_B_xplained_dict_Factorized:
-            A_B_xplained_dict_Factorized[pair][True] = val
-        elif (pair[1], pair[0]) in A_B_xplained_dict_Factorized:
-            A_B_xplained_dict_Factorized[(pair[1], pair[0])][False] = val
-    print(A_B_xplained_dict_Factorized,"\n")
-
-    Corresp_Set = correspondingSet(n)
-    for pair, ordering_dict in A_B_ordering_dict_Factorized.items():
-        # print(pair)
-        a, b = pair
-        obj = (Corresp_Set[a], Corresp_Set[b])
-        nb_files = sum(ordering_dict.values())
-        p_a_b = ordering_dict[True] / nb_files
-        p_b_a = ordering_dict[False] / nb_files
-
-        p_xplain_a_b = 0
-        aff_p_xplain_a_b = None
-        if ordering_dict[True] != 0:
-            p_xplain_a_b = round(A_B_xplained_dict_Factorized[pair][True] / ordering_dict[True], 2)
-            aff_p_xplain_a_b = round(100 * p_xplain_a_b,2)
-
-
-        p_xplain_b_a = 0
-        aff_p_xplain_b_a = None
-        if ordering_dict[False] != 0:
-            p_xplain_b_a = round(A_B_xplained_dict_Factorized[pair][False] / ordering_dict[False], 2)
-            aff_p_xplain_b_a = round(100*p_xplain_b_a,2)
-        p_xplain = p_xplain_a_b * p_a_b + p_b_a * p_xplain_b_a
-
-
-        print(obj, round(100*p_a_b, 2), aff_p_xplain_a_b,  round(100*p_b_a, 2), aff_p_xplain_b_a, round(100*p_xplain, 2))
+    # for pair in A_B_ordering_dict.keys() - A_B_xplained_dict.keys():
+    #     A_B_xplained_dict[pair] = 0
+    # # print("ordering", A_B_ordering_dict)
+    # # print("xplained", A_B_xplained_dict)
+    #
+    # A_B_ordering_dict_Factorized = {(min(pair), max(pair)): dict() for pair in A_B_ordering_dict}
+    # for pair, val in A_B_ordering_dict.items():
+    #     if pair in A_B_ordering_dict_Factorized:
+    #         A_B_ordering_dict_Factorized[pair][True] = val
+    #     elif (pair[1], pair[0]) in A_B_ordering_dict_Factorized:
+    #         A_B_ordering_dict_Factorized[(pair[1], pair[0])][False] = val
+    # print(A_B_ordering_dict_Factorized)
+    #
+    # A_B_xplained_dict_Factorized = {(min(pair), max(pair)): {True : 0, False : 0} for pair in A_B_ordering_dict}
+    # for pair, val in A_B_xplained_dict.items():
+    #     if pair in A_B_xplained_dict_Factorized:
+    #         A_B_xplained_dict_Factorized[pair][True] = val
+    #     elif (pair[1], pair[0]) in A_B_xplained_dict_Factorized:
+    #         A_B_xplained_dict_Factorized[(pair[1], pair[0])][False] = val
+    # print(A_B_xplained_dict_Factorized,"\n")
+    #
+    # Corresp_Set = correspondingSet(n)
+    # for pair, ordering_dict in A_B_ordering_dict_Factorized.items():
+    #     # print(pair)
+    #     a, b = pair
+    #     obj = (Corresp_Set[a], Corresp_Set[b])
+    #     nb_files = sum(ordering_dict.values())
+    #     p_a_b = ordering_dict[True] / nb_files
+    #     p_b_a = ordering_dict[False] / nb_files
+    #
+    #     p_xplain_a_b = 0
+    #     aff_p_xplain_a_b = None
+    #     if ordering_dict[True] != 0:
+    #         p_xplain_a_b = round(A_B_xplained_dict_Factorized[pair][True] / ordering_dict[True], 2)
+    #         aff_p_xplain_a_b = round(100 * p_xplain_a_b,2)
+    #
+    #
+    #     p_xplain_b_a = 0
+    #     aff_p_xplain_b_a = None
+    #     if ordering_dict[False] != 0:
+    #         p_xplain_b_a = round(A_B_xplained_dict_Factorized[pair][False] / ordering_dict[False], 2)
+    #         aff_p_xplain_b_a = round(100*p_xplain_b_a,2)
+    #     p_xplain = p_xplain_a_b * p_a_b + p_b_a * p_xplain_b_a
+    #
+    #
+    #     print(obj, round(100*p_a_b, 2), aff_p_xplain_a_b,  round(100*p_b_a, 2), aff_p_xplain_b_a, round(100*p_xplain, 2))
 
 # n = 4
 # Minimum 66.67 Median 66.67 Maximum 100.0
@@ -274,3 +281,7 @@ if __name__ == "__main__":
 # ({1, 4, 5}, {2, 3, 6}) 15.62 35.0 84.38 67.0 62.0
 # ({2, 3, 5}, {1, 4, 6}) 10.21 23.0 89.79 70.0 65.2
 # ({2, 3, 4}, {1, 5, 6}) 1.1 0.0 98.9 87.0 86.04
+
+# n = 6 FONCTION DE REPARTITION
+# [(80.0, 4722), (84.0, 21652), (88.0, 38301), (92.0, 77312), (96.0, 123156)]
+# Minimum 80.0 Median 92.0 Maximum 100.0

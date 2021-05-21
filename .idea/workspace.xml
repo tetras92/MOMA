@@ -5,21 +5,23 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/CORE/IJCAI21-OfflineSimulator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/IJCAI21.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/__init.py__.py" afterDir="false" />
+    <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="Push de sécurité : dimanche 17 Janvier">
+      <change afterPath="$PROJECT_DIR$/CORE/DialogDurationVsInexplicability.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/GraphicsRepresentation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/InteractionSimulation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/InteractionSimulationDetails.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/Metrics4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/Proportion-CriticalPairs-A_B_covering_m.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/SmallestSetOfPairs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CORE/SubstitutionTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/Commitment.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Commitment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/DA.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/DA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/Explanation.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Explanation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/InformationStore.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/InformationStore.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/ProblemDescription.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/ProblemDescription.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/KR-TARK-v2-1pro-vs-1con.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/KR-TARK-v2-1pro-vs-1con.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/KR-TARK-v2-A_B_covering_m.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/KR-TARK-v2-A_B_covering_m.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/KR-TARK-v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/KR-TARK-v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/NecessaryPreference.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/NecessaryPreference.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/SIMULATION/CBTOprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/SIMULATION/CBTOprocessing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/SIMULATION/Item.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/SIMULATION/Item.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/gurobi.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/performanceTableAndAlternativesGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/performanceTableAndAlternativesGenerator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/gurobi.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +40,14 @@
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="1Vvqg9k7Hfjlj0tQ8sKEy0zBAzq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -55,42 +65,25 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/CORE" />
+      <recent name="$PROJECT_DIR$/CORE/SIMULATION" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/CORE/CSVFILES" />
       <recent name="C:\Users\MICS\PycharmProjects\MOMBA\CORE\CSVFILES" />
-      <recent name="C:\Users\MICS\PycharmProjects\MOMBA" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$USER_HOME$/MICS/ENSEIGNEMENTS/CENTRALESUPELEC/ST07/2020-2021/TD-TP/TP-Note/fournis" />
+      <recent name="$USER_HOME$/MICS/ENSEIGNEMENTS/CENTRALESUPELEC/ST07/2020-2021/TD-TP/TP2" />
+      <recent name="$PROJECT_DIR$/CORE" />
       <recent name="C:\Users\MICS\PycharmProjects\MOMBA\MCDA" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.IJCAI21">
-    <configuration name="CBTOprocessing" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="MOMBA" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE/SIMULATION" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/SIMULATION/CBTOprocessing.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="IJCAI21-OfflineSimulator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.DialogDurationVsInexplicability">
+    <configuration name="DialogDurationVsInexplicability" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -102,7 +95,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/IJCAI21-OfflineSimulator.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/DialogDurationVsInexplicability.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -111,7 +104,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="IJCAI21" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="GraphicsRepresentation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -123,7 +116,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/IJCAI21.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/GraphicsRepresentation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -132,7 +125,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="InteractionSimulationDetails" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -144,7 +137,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/InteractionSimulationDetails.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -153,7 +146,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="performanceTableAndAlternativesGenerator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Metrics4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -165,7 +158,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/performanceTableAndAlternativesGenerator.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Metrics4.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SmallestSetOfPairs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MOMBA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/SmallestSetOfPairs.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -176,11 +190,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.IJCAI21" />
-        <item itemvalue="Python.main" />
-        <item itemvalue="Python.CBTOprocessing" />
-        <item itemvalue="Python.performanceTableAndAlternativesGenerator" />
-        <item itemvalue="Python.IJCAI21-OfflineSimulator" />
+        <item itemvalue="Python.DialogDurationVsInexplicability" />
+        <item itemvalue="Python.SmallestSetOfPairs" />
+        <item itemvalue="Python.GraphicsRepresentation" />
+        <item itemvalue="Python.Metrics4" />
+        <item itemvalue="Python.InteractionSimulationDetails" />
       </list>
     </recent_temporary>
   </component>
@@ -493,8 +507,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="CORRECTION DU BUG KBESTRECOMMENDATION = K FOIS un OneBest sinon l'ordre d'évaluation joue." />
-    <MESSAGE value="AVEC LES AFFICHAGES EN MOINS" />
     <MESSAGE value="AVEC UN FICHIER main.py" />
     <MESSAGE value="REFACTORING DE LA RECOMMENDATION AVEC RECOMMENDATIONWRAPPER QUI AURA COMME ATTRIBUT LE TYPE DE RECOMMENDATION" />
     <MESSAGE value="KRANKINGRECOMMENDATION ET KBESTRECOMMENDATION" />
@@ -518,6 +530,8 @@
     <MESSAGE value="CORRECTION BUG :&#10;IMPLEMENTATION DU MOTEUR 1 Vs K MIXED EXPLANATION &#10;&#10;e_kl = u_l * b_kl et non e_kl = u_k * b_kl" />
     <MESSAGE value="RAJOUT DES COHERENT TERM ORDERS" />
     <MESSAGE value="IMPLEMENTATION ENGINE K Vs 1 explanation" />
-    <option name="LAST_COMMIT_MESSAGE" value="IMPLEMENTATION ENGINE K Vs 1 explanation" />
+    <MESSAGE value="Push de sécurité : dimanche 17 Janvier" />
+    <MESSAGE value="Push de sécurité : vendredi 26 Mars" />
+    <option name="LAST_COMMIT_MESSAGE" value="Push de sécurité : vendredi 26 Mars" />
   </component>
 </project>

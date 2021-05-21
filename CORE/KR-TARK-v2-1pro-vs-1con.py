@@ -42,7 +42,7 @@ if __name__ == "__main__":
     mcda_problem_description = ProblemDescription(criteriaFileName=criteriaFile,
                                                   performanceTableFileName=perfFile)
 
-    directory = f'/home/manuel239/PycharmProjects/MOMA/CORE/SIMULATION/MCDA-CBTO{n}'
+    directory = f'/home/manuel239/PycharmProjects/MOMA/CORE/SIMULATION/CBTO{n}'
 
 
     Tn = Tn_for_OfflineSimulator(n)
@@ -128,13 +128,13 @@ if __name__ == "__main__":
 
         cumul = len(Dn_star)
 
-        for a, b in SUn_star:
-            altD = mcda_problem_description[a]
-            altd = mcda_problem_description[b]
-
-            ok, text = Engine(mcda_problem_description, PI().getRelation()["dominanceRelation"], object=(altD, altd))
-            if ok:
-                cumul += 1
+        # for a, b in SUn_star:
+        #     altD = mcda_problem_description[a]
+        #     altd = mcda_problem_description[b]
+        #
+        #     ok, text = Engine(mcda_problem_description, PI().getRelation()["dominanceRelation"], object=(altD, altd))
+        #     if ok:
+        #         cumul += 1
         RESULT[dmFile] = cumul
 
 

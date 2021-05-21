@@ -35,6 +35,37 @@ def superSet_and_subset_Dicts(n):
 def Tn_star(n):
     return [(A, B) for A, B in Tn(n) if len(A) >= 2 and len(B) >= 2]# and len(A) + len(B) == n]
 
+def Un(n, letter=False):
+    Tn_ = Tn(n)
+    Un_ = list()
+    for A, B in Tn_:
+        LA = list(A)
+        LA.sort()
+        LB = list(B)
+        LB.sort()
+        if not injectionFromAToB(LA, LB) and not injectionFromAToB(LB, LA):
+            Un_.append((A, B))
+    print([("".join([str(a) for a in A]), "".join([str(b) for b in B])) for A, B in Un_])
+    def SetRankOf(Couple):
+        A, B = Couple
+        A_, B_ = set(), set()
+        AB_ = A|B
+        m = len(A) + len(B)
+        for v in sorted(AB_, reverse=True):
+            if v in A:
+                A_.add(m)
+            else:
+                B_.add(m)
+            m -= 1
+        return "".join([chr(ord('a') + (len(A) + len(B) - valueA)) for valueA in sorted(A_, reverse=True)]), "".join([chr(ord('a') + (len(A) + len(B) - valueB)) for valueB in sorted(B_, reverse=True)])
+
+    if letter:
+        # Un_ = [(SetRankOf(AB), AB) for AB in Un_]
+        # print(Un_)
+        Un_ = {("".join([str(a) for a in A]), "".join([str(b) for b in B])): SetRankOf((A,B)) for A, B in Un_}
+        # Un_ = {("".join([str(a) for a in A]), "".join([str(b) for b in B])): [("".join([chr(ord('a') + (n - valueA)) for valueA in sorted(A, reverse=True)]), "".join([chr(ord('a') + (n - valueB)) for valueB in sorted(B, reverse=True)])), SetRankOf((A,B))] for A, B in Un_}
+    return Un_
+
 def Un_star_for_IJCAI(filename, n):
     L = regenerateCBTOfromModel(filename, n)
     Tn_ = Tn_star(n)
@@ -46,7 +77,6 @@ def Un_star_for_IJCAI(filename, n):
         LB.sort()
         if not injectionFromAToB(LA, LB) and not injectionFromAToB(LB, LA):
             Un_.append((A, B))
-
 
     SUn = [(min(pair, key=lambda x: L.index(x)),
             max(pair, key=lambda x: L.index(x))) for pair in Un_]
@@ -158,7 +188,9 @@ def val(L, n):
         return int(s, 2)
 
 def correspondingSet(n):
-    return {val(item, n) : item for item in allItems(n)}
+    # {("".join([str(a) for a in A]), "".join([str(b) for b in B])): SetRankOf((A,B)) for A, B in Un_}
+    # return {val(item, n) : item for item in allItems(n)}
+    return {val(item, n): "".join([str(a) for a in item]) for item in allItems(n)}
 
 def CBTO_formated_for_OfflineSimulator(filename, n):
     R = list()
@@ -177,14 +209,17 @@ def flat_CBTO_formated_for_OfflineSimulator(filename, n):
 
 import os
 if __name__ == "__main__":
-    m = 6
+    m = 5
+    D = Un(m, False)
+    # for c1, c2 in D.items():
+    #     print(c1, c2)
     # print(len(nCoveringPairs(f'CBTO{m}/model1.csv', m)))
     # print(len(explanation1vsN_eligibleTn(4)), explanation1vsN_eligibleTn(4))
     # print(Tn_for_OfflineSimulator(4))
     # print(explanation1vsN_eligibleTn(4))
     # for model in os.listdir('KR-CBTO7'):
     # L = regenerateCBTOfromModel('model1.csv', 5)
-    print(difficultyDict('model1.csv', 5))
+    # print(difficultyDict('model1.csv', 5))
     # print(CBTO_formated_for_OfflineSimulator('CoherentBooleanTermOrders4/model1.csv', 4))
     # print(regenerateCBTOfromModel('CoherentBooleanTermOrders4/model2.csv', 4))
     # print("eligible ", len(explanation1vsN_eligibleTn(6)) + len(explanation1vsN_eligibleTn(5)) + len(explanation1vsN_eligibleTn(4)))
