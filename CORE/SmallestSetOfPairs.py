@@ -56,9 +56,10 @@ class SmallestSetOfPairs:
         model.setObjective(quicksum(BaseVectorVar), GRB.MINIMIZE)
         model.optimize()
 
-        for i in range(len(Relation)):
-            print(*[MatrixOfVarE[i][j].x for j in range(len(Relation))], sep=" ")
-        print("\n")
+        # print of matrix (useful)
+        # for i in range(len(Relation)):
+        #     print(*[MatrixOfVarE[i][j].x for j in range(len(Relation))], sep=" ")
+        # print("\n")
 
         return model.status == GRB.OPTIMAL, round(model.objVal), [i for i in range(len(Relation)) if round(BaseVectorVar[i].x) == 1]
 

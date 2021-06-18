@@ -223,6 +223,9 @@ class ProblemDescription:
     def __getitem__(self, item):
         return self._alternativesDict[item]
 
+    def __iter__(self):
+        return self._alternativesDict.values().__iter__()
+
     def getNumberOfAlternatives(self):
         return len(self._alternativesDict)
 
@@ -235,10 +238,14 @@ class ProblemDescription:
     def getListOfInformation(self):
         return self._list_of_information
 
+    def getALternativesSet(self):
+        return self._alternativesDict.values()
+
     numberOfAlternatives = property(getNumberOfAlternatives)
     numberOfInformation = property(getNumberOfInformation)
     fictiousPairsOfAlternatives = property(getFictiousPairsOfAlternatives)
     listOfInformation = property(fget=getListOfInformation)
+    alternativesSet = property(fget=getALternativesSet)
     def getCorrespondingAlternative(self, alternative):
         for alt in self._alternativesDict.values():
             if alternative == alt:

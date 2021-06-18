@@ -19,7 +19,7 @@ def breakpoint(series):
 
 
 if __name__ == "__main__":
-    n = 5
+    n = 4
 
     cardSDn = {4: 19,
                5: 64,
@@ -98,6 +98,7 @@ if __name__ == "__main__":
     RESULT2 = dict()
     RESULT = dict()
     CorrespondingSetDict = correspondingSet(n)
+    card = 0
     for dmFile in os.listdir(directory):
         niveau += 1
         if niveau % 500 == 0: print(niveau, datetime.now())
@@ -106,11 +107,6 @@ if __name__ == "__main__":
                 max(pair, key=lambda x: CBTOrder.index(x))) for pair in Tn]
 
         CriticalPair = [(CBTOrder[j], CBTOrder[j+1]) for j in range(len(CBTOrder)-1) if (CBTOrder[j], CBTOrder[j+1]) in STn] # contigu et disjoints
-        Research = [(CorrespondingSetDict[a], CorrespondingSetDict[b]) for a, b in CriticalPair]
-        # if ('25', '134') in Research and ('12', '3') in Research:
-        # if ('4', '12') in Research and ('13', '5') in Research:
-        #     print("Modele : ", dmFile)
-
         SUn_star = [(min(pair, key=lambda x: CBTOrder.index(x)),
                      max(pair, key=lambda x: CBTOrder.index(x))) for pair in Un_star]
 
@@ -138,61 +134,93 @@ if __name__ == "__main__":
 
 
         Un_star_deductible_non_critical_Set = set(SUn_star) - set(smallestSetOfQueries)
-        deductible_but_non_explainable_Un_Star = list()
-        # Pairs of Un_star deductible non explainable
-        cumul = 0
+        Un_star_deductible_and_adjacent = Un_star_deductible_non_critical_Set & set(CriticalPair)
 
-        for a, b in Un_star_deductible_non_critical_Set:
-            altD = mcda_problem_description[a]
-            altd = mcda_problem_description[b]
+        if len(Un_star_deductible_and_adjacent) > 0:
+            RESULT[dmFile] = {'model': dmFile, "critical_length": len(CriticalPair), 'minimal_number_of_queries': smallestsize1, "non_trivial_critical_pairs": len(set(SUn_star) & set(CriticalPair)), 'non_trivial_deduced_critical_pairs': len(Un_star_deductible_and_adjacent)}
+    print("Nombre de modeles concernes", len(RESULT), round(100 * len(RESULT) / len(os.listdir(directory)), 2), "%")
 
-            ok, text = Engine(mcda_problem_description, PI().getRelation()["dominanceRelation"], object=(altD, altd))
-            if not ok:
-                cumul += 1
-                deductible_but_non_explainable_Un_Star.append((a, b))
-
-        large_queries = deductible_but_non_explainable_Un_Star + CriticalPair
-        aprioriSelection = [True] * len(deductible_but_non_explainable_Un_Star) + [False] * len(CriticalPair)
-
-        large_queries_alt = [(mcda_problem_description[a], mcda_problem_description[b]) for a, b in large_queries]
-        answer2, smallestsize2, selectedList2 = SmallestSetOfPairs.compute(mcda_problem_description, large_queries_alt, aprioriSelection)
-
-
-        RESULT2[dmFile] = smallestsize1, smallestsize2
-        RESULT[dmFile] = {'model': dmFile, 'all_explainable_minimal_number_of_queries': int(smallestsize2), 'minimal_number_of_queries': int(smallestsize1), "critical_length": len(CriticalPair),
-                          "number_of_non_explainable": len(deductible_but_non_explainable_Un_Star)}
-
-
-    with open(f'QuestionSimulation{n}.csv', 'w', newline='') as csvfile:
-            fieldnames = ['model', "critical_length", 'minimal_number_of_queries', "number_of_non_explainable", 'all_explainable_minimal_number_of_queries']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
-            for row in RESULT.values():
-                writer.writerow(row)
-    # print(RESULT2)
-    # print(sorted(RESULT2.keys(), key=lambda file : RESULT2[file][0]))
-    SERIES = sorted([round(100*(s2 - s1)/s1, 2) for s1, s2 in RESULT2.values()])
-    # print(SERIES)
-    # print(breakpoint(SERIES))
-    print("Minimum", min(SERIES), "Median", SERIES[len(SERIES)//2], "Maximum", max(SERIES))
-    Histogram = dict()
-    for val in SERIES:
-        if int(val) not in Histogram:
-            Histogram[int(val)] = 0
-        Histogram[int(val)] += 1
-
-    print(Histogram)
-
-
-# n = 4
-# Minimum 0.0 Median 0.0 Maximum 0.0
-# {0: 14}
+    with open(f'XP_TotalOrderJustification{n}.csv', 'w', newline='') as csvfile:
+        fieldnames = ['model', "critical_length", 'minimal_number_of_queries', "non_trivial_critical_pairs", 'non_trivial_deduced_critical_pairs']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in RESULT.values():
+            writer.writerow(row)
 
 # n = 5
-# Minimum 0.0 Median 40.0 Maximum 125.0
-# {0: 86, 12: 4, 14: 17, 16: 21, 20: 26, 25: 3, 28: 29, 33: 70, 40: 60, 42: 3, 50: 39, 60: 98, 66: 12, 75: 5, 80: 34, 100: 7, 125: 2}
+# Nombre de modeles concernes 72 / 516, 14 %
+# model106.csv [('25', '134')]
+# model69.csv [('14', '23')]
+# model173.csv [('23', '14')]
+# model329.csv [('234', '15')]
+# model153.csv [('134', '25')]
+# model328.csv [('234', '15')]
+# model368.csv [('134', '25')]
+# model105.csv [('234', '15')]
+# model478.csv [('124', '35')]
+# model424.csv [('15', '234')]
+# model188.csv [('23', '14')]
+# model178.csv [('23', '14')]
+# model124.csv [('23', '14')]
+# model462.csv [('124', '35')]
+# model148.csv [('15', '234')]
+# model467.csv [('23', '14')]
+# model94.csv [('134', '25')]
+# model403.csv [('35', '124')]
+# model305.csv [('14', '23')]
+# model334.csv [('25', '134')]
+# model406.csv [('24', '15')]
+# model332.csv [('25', '134')]
+# model408.csv [('24', '15')]
+# model111.csv [('25', '134')]
+# model439.csv [('23', '14')]
+# model475.csv [('15', '24')]
+# model419.csv [('24', '15')]
+# model330.csv [('25', '134')]
+# model72.csv [('14', '23')]
+# model158.csv [('134', '25')]
+# model161.csv [('134', '25')]
+# model301.csv [('14', '23')]
+# model303.csv [('14', '23')]
+# model425.csv [('15', '234')]
+# model156.csv [('15', '34')]
+# model309.csv [('14', '23')]
+# model333.csv [('25', '134')]
+# model128.csv [('23', '14')]
+# model473.csv [('15', '24')]
+# model485.csv [('23', '14')]
+# model357.csv [('15', '234')]
+# model91.csv [('134', '25')]
+# model194.csv [('23', '14')]
+# model366.csv [('15', '34')]
+# model190.csv [('23', '14')]
+# model460.csv [('15', '24')]
+# model477.csv [('124', '35')]
+# model151.csv [('15', '34')]
+# model381.csv [('234', '15')]
+# model184.csv [('23', '14')]
+# model396.csv [('14', '23')]
+# model363.csv [('14', '23')]
+# model336.csv [('34', '15')]
+# model378.csv [('23', '14')]
+# model487.csv [('23', '14')]
+# model414.csv [('14', '23')]
+# model387.csv [('23', '14')]
+# model298.csv [('14', '23')]
+# model398.csv [('14', '23')]
+# model296.csv [('14', '23')]
+# model78.csv [('14', '23')]
+# model307.csv [('14', '23')]
+# model382.csv [('25', '134')]
+# model331.csv [('25', '134')]
+# model404.csv [('35', '124')]
+# model162.csv [('134', '25')]
+# model165.csv [('134', '25')]
+# model108.csv [('34', '15')]
+# model441.csv [('23', '14')]
+# model113.csv [('34', '15')]
+# model360.csv [('14', '23')]
+# model417.csv [('35', '124')]
 
 # n = 6
-# Minimum 0.0 Median 200.0 Maximum 500.0
-# {0: 454, 7: 1, 9: 19, 10: 70, 11: 109, 12: 175, 14: 204, 15: 2, 16: 100, 18: 20, 20: 99, 22: 306, 23: 1, 25: 561, 27: 25, 28: 641, 30: 55, 33: 431, 36: 47, 37: 513, 40: 152, 41: 4, 42: 952, 44: 247, 45: 22, 50: 988, 53: 1, 54: 11, 55: 274, 57: 805, 58: 1, 60: 82, 61: 4, 62: 539, 63: 22, 66: 692, 69: 2, 70: 80, 71: 686, 72: 39, 75: 700, 76: 1, 77: 239, 80: 97, 81: 35, 83: 501, 84: 4, 85: 975, 87: 550, 88: 301, 90: 245, 91: 20, 92: 1, 100: 3367, 108: 15, 109: 93, 110: 355, 111: 641, 112: 904, 114: 1007, 115: 1, 116: 1066, 118: 63, 120: 340, 122: 758, 125: 1333, 127: 55, 128: 1235, 130: 290, 133: 1998, 136: 52, 137: 1659, 140: 241, 142: 1713, 144: 850, 145: 68, 150: 3022, 154: 42, 155: 782, 157: 2289, 160: 281, 162: 2305, 163: 20, 166: 1693, 170: 312, 171: 2918, 172: 5, 175: 2132, 177: 654, 180: 144, 183: 1231, 185: 3666, 187: 2077, 188: 920, 190: 58, 200: 8691, 210: 1, 211: 412, 212: 1807, 214: 3750, 216: 2596, 220: 10, 222: 178, 225: 2441, 228: 3644, 233: 3350, 237: 1919, 240: 14, 242: 3296, 244: 1, 250: 4423, 257: 3216, 260: 9, 262: 377, 266: 3466, 271: 4112, 275: 58, 280: 17, 283: 3272, 285: 2996, 287: 2, 300: 4046, 314: 523, 316: 2798, 320: 10, 328: 78, 333: 3364, 340: 19, 342: 1, 350: 2226, 360: 11, 366: 891, 380: 8, 383: 257, 400: 60, 416: 1, 420: 17, 440: 23, 460: 25, 480: 7, 500: 4}
-
+# Nombre de modeles concernes 101264 81.54 %

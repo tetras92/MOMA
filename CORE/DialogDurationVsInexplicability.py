@@ -18,7 +18,7 @@ def breakpoint(series):
 
 
 if __name__ == "__main__":
-    n = 4
+    n = 5
 
     cardSDn = {4: 19,
                5: 64,
@@ -92,14 +92,14 @@ if __name__ == "__main__":
     Un_star = set(Un) & set(Tn_star)
 
 
-    dmFile = 'model3.csv'
+    dmFile = 'model421.csv'
 
     CorrespondingSetDict = correspondingSet(n)
     # print(CorrespondingSetDict)
     # for dmFile in os.listdir(directory):
     CBTOrder = flat_CBTO_formated_for_OfflineSimulator(directory + '/' + dmFile, n)
     L = [CorrespondingSetDict[elm] for elm in CBTOrder]
-    L.reverse()
+    # L.reverse()
 
     STn = [(min(pair, key=lambda x: CBTOrder.index(x)),
             max(pair, key=lambda x: CBTOrder.index(x))) for pair in Tn]
