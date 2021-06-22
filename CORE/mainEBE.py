@@ -61,12 +61,11 @@ def recommend_and_explain(problem_description, relation=[]):
 if __name__ == "__main__":
 
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
-                                                  performanceTableFileName="CSVFILES/test_da2pl_test.csv")
-                                                  # performanceTableFileName="CSVFILES/PerfTable4+.csv")
-    # print(mcda_problem_description)
-    # x = mcda_problem_description[60]
-    # print(x)
-    # other_alt = [alt for alt in mcda_problem_description.alternativesSet if alt != x]
-    # print(other_alt)
-    # print(ExplanationBasedElicitation.adjudicate(mcda_problem_description, x, other_alt, [(mcda_problem_description[43], mcda_problem_description[46])]))
-    print(recommend_and_explain(mcda_problem_description, [(mcda_problem_description[15], mcda_problem_description[29])]))
+                                                  # performanceTableFileName="CSVFILES/test_table.csv")
+                                                  performanceTableFileName="CSVFILES/test_da2pl_5alt.csv")
+
+    # dm = NoisyWS_DM("CSVFILES/DM_Utility_Function_another_test.csv", 0)
+    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function_ebe_test.csv", 0)
+    DA(problemDescription=mcda_problem_description, InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver))
+    DA().interactInADialogGameWith(dm)
+    # print(recommend_and_explain(mcda_problem_description, [(mcda_problem_description[15], mcda_problem_description[29])]))

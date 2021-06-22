@@ -98,8 +98,8 @@ class ExplanationBasedElicitation:
         status = model.status == GRB.OPTIMAL
         if status:
             number_of_pairs_explained = len(other_alternatives) - int(model.objVal)
-            percentage = round(number_of_pairs_explained / len(other_alternatives), 2)
+            # percentage = round(number_of_pairs_explained / len(other_alternatives), 2)
             List_of_swap_used = [[(i, j) for (i, j) in BooleanSwapsCoeffDict[k] if int(BooleanSwapsCoeffDict[k][(i, j)].x) == 1] for k in range(len(XYCovList))]
-
-            return status, number_of_pairs_explained, percentage, List_of_swap_used
+            pareto_dominance = [int(BaseVectorVar[k].x) == 0 and all([int(BooleanSwapsCoeffDict[k][(i, j)].x) == 0 for (i, j) in BooleanSwapsCoeffDict[k]]) for k in range(len(XYCovList))]
+            return status, number_of_pairs_explained, pareto_dominance, List_of_swap_used
         return False, 0, 0, list()

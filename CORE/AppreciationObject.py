@@ -1,4 +1,4 @@
-from CORE.InformationStore import NonPI, PI, N
+from CORE.InformationStore import NonPI, PI, N, A
 from CORE.Tools import NO_TERM
 from CORE.Tools import colored_expression, AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS
 from CORE.NecessaryPreference import NecessaryPreference
@@ -166,3 +166,42 @@ class TransitiveObject(AppreciationObject):
         gurobi_model_with_PI_constraints.update()
         gurobi_model_with_PI_constraints.optimize()
         return round(gurobi_model_with_PI_constraints.objVal, ROUNDED_NUMBER_OF_DECIMALS)
+
+class AInformation(AppreciationObject):
+    # 20/06/2021
+    """Classe modélisant une paire d'alternatives supposee vraie par le DA
+     : l'information correspondante se trouve
+        donc dans N ou NonPI """
+    def __init__(self, information, alternative1, alternative2):
+        """ Information * Alternative² --> NoneType
+        Hyp : alternative1.id < alternative2.id
+        le paramètre information est la 'capsule' enveloppant
+         la paire d'alternative."""
+        A().add(information)
+        AppreciationObject.__init__(self, alternative1, alternative2)
+        self._termA = NO_TERM()
+
+    def getTermA(self):
+        return self._termA
+
+    def setTermA(self, v):
+        self._termA = v
+
+    termA = property(getTermA, setTermA)
+
+    def __str__(self):
+        return AppreciationObject.__str__(self)
+        # symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
+        # return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
+        #                                              self.alternative2.id)
+
+
+    term = property(getTermA)
+
+    def _getCorrespondingObject(self):
+        if self._termA is AS_LEAST_AS_GOOD_AS():
+            return self.alternative1, self.alternative2
+        elif self._termA is NOT_AS_LEAST_AS_GOOD_AS():
+            return self.alternative2, self.alternative1
+
+    dominanceObject = property(fget=_getCorrespondingObject)

@@ -1,8 +1,11 @@
+import random
+
 from CORE.Dialog import Dialog
-from CORE.Exceptions import DMdoesntValidateNElementException
+from CORE.Exceptions import DMdoesntValidateNElementException, DMdoesntValidateAElementException, AskWhyException
 from CORE.Explanation import Explain
 from CORE.InformationStore import *
 from CORE.Recommendation import RecommendationWrapper, KBestRecommendation
+from CORE.DG_RecommendationEngine import DGRecommendationEngine
 
 
 @singleton
@@ -51,6 +54,8 @@ class DA:
 
         self.explanationEngine = ExplanationWrapper
         self.recommendation = None
+
+
 
     def show(self):
         """ --> NoneType
@@ -118,6 +123,44 @@ class DA:
         while not self._stopCriterion.stop():
             info = NonPI().pick()
             Dialog(info).madeWith(dm)
+
+    def interactInADialogGameWith(self, dm):
+        all_validated = False
+        while not all_validated: #number_of_validations != self._problemDescription.numberOfAlternatives - 1: # sous-entendu recommandation 1-best . ATTENTION
+            recommendation_engine = DGRecommendationEngine(self._problemDescription, **PI().getRelation())
+            all_validated = True
+            # print("A : \n{}".format(str(A())))
+            print()
+            able_to_fully_explain, infoList, best_alternative, explanation_swap_A_info = recommendation_engine.process()
+            if able_to_fully_explain:
+                print("\n\n** RECOMMENDATION : {} **\n".format(best_alternative))
+                order_k_list = [k_ for k_ in range(len(infoList))]
+                random.shuffle(order_k_list)
+                for k in order_k_list: # Utiliser APicker
+                    info = infoList[k]
+                    k_swap_explanation = explanation_swap_A_info[k]
+                    # print("out PI : \n{}".format(str(PI())))
+                    try:
+                        print("\n", info)
+                        Dialog(info).madeWith(dm)
+                    except AskWhyException as awe:
+                        for swap_a_info in k_swap_explanation:
+                            try:
+                                Dialog(swap_a_info).madeWith(dm)
+                            except DMdoesntValidateAElementException as dma2:
+                                all_validated = False
+
+                        A().clear()
+                        break
+                    except DMdoesntValidateAElementException as dma:
+                        A().clear()
+                        all_validated = False
+                        break
+
+            else: # use NonPi picker a domaine restreint
+                all_validated = False
+                k = random.randint(0, len(infoList)-1)
+                Dialog(infoList[k]).madeWith(dm)
 
     def reset(self):
 

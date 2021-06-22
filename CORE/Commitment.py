@@ -49,6 +49,32 @@ class ValidationCommitment(Commitment):
                                                                                      self.term,
                                                                                      symb2, self.info.alternative2.id)
 
+class ValidationOfAssumedCommitment(ValidationCommitment):
+    """Classe modélisant la déclaration que fait un DM en validant
+       une supposition faite par le DA"""
+    def __init__(self, info, term):
+        ValidationCommitment.__init__(self, info, term)
+
+    def __str__(self):
+        symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}]\n\tDM validates.".format(self.__class__, self.date,
+                                                                                     self.info.alternative1.id, symb1,
+                                                                                     self.term,
+                                                                                     symb2, self.info.alternative2.id)
+
+class DMToldCommitment(ValidationCommitment):
+    """Classe modélisant la déclaration que fait un DM en validant
+       une supposition faite par le DA"""
+    def __init__(self, info, term):
+        ValidationCommitment.__init__(self, info, term)
+
+    def __str__(self):
+        symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}]\n\tDM stated.".format(self.__class__, self.date,
+                                                                                     self.info.alternative1.id, symb1,
+                                                                                     self.term,
+                                                                                     symb2, self.info.alternative2.id)
+
 class InvalidationCommitment(Commitment):
     """Classe modélisant la déclaration que fait un DM en ne validant pas
        un élément induit par calcul de la relation nécessaire, term
@@ -62,6 +88,59 @@ class InvalidationCommitment(Commitment):
                                                                                       self.info.alternative1.id, symb1,
                                                                                       self.term,
                                                                                       symb2, self.info.alternative2.id)
+
+class InvalidationOfAssumedCommitment(Commitment):
+    """Classe modélisant la déclaration que fait un DM en ne validant pas
+       une supposition faite par le DA"""
+    def __init__(self, info, term):
+        Commitment.__init__(self, info, term)  # ici, term est la réponse à laquelle s'oppose le DM
+
+    def __str__(self):
+        symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}]\n\tDM invalidates.".format(self.__class__, self.date,
+                                                                                      self.info.alternative1.id, symb1,
+                                                                                      self.term,
+                                                                                      symb2, self.info.alternative2.id)
+
+class AskWhyAboutAssumedCommitment(Commitment):
+    """Classe modélisant la déclaration que fait un DM en ne validant pas
+       une supposition faite par le DA"""
+    def __init__(self, info, term):
+        Commitment.__init__(self, info, term)  # ici, term est la réponse à laquelle s'oppose le DM
+
+    def __str__(self):
+        symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}]\n\tDM asks why?".format(self.__class__, self.date,
+                                                                                      self.info.alternative1.id, symb1,
+                                                                                      self.term,
+                                                                                      symb2, self.info.alternative2.id)
+
+
+class AssumedCommitment(Commitment):
+    # 20/06/2021
+    """Classe modélisant une comparaison supposée (hypothétique) qui
+    sera sujette a validation par le DM"""
+    def __init__(self, info, term):
+        Commitment.__init__(self, info, term)
+
+    def __str__(self):
+        symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}]\n\tDA supposes {}.".format(self.__class__, self.date,
+                                                                 self.info.alternative1.id, symb1, NO_TERM(),
+                                                                 symb2, self.info.alternative2.id, self.term)
+
+class GuaranteeCommitment(Commitment):
+    # 21/06/2021
+    """Classe modélisant une comparaison supposée (hypothétique) qui
+    sera sujette a validation par le DM"""
+    def __init__(self, info, term):
+        Commitment.__init__(self, info, term)
+
+    def __str__(self):
+        symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}]\n\tDA guarantees.".format(self.__class__, self.date,
+                                                                 self.info.alternative1.id, symb1, self.term,
+                                                                 symb2, self.info.alternative2.id)
 
 from CORE.decorators import singleton
 @singleton
@@ -77,7 +156,7 @@ class CommitmentStore():
         self._store_alt_commitment = dict()
 
     def add(self, commitment):
-        # print(commitment)
+        print(commitment)
         if commitment.info not in self._store_info_commitment:
             self._store_info_commitment[commitment.info] = list()
         self._store_info_commitment[commitment.info].append(commitment)

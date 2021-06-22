@@ -5,7 +5,7 @@ from CORE.Commitment import AnswerCommitment
 
 class InformationStore:
     def __init__(self, strlen=105):
-        self._store = list()
+        self._store = set()
         self._strlen = strlen
 
     @staticmethod
@@ -82,7 +82,7 @@ class PI(InformationStore):
         self._frozen_store = list()
 
     def add(self, information):
-        self._store.append(information)
+        self._store.add(information)
 
     def __len__(self):
         return len(self._store) #+ len(self._frozen_store)
@@ -147,21 +147,21 @@ class PI(InformationStore):
                 element = (information.alternative1, information.alternative2)
                 recommendationRelationElementList.append(element)
                 # relationElementList.append(element)
-                if information.how_entering_pi is AnswerCommitment : relationElementList.append(element)
+                if information.how_entering_pi is AnswerCommitment: relationElementList.append(element)
                 relationElementInfoDict[information] = element
             elif information.termP is NOT_AS_LEAST_AS_GOOD_AS():
                 element = (information.alternative2, information.alternative1)
                 recommendationRelationElementList.append(element)
                 # relationElementList.append(element)
-                if information.how_entering_pi is AnswerCommitment : relationElementList.append(element)
+                if information.how_entering_pi is AnswerCommitment: relationElementList.append(element)
                 relationElementInfoDict[information] = element
             else :
                 raise Exception("Error getRelation in PI()")
 
-        RelationDict["dominanceRelation"] = relationElementList
+        RelationDict["dominanceRelation"] = relationElementList       # uniquement les reponses directes (AnswerCommitment)
         RelationDict["datesInRelation"] = datesInRelation
         RelationDict["matchingInfoCoupleAlt"] = relationElementInfoDict
-        RelationDict["recommendationDominanceRelation"] = recommendationRelationElementList
+        RelationDict["recommendationDominanceRelation"] = recommendationRelationElementList        # reponses directes et elements de N (donc possibilite de redondance)
 
         return RelationDict
 
@@ -213,9 +213,9 @@ class NonPI(InformationStore):
         return self._infoPicker.pick(self)
 
     def add(self, information):
-        self._store.append(information)
+        self._store.add(information)
         # - 08 / 07 / 20
-        self._store.sort(key=lambda info : info.id)
+        # self._store.sort(key=lambda info : info.id)
         # - #
 
     def remove(self, info):
@@ -239,9 +239,9 @@ class NonPI(InformationStore):
 
     def filter(self, Tn=None):
         if not Tn is None:
-            self._store = [info for info in self if (info.alternative1.id, info.alternative2.id) in Tn or (info.alternative2.id, info.alternative1.id) in Tn]
+            self._store = set([info for info in self if (info.alternative1.id, info.alternative2.id) in Tn or (info.alternative2.id, info.alternative1.id) in Tn])
         else:
-            self._store = [info for info in self if info.is_a_disjointed_pair]
+            self._store = set([info for info in self if info.is_a_disjointed_pair])
 
 @singleton
 class N(InformationStore):
@@ -269,7 +269,7 @@ class N(InformationStore):
 
 
     def add(self, information):
-        self._store.append(information)
+        self._store.add(information)
 
 
 
@@ -295,6 +295,45 @@ class N(InformationStore):
         store_copy = [info for info in self._store] # important tout comme dans le cas de PI
         for info in store_copy:
             del info.termN
+
+    def is_empty(self):
+        return InformationStore.is_empty(self)
+
+
+@singleton
+class A(InformationStore):
+    # 20/06/2021
+    def __init__(self):
+        InformationStore.__init__(self)
+
+    def setInfoPicker(self, infoPicker):
+        self._infoPicker = infoPicker
+
+    def add(self, information):
+        self._store.add(information)
+
+    def pick(self):
+        return self._infoPicker.pick(self)
+
+    def __iter__(self):
+        return self._store.__iter__()
+
+    def __len__(self):
+        return len(self._store)
+
+    def remove(self, info):
+        InformationStore.remove(self, info)
+
+    def __str__(self):
+        return InformationStore.__str__(self)
+
+    def __getitem__(self, item):
+        return InformationStore.__getitem__(self, item)
+
+    def clear(self):
+        store_copy = [info for info in self._store] # important tout comme dans le cas de PI
+        for info in store_copy:
+            del info.termA
 
     def is_empty(self):
         return InformationStore.is_empty(self)

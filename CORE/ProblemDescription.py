@@ -29,7 +29,7 @@ class ProblemDescription:
         # self._remove_dominated_alternatives()
         self._generate_Information()
         self._generate_list_of_list_of_ordered_criterion_attributes()
-        self._generate_dict_of_fictious_pairs_of_alternatives()
+        self._generate_dict_of_fictious_swap_pairs_of_alternatives()
 
     def _set_up_alternatives(self):
         """Instanciation des alternatives à partir de la table de performance."""
@@ -86,11 +86,15 @@ class ProblemDescription:
         """Génération de tous les objets de type Information correspondant
             aux alternatives du front de Pareto"""
         self._list_of_information = list()
+        self._dict_of_information = dict()
         for coupleOfAltId in list(it.combinations(self._alternativesDict.keys(), 2)):
             C = list(coupleOfAltId)
             C.sort()
             C = [self._alternativesDict[elt] for elt in C]
-            self._list_of_information.append(Information(*C))
+            info = Information(*C)
+            self._list_of_information.append(info)
+            self._dict_of_information[(info.alternative1, info.alternative2)] = info
+            self._dict_of_information[(info.alternative2, info.alternative1)] = info
 
     def _generate_list_of_list_of_ordered_criterion_attributes(self):
         """Génération d'une liste ordonnée des attributs pour chacun des critères.
@@ -111,7 +115,7 @@ class ProblemDescription:
         self._list_of_list_of_ordered_criterion_attributes = L
 
 
-    def _generate_dict_of_fictious_pairs_of_alternatives(self):
+    def _generate_dict_of_fictious_swap_pairs_of_alternatives(self):
         def fictious_alternative(j):
             levels_list = list()
             for k in range(len(self._criteriaOrderedList)):
@@ -238,6 +242,9 @@ class ProblemDescription:
     def getListOfInformation(self):
         return self._list_of_information
 
+    def getDictOfInformation(self):
+        return self._dict_of_information
+
     def getALternativesSet(self):
         return self._alternativesDict.values()
 
@@ -245,7 +252,9 @@ class ProblemDescription:
     numberOfInformation = property(getNumberOfInformation)
     fictiousPairsOfAlternatives = property(getFictiousPairsOfAlternatives)
     listOfInformation = property(fget=getListOfInformation)
+    dictOfInformation = property(fget=getDictOfInformation)
     alternativesSet = property(fget=getALternativesSet)
+
     def getCorrespondingAlternative(self, alternative):
         for alt in self._alternativesDict.values():
             if alternative == alt:
@@ -319,3 +328,14 @@ class ProblemDescription:
     def getN(self):
         return len(self._criteriaOrderedList)
     n = property(getN)
+
+
+    def getInformation(self, alternative1, alternative2):
+        if (alternative1, alternative2) in self._dict_of_information:
+            return self._dict_of_information[(alternative1, alternative2)]
+        # print(alternative2)
+        info = Information(alternative1, alternative2)
+        # les alternatives fictives ne sont pas rajoutées aux listes d'alternatives reelles . Seule l'information conrrespndante est ajoutee au dictionnaire des infos
+        self._dict_of_information[(alternative1, alternative2)] = info
+        self._dict_of_information[(alternative2, alternative1)] = info
+        return info
