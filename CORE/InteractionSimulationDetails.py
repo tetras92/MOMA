@@ -18,7 +18,7 @@ def breakpoint(series):
 
 
 if __name__ == "__main__":
-    n = 5
+    n = 7
 
     cardSDn = {4: 19,
                5: 64,
@@ -40,6 +40,9 @@ if __name__ == "__main__":
 
     # Engine1 = Explain.general_MixedExplanation
     Engine = Explain.brut_force_general_1_vs_k_and_k_vs_1_MixedExplanation
+    # Engine = Explain.general_1_vs_k_MixedExplanation
+    # Engine = Explain.general_k_vs_1_MixedExplanation
+    # Engine = Explain.Order2SwapExplanation
 
 
     criteriaFile = f'/home/manuel239/PycharmProjects/MOMA/CORE/CSVFILES/ijcai_criteria{n}.csv'
@@ -92,14 +95,15 @@ if __name__ == "__main__":
     Un_star = set(Un) & set(Tn_star)
 
 
-    dmFile = 'model229.csv'
+    # dmFile = 'model136.csv'
+    dmFile = 'model1.csv'
 
     CorrespondingSetDict = correspondingSet(n)
     # print(CorrespondingSetDict)
     # for dmFile in os.listdir(directory):
     CBTOrder = flat_CBTO_formated_for_OfflineSimulator(directory + '/' + dmFile, n)
     L = [CorrespondingSetDict[elm] for elm in CBTOrder]
-    L.reverse()
+    # L.reverse()
 
     STn = [(min(pair, key=lambda x: CBTOrder.index(x)),
             max(pair, key=lambda x: CBTOrder.index(x))) for pair in Tn]
@@ -146,6 +150,23 @@ if __name__ == "__main__":
             cumul += 1
             not_explained_not_critical_pairs.append((a, b))
 
+    NOT_EXPLAINABLE_REDUCED_PAIRS_LIST = [(CorrespondingSetDict[a], CorrespondingSetDict[b]) for a, b in not_explained_not_critical_pairs]
+    mnd = 0
+    A_max = None
+    B_list = None
+    for i in range(len(L)-1):
+        nd = 0
+        Bi_list = list()
+        for j in range(i+1, len(L)):
+            A, B = L[i] - L[j], L[j] - L[i]
+            if (A, B) in NOT_EXPLAINABLE_REDUCED_PAIRS_LIST:
+                nd += 1
+                Bi_list.append(L[j])
+        if nd > mnd:
+            A_max = L[i]
+            B_list = Bi_list
+            mnd = nd
+    print("MND of {}, {} = {}".format(dmFile, Engine, mnd), A_max, B_list)
     Un_star_critical = set(SUn_star) & set(CriticalPair)
     pi_dominance_relation_copy = PI().getRelation()["dominanceRelation"].copy()
 

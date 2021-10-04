@@ -48,13 +48,11 @@ class NoisyWS_DM(DM):
         else:
             info.termP = AS_LEAST_AS_GOOD_AS()
 
-        # if U1 < U2:
-        #     info.termP = ComparisonTerm.IS_LESS_PREFERRED_THAN
-        # elif U1 > U2:
-        #     info.termP = ComparisonTerm.IS_PREFERRED_TO
-        # else:
-        #     info.termP = ComparisonTerm.IS_INDIFERRENT_TO
-
+    def best_alternative(self, problem_description):
+        raise Exception(f'{self.__class__} can not return a best alternative')
+        # alternatives_list = list(problem_description.alternativesSet)
+        # alternatives_list.sort(key=self._evaluateAlternative, reverse=True)
+        # return alternatives_list[0]
 
 
 
@@ -67,6 +65,10 @@ class WS_DM(NoisyWS_DM):
     def evaluate(self, info):
         NoisyWS_DM.evaluate(self, info)
 
+    def best_alternative(self, problem_description):
+        alternatives_list = list(problem_description.alternativesSet)
+        alternatives_list.sort(key=self._evaluateAlternative, reverse=True)
+        return alternatives_list[0]
 
 class VNoisyWS_DM(NoisyWS_DM):
     """Classe modélisant un DM dont la fonction d'évaluation (une somme pondérée)

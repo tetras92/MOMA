@@ -91,8 +91,64 @@ if __name__ == "__main__":
     Dn_star = set(Dn) & set(Tn_star)
     Un_star = set(Un) & set(Tn_star)
 
+# model97.csv
+# model216.csv
+# model109.csv
+# model180.csv
+# model47.csv
+# model81.csv
+# model159.csv
+# model140.csv
+# model29.csv
+# model130.csv
+# model61.csv
+# model210.csv
+# model25.csv
+# model144.csv
+# model222.csv
+# model220.csv
+# model212.csv
+# model138.csv
+# model92.csv
+# model27.csv
+# model17.csv
+# model41.csv
+# model200.csv
+# model142.csv
+# model218.csv
+# model122.csv
+# model192.csv
+# model75.csv
+# model11.csv
+# model186.csv
+# model196.csv
+# model59.csv
+# model57.csv
+# model95.csv
+# model114.csv
+# model214.csv
+# model163.csv
+# model89.csv
+# model51.csv
+# model118.csv
+# model224.csv
+# model166.csv
+# model154.csv
+# model134.csv
+# model55.csv
+# model21.csv
+# model228.csv
+# model126.csv
+# model208.csv
+# model63.csv
+# model85.csv
+# model226.csv
+# model168.csv
+# model204.csv
+# 500 2021-06-21 18:54:00.035192
+# model99.csv
 
-    dmFile = 'model421.csv'
+    dmFile = 'model231.csv'
 
     CorrespondingSetDict = correspondingSet(n)
     # print(CorrespondingSetDict)

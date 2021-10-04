@@ -156,7 +156,7 @@ class CommitmentStore():
         self._store_alt_commitment = dict()
 
     def add(self, commitment):
-        print(commitment)
+        # print(commitment)
         if commitment.info not in self._store_info_commitment:
             self._store_info_commitment[commitment.info] = list()
         self._store_info_commitment[commitment.info].append(commitment)

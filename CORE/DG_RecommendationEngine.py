@@ -2,6 +2,7 @@ from CORE.ElicitationBasedOnExplanation import ExplanationBasedElicitation
 from CORE.NecessaryPreference import NecessaryPreference
 from CORE.Tools import AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS
 
+# DG : Dialog Game
 class DGRecommendationEngine:
     # 20 / 06 / 2021
     """ Classe (de base) modélisant un moteur de Recommandation dans le cadre d'un jeu de dialogue."""
@@ -72,6 +73,7 @@ class DGRecommendationEngine:
                         j = j_ - 1
                         prec = k_alternative_sequence[-1]
                         suiv = self._problemDescription.swap_translation(prec, ({i}, {j}))
+                        # attention (15/07/2021) getInformation pourrait contenir un bug (constat lors de l'implem de WD-DLT11)
                         info_prec_suiv = self._problemDescription.getInformation(prec, suiv)
                         if (prec, suiv) not in self._dominanceRelation and NecessaryPreference.adjudicate(self._problemDescription, self._dominanceRelation, (prec, suiv)):
                             if info_prec_suiv.alternative1 == prec:

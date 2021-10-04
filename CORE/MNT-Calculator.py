@@ -1,7 +1,7 @@
 from CORE.InformationStore import NonPI, N, PI
 from CORE.ProblemDescription import *
 from CORE.Explanation import Explain
-from CORE.SIMULATION.CBTOprocessing import nCoveringPairs, flat_CBTO_formated_for_OfflineSimulator, Tn_for_OfflineSimulator, Un_star_for_IJCAI, Tn_star_for_OfflineSimulator, correspondingSet
+from CORE.SIMULATION.CBTOprocessing import correspondingSet, flat_CBTO_formated_for_OfflineSimulator, Tn_for_OfflineSimulator, Un_star_for_IJCAI, Tn_star_for_OfflineSimulator, correspondingSet
 import os
 from CORE.Dialog import Dialog
 import random
@@ -40,6 +40,8 @@ if __name__ == "__main__":
 
     # Engine1 = Explain.general_MixedExplanation
     Engine = Explain.brut_force_general_1_vs_k_and_k_vs_1_MixedExplanation
+    # Engine = Explain.general_1_vs_k_MixedExplanation
+    # Engine = Explain.general_k_vs_1_MixedExplanation
 
 
     criteriaFile = f'/home/manuel239/PycharmProjects/MOMA/CORE/CSVFILES/ijcai_criteria{n}.csv'
@@ -90,29 +92,24 @@ if __name__ == "__main__":
 
     Dn_star = set(Dn) & set(Tn_star)
     Un_star = set(Un) & set(Tn_star)
-    # print("to examine", len(Dn_star) + len(Un_star))
-    niveau = -1
 
 
-    RESULT2 = dict()
     RESULT = dict()
-    CorrespondingSetDict = correspondingSet(n)
-    for dmFile in os.listdir(directory):
-        niveau += 1
-        if niveau % 500 == 0: print(niveau, datetime.now())
-        CBTOrder = flat_CBTO_formated_for_OfflineSimulator(directory + '/' + dmFile, n)
 
-        L = [CorrespondingSetDict[elm] for elm in CBTOrder]
-        # if L.index('34') < L.index('125'):
-        #     print(dmFile)
+    CorrespondingSetDict = correspondingSet(n)
+    # print(CorrespondingSetDict)
+    for dmFile in os.listdir(directory):
+        CBTOrder = flat_CBTO_formated_for_OfflineSimulator(directory + '/' + dmFile, n)
+        CBTOrderBySetsOfCriteria = [CorrespondingSetDict[elm] for elm in CBTOrder]
+        # L.reverse()
+
         STn = [(min(pair, key=lambda x: CBTOrder.index(x)),
                 max(pair, key=lambda x: CBTOrder.index(x))) for pair in Tn]
 
         CriticalPair = [(CBTOrder[j], CBTOrder[j+1]) for j in range(len(CBTOrder)-1) if (CBTOrder[j], CBTOrder[j+1]) in STn] # contigu et disjoints
         SUn_star = [(min(pair, key=lambda x: CBTOrder.index(x)),
                      max(pair, key=lambda x: CBTOrder.index(x))) for pair in Un_star]
-        SUn = [(min(pair, key=lambda x: CBTOrder.index(x)),
-                     max(pair, key=lambda x: CBTOrder.index(x))) for pair in Un]
+
 
         dm = WS_DM(directory+'/'+dmFile)
 
@@ -131,51 +128,43 @@ if __name__ == "__main__":
             Dialog(Dict_Non_PI[(a, b)]).madeWith(dm)        # chargement du modèle
 
 
-        # Un_star_deductible_non_critical_Set = set(SUn_star) - set(CriticalPair)
-        # deductible_len = len(Un_star_deductible_non_critical_Set)
-        #
-        # # Pairs of Un_star deductible non explainable
-        # deductible_but_non_explainable = list()
-        #
-        # for a, b in Un_star_deductible_non_critical_Set:
-        #     altD = mcda_problem_description[a]
-        #     altd = mcda_problem_description[b]
-        #
-        #     ok, text = Engine(mcda_problem_description, PI().getRelation()["dominanceRelation"], object=(altD, altd))
-        #     if not ok:
-        #         deductible_but_non_explainable.append((altD, altd))
-        #     else:
-        #         deductible_but_non_explainable.append((altD, altd))
-        #
-        # Un_star_critical = set(SUn_star) & set(CriticalPair)
-        #
-        # for crit in Un_star_critical:
-        #     a, b = crit
-        #     altD = mcda_problem_description[a]
-        #     altd = mcda_problem_description[b]
-        #
-        #     if NecessaryPreference.adjudicate(mcda_problem_description, deductible_but_non_explainable, (altD, altd)):
-        #         print(CorrespondingSetDict[crit[0]], CorrespondingSetDict[crit[1]])
-        #
-        Un_deductible_non_critical_Set = set(SUn) - set(CriticalPair)
-        deductible_len = len(Un_deductible_non_critical_Set)
 
-        # Pairs of Un_star deductible non explainable
-        deductible_but_non_explainable = list()
 
-        for a, b in Un_deductible_non_critical_Set:
+        not_explainable_pairs = list()
+        for a, b in set(SUn_star):
             altD = mcda_problem_description[a]
             altd = mcda_problem_description[b]
 
-            deductible_but_non_explainable.append((altD, altd))
+            ok, text = Engine(mcda_problem_description, PI().getRelation()["dominanceRelation"], object=(altD, altd))
+            if not ok:
+                # cumul += 1
+                not_explainable_pairs.append((a, b))
 
-        Un_critical = set(SUn) & set(CriticalPair)
+        NOT_EXPLAINABLE_REDUCED_PAIRS_LIST = [(CorrespondingSetDict[a], CorrespondingSetDict[b]) for a, b in not_explainable_pairs]
+        mnd = 0
+        A_max = set()
+        B_list = list()
+        for i in range(len(CBTOrderBySetsOfCriteria) - 1):
+            nd = 0
+            Bi_list = list()
+            for j in range(i+1, len(CBTOrderBySetsOfCriteria)):
+                A, B = CBTOrderBySetsOfCriteria[i] - CBTOrderBySetsOfCriteria[j], CBTOrderBySetsOfCriteria[j] - CBTOrderBySetsOfCriteria[i]
+                if (A, B) in NOT_EXPLAINABLE_REDUCED_PAIRS_LIST:
+                    nd += 1
+                    Bi_list.append(CBTOrderBySetsOfCriteria[j])
+            if nd > mnd:
+                A_max = CBTOrderBySetsOfCriteria[i]
+                B_list = Bi_list
+                mnd = nd
+        RESULT[dmFile] = {'model': dmFile, 'mnd-value': mnd, 'best-alternative': "".join([str(a) for a in A_max]),
+                          "challengers": ["".join([str(b) for b in B]) for B in B_list]}
+        print("MND of {}, {} = {}".format(dmFile, Engine, mnd), A_max, B_list)
 
-        for crit in Un_critical:
-            a, b = crit
-            altD = mcda_problem_description[a]
-            altd = mcda_problem_description[b]
+    with open(f'MNT-Values-1mDecomposition-{n}.csv', 'w', newline='') as csvfile:
+    # with open(f'MNT-Values-m1Decomposition-{n}.csv', 'w', newline='') as csvfile:
 
-            if NecessaryPreference.adjudicate(mcda_problem_description, deductible_but_non_explainable, (altD, altd)):
-                print([(CorrespondingSetDict[a], CorrespondingSetDict[b]) for a, b in Un_deductible_non_critical_Set])
-                print("imply: ", (CorrespondingSetDict[crit[0]], CorrespondingSetDict[crit[1]]))
+        fieldnames = ['model', 'mnd-value', 'best-alternative', "challengers"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in RESULT.values():
+            writer.writerow(row)

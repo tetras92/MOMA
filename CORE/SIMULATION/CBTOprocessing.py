@@ -189,8 +189,8 @@ def val(L, n):
 
 def correspondingSet(n):
     # {("".join([str(a) for a in A]), "".join([str(b) for b in B])): SetRankOf((A,B)) for A, B in Un_}
-    # return {val(item, n) : item for item in allItems(n)}
-    return {val(item, n): "".join([str(a) for a in item]) for item in allItems(n)}
+    return {val(item, n) : item for item in allItems(n)}
+    # return {val(item, n): "".join([str(a) for a in item]) for item in allItems(n)}
 
 def CBTO_formated_for_OfflineSimulator(filename, n):
     R = list()
