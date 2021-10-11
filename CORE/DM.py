@@ -65,10 +65,13 @@ class WS_DM(NoisyWS_DM):
     def evaluate(self, info):
         NoisyWS_DM.evaluate(self, info)
 
-    def best_alternative(self, problem_description):
+    def alternatives_ordering_list(self, problem_description):
         alternatives_list = list(problem_description.alternativesSet)
         alternatives_list.sort(key=self._evaluateAlternative, reverse=True)
-        return alternatives_list[0]
+        return alternatives_list
+
+    def best_alternative(self, problem_description):
+        return self.alternatives_ordering_list(problem_description)[0]
 
 class VNoisyWS_DM(NoisyWS_DM):
     """Classe modélisant un DM dont la fonction d'évaluation (une somme pondérée)

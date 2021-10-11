@@ -51,6 +51,7 @@ def decompose(proSet, conSet, W):
     model.optimize()
 
     if model.status == GRB.OPTIMAL:
+        chainons_arguments_list = list()
         I1m = set()
         J1m = set()
         print(model.objVal)
@@ -68,6 +69,7 @@ def decompose(proSet, conSet, W):
         for i in proSet:
             if sum([int(B1m[(i, j_)].x) for j_ in conSet]) > 0:
                 localJ1m = {j_ for j_ in conSet if int(B1m[(i, j_)].x) == 1}
+                chainons_arguments_list.append(({i}, localJ1m))
                 print("{} -> {}".format(i, localJ1m))
                 I1m.add(i)
                 J1m = J1m | localJ1m
@@ -75,10 +77,14 @@ def decompose(proSet, conSet, W):
         print("\nDelta m1")
         for j in conSet - J1m:
             if sum([int(Bm1[(i_, j)].x) for i_ in proSet]) > 0:
-                print("{} -> {}".format({i_ for i_ in proSet if int(Bm1[(i_, j)].x) == 1}, j))
+                localIm1 = {i_ for i_ in proSet if int(Bm1[(i_, j)].x) == 1}
+                chainons_arguments_list.append((localIm1, {j}))
+                print("{} -> {}".format(localIm1, j))
 
+        return True, chainons_arguments_list
     else:
         print("Non Delta 1m and Delta m1 decomposable")
+        return False, list()
 
 
 if __name__ == "__main__":
@@ -87,10 +93,10 @@ if __name__ == "__main__":
     # decompose({'a', 'f'}, {'c', 'e', 'g'}, {'a': 128, 'b': 126, 'c': 77, 'd': 59, 'e': 52, 'f': 41, 'g': 37})
     # decompose({'a', 'c', 'd'}, {'b'}, {'a': 1, 'b': 5, 'c': 3, 'd': 2})
     # decompose({'a', 'd'}, {'c', 'e', 'g'}, {'a': 0.2462, 'b': 0.2423, 'c': 0.1480, 'd': 0.1135, 'e': 0.1000, 'f': 0.0788, 'g': 0.0712})
-    # decompose({'b', 'f', 'g'}, {'c', 'd', 'e'}, {'a': 0.2462, 'b': 0.2423, 'c': 0.1480, 'd': 0.1135, 'e': 0.1000, 'f': 0.0788, 'g': 0.0712})
+    decompose({'b', 'f', 'g'}, {'c', 'd', 'e'}, {'a': 0.2462, 'b': 0.2423, 'c': 0.1480, 'd': 0.1135, 'e': 0.1000, 'f': 0.0788, 'g': 0.0712})
 
     # decompose({'a', 'f', 'g'}, {'c', 'e', 'd'}, {'a': 0.2456, 'b': 0.2455, 'c': 0.1455, 'd': 0.1135, 'e': 0.1000, 'f': 0.0788, 'g': 0.0712})
     # decompose({'a', 'f'}, {'c', 'e'}, {'a': 0.2456, 'b': 0.2455, 'c': 0.1455, 'd': 0.1135, 'e': 0.1000, 'f': 0.0788, 'g': 0.0712})
-    decompose({'b', 'd'}, {'c', 'e', 'g'}, {'a': 0.2456, 'b': 0.2455, 'c': 0.1455, 'd': 0.1135, 'e': 0.1000, 'f': 0.0788, 'g': 0.0712})
+    # decompose({'b', 'd'}, {'c', 'e', 'g'}, {'a': 0.2456, 'b': 0.2455, 'c': 0.1455, 'd': 0.1135, 'e': 0.1000, 'f': 0.0788, 'g': 0.0712})
     # decompose({'a', 'f', 'g'}, {'b', 'd'}, {'a': 0.2456, 'b': 0.2455, 'c': 0.1455, 'd': 0.1135, 'e': 0.1000, 'f': 0.0788, 'g': 0.0712})
 

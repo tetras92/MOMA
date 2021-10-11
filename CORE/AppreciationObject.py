@@ -16,8 +16,10 @@ class AppreciationObject:
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
-        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
+        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, "preferred to", symb2,
                                                      self.alternative2.id)
+    def __repr__(self):
+        return self.__str__()
 
     def number_of_pro_arguments(self):
         return np.count_nonzero((np.array(self.alternative1.attributeLevelsList) - np.array(self.alternative2.attributeLevelsList)) == 1)
@@ -190,10 +192,10 @@ class AInformation(AppreciationObject):
     termA = property(getTermA, setTermA)
 
     def __str__(self):
-        return AppreciationObject.__str__(self)
-        # symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
-        # return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
-        #                                              self.alternative2.id)
+        # return AppreciationObject.__str__(self)
+        symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
+        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
+                                                     self.alternative2.id)
 
 
     term = property(getTermA)

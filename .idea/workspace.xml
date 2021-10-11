@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand />
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="Push de sécurité : dimanche 17 Janvier">
-      <change afterPath="$PROJECT_DIR$/CORE/DialogDurationVsInexplicability.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/GraphicsRepresentation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/InteractionSimulation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/InteractionSimulationDetails.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/Metrics4.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/Proportion-CriticalPairs-A_B_covering_m.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/SmallestSetOfPairs.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CORE/SubstitutionTest.py" afterDir="false" />
+    <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="Push de sécurité : vendredi 21 Mai 2021">
+      <change afterPath="$PROJECT_DIR$/CORE/Explain1BestRecommandation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/KR-TARK-v2-1pro-vs-1con.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/KR-TARK-v2-1pro-vs-1con.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/KR-TARK-v2-A_B_covering_m.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/KR-TARK-v2-A_B_covering_m.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/KR-TARK-v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/KR-TARK-v2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/NecessaryPreference.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/NecessaryPreference.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/SIMULATION/CBTOprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/SIMULATION/CBTOprocessing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/AppreciationObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/AppreciationObject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/DM.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/DM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/PLNE_for_Delta11_decomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/PLNE_for_Delta11_decomposition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/PLNE_for_Delta1m_decomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/PLNE_for_Delta1m_decomposition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/PLNE_for_Delta1m_m1_decomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/PLNE_for_Delta1m_m1_decomposition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/PLNE_for_Deltam1_decomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/PLNE_for_Deltam1_decomposition.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/gurobi.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/gurobi.log" afterDir="false" />
     </list>
@@ -71,19 +68,19 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/CORE" />
       <recent name="$PROJECT_DIR$/CORE/SIMULATION" />
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/CORE/SIMULATION/CBTO7" />
       <recent name="$PROJECT_DIR$/CORE/CSVFILES" />
-      <recent name="C:\Users\MICS\PycharmProjects\MOMBA\CORE\CSVFILES" />
+      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/CORE" />
       <recent name="$USER_HOME$/MICS/ENSEIGNEMENTS/CENTRALESUPELEC/ST07/2020-2021/TD-TP/TP-Note/fournis" />
       <recent name="$USER_HOME$/MICS/ENSEIGNEMENTS/CENTRALESUPELEC/ST07/2020-2021/TD-TP/TP2" />
-      <recent name="$PROJECT_DIR$/CORE" />
       <recent name="C:\Users\MICS\PycharmProjects\MOMBA\MCDA" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.DialogDurationVsInexplicability">
-    <configuration name="DialogDurationVsInexplicability" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.Explain1BestRecommandation">
+    <configuration name="Explain1BestRecommandation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -95,7 +92,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/DialogDurationVsInexplicability.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Explain1BestRecommandation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -104,7 +101,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="GraphicsRepresentation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="PLNE_for_Delta11_decomposition" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -116,7 +113,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/GraphicsRepresentation.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/PLNE_for_Delta11_decomposition.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -125,7 +122,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="InteractionSimulationDetails" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="PLNE_for_Delta1m_decomposition" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -137,7 +134,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/InteractionSimulationDetails.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/PLNE_for_Delta1m_decomposition.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -146,7 +143,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Metrics4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="PLNE_for_Delta1m_m1_decomposition" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -158,7 +155,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Metrics4.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/PLNE_for_Delta1m_m1_decomposition.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -167,7 +164,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="SmallestSetOfPairs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="PLNE_for_Deltam1_decomposition" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -179,7 +176,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/SmallestSetOfPairs.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/PLNE_for_Deltam1_decomposition.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="WD-DLT1m-m1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MOMBA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/WD-DLT1m-m1.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -190,11 +208,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.DialogDurationVsInexplicability" />
-        <item itemvalue="Python.SmallestSetOfPairs" />
-        <item itemvalue="Python.GraphicsRepresentation" />
-        <item itemvalue="Python.Metrics4" />
-        <item itemvalue="Python.InteractionSimulationDetails" />
+        <item itemvalue="Python.Explain1BestRecommandation" />
+        <item itemvalue="Python.PLNE_for_Delta1m_m1_decomposition" />
+        <item itemvalue="Python.PLNE_for_Deltam1_decomposition" />
+        <item itemvalue="Python.PLNE_for_Delta11_decomposition" />
+        <item itemvalue="Python.PLNE_for_Delta1m_decomposition" />
       </list>
     </recent_temporary>
   </component>
@@ -463,7 +481,35 @@
       <option name="project" value="LOCAL" />
       <updated>1579510353294</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Push de sécurité : vendredi 21 Mai 2021">
+      <created>1621581048001</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1621581048001</updated>
+    </task>
+    <task id="LOCAL-00035" summary="ElicitationBasedOnExplanation.py (les débuts)&#10;+&#10;Push de sécurité : vendredi 18 Juin 2021">
+      <created>1624016764769</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1624016764769</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Push après premiere version de proptocole de dialogue swap">
+      <created>1624379253145</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1624379253145</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Lundi 04 Octobre : &#10;    - PLNE pour la decomposition suivant les 4 langages&#10;    - Deformation / Translation pour arriver a decomposer suivant les 4 langages&#10;    - MNT Calculator : un fichier d'exécution automatisant le calcul de la metrique MNT">
+      <created>1633354571371</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1633354571371</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,10 +553,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="AVEC UN FICHIER main.py" />
-    <MESSAGE value="REFACTORING DE LA RECOMMENDATION AVEC RECOMMENDATIONWRAPPER QUI AURA COMME ATTRIBUT LE TYPE DE RECOMMENDATION" />
-    <MESSAGE value="KRANKINGRECOMMENDATION ET KBESTRECOMMENDATION" />
-    <MESSAGE value="PASSAGE A 6 CRITERES PLUS README" />
     <MESSAGE value="GESTION DES INDIFFERENCES APPARAISSANT DANS N" />
     <MESSAGE value="AFFICHAGE COLORE DES PAIRES D'ALTERNATIVES" />
     <MESSAGE value="IT InconsistencySolver.py CODE mais reste des tests à faire" />
@@ -532,6 +574,10 @@
     <MESSAGE value="IMPLEMENTATION ENGINE K Vs 1 explanation" />
     <MESSAGE value="Push de sécurité : dimanche 17 Janvier" />
     <MESSAGE value="Push de sécurité : vendredi 26 Mars" />
-    <option name="LAST_COMMIT_MESSAGE" value="Push de sécurité : vendredi 26 Mars" />
+    <MESSAGE value="Push de sécurité : vendredi 21 Mai 2021" />
+    <MESSAGE value="ElicitationBasedOnExplanation.py (les débuts)&#10;+&#10;Push de sécurité : vendredi 18 Juin 2021" />
+    <MESSAGE value="Push après premiere version de proptocole de dialogue swap" />
+    <MESSAGE value="Lundi 04 Octobre : &#10;    - PLNE pour la decomposition suivant les 4 langages&#10;    - Deformation / Translation pour arriver a decomposer suivant les 4 langages&#10;    - MNT Calculator : un fichier d'exécution automatisant le calcul de la metrique MNT" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lundi 04 Octobre : &#10;    - PLNE pour la decomposition suivant les 4 langages&#10;    - Deformation / Translation pour arriver a decomposer suivant les 4 langages&#10;    - MNT Calculator : un fichier d'exécution automatisant le calcul de la metrique MNT" />
   </component>
 </project>
