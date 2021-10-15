@@ -8,17 +8,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="Push de sécurité : vendredi 21 Mai 2021">
-      <change afterPath="$PROJECT_DIR$/CORE/Explain1BestRecommandation.py" afterDir="false" />
+    <list default="true" id="3a2d253d-e1b3-4882-9207-bdd4f04f7dfb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/AppreciationObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/AppreciationObject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/DM.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/DM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/PLNE_for_Delta11_decomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/PLNE_for_Delta11_decomposition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/PLNE_for_Delta1m_decomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/PLNE_for_Delta1m_decomposition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/PLNE_for_Delta1m_m1_decomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/PLNE_for_Delta1m_m1_decomposition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CORE/PLNE_for_Deltam1_decomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/PLNE_for_Deltam1_decomposition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/Commitment.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Commitment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/DA.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/DA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/DG_RecommendationEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/DG_RecommendationEngine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/Explain1BestRecommandation.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Explain1BestRecommendation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/Information.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/Information.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/InformationStore.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/InformationStore.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/ProblemDescription.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/ProblemDescription.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CORE/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/gurobi.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gurobi.log" beforeDir="false" afterPath="$PROJECT_DIR$/gurobi.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/is_BCR_equal_CR_iff_CR_D1m_Dm1.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/is_BCR_equal_CR_iff_CR_D1m_Dm1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CORE/mainEBE.py" beforeDir="false" afterPath="$PROJECT_DIR$/CORE/mainEBE.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,8 +81,8 @@
       <recent name="C:\Users\MICS\PycharmProjects\MOMBA\MCDA" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Explain1BestRecommandation">
-    <configuration name="Explain1BestRecommandation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.mainEBE">
+    <configuration name="DA" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -92,7 +94,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Explain1BestRecommandation.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/DA.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -101,7 +103,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="PLNE_for_Delta11_decomposition" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Explain1BestRecommendation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MOMBA" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -113,28 +115,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/PLNE_for_Delta11_decomposition.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="PLNE_for_Delta1m_decomposition" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="MOMBA" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/PLNE_for_Delta1m_decomposition.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/Explain1BestRecommendation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -206,13 +187,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="mainEBE" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MOMBA" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CORE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CORE/mainEBE.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Explain1BestRecommandation" />
+        <item itemvalue="Python.mainEBE" />
+        <item itemvalue="Python.DA" />
+        <item itemvalue="Python.Explain1BestRecommendation" />
         <item itemvalue="Python.PLNE_for_Delta1m_m1_decomposition" />
         <item itemvalue="Python.PLNE_for_Deltam1_decomposition" />
-        <item itemvalue="Python.PLNE_for_Delta11_decomposition" />
-        <item itemvalue="Python.PLNE_for_Delta1m_decomposition" />
       </list>
     </recent_temporary>
   </component>
@@ -509,7 +511,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633354571371</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Lundi 11 Octobre 2021 : Implementation de l'algorithme d'explication d'une recommandation de type 1-best etant donné un jeu de poids W">
+      <created>1633937744406</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1633937744406</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -553,7 +562,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="GESTION DES INDIFFERENCES APPARAISSANT DANS N" />
     <MESSAGE value="AFFICHAGE COLORE DES PAIRES D'ALTERNATIVES" />
     <MESSAGE value="IT InconsistencySolver.py CODE mais reste des tests à faire" />
     <MESSAGE value="généralisation de l'utilisation des solveurs d'inconsistance (suppression de InconsistencySolverFactory" />
@@ -578,6 +586,7 @@
     <MESSAGE value="ElicitationBasedOnExplanation.py (les débuts)&#10;+&#10;Push de sécurité : vendredi 18 Juin 2021" />
     <MESSAGE value="Push après premiere version de proptocole de dialogue swap" />
     <MESSAGE value="Lundi 04 Octobre : &#10;    - PLNE pour la decomposition suivant les 4 langages&#10;    - Deformation / Translation pour arriver a decomposer suivant les 4 langages&#10;    - MNT Calculator : un fichier d'exécution automatisant le calcul de la metrique MNT" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lundi 04 Octobre : &#10;    - PLNE pour la decomposition suivant les 4 langages&#10;    - Deformation / Translation pour arriver a decomposer suivant les 4 langages&#10;    - MNT Calculator : un fichier d'exécution automatisant le calcul de la metrique MNT" />
+    <MESSAGE value="Lundi 11 Octobre 2021 : Implementation de l'algorithme d'explication d'une recommandation de type 1-best etant donné un jeu de poids W" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lundi 11 Octobre 2021 : Implementation de l'algorithme d'explication d'une recommandation de type 1-best etant donné un jeu de poids W" />
   </component>
 </project>

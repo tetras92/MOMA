@@ -337,3 +337,42 @@ class A(InformationStore):
 
     def is_empty(self):
         return InformationStore.is_empty(self)
+
+@singleton
+class AA(InformationStore):
+    # 20/06/2021
+    def __init__(self):
+        InformationStore.__init__(self)
+
+    def setInfoPicker(self, infoPicker):
+        self._infoPicker = infoPicker
+
+    def add(self, information):
+        self._store.add(information)
+
+    def pick(self):
+        return self._infoPicker.pick(self)
+
+    def __iter__(self):
+        return self._store.__iter__()
+
+    def __len__(self):
+        return len(self._store)
+
+    def remove(self, info):
+        InformationStore.remove(self, info)
+
+    def __str__(self):
+        return InformationStore.__str__(self)
+
+    def __getitem__(self, item):
+        return InformationStore.__getitem__(self, item)
+
+    def clear(self):
+        raise Exception("clear AA Information Store")
+        # store_copy = [info for info in self._store] # important tout comme dans le cas de PI
+        # for info in store_copy:
+        #     del info.termA
+
+    def is_empty(self):
+        return InformationStore.is_empty(self)

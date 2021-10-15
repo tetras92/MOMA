@@ -59,7 +59,7 @@ def recommend_and_explain(problem_description, relation=[]):
 
 
 if __name__ == "__main__":
-
+    ### - !!! ACTIVER / DÉSACTIVER L'AFFICHAGE COMPLET EN DÉCOMMENTANT LA LIGNE 159 DE COMMITMENT.PY function add(self, Commitment) de CommitmentStore.
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
                                                   # performanceTableFileName="CSVFILES/test_table.csv")
                                                   performanceTableFileName="CSVFILES/test_da2pl_5alt.csv")

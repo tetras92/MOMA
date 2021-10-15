@@ -132,6 +132,7 @@ class DA:
             # print("A : \n{}".format(str(A())))
             print()
             able_to_fully_explain, infoList, best_alternative, explanation_swap_A_info = recommendation_engine.process()
+            # print(explanation_swap_A_info)
             if able_to_fully_explain:
                 print("\n\n** RECOMMENDATION : {} **\n".format(best_alternative))
                 order_k_list = [k_ for k_ in range(len(infoList))]
@@ -141,7 +142,7 @@ class DA:
                     k_swap_explanation = explanation_swap_A_info[k]
                     # print("out PI : \n{}".format(str(PI())))
                     try:
-                        print("\n", info)
+                        # print("\n", info)
                         Dialog(info).madeWith(dm)
                     except AskWhyException as awe:
                         for swap_a_info in k_swap_explanation:
@@ -149,13 +150,14 @@ class DA:
                                 Dialog(swap_a_info).madeWith(dm)
                             except DMdoesntValidateAElementException as dma2:
                                 all_validated = False
+                                # break
 
                         A().clear()
                         break
-                    except DMdoesntValidateAElementException as dma:
-                        A().clear()
-                        all_validated = False
-                        break
+                    # except DMdoesntValidateAElementException as dma:
+                    #     A().clear()
+                    #     all_validated = False
+                    #     break
 
             else: # use NonPi picker a domaine restreint
                 all_validated = False

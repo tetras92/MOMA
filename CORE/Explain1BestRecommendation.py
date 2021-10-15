@@ -65,6 +65,7 @@ def explain(problem_description, dm, language=3):
             Explanation_text += "\t" + elm + "\n"
 
     print("Recommendation : {}".format(OrderedListOfAlternatives[1]))
+    print("W = {}".format(dm.utilitiesList))
     print(Explanation_text)
     return True, Explanation_text
 
