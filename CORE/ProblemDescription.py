@@ -285,6 +285,7 @@ class ProblemDescription:
     def pareto_translation(self, alternative, i):
         attributeLevelsList = alternative.attributeLevelsList.copy()
         if attributeLevelsList[i] != 1 :
+            print("deboooog", attributeLevelsList, "i", i)
             raise Exception("Pareto translation Exception")
         attributeLevelsList[i] = 0
         attributeList = [self._list_of_list_of_ordered_criterion_attributes[cr_i][attributeLevelsList[cr_i]] for cr_i in range(self.n)]

@@ -8,7 +8,7 @@ class DMdoesntValidateNElementException(Exception):
     def __str__(self):
         return Exception.__str__(self)
 
-class DMdoesntValidateAElementException(Exception):
+class DMdoesntValidateAtomicAssumedElementException(Exception):
     """Classe modélisant une Exception correspondant à la rupture de calcul
     souhaitée lorsque le DM conteste une supposition du DA."""
     def __init__(self, dominanceObject):

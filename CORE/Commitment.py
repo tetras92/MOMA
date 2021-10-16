@@ -62,6 +62,21 @@ class ValidationOfAssumedCommitment(ValidationCommitment):
                                                                                      self.term,
                                                                                      symb2, self.info.alternative2.id)
 
+class ValidationOfBecauseAssumedAtomicCommitment(ValidationCommitment):
+    # 16/10/2021
+    """Classe modélisant la déclaration que fait un DM en validant
+       une supposition ATOMIQUE faite par le DA"""
+    def __init__(self, info, term):
+        ValidationCommitment.__init__(self, info, term)
+
+    def __str__(self):
+        symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}] ({} -> {}) \n\tDM validates.".format(self.__class__, self.date,
+                                                                                     self.info.alternative1.id, symb1,
+                                                                                     self.term,
+                                                                                     symb2, self.info.alternative2.id, str(self.info.o.pro_arguments_set()),
+                                                                                                 str(self.info.o.con_arguments_set()))
+
 class DMToldCommitment(ValidationCommitment):
     """Classe modélisant la déclaration que fait un DM en validant
        une supposition faite par le DA"""
@@ -139,7 +154,7 @@ class BecauseAssumedAtomicCommitment(Commitment):
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
-        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}] ({} -> {})\n\t".format(self.__class__, self.date,
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}] ({} -> {})\t".format(self.__class__, self.date,
                                                                  self.info.alternative1.id, symb1, self.term ,
                                                                  symb2, self.info.alternative2.id,str(self.info.o.pro_arguments_set()), str(self.info.o.con_arguments_set()))
 

@@ -17,6 +17,7 @@ EPSILON = 0.000001                      #
 CONSTRAINTSFEASIBILITYTOL = 1e-9 #0.000000001 # borne min dans Gurobi 1e-9
 INTEGERFEASIBILITYTOL = 1e-9
 ROUNDED_NUMBER_OF_DECIMALS = 4
+EMPTYSET = "emptyset"
 def covectorOfPairWiseInformationWith2Levels(coupleAlt):
     alt1, alt2 = coupleAlt
     cov = list()

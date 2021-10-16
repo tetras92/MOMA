@@ -1,7 +1,7 @@
 import random
 
 from CORE.Dialog import Dialog
-from CORE.Exceptions import DMdoesntValidateNElementException, DMdoesntValidateAElementException, AskWhyException
+from CORE.Exceptions import DMdoesntValidateNElementException, DMdoesntValidateAtomicAssumedElementException, AskWhyException
 from CORE.Explanation import Explain
 from CORE.InformationStore import *
 from CORE.Recommendation import RecommendationWrapper, KBestRecommendation
@@ -126,7 +126,7 @@ class DA:
 
     def interactInADialogGameWith(self, dm):
         all_validated = False
-        while not all_validated: #number_of_validations != self._problemDescription.numberOfAlternatives - 1: # sous-entendu recommandation 1-best . ATTENTION
+        while not all_validated:
             recommendation_engine = DGRecommendationEngine(self._problemDescription, **PI().getRelation())
             all_validated = True
             # print("A : \n{}".format(str(A())))
@@ -134,7 +134,7 @@ class DA:
             able_to_fully_explain, infoList, best_alternative, explanation_swap_A_info = recommendation_engine.process()
             # print(explanation_swap_A_info)
             if able_to_fully_explain:
-                print("\n\n** RECOMMENDATION : {} **\n".format(best_alternative))
+                print("\t\t** RECOMMENDATION : {} **\n\n\n\n\t\t\t** The Dialog **".format(best_alternative))
                 order_k_list = [k_ for k_ in range(len(infoList))]
                 random.shuffle(order_k_list)
                 for k in order_k_list: # Utiliser APicker
@@ -148,16 +148,13 @@ class DA:
                         for swap_a_info in k_swap_explanation:
                             try:
                                 Dialog(swap_a_info).madeWith(dm)
-                            except DMdoesntValidateAElementException as dma2:
+                            except DMdoesntValidateAtomicAssumedElementException as dma2:
                                 all_validated = False
                                 # break
-
+                        N().clear()        # rajouté le 15/10/2021
                         A().clear()
+                        # AA().clear()         # rajouté le 15/10/2021 : essentiellement pour le garbage collector qui detruira ces objets
                         break
-                    # except DMdoesntValidateAElementException as dma:
-                    #     A().clear()
-                    #     all_validated = False
-                    #     break
 
             else: # use NonPi picker a domaine restreint
                 all_validated = False

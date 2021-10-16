@@ -1,6 +1,6 @@
 from CORE.AppreciationObject import PairwiseInformation, NInformation, PInformation, AInformation, AtomicInformation
 from CORE.Commitment import *
-from CORE.Exceptions import DMdoesntValidateNElementException, DMdoesntValidateAElementException, AskWhyException
+from CORE.Exceptions import DMdoesntValidateNElementException, DMdoesntValidateAtomicAssumedElementException, AskWhyException
 from CORE.InformationStore import NonPI, N, PI, A, AA
 from CORE.Tools import difficultyLevel, covectorOfPairWiseInformationWith2Levels
 
@@ -92,19 +92,6 @@ class Information:
             print("class", oldO.__class__)
             raise Exception("a Update from somewhere else")
 
-        # elif isinstance(oldO, AInformation):
-        #     CommitmentStore().add(AssumedCommitment(self, v))
-        # else:
-        #     print("class", oldO.__class__)
-        #     raise Exception("a Update from somewhere else")
-        #
-        # if isinstance(oldO, PInformation): # deja confirme par le DM
-        #     CommitmentStore().add(DMToldCommitment(self, v))
-        #     return
-        # elif isinstance(oldO, NInformation): # en attente d'etre confirme
-        #     CommitmentStore().add(GuaranteeCommitment(self, v))
-        #     return
-
 
     def _pUpgrade(self, v):
         """Méthode traduisant le passage de l'information vers PI.
@@ -112,10 +99,6 @@ class Information:
         est modifié  (accès par écriture)."""
 
         oldO = self.o
-
-        # - Jeudi 14 octobre 2021 : tentative de maj de pUpdate : objectif : traiter indifféremment les comparaisons d'alternatives swaps natifs des comparaisons d'alternatives dont
-        #                                                                   # la difficultyLevel est > 2.
-        # A COMPLETER
 
         if isinstance(oldO, PInformation):
             if oldO.termP is v:
@@ -143,9 +126,9 @@ class Information:
             self.o.termP = v
             if not(oldO.termAA is v):
                 CommitmentStore().add(InvalidationOfBecauseAssumedAtomicCommitment(self, oldO.termAA))
-                raise DMdoesntValidateAElementException(oldO.dominanceObject)
+                raise DMdoesntValidateAtomicAssumedElementException(oldO.dominanceObject)
             else:
-                CommitmentStore().add(ValidationOfAssumedCommitment(self, v))
+                CommitmentStore().add(ValidationOfBecauseAssumedAtomicCommitment(self, v))
             return
 
         self.o = PInformation(self, self.alternative1, self.alternative2)
@@ -174,14 +157,14 @@ class Information:
         Elle est privée et appelée lorsque le termP ou le termN ou le termA de l'information (property)
         est supprimé."""
         if isinstance(self.o, PInformation):
-            # print("here")
             PI().remove(self)
         elif isinstance(self.o, NInformation):
             N().remove(self)
         elif isinstance(self.o, AInformation):
             A().remove(self)
-        elif isinstance(self.o, AtomicInformation):
-            AA().remove()
+        else:
+            print("class", self.o.__class__)
+            raise Exception("a downgrade from somewhere else")
         self.o = PairwiseInformation(self, self.alternative1, self.alternative2)
 
     def setTermN(self, v):

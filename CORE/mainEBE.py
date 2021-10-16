@@ -60,12 +60,17 @@ def recommend_and_explain(problem_description, relation=[]):
 
 if __name__ == "__main__":
     ### - !!! ACTIVER / DÉSACTIVER L'AFFICHAGE COMPLET EN DÉCOMMENTANT LA LIGNE 159 DE COMMITMENT.PY function add(self, Commitment) de CommitmentStore.
-    mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
-                                                  # performanceTableFileName="CSVFILES/test_table.csv")
-                                                  performanceTableFileName="CSVFILES/test_da2pl_5alt.csv")
+    # m = 6
+    # mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
+    #                                               performanceTableFileName="CSVFILES/test_da2pl_5alt.csv")
+    #
+    # dm = NoisyWS_DM("CSVFILES/DM_Utility_Function_ebe_test.csv", 0)
 
-    # dm = NoisyWS_DM("CSVFILES/DM_Utility_Function_another_test.csv", 0)
-    dm = NoisyWS_DM("CSVFILES/DM_Utility_Function_ebe_test.csv", 0)
+    # m = 7
+    mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria7.csv",
+                                                  performanceTableFileName="CSVFILES/test-alternatives-7.csv")
+    dm = NoisyWS_DM("CSVFILES/DM-kr-v2-7.csv", 0)
+
     DA(problemDescription=mcda_problem_description, InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver))
     DA().interactInADialogGameWith(dm)
     # print(recommend_and_explain(mcda_problem_description, [(mcda_problem_description[15], mcda_problem_description[29])]))

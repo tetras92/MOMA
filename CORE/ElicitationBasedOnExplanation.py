@@ -2,7 +2,7 @@ import numpy as np
 from gurobipy import *
 
 from CORE.Tools import covectorOfPairWiseInformationWith2Levels
-from CORE.Tools import CONSTRAINTSFEASIBILITYTOL, EPSILON
+from CORE.Tools import CONSTRAINTSFEASIBILITYTOL, EPSILON, EMPTYSET
 from itertools import permutations, product
 
 class ExplanationBasedElicitation:
@@ -51,13 +51,25 @@ class ExplanationBasedElicitation:
 
         model.update()
 
+        # 16/10/2021
+        # Eviter les phenomenes de compensation puisque de l'operation je recupere les swaps.
+        # Ex : ici, il y a compensation : [(3, 1), (5, 1), (1, 'emptyset')] => {3,5} >= {1}
+        for k, ijDict in BooleanSwapsCoeffDict.items():
+            jList = [j for (_, j) in ijDict]
+            iList = [i for (i, _) in ijDict]
+            for j in jList:
+                model.addConstr(quicksum([ijDict[(i_, j_)] for (i_, j_) in ijDict if j_ == j]) <= 1) #
+            for i in iList:
+                model.addConstr(quicksum([ijDict[(i_, j_)] for (i_, j_) in ijDict if i_ == i]) <= 1)
+        # -
+
         DoublonsAvoidanceDict = dict()
         # Swaps selected consequence
         # for (i, j) in AllSwapsList:
         #     for k in range(len(other_alternatives)):
         for k, ijDict in BooleanSwapsCoeffDict.items():
             for (i, j) in ijDict:
-                model.addConstr(VarList[i-1][1][1] - VarList[j-1][1][1] >= BooleanSwapsCoeffDict[k][(i, j)] - 1)
+                model.addConstr(VarList[i-1][1][1] - VarList[j-1][1][1] >= BooleanSwapsCoeffDict[k][(i, j)] - 1 + EPSILON)
                 # Profitons pour stocker les var (i, j)
                 min_, max_ = min(i, j), max(i, j)
                 if (min_, max_) not in DoublonsAvoidanceDict:
@@ -99,7 +111,8 @@ class ExplanationBasedElicitation:
         if status:
             number_of_pairs_explained = len(other_alternatives) - int(model.objVal)
             # percentage = round(number_of_pairs_explained / len(other_alternatives), 2)
-            List_of_swap_used = [[(i, j) for (i, j) in BooleanSwapsCoeffDict[k] if int(BooleanSwapsCoeffDict[k][(i, j)].x) == 1] for k in range(len(XYCovList))]
+            List_of_swap_used = [[(i, j) for (i, j) in BooleanSwapsCoeffDict[k] if int(BooleanSwapsCoeffDict[k][(i, j)].x) == 1] + [(i, EMPTYSET) for i in range(1, mcda_problemDescription.n+1) if int(VarMDict[k][i-1].x) == 1]
+                                 for k in range(len(XYCovList))]
             pareto_dominance = [int(BaseVectorVar[k].x) == 0 and all([int(BooleanSwapsCoeffDict[k][(i, j)].x) == 0 for (i, j) in BooleanSwapsCoeffDict[k]]) for k in range(len(XYCovList))]
             return status, number_of_pairs_explained, pareto_dominance, List_of_swap_used
         return False, 0, 0, list()

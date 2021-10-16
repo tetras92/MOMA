@@ -1,8 +1,9 @@
 from CORE.ElicitationBasedOnExplanation import ExplanationBasedElicitation
 from CORE.NecessaryPreference import NecessaryPreference
-from CORE.Tools import AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS
+from CORE.Tools import AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS, EMPTYSET
 from CORE.InformationStore import NonPI, N, PI, A, AA
 
+import random
 # DG : Dialog Game
 class DGRecommendationEngine:
     # 20 / 06 / 2021
@@ -106,7 +107,13 @@ class DGRecommendationEngine:
         other_candidates = None
         unexplained_challengers = None
         dispensed_from_explanation_number = 0
+
+        L = list()
         for candidate in self._problemDescription:
+            L.append(candidate)
+        random.shuffle(L)
+        for candidate in L:
+        # for candidate in self._problemDescription:
             other_alt = [alt for alt in self._problemDescription.alternativesSet if alt != candidate]
             can_be_best, number_of_pwc_explained, pareto_dominance, details = ExplanationBasedElicitation.adjudicate(self._problemDescription, candidate, other_alt, self._dominanceRelation)
             challengers_unexplained = list()
@@ -125,13 +132,13 @@ class DGRecommendationEngine:
                     swaps_used = details
                     other_candidates = other_alt
                     unexplained_challengers = challengers_unexplained
-
+            # break                                                          # A RETIRER (DEBOGAGE)
 
         returned_AInfo_list = list()
         explanation_sequences_list = list()
-
+        # print("SWAPS", other_candidates, swaps_used)
+        print("\n\n\t\t***** DA thinking... *****\n")
         if best_value == 1:
-            print("\n\n***** DA thinking... *****\n")
             # print("\n\n***** DA thinking... *****{}\n".format(len(other_candidates)))
             for k in range(len(other_candidates)):
                 challenger = other_candidates[k]
@@ -149,7 +156,6 @@ class DGRecommendationEngine:
                     isCorrespondingInfoNecessary = True
 
                 elif correspondingInfo in PI():
-                    # raise Exception("une paire d'alternatives reelles en cours de justification ne devrait jamais appartenir a PI.")
                     isCorrespondingInfoNecessary = correspondingInfo.termPConfirm  # always True
 
                 else:
@@ -167,18 +173,21 @@ class DGRecommendationEngine:
 
                 if not isCorrespondingInfoNecessary:
                     for (i_, j_) in swaps_used_list:
-                        i = i_ - 1
-                        j = j_ - 1
                         prec = k_alternative_sequence[-1]
-                        suiv = self._problemDescription.swap_translation(prec, ({i}, {j}))
+                        i = i_ - 1
+                        if j_ == EMPTYSET:
+                            suiv = self._problemDescription.pareto_translation(prec, i)
+                        else :
+                            j = j_ - 1
+                            suiv = self._problemDescription.swap_translation(prec, ({i}, {j}))
 
                         info_prec_suiv = self._problemDescription.generateFictiveAtomicInformation(prec, suiv)
 
                         if NecessaryPreference.adjudicate(self._problemDescription, self._dominanceRelation, (prec, suiv)):
                                 info_prec_suiv.termN = AS_LEAST_AS_GOOD_AS()
 
-                        elif (prec, suiv) in self._dominanceRelation:
-                            raise Exception("peut arriver ????")
+                        # elif (prec, suiv) in self._dominanceRelation:
+                        #     raise Exception("peut arriver ????")
 
                         else:
                             info_prec_suiv.termAA = AS_LEAST_AS_GOOD_AS()
@@ -186,11 +195,12 @@ class DGRecommendationEngine:
                         k_alternative_sequence.append(suiv)
 
                         k_explanation_sequence.append(info_prec_suiv)
-
+                    print() # Sert a espacer les differents suppositions
 
                 explanation_sequences_list.append(k_explanation_sequence)
             return True, returned_AInfo_list, best_alternative, explanation_sequences_list
 
+        print("\t\t***** DA : there is no explainable potential 1-best alternative ! *****\n")
         return False, [self._problemDescription.dictOfInformation[(best_alternative, challenger)] for challenger in unexplained_challengers], best_alternative, None
 
 
