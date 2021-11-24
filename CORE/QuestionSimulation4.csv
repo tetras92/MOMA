@@ -1,0 +1,15 @@
+model,critical_length,minimal_number_of_queries,number_of_non_explainable,all_explainable_minimal_number_of_queries
+model2.csv,4,4,0,4
+model14.csv,5,4,0,4
+model7.csv,4,4,0,4
+model13.csv,5,4,0,4
+model6.csv,5,4,0,4
+model4.csv,4,3,0,3
+model10.csv,5,4,0,4
+model8.csv,5,5,0,5
+model9.csv,6,5,0,5
+model1.csv,3,3,0,3
+model5.csv,5,4,0,4
+model11.csv,6,5,0,5
+model12.csv,6,4,0,4
+model3.csv,5,4,0,4
