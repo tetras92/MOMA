@@ -1,4 +1,4 @@
-from CORE.InformationStore import NonPI, PI, N, A, AA
+from CORE.InformationStore import NonPI, PI, N, A, AA, NA
 from CORE.Tools import NO_TERM
 from CORE.Tools import colored_expression, AS_LEAST_AS_GOOD_AS, NOT_AS_LEAST_AS_GOOD_AS
 from CORE.NecessaryPreference import NecessaryPreference
@@ -89,11 +89,47 @@ class NInformation(AppreciationObject):
     termN = property(getTermN, setTermN)
 
     def __str__(self):
-        return AppreciationObject.__str__(self)
-        # symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
-        # return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
-        #                                              self.alternative2.id)
+        # return AppreciationObject.__str__(self)
+        symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
+        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
+                                                     self.alternative2.id)
 
+
+    term = property(getTermN)
+
+    def _getCorrespondingObject(self):
+        if self._termN is AS_LEAST_AS_GOOD_AS():
+            return self.alternative1, self.alternative2
+        elif self._termN is NOT_AS_LEAST_AS_GOOD_AS():
+            return self.alternative2, self.alternative1
+
+    dominanceObject = property(fget=_getCorrespondingObject)
+
+class NAInformation(AppreciationObject):
+    """Classe modélisant une paire ATOMIQUE FICTIVE d'alternatives induite par calcul
+        de la relation nécessaire : l'information correspondante se trouve
+        donc dans Na"""
+    def __init__(self, information, alternative1, alternative2):
+        """ Information * Alternative² --> NoneType
+        Hyp : alternative1.id < alternative2.id
+        le paramètre information est la 'capsule' enveloppant
+         la paire d'alternative."""
+        NA().add(information)
+        AppreciationObject.__init__(self, alternative1, alternative2)
+        self._termN = NO_TERM()
+
+    def getTermN(self):
+        return self._termN
+
+    def setTermN(self, v):
+        self._termN = v
+
+    termN = property(getTermN, setTermN)
+
+    def __str__(self):
+        symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
+        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
+                                                     self.alternative2.id)
 
     term = property(getTermN)
 
@@ -128,10 +164,10 @@ class PInformation(AppreciationObject):
     termP = property(getTermP, setTermP)
 
     def __str__(self):
-        return AppreciationObject.__str__(self)
-        # symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
-        # return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
-        #                                              self.alternative2.id)
+        # return AppreciationObject.__str__(self)
+        symb1, symb2 = colored_expression(self.alternative1.symbolicName, self.alternative2.symbolicName)
+        return "[{:>2}] : {} {} {} : [{:>2}]".format(self.alternative1.id, symb1, self.term, symb2,
+                                                     self.alternative2.id)
 
     def linear_expr(self, VarDict):
         return AppreciationObject.linear_expr(self, VarDict)

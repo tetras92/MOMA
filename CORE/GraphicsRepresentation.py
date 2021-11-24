@@ -133,13 +133,25 @@ def histogramme(D):
 # print("Minimum", min(SERIES), "questions", "1er quartile", SERIES[len(SERIES)//4], "questions", "Median", SERIES[len(SERIES)//2], "questions","3e quartile", SERIES[3*len(SERIES)//4],"questions", "Maximum", max(SERIES), "questions", numpy.mean(SERIES))
 #
 
+# SERIES = list()
+# with open("XP_TotalOrderJustification5.csv") as qSim:
+#     reader = csv.DictReader(qSim)
+#     for row in reader:
+#         SERIES.append(round(100 * int(row['non_trivial_deduced_critical_pairs']) / int(row['minimal_number_of_queries']), 2))
+#         # SERIES.append(int(row['minimal_number_of_queries']))
+#
+# SERIES.sort()
+# print("Minimum", min(SERIES), "%", "1er quartile", SERIES[len(SERIES)//4], "%", "Median", SERIES[len(SERIES)//2], "%","3e quartile", SERIES[3*len(SERIES)//4],"%", "Maximum", max(SERIES), "%",)
+# # print("Minimum", min(SERIES), "questions", "1er quartile", SERIES[len(SERIES)//4], "questions", "Median", SERIES[len(SERIES)//2], "questions","3e quartile", SERIES[3*len(SERIES)//4],"questions", "Maximum", max(SERIES), "questions", numpy.mean(SERIES))
+
+
 SERIES = list()
-with open("XP_TotalOrderJustification5.csv") as qSim:
+with open("Metrics-For-Dialog-Values-m1-Decomposition-6.csv") as qSim:
     reader = csv.DictReader(qSim)
     for row in reader:
-        SERIES.append(round(100 * int(row['non_trivial_deduced_critical_pairs']) / int(row['minimal_number_of_queries']), 2))
-        # SERIES.append(int(row['minimal_number_of_queries']))
+        SERIES.append(float(row['metric-value-percent']))
 
+# print(SERIES)
 SERIES.sort()
 print("Minimum", min(SERIES), "%", "1er quartile", SERIES[len(SERIES)//4], "%", "Median", SERIES[len(SERIES)//2], "%","3e quartile", SERIES[3*len(SERIES)//4],"%", "Maximum", max(SERIES), "%",)
 # print("Minimum", min(SERIES), "questions", "1er quartile", SERIES[len(SERIES)//4], "questions", "Median", SERIES[len(SERIES)//2], "questions","3e quartile", SERIES[3*len(SERIES)//4],"questions", "Maximum", max(SERIES), "questions", numpy.mean(SERIES))

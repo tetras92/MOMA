@@ -5,7 +5,8 @@ from CORE.Commitment import AnswerCommitment
 
 class InformationStore:
     def __init__(self, strlen=105):
-        self._store = set()
+        # self._store = set()
+        self._store = list()                                  # a store is a list. comme ça on pourra utiliser __getitem__
         self._strlen = strlen
 
     @staticmethod
@@ -82,7 +83,7 @@ class PI(InformationStore):
         self._frozen_store = list()
 
     def add(self, information):
-        self._store.add(information)
+        self._store.append(information)
 
     def __len__(self):
         return len(self._store) #+ len(self._frozen_store)
@@ -213,7 +214,7 @@ class NonPI(InformationStore):
         return self._infoPicker.pick(self)
 
     def add(self, information):
-        self._store.add(information)
+        self._store.append(information)
         # - 08 / 07 / 20
         # self._store.sort(key=lambda info : info.id)
         # - #
@@ -269,7 +270,7 @@ class N(InformationStore):
 
 
     def add(self, information):
-        self._store.add(information)
+        self._store.append(information)
 
 
 
@@ -301,6 +302,43 @@ class N(InformationStore):
 
 
 @singleton
+class NA(InformationStore):
+    def __init__(self):
+        InformationStore.__init__(self)
+
+    def setInfoPicker(self, infoPicker):
+        self._infoPicker = infoPicker
+
+
+    def add(self, information):
+        self._store.append(information)
+
+    def pick(self):
+        return self._infoPicker.pick(self)
+
+    def __iter__(self):
+        return self._store.__iter__()
+
+    def __len__(self):
+        return len(self._store)
+
+    def remove(self, info):
+        InformationStore.remove(self, info)
+
+    def __str__(self):
+        return InformationStore.__str__(self)
+
+    def __getitem__(self, item):
+        return InformationStore.__getitem__(self, item)
+
+    def clear(self):
+        raise Exception("clear NA Information Store")
+
+    def is_empty(self):
+        return InformationStore.is_empty(self)
+
+
+@singleton
 class A(InformationStore):
     # 20/06/2021
     def __init__(self):
@@ -310,7 +348,7 @@ class A(InformationStore):
         self._infoPicker = infoPicker
 
     def add(self, information):
-        self._store.add(information)
+        self._store.append(information)
 
     def pick(self):
         return self._infoPicker.pick(self)
@@ -348,7 +386,7 @@ class AA(InformationStore):
         self._infoPicker = infoPicker
 
     def add(self, information):
-        self._store.add(information)
+        self._store.append(information)
 
     def pick(self):
         return self._infoPicker.pick(self)

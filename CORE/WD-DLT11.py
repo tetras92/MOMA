@@ -1,10 +1,14 @@
+from builtins import property
+
 from CORE.ProblemDescription import *
 from CORE.DM import *
 from CORE.Tools import EPSILON
 
 # WD-DLT11 : Weight Deformation
 def deform(problem_description, dm):
-    dm_best_alternative = dm.best_alternative(problem_description)
+    dm_order_of_alternatives = dm.alternatives_ordering_list(problem_description)
+    dm_best_alternative = dm_order_of_alternatives[0]
+    # dm_best_alternative = dm.best_alternative(problem_description)
     print(dm_best_alternative)
     model = Model("Deformation of DM weight -- Delta 1-1")
     DeviationsSigma = {k: (model.addVar(vtype=GRB.CONTINUOUS, lb=0, name=f'sig+_{k}'), model.addVar(vtype=GRB.CONTINUOUS, lb=0, name=f'sig-_{k}'))
@@ -66,12 +70,29 @@ def deform(problem_description, dm):
     #     model.addConstr(Lambda >= DeviationsSigma[k][1] - DeviationsSigma[k][0])
 
     model.update()
-    model.setObjective(quicksum([sig_pair[0] for sig_pair in DeviationsSigma.values()]), GRB.MINIMIZE)
+
+    YZwVarDict = {(p1, p2): model.addVar(vtype=GRB.BINARY, name=f'b_{(dm_order_of_alternatives[p1], dm_order_of_alternatives[p2])}') for p1 in range(1, len(dm_order_of_alternatives)-1)
+                  for p2 in range(p1 + 1, len(dm_order_of_alternatives))}
+    Eval_alt_after_deformation_list = [dm.evaluateAlternative(alt) + quicksum([DeviationsSigma[k][0] for k in range(problem_description.n) if alt.attributeLevelsList[k] == 1]) - quicksum([DeviationsSigma[k][1] for k in range(problem_description.n) if alt.attributeLevelsList[k] == 1])
+                                       for alt in dm_order_of_alternatives]
+
+    for (p1, p2), yzwVar in YZwVarDict.items():
+        model.addConstr(Eval_alt_after_deformation_list[p1] - Eval_alt_after_deformation_list[p2] >= yzwVar - sum_w + local_epsilon)
+
+    model.update()
+    # model.setObjective(quicksum([sig_pair[0] for sig_pair in DeviationsSigma.values()]), GRB.MINIMIZE)
+    # model.setObjective(quicksum(YZwVarDict.values()), GRB.MAXIMIZE)
+    model.setObjectiveN(quicksum(YZwVarDict.values()), 0, 1)
+    model.setObjectiveN(-quicksum([sig_pair[0] for sig_pair in DeviationsSigma.values()]), 1, 0)
+    model.modelSense = -1 # MAXIMISATION
+
+
+
     # model.setObjectiveN(quicksum(X.values()), 0, priority=0)
     # model.setObjectiveN(quicksum([sig_pair[0] for sig_pair in DeviationsSigma.values()]), 1, priority=1)
     # model.setObjective(Lambda, GRB.MINIMIZE)
     model.optimize()
-    print(model.objVal)
+    print("objVal", model.objVal, "/", (len(dm_order_of_alternatives) - 1)*(len(dm_order_of_alternatives) - 2)/2, "pairs in YZw")
     for oth_alt in problem_description.alternativesSet:
         if oth_alt != dm_best_alternative:
             print(oth_alt, [(i, j) for (i, j), var_ij in other_alternative_related_swapVar[oth_alt].items() if int(var_ij.x) == 1])

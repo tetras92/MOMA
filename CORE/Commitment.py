@@ -35,7 +35,7 @@ class AnswerCommitment(Commitment):
                                                                  self.info.alternative1.id, symb1, NO_TERM(),
                                                                  symb2, self.info.alternative2.id, self.term)
 
-class ValidationCommitment(Commitment):
+class ValidationOfNecessaryPreferenceCommitment(Commitment):
     """Classe modélisant la déclaration que fait un DM en validant
        un élément induit par calcul de la relation nécessaire, term
        représente le terme de comparaison induit"""
@@ -49,11 +49,24 @@ class ValidationCommitment(Commitment):
                                                                                      self.term,
                                                                                      symb2, self.info.alternative2.id)
 
-class ValidationOfAssumedCommitment(ValidationCommitment):
+class ValidationViaExplanationCommitment(Commitment):
+    """Classe modélisant la validation de l'explication d'une
+    paire"""
+    def __init__(self, info, term):
+        Commitment.__init__(self, info, term)
+
+    def __str__(self):
+        symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}]\n\tDM understands why and agrees.\n".format(self.__class__, self.date,
+                                                                                     self.info.alternative1.id, symb1,
+                                                                                     self.term,
+                                                                                     symb2, self.info.alternative2.id)
+
+class ValidationOfAssumedCommitment(ValidationOfNecessaryPreferenceCommitment):
     """Classe modélisant la déclaration que fait un DM en validant
        une supposition faite par le DA"""
     def __init__(self, info, term):
-        ValidationCommitment.__init__(self, info, term)
+        ValidationOfNecessaryPreferenceCommitment.__init__(self, info, term)
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
@@ -62,12 +75,12 @@ class ValidationOfAssumedCommitment(ValidationCommitment):
                                                                                      self.term,
                                                                                      symb2, self.info.alternative2.id)
 
-class ValidationOfBecauseAssumedAtomicCommitment(ValidationCommitment):
+class ValidationOfBecauseAssumedAtomicCommitment(ValidationOfNecessaryPreferenceCommitment):
     # 16/10/2021
     """Classe modélisant la déclaration que fait un DM en validant
        une supposition ATOMIQUE faite par le DA"""
     def __init__(self, info, term):
-        ValidationCommitment.__init__(self, info, term)
+        ValidationOfNecessaryPreferenceCommitment.__init__(self, info, term)
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
@@ -77,11 +90,11 @@ class ValidationOfBecauseAssumedAtomicCommitment(ValidationCommitment):
                                                                                      symb2, self.info.alternative2.id, str(self.info.o.pro_arguments_set()),
                                                                                                  str(self.info.o.con_arguments_set()))
 
-class DMToldCommitment(ValidationCommitment):
+class DMToldCommitment(ValidationOfNecessaryPreferenceCommitment):
     """Classe modélisant la déclaration que fait un DM en validant
        une supposition faite par le DA"""
     def __init__(self, info, term):
-        ValidationCommitment.__init__(self, info, term)
+        ValidationOfNecessaryPreferenceCommitment.__init__(self, info, term)
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
@@ -154,7 +167,7 @@ class BecauseAssumedAtomicCommitment(Commitment):
 
     def __str__(self):
         symb1, symb2 = colored_expression(self.info.alternative1.symbolicName, self.info.alternative2.symbolicName)
-        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}] ({} -> {})\t".format(self.__class__, self.date,
+        return "{} at {} :\n\t[{:>2}] : {} {} {} : [{:>2}] ({} -> {})\n\tDA assumes.".format(self.__class__, self.date,
                                                                  self.info.alternative1.id, symb1, self.term ,
                                                                  symb2, self.info.alternative2.id,str(self.info.o.pro_arguments_set()), str(self.info.o.con_arguments_set()))
 

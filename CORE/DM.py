@@ -32,7 +32,7 @@ class NoisyWS_DM(DM):
                 for criterion in reader.fieldnames:
                     self.utilitiesList.append(float(row[criterion]))
 
-    def _evaluateAlternative(self, alternative):
+    def evaluateAlternative(self, alternative):
         """Alternative -> float
         retourne l'évaluation de l'alternative."""
         return np.vdot(np.array(self.utilitiesList), np.array(alternative.attributeLevelsList)) \
@@ -41,8 +41,8 @@ class NoisyWS_DM(DM):
     def evaluate(self, info):
         """Alternative -> float
         réalise (par effet de bord) l'évaluation de l'information."""
-        U1 = self._evaluateAlternative(info.alternative1)
-        U2 = self._evaluateAlternative(info.alternative2)
+        U1 = self.evaluateAlternative(info.alternative1)
+        U2 = self.evaluateAlternative(info.alternative2)
         if U1 <= U2:
             info.termP = NOT_AS_LEAST_AS_GOOD_AS()
         else:
@@ -59,19 +59,22 @@ class NoisyWS_DM(DM):
 class WS_DM(NoisyWS_DM):
     """Classe modélisant un DM dont la fonction d'évaluation (une somme pondérée)
     d'une alternative est non bruité."""
-    def __init__(self, utilityFunctionFileName):
+    def __init__(self, utilityFunctionFileName, ChoiceOfInfoStrategy=None):
         NoisyWS_DM.__init__(self, utilityFunctionFileName, 0)
+        if not (ChoiceOfInfoStrategy is None):
+            self.strategy = ChoiceOfInfoStrategy(self)
 
     def evaluate(self, info):
         NoisyWS_DM.evaluate(self, info)
 
     def alternatives_ordering_list(self, problem_description):
         alternatives_list = list(problem_description.alternativesSet)
-        alternatives_list.sort(key=self._evaluateAlternative, reverse=True)
+        alternatives_list.sort(key=self.evaluateAlternative, reverse=True)
         return alternatives_list
 
     def best_alternative(self, problem_description):
         return self.alternatives_ordering_list(problem_description)[0]
+
 
 class VNoisyWS_DM(NoisyWS_DM):
     """Classe modélisant un DM dont la fonction d'évaluation (une somme pondérée)

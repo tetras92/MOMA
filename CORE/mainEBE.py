@@ -1,5 +1,5 @@
 from CORE.DA import DA
-from CORE.DM import NoisyWS_DM
+from CORE.DM import WS_DM
 from CORE.InconsistencySolver import InconsistencySolverWrapper, RadicalInconsistencySolver
 from CORE.InformationPicker import RandomPicker, DifficultyLevelPicker, DeterministicPicker, DiscoveryPicker
 from CORE.ProblemDescription import *
@@ -7,7 +7,7 @@ from CORE.Recommendation import RecommendationWrapper, KRankingRecommendation, K
 from CORE.StopCriterion import *
 from CORE.Explanation import ExplanationWrapper, Explain
 from CORE.ElicitationBasedOnExplanation import ExplanationBasedElicitation
-import time
+from CORE.StrategyOfInfoOrderChoice import *
 
 def build_explanation_text(mcda_problemDescription, best_alternative, challenger, swap_used_list, Relation):
     Explanation_text = "{} is preferred to {} because : \n".format(best_alternative, challenger)
@@ -69,8 +69,7 @@ if __name__ == "__main__":
     # m = 7
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria7.csv",
                                                   performanceTableFileName="CSVFILES/test-alternatives-7.csv")
-    dm = NoisyWS_DM("CSVFILES/DM-kr-v2-7.csv", 0)
+    dm = WS_DM("CSVFILES/DM-kr-v2-7.csv", ChoiceOfInfoStrategy=RandomInfoListStrategy)
 
-    DA(problemDescription=mcda_problem_description, InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver))
+    DA(problemDescription=mcda_problem_description, N_InfoPicker=RandomPicker(), NonPI_InfoPicker=RandomPicker(), InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver))
     DA().interactInADialogGameWith(dm)
-    # print(recommend_and_explain(mcda_problem_description, [(mcda_problem_description[15], mcda_problem_description[29])]))

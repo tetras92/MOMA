@@ -6,7 +6,7 @@ from CORE.Explanation import Explain
 from CORE.InformationStore import *
 from CORE.Recommendation import RecommendationWrapper, KBestRecommendation
 from CORE.DG_RecommendationEngine import DGRecommendationEngine
-
+from CORE.MultiInformationDialog import *
 
 @singleton
 class DA:
@@ -124,42 +124,40 @@ class DA:
             info = NonPI().pick()
             Dialog(info).madeWith(dm)
 
-    def interactInADialogGameWith(self, dm):
-        all_validated = False
-        while not all_validated:
-            recommendation_engine = DGRecommendationEngine(self._problemDescription, **PI().getRelation())
-            all_validated = True
-            # print("A : \n{}".format(str(A())))
-            print()
-            able_to_fully_explain, infoList, best_alternative, explanation_swap_A_info = recommendation_engine.process()
-            # print(explanation_swap_A_info)
-            if able_to_fully_explain:
-                print("\t\t** RECOMMENDATION : {} **\n\n\n\n\t\t\t** The Dialog **".format(best_alternative))
-                order_k_list = [k_ for k_ in range(len(infoList))]
-                random.shuffle(order_k_list)
-                for k in order_k_list: # Utiliser APicker
-                    info = infoList[k]
-                    k_swap_explanation = explanation_swap_A_info[k]
-                    # print("out PI : \n{}".format(str(PI())))
-                    try:
-                        # print("\n", info)
-                        Dialog(info).madeWith(dm)
-                    except AskWhyException as awe:
-                        for swap_a_info in k_swap_explanation:
-                            try:
-                                Dialog(swap_a_info).madeWith(dm)
-                            except DMdoesntValidateAtomicAssumedElementException as dma2:
-                                all_validated = False
-                                # break
-                        N().clear()        # rajouté le 15/10/2021
-                        A().clear()
-                        # AA().clear()         # rajouté le 15/10/2021 : essentiellement pour le garbage collector qui detruira ces objets
-                        break
+    # def interactInADialogGameWith(self, dm):
+    #     dialogIsOver = False
+    #     while not dialogIsOver:
+    #         recommendation_engine = DGRecommendationEngine(self._problemDescription, **PI().getRelation())
+    #         print()
+    #         able_to_fully_explain, infoList, best_alternative = recommendation_engine.process()
+    #         if able_to_fully_explain:
+    #             print("\t** RECOMMENDATION : ** \n{} \n\n\n\n\t\t\t** The Dialog **".format("\n".join([str(info) for info in infoList])))
+    #             dialogIsOver = MultiInformationDialog(infoList).madeWith(dm)
+    #         else: # use NonPi picker a domaine restreint
+    #             dialogIsOver = False
+    #             # print("COLLECT INFO", infoList)
+    #             k = random.randint(0, len(infoList)-1)
+    #             # k = 0
+    #             Dialog(infoList[k]).madeWith(dm)
 
-            else: # use NonPi picker a domaine restreint
-                all_validated = False
-                k = random.randint(0, len(infoList)-1)
-                Dialog(infoList[k]).madeWith(dm)
+    def interactInADialogGameWith(self, dm):
+        dialogIsOver = False
+        while not dialogIsOver:
+            recommendation_engine = DGRecommendationEngine(self._problemDescription, **PI().getRelation())
+            print()
+            able_to_fully_explain, infoList, best_alternative = recommendation_engine.process()
+            if able_to_fully_explain:
+                print("\t** RECOMMENDATION : ** \n{} \n\n\n\n\t\t\t** The Dialog **".format("\n".join([str(info) for info in infoList])))
+                dialogIsOver = MultiInformationDialog(infoList).madeWith(dm)
+            else:
+                dialogIsOver = False
+                # N().update(self._problemDescription, **PI().getRelation())
+                # if not N().is_empty():
+                #     info = N().pick()                        INCAPACITE A FAIRE LA DISTINCTION ENTRE info Necessaire et Info Non necessaire
+                # else:
+                info = NonPI().pick()
+                Dialog(info).madeWith(dm)
+
 
     def reset(self):
 

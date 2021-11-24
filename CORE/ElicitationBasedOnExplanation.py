@@ -4,6 +4,9 @@ from gurobipy import *
 from CORE.Tools import covectorOfPairWiseInformationWith2Levels
 from CORE.Tools import CONSTRAINTSFEASIBILITYTOL, EPSILON, EMPTYSET
 from itertools import permutations, product
+from CORE.AppreciationObject import AppreciationObject
+
+from CORE.ProblemDescription import *
 
 class ExplanationBasedElicitation:
     @staticmethod
@@ -12,107 +15,77 @@ class ExplanationBasedElicitation:
             Relation = list()
 
         model, VarList, VarDict = mcda_problemDescription.generate_gurobi_model_for_explanation_purposes_and_its_varDict_and_varList(
-            "MOMBA Explanation Based Elicitation fragment", EPSILON)
-
-        model.Params.FeasibilityTol = CONSTRAINTSFEASIBILITYTOL
-
-        # best_alternative := X
-        # an other_alternative := Y
-
-        XYCovList = [covectorOfPairWiseInformationWith2Levels((best_alternative, y)) for y in other_alternatives]
-
-        # BaseVectorVar : ici la base ce sont les swaps retenus ainsi que les paires (x,y) non explicables par des swaps
-        BaseVectorVar = [model.addVar(vtype=GRB.BINARY, name="({}, {})_in_base".format(best_alternative, y)) for y in other_alternatives]
-
-        # AllSwapsList : List[(i, j)]
-        AllSwapsList = list(permutations(range(1, mcda_problemDescription.n +1), 2))
-
-        # AllSwapsCovectorDict : Dict[tuple(int, int), np.array]
-        def swap_covector(i, j):
-            res = np.zeros(mcda_problemDescription.n)
-            res[i-1] = 1
-            res[j-1] = -1
-            return res
-        AllSwapsCovectorDict = {(i, j): swap_covector(i, j) for (i, j) in AllSwapsList}
-
-        BooleanSwapsCoeffDict = {k: {(i, j): model.addVar(vtype=GRB.BINARY, name="c_{}_{}".format((i, j), k)) for (i, j) in AllSwapsList if XYCovList[k][i-1] == 1 and XYCovList[k][j-1] == -1}
-                                 for k in range(len(other_alternatives))}
-
-        VarMDict = {k: [model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="M_{}_{}".format(i, k)) for i in range(mcda_problemDescription.n)] for k in range(len(other_alternatives))}
-
+            "MOMBA is best_alternative in EPB (see def EXPLANATION SUMMER 2021)", EPSILON)
 
         # PI CONSTRAINTS
         for (altD, altd) in Relation:
             model.addConstr(altD.linear_expr(VarDict) - altd.linear_expr(VarDict) >= EPSILON)
+            
+        # model.Params.FeasibilityTol = CONSTRAINTSFEASIBILITYTOL
 
-        # X the best alternative CONSTRAINTS
-        for y in other_alternatives:
-            model.addConstr(best_alternative.linear_expr(VarDict) - y.linear_expr(VarDict) >= EPSILON)
+        # oth_alt_to_consider_indexes_set : other alternatives y such that (best_alternative, y) not in relation
+        oth_alt_to_consider_indexes_set = {k for k in range(len(other_alternatives)) if (best_alternative, other_alternatives[k]) not in Relation}
+        if len(oth_alt_to_consider_indexes_set) == 0:
+            # status, number_of_pairs_explained, number_of_pairsi_n_K_ACS, List_of_Corresponding_swaps
+            return True, 0, len(other_alternatives), [list() for k in range(len(other_alternatives))]
+
+
+        # ProConDict : dico d'index pris dans oth_alt_to_consider_indexes_set et de valeur la paire ((x, y)^+, (x, y)^-)
+        ProConDict = {k: (AppreciationObject(best_alternative, other_alternatives[k]).pro_arguments_set(), AppreciationObject(best_alternative, other_alternatives[k]).con_arguments_set())
+                      for k in oth_alt_to_consider_indexes_set}
+
+        # BooleanSwapsSetDict : dico d'index pris dans oth_alt_to_consider_indexes_set et de valeur un dico (i, j) : b_ij^k variable booleene correspondant au swap (i, j)
+        BooleanSwapsSetDict = {k: {(i, j): model.addVar(vtype=GRB.BINARY, name="b_{}_{}".format((i, j), k)) for i in ProConDict[k][0] for j in ProConDict[k][1]}
+                               for k in oth_alt_to_consider_indexes_set}
+
+        # Ajouter les contraintes de compatibilité
+        for k, ijDict in BooleanSwapsSetDict.items():
+            for (i, j), varBij in ijDict.items():
+                model.addConstr(VarList[i][1][1] - VarList[j][1][1] >= varBij - 1 + EPSILON)
 
         model.update()
 
-        # 16/10/2021
-        # Eviter les phenomenes de compensation puisque de l'operation je recupere les swaps.
-        # Ex : ici, il y a compensation : [(3, 1), (5, 1), (1, 'emptyset')] => {3,5} >= {1}
-        for k, ijDict in BooleanSwapsCoeffDict.items():
-            jList = [j for (_, j) in ijDict]
-            iList = [i for (i, _) in ijDict]
-            for j in jList:
-                model.addConstr(quicksum([ijDict[(i_, j_)] for (i_, j_) in ijDict if j_ == j]) <= 1) #
-            for i in iList:
-                model.addConstr(quicksum([ijDict[(i_, j_)] for (i_, j_) in ijDict if i_ == i]) <= 1)
-        # -
+        # Ajouter les contraintes : tout con couvert
+        for k, ijDict in BooleanSwapsSetDict.items():
+            for j_ in ProConDict[k][1]:
+                model.addConstr(quicksum([varBij for (i, j), varBij in ijDict.items() if j == j_]) == 1)
+        model.update()
 
-        DoublonsAvoidanceDict = dict()
-        # Swaps selected consequence
-        # for (i, j) in AllSwapsList:
-        #     for k in range(len(other_alternatives)):
-        for k, ijDict in BooleanSwapsCoeffDict.items():
-            for (i, j) in ijDict:
-                model.addConstr(VarList[i-1][1][1] - VarList[j-1][1][1] >= BooleanSwapsCoeffDict[k][(i, j)] - 1 + EPSILON)
-                # Profitons pour stocker les var (i, j)
-                min_, max_ = min(i, j), max(i, j)
-                if (min_, max_) not in DoublonsAvoidanceDict:
-                    DoublonsAvoidanceDict[(min_, max_)] = {True : set(), False : set()}
-                if (min_, max_) == (i, j):
-                    DoublonsAvoidanceDict[(min_, max_)][True].add(ijDict[(i, j)])
-                else:
-                    DoublonsAvoidanceDict[(min_, max_)][False].add(ijDict[(i, j)])
-                # model.addConstr(VarList[i-1][1][1] - VarList[j-1][1][1] >= (1 + EPSILON)*BooleanSwapsCoeffDict[k][(i, j)] - 1)
+        # Ajouter les contraintes : tout pro utilisé au plus une fois couvert
+        for k, ijDict in BooleanSwapsSetDict.items():
+            for i_ in ProConDict[k][0]:
+                model.addConstr(quicksum([varBij for (i, j), varBij in ijDict.items() if i == i_]) <= 1)
+        model.update()
 
-        # Swaps equivalence avoidance
-        # for (i, j) in AllSwapsList:
-        #     model.addConstr(quicksum([BooleanSwapsCoeffDict[k][(i, j)] for k in range(len(other_alternatives))]) + quicksum([BooleanSwapsCoeffDict[k][(j, i)] for k in range(len(other_alternatives))]) <= 1)
-
-        for _, trueFalseDict in DoublonsAvoidanceDict.items():
-            Product = list(product(trueFalseDict[True], trueFalseDict[False]))
-            for (P1, P2) in Product:
-                model.addConstr(P1 + P2 <= 1)
-
-        for k in range(len(XYCovList)):
-            object_covector = XYCovList[k]
-            Member_p_0 = np.array([BaseVectorVar[k]]*mcda_problemDescription.n) * object_covector
-            To_accumulate = list()
-            # for (i, j) in AllSwapsList:
-            for (i, j) in BooleanSwapsCoeffDict[k]:
-                var_ij_k = BooleanSwapsCoeffDict[k][(i, j)]
-                To_accumulate.append(np.array([var_ij_k]*mcda_problemDescription.n) * AllSwapsCovectorDict[(i, j)])
-            Member_p_1 = [quicksum([element_of_To_accumulate[i_] for element_of_To_accumulate in To_accumulate]) for i_ in range(mcda_problemDescription.n)]
-            Member_p_2 = VarMDict[k]
-
-            for i in range(mcda_problemDescription.n):
-                model.addConstr(Member_p_0[i] + Member_p_1[i] + Member_p_2[i] == object_covector[i])
-            model.update()
-
-        model.setObjective(quicksum(BaseVectorVar), GRB.MINIMIZE)
         model.optimize()
 
         status = model.status == GRB.OPTIMAL
         if status:
-            number_of_pairs_explained = len(other_alternatives) - int(model.objVal)
-            # percentage = round(number_of_pairs_explained / len(other_alternatives), 2)
-            List_of_swap_used = [[(i, j) for (i, j) in BooleanSwapsCoeffDict[k] if int(BooleanSwapsCoeffDict[k][(i, j)].x) == 1] + [(i, EMPTYSET) for i in range(1, mcda_problemDescription.n+1) if int(VarMDict[k][i-1].x) == 1]
-                                 for k in range(len(XYCovList))]
-            pareto_dominance = [int(BaseVectorVar[k].x) == 0 and all([int(BooleanSwapsCoeffDict[k][(i, j)].x) == 0 for (i, j) in BooleanSwapsCoeffDict[k]]) for k in range(len(XYCovList))]
-            return status, number_of_pairs_explained, pareto_dominance, List_of_swap_used
-        return False, 0, 0, list()
+            DictOfSwaps = {k: [(i, j) for (i, j), varBij in ijDict.items() if int(varBij.x) == 1] + [(i, EMPTYSET) for i in ProConDict[k][0] if sum([int(varbij.x) for (i_, j_), varbij in ijDict.items() if i_ == i]) == 0]
+                           for k, ijDict in BooleanSwapsSetDict.items()}
+
+            ListOfSwaps = list()
+            number_of_pairs_in_K_ACS = 0
+            for k in range(len(other_alternatives)):
+                if k in oth_alt_to_consider_indexes_set:
+                    ListOfSwaps.append(DictOfSwaps[k])
+                else:
+                    ListOfSwaps.append(list())
+                    number_of_pairs_in_K_ACS += 1
+            # status, number_of_pairs_explained, number_of_pairs_in_K_ACS, List_of_Corresponding_swaps
+            return True, len(oth_alt_to_consider_indexes_set), number_of_pairs_in_K_ACS, ListOfSwaps
+
+        # À AMELIORER POUR MAXIMISER LE NOMBRE DE PAIRES EXPLICABLES
+        return False, 0, len(other_alternatives) - len(oth_alt_to_consider_indexes_set), [list() for k in range(len(other_alternatives))]
+
+        # print(VarList)
+        # print("\n\n", VarDict)
+
+
+if __name__ == "__main__":
+
+    # m = 7
+    mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria7.csv",
+                                                  performanceTableFileName="CSVFILES/test-alternatives-7.csv")
+    print(ExplanationBasedElicitation.adjudicate(mcda_problem_description, mcda_problem_description[20],
+                                           [mcda_problem_description[19],  mcda_problem_description[18],  mcda_problem_description[21]]))

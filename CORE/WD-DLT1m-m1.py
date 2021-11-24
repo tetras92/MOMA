@@ -150,7 +150,7 @@ def deform(problem_description, dm):
 if __name__ == "__main__":
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria7.csv",
                                                   # performanceTableFileName="CSVFILES/kr-v2-7.csv")
-                                                  performanceTableFileName="CSVFILES/test-alternatives-7.csv")
+                                                  performanceTableFileName="CSVFILES/test-alternatives-7-2.csv")
     # print(mcda_problem_description)
     dm = WS_DM("CSVFILES/DM-kr-v2-7.csv")
     deform(mcda_problem_description, dm)

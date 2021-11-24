@@ -342,7 +342,7 @@ class ProblemDescription:
         return info
 
     def generateFictiveAtomicInformation(self, alternative1, alternative2):
-        info = Information(alternative1, alternative2)
+        info = Information(alternative1, alternative2, isFictive=True)
         # les alternatives fictives ne sont pas rajoutées aux listes d'alternatives reelles . Seule l'information conrrespndante est ajoutee au dictionnaire des infos
         # self._dict_of_information[(alternative1, alternative2)] = info
         # self._dict_of_information[(alternative2, alternative1)] = info
