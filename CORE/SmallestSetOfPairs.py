@@ -18,23 +18,23 @@ class SmallestSetOfPairs:
         MatrixOfCoeffVar = [[model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="c_{}_{}".format(i, j)) for i in range(len(Relation))] for j in range(len(Relation))]
 
         MatrixOfVarE = [[model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="E_{}_{}".format(i, j)) for i in range(len(Relation))] for j in range(len(Relation))]
-        MatrixOfVarM = [[model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="M_{}_{}".format(i, k)) for k in range(mcda_problemDescription.n)] for i in range(len(Relation))]
+        MatrixOfVarM = [[model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="M_{}_{}".format(i, k)) for k in range(mcda_problemDescription.m)] for i in range(len(Relation))]
 
         for i in range(len(Relation)):
             object = Relation[i]
             object_covector = covectorOfPairWiseInformationWith2Levels(object)
 
             varL_i = MatrixOfVarE[i]
-            varL_iDup = [np.array([vli]*mcda_problemDescription.n) for vli in varL_i]
+            varL_iDup = [np.array([vli] * mcda_problemDescription.m) for vli in varL_i]
             varL_iDupCovPI = [varL_iDup[i_] * LCovPIList[i_] for i_ in range(len(Relation))]
-            Member_i_1 = [quicksum([elm[k] for elm in varL_iDupCovPI]) for k in range(mcda_problemDescription.n)]
+            Member_i_1 = [quicksum([elm[k] for elm in varL_iDupCovPI]) for k in range(mcda_problemDescription.m)]
             Member_i_2 = MatrixOfVarM[i]
 
-            for k in range(mcda_problemDescription.n):
+            for k in range(mcda_problemDescription.m):
                 model.addConstr(Member_i_1[k] + Member_i_2[k] == object_covector[k], name="KB_{}".format(i))
             model.update()
 
-        Big_M = mcda_problemDescription.n + len(Relation)
+        Big_M = mcda_problemDescription.m + len(Relation)
         for i in range(len(Relation)):
             for j in range(len(Relation)):
                 # https://www.leandro-coelho.com/linearization-product-variables/

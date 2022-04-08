@@ -17,19 +17,22 @@ def decompose(proSet, conSet, W):
     #1. Pour tout critère con j, on a :
     #   - soit j est couvert en Delta(1,\,m) par un critère pro i donné,
     #   - soit j est couvert en Delta(m,\,1) par un critère pro i' donné.
-    proSetList = list(proSet)
-    for ki in range(len(proSetList)):
-        for ki_ in range(ki, len(proSetList)):
-            i = proSetList[ki]
-            i_ = proSetList[ki_]
-            for j in conSet:
-                model.addConstr(B1m[(i, j)] + Bm1[(i_, j)] <= 1, name="C1 ({})".format((i, i_, j)))
+    # proSetList = list(proSet)
+    # for ki in range(len(proSetList)):
+    #     for ki_ in range(ki, len(proSetList)):             #COMMENTÉ CE 16/02/22. Est-ce pertinent?
+    #         i = proSetList[ki]
+    #         i_ = proSetList[ki_]
+    #         for j in conSet:
+    #             model.addConstr(B1m[(i, j)] + Bm1[(i_, j)] <= 1, name="C1 ({})".format((i, i_, j)))
 
-
-
-    # 2. Unicite contribution de i dans le Delta m1 world
+    # 1. tentative de modification (ce 16/02/22)
     for i in proSet:
-        model.addConstr(quicksum([Bm1[(i, j_)] for j_ in conSet]) <= 1, name="C2 ({})".format(i))
+        for j in conSet:
+            model.addConstr(Bm1[(i, j)] + quicksum([B1m[(i_, j)] for i_ in proSet]) <= 1, name="C1 ({})".format((i, j)))
+
+    # 2. Unicite contribution de i dans le Delta m1 world                 [Ce 28/11/21 jugé non indispensable à cause de 3. Unicite inter-worlds]
+    # for i in proSet:
+    #     model.addConstr(quicksum([Bm1[(i, j_)] for j_ in conSet]) <= 1, name="C2 ({})".format(i))
 
     # 3. Unicite inter-worlds
     for i in proSet:
@@ -54,36 +57,37 @@ def decompose(proSet, conSet, W):
         chainons_arguments_list = list()
         I1m = set()
         J1m = set()
-        print(model.objVal)
-        print("World 1m")
-        for i in proSet:
-            for j in conSet:
-                print(f'({i}, {j})', int(B1m[(i, j)].x))
+        # print(model.objVal)
+        # print("World 1m")
+        # for i in proSet:
+        #     for j in conSet:
+        #         print(f'({i}, {j})', int(B1m[(i, j)].x))
+        #
+        # print("World m1")
+        # for i in proSet:
+        #     for j in conSet:
+        #         print(f'({i}, {j})', int(Bm1[(i, j)].x))
 
-        print("World m1")
-        for i in proSet:
-            for j in conSet:
-                print(f'({i}, {j})', int(Bm1[(i, j)].x))
-
-        print("\nDelta 1m")
+        # print("\nDelta 1m")
         for i in proSet:
             if sum([int(B1m[(i, j_)].x) for j_ in conSet]) > 0:
                 localJ1m = {j_ for j_ in conSet if int(B1m[(i, j_)].x) == 1}
                 chainons_arguments_list.append(({i}, localJ1m))
-                print("{} -> {}".format(i, localJ1m))
+                # print("{} -> {}".format(i, localJ1m))
                 I1m.add(i)
-                J1m = J1m | localJ1m
+                # J1m = J1m | localJ1m
 
-        print("\nDelta m1")
+        # print("\nDelta m1")
         for j in conSet - J1m:
             if sum([int(Bm1[(i_, j)].x) for i_ in proSet]) > 0:
                 localIm1 = {i_ for i_ in proSet if int(Bm1[(i_, j)].x) == 1}
                 chainons_arguments_list.append((localIm1, {j}))
-                print("{} -> {}".format(localIm1, j))
-
+                # print("{} -> {}".format(localIm1, j))
+        # print(W, proSet, conSet)
+        # print("===============================>", chainons_arguments_list)
         return True, chainons_arguments_list
     else:
-        print("Non Delta 1m and Delta m1 decomposable")
+        # print("Non Delta 1m and Delta m1 decomposable")
         return False, list()
 
 

@@ -259,7 +259,7 @@ import time
 import numpy as np
 if __name__ == "__main__":
     Collector = list()
-    n = 4
+    n = 6
     i = 0
     debut = time.time()
     for to in yield_generateCoherentBooleanTermsOrders(n):

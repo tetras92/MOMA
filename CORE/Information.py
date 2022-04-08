@@ -170,10 +170,15 @@ class Information:
                 else:
                     # print("=========================*")
                     # self.o = PairwiseInformation(self, self.alternative1, self.alternative2)
-                    CommitmentStore().add(AskWhyAboutAssumedCommitment(self, oldO.termN))          # ICI, LE DM DEMANDE EXPLICATION D'UNE DEDUCTION DE LA RELATION NECESSAIRE EXPLICABLE
-                    raise AskWhyException(oldO.dominanceObject)
+
+                    CommitmentStore().add(AskWhyAboutAssumedCommitment(self, oldO.termN))    # A DECOMMENTER FAIT CE 07/01/22      # ICI, LE DM DEMANDE EXPLICATION D'UNE DEDUCTION DE LA RELATION NECESSAIRE EXPLICABLE
+                    raise AskWhyException(oldO.dominanceObject)  # A DECOMMENTER FAIT CE 07/01/22
+
                     # CommitmentStore().add(ValidationOfNecessaryPreferenceCommitment(self, v))      # ICI, IL VALIDE
 
+                    # self.o = PInformation(self, self.alternative1, self.alternative2)
+                    # self.o.termP = v
+                    # N().remove(self)
             elif isinstance(oldO, PairwiseInformation):
                 self.o = PInformation(self, self.alternative1, self.alternative2)
                 self.o.termP = v
@@ -213,10 +218,10 @@ class Information:
             N().remove(self)
         elif isinstance(self.o, AInformation):
             A().remove(self)
-        else:
-            # print("concerned", self)
-            # print("class", self.o.__class__)
-            raise Exception("a downgrade from somewhere else")
+        # else:                                   # commenté ce 30/01/22 pour avancer dans ITOR-XP/Way-2-XP
+        #     # print("concerned", self)
+        #     # print("class", self.o.__class__)
+        #     raise Exception("a downgrade from somewhere else")
 
         if not self.is_fictive:                        # retourne dans NonPI que les informations réelles non fictives
             self.o = PairwiseInformation(self, self.alternative1, self.alternative2)

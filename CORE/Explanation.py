@@ -300,7 +300,7 @@ class Explain:
 
         source_alternative, dest_alternative = object
         # l : explanation max length (by default equal to n (size of alternatives))
-        l = mcda_problemDescription.n + 1
+        l = mcda_problemDescription.m + 1
         Graph_of_dominance = dict()
         ListOfESet = [{source_alternative}]
         while len(ListOfESet[-1]) != 0 and l > 0:
@@ -406,7 +406,7 @@ class Explain:
 
         source_alternative, dest_alternative = object
         # l : explanation max length (by default equal to n (size of alternatives))
-        l = mcda_problemDescription.n + 1
+        l = mcda_problemDescription.m + 1
         ExplanationList = list()
         AssumptionList = list()
         L = list()
@@ -475,7 +475,7 @@ class Explain:
 
         # k_max : explanation max length (by default equal to n (size of alternatives))
         # k_max = mcda_problemDescription.n // 2
-        k_max = mcda_problemDescription.n
+        k_max = mcda_problemDescription.m
 
         # B_kl : dict of b_kl binary variables
         B_kl = {k: {l_: plne_model.addVar(vtype=GRB.BINARY, name="b_{}_{}".format(k, l_))for l_ in con_argument_set} for k in pro_argument_set}
@@ -668,7 +668,7 @@ class Explain:
 
         # k_max : explanation max length (by default equal to n (size of alternatives))
         # k_max = mcda_problemDescription.n // 2
-        k_max = mcda_problemDescription.n
+        k_max = mcda_problemDescription.m
 
         # B_kl : dict of b_kl binary variables
         B_kl = {k: {l_: plne_model.addVar(vtype=GRB.BINARY, name="b_{}_{}".format(k, l_))for l_ in con_argument_set} for k in pro_argument_set}
@@ -897,7 +897,7 @@ class Explain:
         # print("product Brut", filtered_product)
 
         # k_max = 1
-        k_max = mcda_problemDescription.n #A DECOMMENTER
+        k_max = mcda_problemDescription.m #A DECOMMENTER
 
         filtered_product = [elemt for elemt in filtered_product if len(elemt[0]) <= k_max and len(elemt[1]) <= k_max]
 

@@ -11,8 +11,8 @@ import time
 if __name__ == "__main__":
 
     mcda_problem_description = ProblemDescription(criteriaFileName="CSVFILES/criteria.csv",
-                                                  performanceTableFileName="CSVFILES/test_da2pl_test.csv")
-                                                  # performanceTableFileName="CSVFILES/PerfTable4+.csv")
+                                                  # performanceTableFileName="CSVFILES/test_da2pl_test.csv")
+                                                  performanceTableFileName="CSVFILES/itor-test-7-alter.csv")
     print(mcda_problem_description)
     dm = NoisyWS_DM("CSVFILES/DM_Utility_Function6.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
     # dm = NoisyWS_DM("CSVFILES/DM_Utility_Function_da2pl.csv", 0) # WS_DM("CSVFILES/DM_Utility_Function.csv")
@@ -23,7 +23,7 @@ if __name__ == "__main__":
        stopCriterion=DialogDurationStopCriterion(float("inf")),
        N_InfoPicker=RandomPicker(0),
        # recommandationMaker=RecommendationWrapper(KBestRecommendation, 4),
-       recommandationMaker=RecommendationWrapper(KRankingRecommendation, 9),
+       recommandationMaker=RecommendationWrapper(KBestRecommendation, 1),
        InconsistencySolverType=InconsistencySolverWrapper(RadicalInconsistencySolver),
        ExplanationWrapper=ExplanationWrapper(ListOfExplanationEngines=list([Explain.Order2SwapMixedExplanation, Explain.general_1_vs_k_MixedExplanation,
                                                                             Explain.brut_force_general_1_vs_k_and_k_vs_1_MixedExplanation]),

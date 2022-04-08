@@ -26,16 +26,18 @@ def decompose(proSet, conSet, W):
 
     if model.status == GRB.OPTIMAL:
         chainons_arguments_list = list()
-
-        print("\nDelta 1-1")
+        dominance_swap = {i: ({i}, set()) for i in proSet}
+        # print("\nDelta 1-1")
         for j in conSet:
             for i in proSet:
                 if Sij[(i, j)].x == 1:
                     chainons_arguments_list.append(({i}, {j}))
-                    print(f'\'{i}\' -> \'{j}\'')
-        return True, chainons_arguments_list
+                    del dominance_swap[i]
+                    # print(f'\'{i}\' -> \'{j}\'')
+
+        return True, chainons_arguments_list + list(dominance_swap.values())
     else:
-        print("Non Delta 11 decomposable")
+        # print("Non Delta 11 decomposable")
         return False, list()
 
 

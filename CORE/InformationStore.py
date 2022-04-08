@@ -240,9 +240,9 @@ class NonPI(InformationStore):
 
     def filter(self, Tn=None):
         if not Tn is None:
-            self._store = set([info for info in self if (info.alternative1.id, info.alternative2.id) in Tn or (info.alternative2.id, info.alternative1.id) in Tn])
+            self._store = list(set([info for info in self if (info.alternative1.id, info.alternative2.id) in Tn or (info.alternative2.id, info.alternative1.id) in Tn]))
         else:
-            self._store = set([info for info in self if info.is_a_disjointed_pair])
+            self._store = list(set([info for info in self if info.is_a_disjointed_pair]))
 
 @singleton
 class N(InformationStore):

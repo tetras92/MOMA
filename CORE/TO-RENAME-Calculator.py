@@ -156,7 +156,7 @@ if __name__ == "__main__":
             criteria_considered_set = set()
             for k in range(i, len(CBTOrderBySetsOfCriteria)):
                 criteria_considered_set = criteria_considered_set | CBTOrderBySetsOfCriteria[k]
-                if len(criteria_considered_set) == n:
+                if len(criteria_considered_set) == n:      # Pas très bonne facon de tester la significativite de tous les critères (ce 30/01/22)
                     to_take_into_account = True
                     break
             if to_take_into_account:

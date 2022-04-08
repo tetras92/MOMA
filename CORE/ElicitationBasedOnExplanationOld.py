@@ -25,11 +25,11 @@ class ExplanationBasedElicitation:
         BaseVectorVar = [model.addVar(vtype=GRB.BINARY, name="({}, {})_in_base".format(best_alternative, y)) for y in other_alternatives]
 
         # AllSwapsList : List[(i, j)]
-        AllSwapsList = list(permutations(range(1, mcda_problemDescription.n +1), 2))
+        AllSwapsList = list(permutations(range(1, mcda_problemDescription.m + 1), 2))
 
         # AllSwapsCovectorDict : Dict[tuple(int, int), np.array]
         def swap_covector(i, j):
-            res = np.zeros(mcda_problemDescription.n)
+            res = np.zeros(mcda_problemDescription.m)
             res[i-1] = 1
             res[j-1] = -1
             return res
@@ -38,7 +38,7 @@ class ExplanationBasedElicitation:
         BooleanSwapsCoeffDict = {k: {(i, j): model.addVar(vtype=GRB.BINARY, name="c_{}_{}".format((i, j), k)) for (i, j) in AllSwapsList if XYCovList[k][i-1] == 1 and XYCovList[k][j-1] == -1}
                                  for k in range(len(other_alternatives))}
 
-        VarMDict = {k: [model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="M_{}_{}".format(i, k)) for i in range(mcda_problemDescription.n)] for k in range(len(other_alternatives))}
+        VarMDict = {k: [model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="M_{}_{}".format(i, k)) for i in range(mcda_problemDescription.m)] for k in range(len(other_alternatives))}
 
 
         # PI CONSTRAINTS
@@ -91,16 +91,16 @@ class ExplanationBasedElicitation:
 
         for k in range(len(XYCovList)):
             object_covector = XYCovList[k]
-            Member_p_0 = np.array([BaseVectorVar[k]]*mcda_problemDescription.n) * object_covector
+            Member_p_0 = np.array([BaseVectorVar[k]] * mcda_problemDescription.m) * object_covector
             To_accumulate = list()
             # for (i, j) in AllSwapsList:
             for (i, j) in BooleanSwapsCoeffDict[k]:
                 var_ij_k = BooleanSwapsCoeffDict[k][(i, j)]
-                To_accumulate.append(np.array([var_ij_k]*mcda_problemDescription.n) * AllSwapsCovectorDict[(i, j)])
-            Member_p_1 = [quicksum([element_of_To_accumulate[i_] for element_of_To_accumulate in To_accumulate]) for i_ in range(mcda_problemDescription.n)]
+                To_accumulate.append(np.array([var_ij_k] * mcda_problemDescription.m) * AllSwapsCovectorDict[(i, j)])
+            Member_p_1 = [quicksum([element_of_To_accumulate[i_] for element_of_To_accumulate in To_accumulate]) for i_ in range(mcda_problemDescription.m)]
             Member_p_2 = VarMDict[k]
 
-            for i in range(mcda_problemDescription.n):
+            for i in range(mcda_problemDescription.m):
                 model.addConstr(Member_p_0[i] + Member_p_1[i] + Member_p_2[i] == object_covector[i])
             model.update()
 
@@ -111,7 +111,7 @@ class ExplanationBasedElicitation:
         if status:
             number_of_pairs_explained = len(other_alternatives) - int(model.objVal)
             # percentage = round(number_of_pairs_explained / len(other_alternatives), 2)
-            List_of_swap_used = [[(i, j) for (i, j) in BooleanSwapsCoeffDict[k] if int(BooleanSwapsCoeffDict[k][(i, j)].x) == 1] + [(i, EMPTYSET) for i in range(1, mcda_problemDescription.n+1) if int(VarMDict[k][i-1].x) == 1]
+            List_of_swap_used = [[(i, j) for (i, j) in BooleanSwapsCoeffDict[k] if int(BooleanSwapsCoeffDict[k][(i, j)].x) == 1] + [(i, EMPTYSET) for i in range(1, mcda_problemDescription.m + 1) if int(VarMDict[k][i - 1].x) == 1]
                                  for k in range(len(XYCovList))]
             pareto_dominance = [int(BaseVectorVar[k].x) == 0 and all([int(BooleanSwapsCoeffDict[k][(i, j)].x) == 0 for (i, j) in BooleanSwapsCoeffDict[k]]) for k in range(len(XYCovList))]
             return status, number_of_pairs_explained, pareto_dominance, List_of_swap_used

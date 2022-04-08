@@ -21,13 +21,13 @@ def decompose(proSet, conSet, W):
 
     if model.status == GRB.OPTIMAL:
         chainons_arguments_list = list()
-        print("\nDelta m-1")
-        for j in conSet:
-            chainons_arguments_list.append(({i_ for i_ in proSet if Sij[(i_, j)].x == 1}, {j}))
-            print(f'{[i_ for i_ in proSet if Sij[(i_, j)].x == 1]} -> \'{j}\'')
+        # print("\nDelta m-1")
+        # for j in conSet:
+        #     chainons_arguments_list.append(({i_ for i_ in proSet if Sij[(i_, j)].x == 1}, {j}))
+            # print(f'{[i_ for i_ in proSet if Sij[(i_, j)].x == 1]} -> \'{j}\'')
         return True, chainons_arguments_list
     else:
-        print("Non Delta m1 decomposable")
+        # print("Non Delta m1 decomposable")
         return False, list()
 
 

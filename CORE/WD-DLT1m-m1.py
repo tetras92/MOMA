@@ -11,7 +11,7 @@ def deform(problem_description, dm):
     #-- Variables globales (= non relatives)
     #- Deviation
     DeviationsSigma = {k: (model.addVar(vtype=GRB.CONTINUOUS, lb=0, name=f'sig+_{k}'), model.addVar(vtype=GRB.CONTINUOUS, lb=0, name=f'sig-_{k}'))
-                       for k in range(problem_description.n)} # [0] = +; [1] = -
+                       for k in range(problem_description.m)} # [0] = +; [1] = -
 
     #-
 
@@ -26,7 +26,7 @@ def deform(problem_description, dm):
     Pros = set()
     Cons = set()
 
-    # model.setParam('OutputFlag', False)
+    model.setParam('OutputFlag', False)
     other_alternative_related_swapVar_1m = dict()
     other_alternative_related_swapVar_m1 = dict()
     local_epsilon = 0.0001
@@ -117,7 +117,7 @@ def deform(problem_description, dm):
     model.addConstr(quicksum([sig_pair[0] for sig_pair in DeviationsSigma.values()]) == quicksum([sig_pair[1] for sig_pair in DeviationsSigma.values()]))
 
     #- (g)
-    for k in range(problem_description.n):
+    for k in range(problem_description.m):
         model.addConstr(DeviationsSigma[k][1] <= dm.utilitiesList[k])
         # model.addConstr(DeviationsSigma[k][1] + local_epsilon <= dm.utilitiesList[k])
 
@@ -141,10 +141,10 @@ def deform(problem_description, dm):
             #     print("j=", j, sum([(other_alternative_related_swapVar_1m[oth_alt][(i_, j)].x + other_alternative_related_swapVar_m1[oth_alt][(i_, j)].x)*(dm.utilitiesList[i_] + DeviationsSigma[i_][0].x - DeviationsSigma[i_][1].x) for i_ in pros]),
             #           ">=", dm.utilitiesList[j] + DeviationsSigma[j][0].x - DeviationsSigma[j][1].x)
     print()
-    print("old", [round(dm.utilitiesList[k], 4) for k in range(problem_description.n)])
-    print("dv+", [round(DeviationsSigma[k][0].x, 4) for k in range(problem_description.n)])
-    print("dv-", [round(DeviationsSigma[k][1].x, 4) for k in range(problem_description.n)])
-    print("new", [round(dm.utilitiesList[k] + DeviationsSigma[k][0].x - DeviationsSigma[k][1].x, 4) for k in range(problem_description.n)])
+    print("old", [round(dm.utilitiesList[k], 4) for k in range(problem_description.m)])
+    print("dv+", [round(DeviationsSigma[k][0].x, 4) for k in range(problem_description.m)])
+    print("dv-", [round(DeviationsSigma[k][1].x, 4) for k in range(problem_description.m)])
+    print("new", [round(dm.utilitiesList[k] + DeviationsSigma[k][0].x - DeviationsSigma[k][1].x, 4) for k in range(problem_description.m)])
 
 
 if __name__ == "__main__":
